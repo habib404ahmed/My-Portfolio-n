@@ -91,7 +91,7 @@ export const profile = {
   ] as LeadershipItem[],
   resume: {
     available: true,
-    path: '/assets/MD_Habib_Munsar_Ahmed_Resume.pdf',
+    path: '/assets/Md-Habib-Munsar-Ahmed-Resume.pdf',
   },
   photo: {
     available: true,

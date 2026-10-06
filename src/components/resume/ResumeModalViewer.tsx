@@ -14,12 +14,17 @@ export function ResumeModalViewer({ isOpen, onClose }: ResumeModalViewerProps) {
 
   useEffect(() => {
     if (isOpen) {
+      const originalOverflow = document.body.style.overflow
+      document.body.style.overflow = 'hidden'
       closeButtonRef.current?.focus()
       const handleKey = (e: KeyboardEvent) => {
         if (e.key === 'Escape') onClose()
       }
       document.addEventListener('keydown', handleKey)
-      return () => document.removeEventListener('keydown', handleKey)
+      return () => {
+        document.body.style.overflow = originalOverflow
+        document.removeEventListener('keydown', handleKey)
+      }
     }
   }, [isOpen, onClose])
 
@@ -60,7 +65,7 @@ export function ResumeModalViewer({ isOpen, onClose }: ResumeModalViewerProps) {
                     RESUME VIEWER // ATS COMPLIANT
                   </span>
                   <span className="font-mono text-[0.6875rem] text-slate-400 hidden sm:inline">
-                    MD_Habib_Munsar_Ahmed_Resume.pdf
+                    Md-Habib-Munsar-Ahmed-Resume.pdf
                   </span>
                 </div>
 

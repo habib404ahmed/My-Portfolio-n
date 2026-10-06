@@ -32,7 +32,7 @@ export function Scene02AboutIdentity() {
     <SectionTransition
       id="about"
       ariaLabel="Engineer Identity"
-      className="relative py-20 md:py-28 border-b border-white/5 bg-[var(--color-void,#050507)] overflow-hidden"
+      className="relative border-b border-white/5 bg-[var(--color-void,#050507)] overflow-hidden"
     >
       <SceneContainer
         badge="SCENE 02 // IDENTITY & PHILOSOPHY"

@@ -1,5 +1,6 @@
 import { useRef, type ReactNode } from 'react'
 import { motion, useInView } from 'framer-motion'
+import { useReducedMotion } from '@/hooks/useReducedMotion'
 
 interface SectionTransitionProps {
   id: string
@@ -7,7 +8,7 @@ interface SectionTransitionProps {
   className?: string
   style?: React.CSSProperties
   ariaLabel?: string
-  amount?: number
+  amount?: number | 'some' | 'all'
 }
 
 /**
@@ -22,10 +23,13 @@ export function SectionTransition({
   className = '',
   style = {},
   ariaLabel,
-  amount = 0.15,
+  amount = 'some',
 }: SectionTransitionProps) {
   const ref = useRef<HTMLElement>(null)
-  const isInView = useInView(ref, { once: true, amount })
+  const prefersReduced = useReducedMotion()
+  const isInView = useInView(ref, { once: true, amount: amount as any })
+
+  const shouldAnimate = !prefersReduced && !isInView
 
   return (
     <section
@@ -36,9 +40,9 @@ export function SectionTransition({
       aria-label={ariaLabel}
     >
       <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
-        transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+        initial={prefersReduced ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+        animate={shouldAnimate ? { opacity: 0, y: 24 } : { opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       >
         {children}
       </motion.div>

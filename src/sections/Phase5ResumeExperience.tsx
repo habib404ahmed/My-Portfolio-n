@@ -6,9 +6,9 @@ import { ResumeCTA } from '@/components/resume/ResumeCTA'
 
 export function Phase5ResumeExperience() {
   return (
-    <SectionTransition id="resume" ariaLabel="Phase 5 The Resume Experience" className="py-24 md:py-32 border-b border-white/5">
+    <SectionTransition id="resume" ariaLabel="Phase 5 The Resume Experience" className="border-b border-white/5">
       {/* Intro Header */}
-      <div className="relative pt-20 pb-8 text-center no-print">
+      <div className="relative pb-8 text-center no-print">
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}

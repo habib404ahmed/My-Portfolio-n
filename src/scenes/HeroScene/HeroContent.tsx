@@ -56,8 +56,8 @@ export function HeroContent({ visible }: HeroContentProps) {
   const handleResume = () => {
     if (profile.resume.available) {
       const a = document.createElement('a')
-      a.href = profile.resume.path
-      a.download = 'MD_Habib_Munsar_Ahmed_Resume.pdf'
+      a.href = '/assets/Md-Habib-Munsar-Ahmed-Resume.pdf'
+      a.download = 'Md-Habib-Munsar-Ahmed-Resume.pdf'
       a.click()
     }
   }

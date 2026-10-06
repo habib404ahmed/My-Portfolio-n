@@ -130,10 +130,10 @@ export function WebResumeViewer() {
             <div className="mt-6 pt-4 border-t border-white/10">
               <a
                 href={profile.resume.path}
-                download="MD_Habib_Munsar_Ahmed_Resume.pdf"
+                download="Md-Habib-Munsar-Ahmed-Resume.pdf"
                 className="w-full py-2 px-3 rounded-lg border border-cyan-500/20 bg-cyan-950/30 text-cyan-300 font-mono text-xs text-center block hover:bg-cyan-500/20 transition-all"
               >
-                MD_Habib_Munsar_Ahmed_Resume.pdf (4.5 KB)
+                Md-Habib-Munsar-Ahmed-Resume.pdf (4.5 KB)
               </a>
             </div>
           </div>

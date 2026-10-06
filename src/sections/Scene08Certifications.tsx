@@ -41,7 +41,7 @@ export function Scene08Certifications() {
   ] || THEMES.ai
 
   return (
-    <SectionTransition id="certifications" ariaLabel="Verified Certifications" className="py-24 md:py-32 border-b border-white/5">
+    <SectionTransition id="certifications" ariaLabel="Verified Certifications" className="border-b border-white/5">
       <div className="page-container relative">
         {/* Dynamic Spatial Environment Backdrop (Rule 08) */}
         <div

@@ -20,7 +20,7 @@ const SYSTEM_NODES = [
 
 export function Scene01EnterSystem() {
   return (
-    <SectionTransition id="enter-system" ariaLabel="Enter the Engineering System" className="py-24 md:py-32 border-b border-white/5">
+    <SectionTransition id="enter-system" ariaLabel="Enter the Engineering System" className="border-b border-white/5">
       <div className="page-container flex flex-col items-center text-center">
         {/* Subtle Chapter Marker */}
         <motion.div

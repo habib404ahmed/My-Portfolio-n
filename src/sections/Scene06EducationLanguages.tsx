@@ -8,7 +8,7 @@ export function Scene06EducationLanguages() {
   const secondaryEdus = profile.education.slice(1)
 
   return (
-    <SectionTransition id="education" ariaLabel="Education and Languages" className="py-20 md:py-28 border-b border-white/5">
+    <SectionTransition id="education" ariaLabel="Education and Languages" className="border-b border-white/5">
       <SceneContainer
         badge="SCENE 06 // ACADEMIC FOUNDATION"
         title="EDUCATION &"

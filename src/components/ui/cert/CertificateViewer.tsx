@@ -47,10 +47,12 @@ export function CertificateViewer({
   const zoomOut = () => setZoom((z) => Math.max(z - 0.25, 0.75))
   const resetZoom = () => setZoom(1)
 
-  // Keyboard navigation: Escape, ArrowLeft, ArrowRight
+  // Keyboard navigation: Escape, ArrowLeft, ArrowRight + Body Scroll Lock (Phase 18)
   useEffect(() => {
     if (!cert) return
     closeButtonRef.current?.focus()
+    const originalOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
@@ -63,7 +65,10 @@ export function CertificateViewer({
     }
 
     document.addEventListener('keydown', handleKeyDown)
-    return () => document.removeEventListener('keydown', handleKeyDown)
+    return () => {
+      document.body.style.overflow = originalOverflow
+      document.removeEventListener('keydown', handleKeyDown)
+    }
   }, [cert, currentIndex, onClose])
 
   if (!cert) return null

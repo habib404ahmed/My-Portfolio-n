@@ -9,7 +9,7 @@ interface CinematicButtonProps {
   disabled?: boolean
   ariaLabel?: string
   className?: string
-  download?: boolean
+  download?: boolean | string
   target?: string
 }
 

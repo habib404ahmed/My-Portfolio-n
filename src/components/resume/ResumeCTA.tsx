@@ -77,8 +77,8 @@ export function ResumeCTA() {
             <CinematicButton
               variant="secondary"
               size="lg"
-              href={profile.resume.path}
-              download={true}
+              href="/assets/Md-Habib-Munsar-Ahmed-Resume.pdf"
+              download="Md-Habib-Munsar-Ahmed-Resume.pdf"
               ariaLabel="Download PDF Resume"
             >
               DOWNLOAD RESUME

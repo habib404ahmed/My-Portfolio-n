@@ -177,8 +177,8 @@ export function Navigation({ visible }: NavigationProps) {
                   {/* Mobile Direct Download Resume Button */}
                   {profile.resume.available && (
                     <a
-                      href={profile.resume.path}
-                      download="MD_Habib_Munsar_Ahmed_Resume.pdf"
+                      href="/assets/Md-Habib-Munsar-Ahmed-Resume.pdf"
+                      download="Md-Habib-Munsar-Ahmed-Resume.pdf"
                       className="mt-2 w-full py-3 rounded-lg border border-cyan-500/40 bg-cyan-950/30 text-cyan-300 font-display text-center text-sm font-bold uppercase tracking-wider block"
                     >
                       DOWNLOAD RESUME (PDF)

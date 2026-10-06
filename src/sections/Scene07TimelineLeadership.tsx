@@ -60,7 +60,7 @@ export function Scene07TimelineLeadership() {
   const activeCertForViewer = certifications.find((c) => c.id === viewerCertId) || null
 
   return (
-    <SectionTransition id="achievements" ariaLabel="Cinematic Journey Timeline" className="py-24 md:py-32 border-b border-white/5">
+    <SectionTransition id="achievements" ariaLabel="Cinematic Journey Timeline" className="border-b border-white/5">
       <div className="page-container relative">
         {/* Dynamic Scene Environment Backdrop (Rule 05) */}
         <div

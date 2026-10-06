@@ -151,7 +151,7 @@ export function Scene03EngineeringMindset() {
   const currentStage = PIPELINE_STAGES.find((s) => s.id === activeStageId) || PIPELINE_STAGES[2]
 
   return (
-    <SectionTransition id="mindset" ariaLabel="Engineering Mindset & Pipeline" className="py-24 md:py-32 border-b border-white/5">
+    <SectionTransition id="mindset" ariaLabel="Engineering Mindset & Pipeline" className="border-b border-white/5">
       <SceneContainer
         badge="SCENE 03 // ARCHITECTURAL DISCIPLINE"
         title="HOW I"

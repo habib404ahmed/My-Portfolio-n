@@ -19,7 +19,7 @@ export function Phase6ContactFinal({ onRestart }: Phase6ContactFinalProps) {
   return (
     <section
       id="contact"
-      className="relative min-h-screen bg-black text-slate-100 overflow-hidden pt-20 pb-12"
+      className="relative bg-black text-slate-100 overflow-hidden"
       aria-label="Contact and Final Experience"
     >
       {/* ──────────────────────────────────────────
@@ -46,7 +46,7 @@ export function Phase6ContactFinal({ onRestart }: Phase6ContactFinalProps) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 1.2, ease: 'easeOut' }}
-          className="text-center py-20 border-b border-white/10"
+          className="text-center py-10 border-b border-white/10"
         >
           {/* Subtle Converging Singularity Glyph */}
           <div className="w-12 h-12 mx-auto mb-8 relative flex items-center justify-center">

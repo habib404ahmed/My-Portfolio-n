@@ -52,7 +52,7 @@ export function ProjectUniverse() {
   }
 
   return (
-    <SectionTransition id="projects" ariaLabel="Project Universe" className="py-24 md:py-32 border-b border-white/5">
+    <SectionTransition id="projects" ariaLabel="Project Universe" className="border-b border-white/5">
       <SceneContainer
         maxWidth={1320}
         badge="PHASE 03 // PROJECT UNIVERSE"

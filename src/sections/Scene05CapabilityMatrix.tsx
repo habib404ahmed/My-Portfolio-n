@@ -9,7 +9,7 @@ export function Scene05CapabilityMatrix() {
   const currentCapability = capabilities.find((c) => c.id === selectedCapId) || capabilities[0]
 
   return (
-    <SectionTransition id="capabilities" ariaLabel="Capability Matrix" className="py-24 md:py-32 border-b border-white/5">
+    <SectionTransition id="capabilities" ariaLabel="Capability Matrix" className="border-b border-white/5">
       <SceneContainer
         badge="SCENE 05 // SYSTEM CAPABILITIES"
         title="WHAT I CAN"

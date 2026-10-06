@@ -33,16 +33,16 @@ export function SceneContainer({
   return (
     <div
       id={id}
-      className={`page-container relative w-full py-16 md:py-24 ${className}`}
+      className={`page-container relative w-full ${className}`}
       style={style}
     >
       {/* Subtle HUD Corner Tech Accents (Desktop) */}
       <div
-        className="absolute top-6 left-6 w-2.5 h-2.5 border-t border-l border-cyan-500/20 pointer-events-none hidden md:block"
+        className="absolute top-0 left-0 w-2.5 h-2.5 border-t border-l border-cyan-500/20 pointer-events-none hidden md:block"
         aria-hidden="true"
       />
       <div
-        className="absolute top-6 right-6 w-2.5 h-2.5 border-t border-r border-cyan-500/20 pointer-events-none hidden md:block"
+        className="absolute top-0 right-0 w-2.5 h-2.5 border-t border-r border-cyan-500/20 pointer-events-none hidden md:block"
         aria-hidden="true"
       />
 
