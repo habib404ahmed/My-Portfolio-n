@@ -8,6 +8,7 @@ export interface ResumeData {
     location: string
     github: string
     linkedin: string
+    portfolio: string
     youtube: string
   }
   summary: string
@@ -28,12 +29,20 @@ export interface ResumeData {
     period: string
     details: string[]
   }[]
+  relevantCoursework: string[]
+  technicalActivities: {
+    role: string
+    platform: string
+    url: string
+    description: string
+  }[]
   certifications: {
     title: string
     issuer: string
     date: string
     credentialId?: string
     details: string
+    verifyUrl?: string
   }[]
   leadership: {
     role: string
@@ -52,17 +61,18 @@ export interface ResumeData {
 export const resumeData: ResumeData = {
   name: 'Md Habib Munsar Ahmed',
   title: 'Software Engineer',
-  positioning: 'AI/ML Engineering • Full-Stack Development • Cybersecurity & Ethical Hacking',
+  positioning: 'AI/ML • Full-Stack Development • Cybersecurity',
   contact: {
     email: 'habibmunsarahmed@gmail.com',
-    phone: '8099321737',
+    phone: '+91 8099321737',
     location: 'Bongaigaon, Assam, India',
     github: 'https://github.com/habib404ahmed',
     linkedin: 'https://www.linkedin.com/in/md-habib-munsar-ahmed-a44b23329/',
+    portfolio: 'https://habibahmed.dev/',
     youtube: 'https://youtube.com/@king_of_kali_linux_404',
   },
   summary:
-    'Software Engineer and BCA student with hands-on experience building full-stack applications, AI-powered systems, multi-agent solutions, and cybersecurity-focused projects. Proficient in Python, Java, JavaScript, React, Node.js, FastAPI, Spring Boot, SQL, modern databases, cloud platforms, and AI technologies. Interested in building intelligent, scalable and secure software systems.',
+    'Software Engineer and BCA student with hands-on experience building full-stack applications, AI-powered systems, multi-agent solutions, and cybersecurity-focused projects. Skilled in Python, Java, JavaScript, React, Node.js, FastAPI, Spring Boot, SQL, modern databases, cloud platforms, and AI technologies. Interested in building intelligent, scalable, and secure software systems.',
   technicalSkills: [
     {
       category: 'Programming',
@@ -82,11 +92,18 @@ export const resumeData: ResumeData = {
     },
     {
       category: 'Cybersecurity',
-      skills: ['Ethical Hacking', 'Kali Linux', 'Network Security', 'Vulnerability Assessment'],
+      skills: [
+        'Ethical Hacking',
+        'Kali Linux',
+        'Network Security',
+        'Network Traffic Analysis',
+        'Threat Detection',
+        'PCAP Analysis',
+      ],
     },
     {
       category: 'Systems',
-      skills: ['Linux Admin', 'Windows Setup', 'Hardware Diagnostics', 'Optimization'],
+      skills: ['Linux Administration', 'Windows Setup', 'Hardware Diagnostics', 'System Tuning'],
     },
     {
       category: 'Databases',
@@ -100,57 +117,51 @@ export const resumeData: ResumeData = {
   projects: [
     {
       title: 'SENTRA — Passive Unidirectional Cyber Threat Detection SOC',
-      subtitle: 'Smart India Hackathon 2026 (Problem Statement 26145)',
-      technologies: 'Python, FastAPI, Scapy, PostgreSQL 18, SQLAlchemy 2.x, React 19, TypeScript, Tailwind CSS',
+      subtitle: 'Smart India Hackathon 2026 (Problem ID: 26145)',
+      technologies: 'FastAPI • Scapy • PostgreSQL • React • TypeScript',
       points: [
-        'Engineered a passive network security monitoring SOC platform tailored for unidirectional IP links and hardware data diodes where return transmission is physically suppressed.',
-        'Implemented streaming PCAP / PCAPNG packet ingestion using Scapy without loading entire multi-megabyte captures into memory.',
-        'Extracted high-dimensional 5-tuple directional flow features (IAT, PPS, BPS, and payload entropy) stored in indexed PostgreSQL tables.',
-        'Built a real-time React 19 Flow Explorer dashboard with multi-factor search and deep directional metadata inspection.',
+        'Engineered a passive network monitoring SOC platform for unidirectional IP data diodes with zero return path.',
+        'Streamed PCAP/PCAPNG packet captures using Scapy and extracted 5-tuple directional flow metrics into PostgreSQL.',
       ],
       githubUrl: 'https://github.com/habib404ahmed/SENTRA',
     },
     {
       title: 'AI Multi-Agent Task & Schedule Manager',
-      subtitle: 'Autonomous Orchestration System',
-      technologies: 'Python, FastAPI, SQLite, Pydantic, Vanilla JS, CSS3, HTML5',
+      subtitle: 'Autonomous Multi-Agent Orchestration System',
+      technologies: 'Python • FastAPI • SQLite • Pydantic • JavaScript',
       points: [
-        'Architected a multi-agent AI system featuring a central Primary Agent router that dispatches natural language user requests to specialized domain agents.',
-        'Designed autonomous sub-agents: Task Agent (priorities & queues), Calendar Agent (agendas), and Notes Agent (semantic tagging).',
-        'Implemented decoupled tool layers backed by transactional SQLite storage and strict Pydantic model validation.',
+        'Built a multi-agent AI system with a central Primary Agent router dispatching tasks to Task, Calendar, and Notes agents.',
+        'Implemented decoupled tool layers with Pydantic schema validation and transactional SQLite storage.',
       ],
       githubUrl: 'https://github.com/habib404ahmed/AI-Multi-Agent-Task-Schedule-Manager',
     },
     {
       title: '5minhelp — Local Service Marketplace',
-      subtitle: 'On-Demand Service Platform & Help Hub',
-      technologies: 'React.js, Node.js, Express, MySQL 8.0, Socket.io, JWT Authentication',
+      subtitle: 'On-Demand Service Platform & Real-Time Help Hub',
+      technologies: 'React • Node.js • Express • MySQL • Socket.io • JWT',
       points: [
-        'Developed a full-stack local service marketplace connecting customers with verified electricians, plumbers, tutors, and mechanics.',
-        'Implemented real-time bidirectional WebSocket event channels with Socket.io for immediate order dispatches and status updates.',
-        'Enforced role-based access control with JWT authentication for Customers, Service Workers, and Administrators over a relational MySQL 8.0 schema.',
+        'Developed a full-stack marketplace connecting local customers with verified service providers in real time.',
+        'Implemented WebSocket event dispatch using Socket.io and multi-role RBAC for Customers, Workers, and Admins.',
       ],
       githubUrl: 'https://github.com/habib404ahmed/5minhelp',
     },
     {
       title: 'Campus Care — Real-Time Campus Safety Platform',
       subtitle: 'Engineering Day Rapid-Coding Competition Entry',
-      technologies: 'React, TypeScript, Vite, Tailwind CSS, HTML5 Geolocation API',
+      technologies: 'React • TypeScript • Vite • Tailwind CSS • Geolocation API',
       points: [
-        'Built a 1-tap SOS emergency dispatch application featuring non-blocking GPS capture and anti-spam duplicate request safeguards.',
-        'Engineered a 4-tier clinical triage assessment system (Low, Moderate, High, Critical) with dedicated medical responder consoles.',
-        'Designed fire hazard dispatch logic with automated priority escalation when trapped occupants are confirmed, supported by a 7-role RBAC architecture.',
+        'Engineered 1-tap SOS emergency dispatch with non-blocking GPS capture and anti-spam safeguards.',
+        'Implemented 4-tier clinical triage assessment and 7-role access control consoles for campus safety.',
       ],
       githubUrl: 'https://github.com/habib404ahmed/Campus-Care',
     },
     {
-      title: 'UniBox League (Box Cricket Tournament Portal)',
+      title: 'UniBox League — Box Cricket Tournament Platform',
       subtitle: 'Sports Credentialing & Administration System',
-      technologies: 'JavaScript, Supabase PostgreSQL, Web Crypto API (SHA-256), Tailwind CSS v4',
+      technologies: 'JavaScript • Supabase PostgreSQL • Web Crypto API • Tailwind CSS',
       points: [
-        'Engineered an athlete registration portal with live photo headshots, document proof viewers, and inter-branch roster management.',
-        'Implemented client-side cryptographic salted SHA-256 password hashing via native browser Web Crypto API before database persistence.',
-        'Integrated Supabase PostgreSQL for real-time clearance tracking, zero-flicker hydration, and coordinator approval command controls.',
+        'Implemented athlete registration with client-side SHA-256 salted password hashing using the native Web Crypto API.',
+        'Integrated real-time Supabase PostgreSQL for live coordinator verification and credential clearance management.',
       ],
       githubUrl: 'https://github.com/habib404ahmed/Box-Cricket',
     },
@@ -159,11 +170,8 @@ export const resumeData: ResumeData = {
     {
       degree: 'Bachelor of Computer Applications (BCA)',
       institution: 'Assam Down Town University',
-      period: '2025 — 2028',
-      details: [
-        '1st Semester SGPA: 8.05 | 2nd Semester SGPA: 8.10',
-        'Relevant Coursework: Data Structures & Algorithms, Object-Oriented Programming, Database Management Systems, Computer Networks.',
-      ],
+      period: '2025–2028',
+      details: ['1st Semester SGPA: 8.05', '2nd Semester SGPA: 8.10'],
     },
     {
       degree: 'Higher Secondary (Class XII)',
@@ -178,25 +186,41 @@ export const resumeData: ResumeData = {
       details: ['Score: 72%'],
     },
   ],
+  relevantCoursework: [
+    'Data Structures & Algorithms',
+    'Database Management Systems',
+    'Object-Oriented Programming',
+    'Computer Networks',
+    'Operating Systems',
+    'Software Engineering',
+    'Web Technologies',
+    'Artificial Intelligence / Machine Learning',
+    'Cybersecurity',
+  ],
+  technicalActivities: [
+    {
+      role: 'Technical Content Creator',
+      platform: 'King of Kali Linux',
+      url: 'https://youtube.com/@king_of_kali_linux_404',
+      description:
+        'Creating educational content around cybersecurity, ethical hacking, Kali Linux, Linux and emerging technologies.',
+    },
+  ],
   certifications: [
     {
       title: 'Introduction to Modern AI',
       issuer: 'Cisco Networking Academy',
       date: '2025',
-      details: 'Foundations of artificial intelligence, machine learning, large language models, prompt engineering, and agent systems.',
+      details:
+        'Foundations of artificial intelligence, machine learning, large language models, prompt engineering, and agent systems.',
     },
     {
-      title: 'Ethical Hacking Certification',
+      title: 'Ethical Hacking',
       issuer: 'Pitronix Solutions',
       date: '7 March 2026',
       credentialId: '#00102970',
-      details: 'Penetration testing methodologies, vulnerability discovery, perimeter network defenses, and zero-trust security practices.',
-    },
-    {
-      title: 'Certificate of Appreciation',
-      issuer: 'Sunstone / Assam Down Town University',
-      date: 'August 2026',
-      details: 'Recognized for program execution, student coordination, and event staging during university Orientation and Independence Day events.',
+      details:
+        'Penetration testing methodologies, vulnerability discovery, perimeter network defenses, and zero-trust security practices.',
     },
   ],
   leadership: [
@@ -207,7 +231,7 @@ export const resumeData: ResumeData = {
       date: 'August 2026',
       recognition: 'Certificate of Appreciation',
       description:
-        'Recognized with a Certificate of Appreciation for dedicated efforts, valuable contribution, and active involvement in organizing Orientation and Independence Day Programs.',
+        'Recognized with a Certificate of Appreciation for organizing university Orientation and Independence Day programs with active student and faculty coordination.',
     },
   ],
   languages: [

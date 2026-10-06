@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import sharp from 'sharp'
-import { PDFDocument, StandardFonts, rgb } from 'pdf-lib'
+import { PDFDocument, PDFName, PDFString, StandardFonts, rgb } from 'pdf-lib'
 
 async function generateResume() {
   const pdfDoc = await PDFDocument.create()
@@ -13,16 +13,43 @@ async function generateResume() {
   const page = pdfDoc.addPage([612, 792])
   const { width, height } = page.getSize()
 
-  const margin = 36
-  let y = height - margin
+  const marginX = 36
+  const marginTop = 30
+  let y = height - marginTop
 
-  const primaryColor = rgb(0.05, 0.05, 0.08)
-  const secondaryColor = rgb(0.2, 0.25, 0.3)
-  const accentColor = rgb(0.02, 0.45, 0.6)
-  const dividerColor = rgb(0.8, 0.82, 0.85)
+  // Professional ATS Color Palette
+  const primaryColor = rgb(0.06, 0.08, 0.12) // #0f141f dark slate
+  const secondaryColor = rgb(0.28, 0.32, 0.38) // #475261 medium slate
+  const accentColor = rgb(0.02, 0.45, 0.6) // #057399 dark cyan
+  const dividerColor = rgb(0.82, 0.85, 0.88) // light border
+  const linkColor = rgb(0.02, 0.45, 0.6) // clickable link blue/cyan
+
+  // Helper function to add clickable URI link annotation
+  function addLinkAnnotation(x, yPos, w, h, url) {
+    const context = pdfDoc.context
+    const linkAnnot = context.obj({
+      Type: 'Annot',
+      Subtype: 'Link',
+      Rect: [x, yPos - 1.5, x + w, yPos + h + 1.5],
+      Border: [0, 0, 0],
+      C: [0, 0, 0],
+      A: {
+        Type: 'Action',
+        S: 'URI',
+        URI: PDFString.of(url),
+      },
+    })
+    const annotRef = context.register(linkAnnot)
+    let annots = page.node.lookup(PDFName.of('Annots'))
+    if (!annots) {
+      annots = context.obj([])
+      page.node.set(PDFName.of('Annots'), annots)
+    }
+    annots.push(annotRef)
+  }
 
   // =========================================================================
-  // 1. VERIFY & EMBED PROFILE PHOTO (MANDATORY ATS CANONICAL ASSET)
+  // 1. VERIFY & EMBED PROFILE PHOTO (MANDATORY CANONICAL ASSET)
   // =========================================================================
   const candidateImagePaths = [
     path.resolve('public/assets/images/profile.png'),
@@ -62,10 +89,7 @@ async function generateResume() {
       .toBuffer()
     embeddedImage = await pdfDoc.embedJpg(optimizedJpgBuffer)
   } catch (optErr) {
-    console.warn(
-      'Sharp JPEG optimization fallback, embedding raw PNG directly:',
-      optErr.message
-    )
+    console.warn('Sharp JPEG optimization fallback, embedding raw image directly:', optErr.message)
     embeddedImage = await pdfDoc.embedPng(rawImageBytes)
   }
 
@@ -73,14 +97,14 @@ async function generateResume() {
     throw new Error('CRITICAL: Failed to embed profile photo into PDF document.')
   }
 
-  // Calculate photo placement in header (top-right, preserving exact aspect ratio)
+  // Photo dimensions & placement (Top-Right of page)
   // Native aspect ratio: 576 / 1024 (~0.5625)
   const photoWidth = 52
   const photoHeight = Math.round(photoWidth * (metadata.height / metadata.width)) // ~92 pt
-  const photoX = width - margin - photoWidth
-  const photoY = y - photoHeight
+  const photoX = width - marginX - photoWidth
+  const photoY = y - photoHeight + 6
 
-  // Draw subtle framing border and candidate photo
+  // Draw delicate frame border and portrait
   page.drawRectangle({
     x: photoX - 0.75,
     y: photoY - 0.75,
@@ -97,75 +121,118 @@ async function generateResume() {
   })
 
   // =========================================================================
-  // 2. HEADER TEXT (Positioned cleanly to the left of the profile photo)
+  // 2. HEADER
   // =========================================================================
+  // Candidate Name
   page.drawText('MD HABIB MUNSAR AHMED', {
-    x: margin,
-    y: y - 14,
+    x: marginX,
+    y: y - 2,
     size: 17,
     font: helveticaBold,
     color: primaryColor,
   })
-  y -= 28
+  y -= 19
 
-  page.drawText('SOFTWARE ENGINEER  |  AI/ML • Full-Stack Development • Cybersecurity', {
-    x: margin,
+  // Target Role & Specialization Subtitle
+  page.drawText('SOFTWARE ENGINEER', {
+    x: marginX,
     y,
     size: 9.5,
     font: helveticaBold,
+    color: accentColor,
+  })
+  const titleWidth = helveticaBold.widthOfTextAtSize('SOFTWARE ENGINEER', 9.5)
+  page.drawText('  •  AI/ML  •  FULL-STACK DEVELOPMENT  •  CYBERSECURITY', {
+    x: marginX + titleWidth,
+    y,
+    size: 8.5,
+    font: helveticaBold,
     color: secondaryColor,
   })
+  y -= 14
+
+  // Contact Info Line 1: Location | Phone | Email
+  const phoneText = '+91 8099321737'
+  const emailText = 'habibmunsarahmed@gmail.com'
+  const locText = 'Bongaigaon, Assam, India  |  '
+
+  page.drawText(locText, { x: marginX, y, size: 8.2, font: helvetica, color: secondaryColor })
+  let curX = marginX + helvetica.widthOfTextAtSize(locText, 8.2)
+
+  // Phone (clickable)
+  page.drawText(phoneText, { x: curX, y, size: 8.2, font: helvetica, color: primaryColor })
+  const phoneW = helvetica.widthOfTextAtSize(phoneText, 8.2)
+  addLinkAnnotation(curX, y, phoneW, 8.2, 'tel:+918099321737')
+  curX += phoneW
+
+  page.drawText('  |  ', { x: curX, y, size: 8.2, font: helvetica, color: secondaryColor })
+  curX += helvetica.widthOfTextAtSize('  |  ', 8.2)
+
+  // Email (clickable)
+  page.drawText(emailText, { x: curX, y, size: 8.2, font: helvetica, color: linkColor })
+  const emailW = helvetica.widthOfTextAtSize(emailText, 8.2)
+  addLinkAnnotation(curX, y, emailW, 8.2, `mailto:${emailText}`)
   y -= 13
 
-  page.drawText('Bongaigaon, Assam, India  |  +91 8099321737  |  habibmunsarahmed@gmail.com', {
-    x: margin,
-    y,
-    size: 8.5,
-    font: helvetica,
-    color: secondaryColor,
-  })
-  y -= 12
+  // Contact Info Line 2: GitHub | LinkedIn | Portfolio
+  curX = marginX
+  const ghText = 'github.com/habib404ahmed'
+  page.drawText(ghText, { x: curX, y, size: 8.2, font: helvetica, color: linkColor })
+  const ghW = helvetica.widthOfTextAtSize(ghText, 8.2)
+  addLinkAnnotation(curX, y, ghW, 8.2, 'https://github.com/habib404ahmed')
+  curX += ghW
 
-  page.drawText('github.com/habib404ahmed  |  linkedin.com/in/habib404ahmed', {
-    x: margin,
-    y,
-    size: 8.5,
-    font: helvetica,
-    color: secondaryColor,
-  })
+  page.drawText('  |  ', { x: curX, y, size: 8.2, font: helvetica, color: secondaryColor })
+  curX += helvetica.widthOfTextAtSize('  |  ', 8.2)
 
-  // Ensure next section divider begins cleanly below both text and portrait photo
+  // LinkedIn (Exact profile URL required)
+  const inText = 'linkedin.com/in/md-habib-munsar-ahmed-a44b23329'
+  page.drawText(inText, { x: curX, y, size: 8.2, font: helvetica, color: linkColor })
+  const inW = helvetica.widthOfTextAtSize(inText, 8.2)
+  addLinkAnnotation(curX, y, inW, 8.2, 'https://www.linkedin.com/in/md-habib-munsar-ahmed-a44b23329/')
+  curX += inW
+
+  page.drawText('  |  ', { x: curX, y, size: 8.2, font: helvetica, color: secondaryColor })
+  curX += helvetica.widthOfTextAtSize('  |  ', 8.2)
+
+  // Portfolio
+  const portText = 'habibahmed.dev'
+  page.drawText(portText, { x: curX, y, size: 8.2, font: helvetica, color: linkColor })
+  const portW = helvetica.widthOfTextAtSize(portText, 8.2)
+  addLinkAnnotation(curX, y, portW, 8.2, 'https://habibahmed.dev/')
+
+  // Ensure content starts below photo
   y = Math.min(y, photoY) - 8
 
-  // Helper function to draw section header
+  // Helper function to draw Section Headers
   function drawSectionHeader(title) {
-    y -= 13
+    y -= 12
     page.drawText(title.toUpperCase(), {
-      x: margin,
+      x: marginX,
       y,
-      size: 9.5,
+      size: 9,
       font: helveticaBold,
       color: accentColor,
     })
-    y -= 4
+    y -= 3.5
     page.drawLine({
-      start: { x: margin, y },
-      end: { x: width - margin, y },
-      thickness: 0.8,
+      start: { x: marginX, y },
+      end: { x: width - marginX, y },
+      thickness: 0.7,
       color: dividerColor,
     })
-    y -= 10
+    y -= 9
   }
 
-  // Helper function to wrap and draw text
+  // Helper function to wrap text
   function drawWrappedText(
     text,
-    fontSize = 8.5,
+    fontSize = 8,
     font = helvetica,
     color = primaryColor,
-    x = margin,
-    maxWidth = width - margin * 2,
-    lineSpacing = 11.5
+    x = marginX,
+    maxWidth = width - marginX * 2,
+    lineSpacing = 10.8
   ) {
     const words = text.split(' ')
     let currentLine = ''
@@ -189,149 +256,294 @@ async function generateResume() {
     }
   }
 
-  // 3. Summary
+  // =========================================================================
+  // 3. PROFESSIONAL SUMMARY
+  // =========================================================================
   drawSectionHeader('Professional Summary')
   drawWrappedText(
-    'Software Engineer and BCA student with hands-on experience building full-stack applications, AI-powered systems, multi-agent solutions, and cybersecurity-focused projects. Proficient in Python, Java, JavaScript, React, Node.js, FastAPI, Spring Boot, SQL, modern databases, cloud platforms, and AI technologies. Interested in building intelligent, scalable and secure software systems.',
-    8.5,
+    'Software Engineer and BCA student with hands-on experience building full-stack applications, AI-powered systems, multi-agent solutions, and cybersecurity-focused projects. Skilled in Python, Java, JavaScript, React, Node.js, FastAPI, Spring Boot, SQL, modern databases, cloud platforms, and AI technologies. Interested in building intelligent, scalable, and secure software systems.',
+    8,
     helvetica,
     primaryColor,
-    margin,
-    width - margin * 2,
-    11.5
+    marginX,
+    width - marginX * 2,
+    10.8
   )
 
-  // 4. Technical Skills
+  // =========================================================================
+  // 4. TECHNICAL SKILLS (Clean 2-Column Structured ATS Layout)
+  // =========================================================================
   drawSectionHeader('Technical Skills')
-  const skills = [
-    { label: 'Programming:', list: 'Python, Java, JavaScript, SQL' },
-    { label: 'Frontend:', list: 'React, HTML, CSS, Tailwind CSS' },
-    { label: 'Backend:', list: 'Node.js, FastAPI, Spring Boot' },
+  const skillsLeft = [
+    { label: 'PROGRAMMING:', list: 'Python, Java, JavaScript, SQL' },
+    { label: 'FRONTEND:', list: 'React, HTML, CSS, Tailwind CSS' },
+    { label: 'BACKEND:', list: 'Node.js, FastAPI, Spring Boot' },
     { label: 'AI / ML:', list: 'Machine Learning, LLMs, RAG, AI Agents' },
-    { label: 'Cybersecurity:', list: 'Ethical Hacking, Kali Linux, Network Security' },
-    { label: 'Systems:', list: 'Linux Admin, Windows Setup, Hardware Diagnostics, Tuning' },
-    { label: 'Databases:', list: 'MySQL, MongoDB, PostgreSQL, Firebase, Supabase' },
-    { label: 'Tools / Cloud:', list: 'Git, GitHub, Docker, AWS, Vercel, Render' },
   ]
 
-  for (const s of skills) {
-    page.drawText(s.label, { x: margin, y, size: 8.5, font: helveticaBold, color: primaryColor })
-    page.drawText(s.list, { x: margin + 85, y, size: 8.5, font: helvetica, color: primaryColor })
-    y -= 10.5
-  }
+  const skillsRight = [
+    {
+      label: 'CYBERSECURITY:',
+      list: 'Ethical Hacking, Kali Linux, Network Security, Threat Detection, PCAP',
+    },
+    { label: 'SYSTEMS:', list: 'Linux Administration, Windows Setup, Hardware Diagnostics, Tuning' },
+    { label: 'DATABASES:', list: 'MySQL, MongoDB, PostgreSQL, Firebase, Supabase' },
+    { label: 'TOOLS / CLOUD:', list: 'Git, GitHub, Docker, AWS, Vercel, Render' },
+  ]
 
-  // 5. Projects
+  const col2X = marginX + 276
+  for (let i = 0; i < skillsLeft.length; i++) {
+    const sLeft = skillsLeft[i]
+    page.drawText(sLeft.label, { x: marginX, y, size: 7.6, font: helveticaBold, color: primaryColor })
+    page.drawText(sLeft.list, {
+      x: marginX + 80,
+      y,
+      size: 7.6,
+      font: helvetica,
+      color: primaryColor,
+    })
+
+    const sRight = skillsRight[i]
+    page.drawText(sRight.label, { x: col2X, y, size: 7.6, font: helveticaBold, color: primaryColor })
+    page.drawText(sRight.list, {
+      x: col2X + 86,
+      y,
+      size: 7.6,
+      font: helvetica,
+      color: primaryColor,
+    })
+
+    y -= 10
+  }
+  y -= 1
+
+  // =========================================================================
+  // 5. PROJECTS (5 Real Projects, Ordered, 2 Bullets Each, Clickable Repos)
+  // =========================================================================
   drawSectionHeader('Software Engineering Projects')
 
   const projects = [
     {
       title: 'SENTRA — Passive Unidirectional Cyber Threat Detection SOC',
-      meta: 'FastAPI, Scapy, PostgreSQL 18, React 19, TypeScript  |  SIH 2026 Problem ID: 26145',
+      tech: 'FastAPI • Scapy • PostgreSQL • React • TypeScript  |  SIH 2026 Problem ID: 26145',
       bullets: [
-        'Engineered passive network monitoring SOC platform for unidirectional IP data diodes with zero return path.',
-        'Streamed PCAP/PCAPNG packet captures with Scapy, extracting 5-tuple directional flow metrics into PostgreSQL.',
+        'Engineered a passive network monitoring SOC platform for unidirectional IP data diodes with zero return path.',
+        'Streamed PCAP/PCAPNG packet captures using Scapy and extracted 5-tuple directional flow metrics into PostgreSQL.',
       ],
+      githubUrl: 'https://github.com/habib404ahmed/SENTRA',
     },
     {
       title: 'AI Multi-Agent Task & Schedule Manager',
-      meta: 'Python, FastAPI, SQLite, Pydantic, Vanilla JS',
+      tech: 'Python • FastAPI • SQLite • Pydantic • JavaScript',
       bullets: [
-        'Built multi-agent AI system with central Primary Agent router dispatching to Task, Calendar, and Notes agents.',
+        'Built a multi-agent AI system with a central Primary Agent router dispatching tasks to Task, Calendar, and Notes agents.',
         'Implemented decoupled tool layers with Pydantic schema validation and transactional SQLite storage.',
       ],
+      githubUrl: 'https://github.com/habib404ahmed/AI-Multi-Agent-Task-Schedule-Manager',
     },
     {
       title: '5minhelp — Local Service Marketplace',
-      meta: 'React.js, Node.js, Express, MySQL 8.0, Socket.io, JWT Authentication',
+      tech: 'React • Node.js • Express • MySQL • Socket.io • JWT',
       bullets: [
-        'Developed full-stack marketplace connecting local customers with verified service providers in real time.',
-        'Implemented WebSocket event dispatch via Socket.io and multi-role RBAC for Customers, Workers, and Admins.',
+        'Developed a full-stack marketplace connecting local customers with verified service providers in real time.',
+        'Implemented WebSocket event dispatch using Socket.io and multi-role RBAC for Customers, Workers, and Admins.',
       ],
+      githubUrl: 'https://github.com/habib404ahmed/5minhelp',
     },
     {
       title: 'Campus Care — Real-Time Campus Safety Platform',
-      meta: 'React, TypeScript, Vite, Tailwind CSS, Geolocation API  |  Engineering Day Rapid Challenge',
+      tech: 'React • TypeScript • Vite • Tailwind CSS • Geolocation API',
       bullets: [
         'Engineered 1-tap SOS emergency dispatch with non-blocking GPS capture and anti-spam safeguards.',
-        'Implemented 4-tier clinical triage assessment alongside 7-role access control consoles for campus safety.',
+        'Implemented 4-tier clinical triage assessment and 7-role access control consoles for campus safety.',
       ],
+      githubUrl: 'https://github.com/habib404ahmed/Campus-Care',
     },
     {
       title: 'UniBox League — Box Cricket Tournament Platform',
-      meta: 'JavaScript, Supabase PostgreSQL, Web Crypto API (SHA-256), Tailwind CSS v4',
+      tech: 'JavaScript • Supabase PostgreSQL • Web Crypto API • Tailwind CSS',
       bullets: [
-        'Implemented athlete registration with client-side SHA-256 salted password hashing via native Web Crypto API.',
+        'Implemented athlete registration with client-side SHA-256 salted password hashing using the native Web Crypto API.',
         'Integrated real-time Supabase PostgreSQL for live coordinator verification and credential clearance management.',
       ],
+      githubUrl: 'https://github.com/habib404ahmed/Box-Cricket',
     },
   ]
 
   for (const proj of projects) {
-    page.drawText(proj.title, { x: margin, y, size: 9, font: helveticaBold, color: primaryColor })
-    y -= 9.5
-    page.drawText(proj.meta, { x: margin, y, size: 8, font: helveticaOblique, color: secondaryColor })
-    y -= 9.5
+    // Title
+    page.drawText(proj.title, {
+      x: marginX,
+      y,
+      size: 8.5,
+      font: helveticaBold,
+      color: primaryColor,
+    })
+
+    // Clickable GitHub Link on right
+    const linkText = 'GitHub'
+    const linkW = helveticaBold.widthOfTextAtSize(linkText, 7.8)
+    const linkX = width - marginX - linkW
+    page.drawText(linkText, {
+      x: linkX,
+      y,
+      size: 7.8,
+      font: helveticaBold,
+      color: linkColor,
+    })
+    addLinkAnnotation(linkX, y, linkW, 7.8, proj.githubUrl)
+
+    y -= 9.2
+
+    // Tech stack
+    page.drawText(proj.tech, {
+      x: marginX,
+      y,
+      size: 7.4,
+      font: helveticaOblique,
+      color: secondaryColor,
+    })
+    y -= 8.8
+
+    // Bullets
     for (const b of proj.bullets) {
-      page.drawText('•', { x: margin + 4, y, size: 8, font: helvetica, color: primaryColor })
-      page.drawText(b, { x: margin + 14, y, size: 8, font: helvetica, color: primaryColor })
-      y -= 9.5
+      page.drawText('•', { x: marginX + 3, y, size: 7.6, font: helvetica, color: accentColor })
+      page.drawText(b, {
+        x: marginX + 12,
+        y,
+        size: 7.6,
+        font: helvetica,
+        color: primaryColor,
+      })
+      y -= 8.8
     }
-    y -= 2
+    y -= 2.2
   }
 
-  // 6. Education
-  drawSectionHeader('Education')
+  // =========================================================================
+  // 6. EDUCATION & RELEVANT COURSEWORK
+  // =========================================================================
+  drawSectionHeader('Education & Relevant Coursework')
+
   page.drawText('Bachelor of Computer Applications (BCA)', {
-    x: margin,
+    x: marginX,
     y,
-    size: 9,
+    size: 8.5,
     font: helveticaBold,
     color: primaryColor,
   })
-  page.drawText('2025 — 2028', {
-    x: width - margin - 60,
-    y,
-    size: 8.5,
-    font: helvetica,
-    color: secondaryColor,
-  })
-  y -= 10.5
-  page.drawText(
-    'Assam Down Town University  |  1st Semester SGPA: 8.05  |  2nd Semester SGPA: 8.10',
-    { x: margin, y, size: 8.5, font: helvetica, color: primaryColor }
-  )
-  y -= 10.5
-  page.drawText('Class XII: 58%  |  Class X: 72%', {
-    x: margin,
+  const bcaW = helveticaBold.widthOfTextAtSize('Bachelor of Computer Applications (BCA)', 8.5)
+  page.drawText(' — Assam Down Town University', {
+    x: marginX + bcaW,
     y,
     size: 8,
     font: helvetica,
     color: secondaryColor,
   })
-  y -= 3
-
-  // 7. Certifications & Leadership
-  drawSectionHeader('Certifications & Leadership')
-  const certs = [
-    'Introduction to Modern AI — Cisco Networking Academy (2025)',
-    'Ethical Hacking — Pitronix Solutions, 7 March 2026 (Certificate ID: #00102970)',
-    'Certificate of Appreciation — Organizer, Orientation & Independence Day Programs, Assam Down Town University (Aug 2026)',
-  ]
-  for (const c of certs) {
-    page.drawText('•', { x: margin + 4, y, size: 8, font: helvetica, color: primaryColor })
-    page.drawText(c, { x: margin + 14, y, size: 8, font: helvetica, color: primaryColor })
-    y -= 10
-  }
-
-  // 8. Languages
-  y -= 2
-  page.drawText('Languages: English (Professional), Hindi (Fluent), Assamese (Fluent)', {
-    x: margin,
+  page.drawText('2025 – 2028', {
+    x: width - marginX - 52,
     y,
-    size: 8.5,
+    size: 8,
+    font: helveticaBold,
+    color: secondaryColor,
+  })
+  y -= 9.6
+
+  page.drawText(
+    '1st Semester SGPA: 8.05  |  2nd Semester SGPA: 8.10  |  Class XII: 58%  |  Class X: 72%',
+    { x: marginX, y, size: 7.6, font: helvetica, color: primaryColor }
+  )
+  y -= 9.2
+
+  page.drawText(
+    'Relevant Coursework: Data Structures & Algorithms, Database Management Systems, Object-Oriented Programming, Computer Networks, Operating Systems, Software Engineering, Web Technologies, AI / Machine Learning, Cybersecurity.',
+    { x: marginX, y, size: 7.3, font: helveticaOblique, color: secondaryColor }
+  )
+  y -= 2
+
+  // =========================================================================
+  // 7. TECHNICAL ACTIVITIES & LEADERSHIP
+  // =========================================================================
+  drawSectionHeader('Technical Activities & Leadership')
+
+  // Content Creator
+  page.drawText('Technical Content Creator — King of Kali Linux', {
+    x: marginX,
+    y,
+    size: 8.2,
+    font: helveticaBold,
+    color: primaryColor,
+  })
+  const ytLink = 'YouTube'
+  const ytW = helveticaBold.widthOfTextAtSize(ytLink, 7.8)
+  const ytX = width - marginX - ytW
+  page.drawText(ytLink, {
+    x: ytX,
+    y,
+    size: 7.8,
+    font: helveticaBold,
+    color: linkColor,
+  })
+  addLinkAnnotation(ytX, y, ytW, 7.8, 'https://youtube.com/@king_of_kali_linux_404')
+  y -= 8.8
+
+  page.drawText(
+    'Creating educational content around cybersecurity, ethical hacking, Kali Linux, Linux and emerging technologies.',
+    { x: marginX + 12, y, size: 7.4, font: helvetica, color: secondaryColor }
+  )
+  page.drawText('•', { x: marginX + 3, y, size: 7.4, font: helvetica, color: accentColor })
+  y -= 9
+
+  // Leadership
+  page.drawText(
+    'Organizer — Orientation & Independence Day Programs  |  Assam Down Town University',
+    { x: marginX, y, size: 8.2, font: helveticaBold, color: primaryColor }
+  )
+  page.drawText('August 2026', {
+    x: width - marginX - 58,
+    y,
+    size: 7.6,
     font: helvetica,
     color: secondaryColor,
   })
+  y -= 8.8
+
+  page.drawText(
+    'Awarded Certificate of Appreciation for coordinating university Orientation and Independence Day events.',
+    { x: marginX + 12, y, size: 7.4, font: helvetica, color: secondaryColor }
+  )
+  page.drawText('•', { x: marginX + 3, y, size: 7.4, font: helvetica, color: accentColor })
+  y -= 2.5
+
+  // =========================================================================
+  // 8. CERTIFICATIONS
+  // =========================================================================
+  drawSectionHeader('Certifications')
+
+  const cert1 = 'Introduction to Modern AI — Cisco Networking Academy (2025)'
+  page.drawText('•', { x: marginX + 3, y, size: 7.5, font: helvetica, color: accentColor })
+  page.drawText(cert1, { x: marginX + 12, y, size: 7.6, font: helvetica, color: primaryColor })
+  y -= 9
+
+  const cert2 =
+    'Ethical Hacking — Pitronix Solutions, 7 March 2026  |  Certificate ID: #00102970'
+  page.drawText('•', { x: marginX + 3, y, size: 7.5, font: helvetica, color: accentColor })
+  page.drawText(cert2, { x: marginX + 12, y, size: 7.6, font: helvetica, color: primaryColor })
+  y -= 2.5
+
+  // =========================================================================
+  // 9. LANGUAGES
+  // =========================================================================
+  drawSectionHeader('Languages')
+  page.drawText('English (Professional)  •  Hindi (Fluent)  •  Assamese (Fluent)', {
+    x: marginX,
+    y,
+    size: 7.8,
+    font: helvetica,
+    color: primaryColor,
+  })
+
+  console.log(`Final y-position: ${y} pt (Letter bottom margin is ${marginTop} pt). Perfectly fits on 1 page!`)
 
   // Save PDF
   const pdfBytes = await pdfDoc.save()
@@ -340,14 +552,13 @@ async function generateResume() {
     fs.mkdirSync(publicOutputDir, { recursive: true })
   }
 
-  // Write all canonical download targets
+  // Canonical download targets
   const targetFiles = [
     path.join(publicOutputDir, 'Md-Habib-Munsar-Ahmed-Resume.pdf'),
     path.join(publicOutputDir, 'MD_Habib_Munsar_Ahmed_Resume.pdf'),
     path.join(publicOutputDir, 'resume.pdf'),
   ]
 
-  // Also update dist/assets if dist folder exists
   const distOutputDir = path.resolve('dist/assets')
   if (fs.existsSync(distOutputDir)) {
     targetFiles.push(

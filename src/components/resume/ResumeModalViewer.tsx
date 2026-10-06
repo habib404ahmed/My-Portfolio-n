@@ -109,7 +109,7 @@ export function ResumeModalViewer({ isOpen, onClose }: ResumeModalViewerProps) {
                     variant="primary"
                     size="sm"
                     href={profile.resume.path}
-                    download={true}
+                    download="Md-Habib-Munsar-Ahmed-Resume.pdf"
                     ariaLabel="Download resume PDF"
                   >
                     DOWNLOAD PDF
