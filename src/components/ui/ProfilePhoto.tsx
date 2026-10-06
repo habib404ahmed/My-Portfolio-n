@@ -86,91 +86,95 @@ export function ProfilePhoto({
         </>
       )}
 
-      {/* ─── Holographic Framing Accents ─── */}
-      <div className="relative group">
-        {/* Subtle Refined Corner Brackets (Thin lines, low opacity) */}
-        <div
-          className="absolute -top-2.5 -left-2.5 w-4 h-4 border-t border-l border-cyan-400/30 pointer-events-none transition-colors duration-500 group-hover:border-cyan-400/60"
-          aria-hidden="true"
-        />
-        <div
-          className="absolute -top-2.5 -right-2.5 w-4 h-4 border-t border-r border-cyan-400/30 pointer-events-none transition-colors duration-500 group-hover:border-cyan-400/60"
-          aria-hidden="true"
-        />
-        <div
-          className="absolute -bottom-2.5 -left-2.5 w-4 h-4 border-b border-l border-cyan-400/30 pointer-events-none transition-colors duration-500 group-hover:border-cyan-400/60"
-          aria-hidden="true"
-        />
-        <div
-          className="absolute -bottom-2.5 -right-2.5 w-4 h-4 border-b border-r border-cyan-400/30 pointer-events-none transition-colors duration-500 group-hover:border-cyan-400/60"
-          aria-hidden="true"
-        />
-
-        {/* ─── Portrait Photo Container ─── */}
-        <div
-          className="relative rounded-2xl overflow-hidden border border-white/10 bg-slate-950/60 shadow-[0_20px_50px_rgba(0,0,0,0.85)] transition-shadow duration-500 group-hover:shadow-[0_20px_60px_rgba(6,182,212,0.15)]"
-          style={{
-            aspectRatio: '576 / 1024',
-          }}
-        >
-          {/* Responsive High-Fidelity Picture */}
-          <picture className="block w-full h-full">
-            <source
-              type="image/webp"
-              srcSet="/assets/images/profile-400.webp 400w, /assets/images/profile-600.webp 600w, /assets/images/profile.webp 576w"
-              sizes="(max-width: 640px) 340px, (max-width: 1024px) 460px, 500px"
-            />
-            <img
-              src="/assets/images/profile.webp"
-              alt={profile.photo.alt || 'Md Habib Munsar Ahmed — Software Engineer'}
-              loading={priority ? 'eager' : 'lazy'}
-              decoding="async"
-              className={`block w-full h-full object-contain filter contrast-[1.01] brightness-[1.01] transition-transform duration-700 ease-out group-hover:scale-[1.012] ${sizeStyles}`}
-              style={{
-                aspectRatio: '576 / 1024',
-              }}
-              onError={(e) => {
-                // Fallback to jpg or png if webp fails
-                const target = e.currentTarget
-                if (target.src.endsWith('.webp')) {
-                  target.src = '/assets/images/profile.jpg'
-                }
-              }}
-            />
-          </picture>
-
-          {/* Environmental Floor Blend: Soft gradient at base to merge into UI darkness */}
+      {/* ─── Profile Structure: Frame + Below-Badge in Flex Column ─── */}
+      <div className="relative flex flex-col items-center">
+        {/* Holographic Framing Accents around Photo Container */}
+        <div className="relative group">
+          {/* Subtle Refined Corner Brackets (Thin lines, low opacity, framing photo) */}
           <div
-            className="absolute inset-x-0 bottom-0 h-16 sm:h-20 bg-gradient-to-t from-[var(--color-void,#050507)] via-[var(--color-void,#050507)]/40 to-transparent pointer-events-none"
+            className="absolute -top-2.5 -left-2.5 w-4 h-4 border-t border-l border-cyan-400/30 pointer-events-none transition-colors duration-500 group-hover:border-cyan-400/60"
+            aria-hidden="true"
+          />
+          <div
+            className="absolute -top-2.5 -right-2.5 w-4 h-4 border-t border-r border-cyan-400/30 pointer-events-none transition-colors duration-500 group-hover:border-cyan-400/60"
+            aria-hidden="true"
+          />
+          <div
+            className="absolute -bottom-2.5 -left-2.5 w-4 h-4 border-b border-l border-cyan-400/30 pointer-events-none transition-colors duration-500 group-hover:border-cyan-400/60"
+            aria-hidden="true"
+          />
+          <div
+            className="absolute -bottom-2.5 -right-2.5 w-4 h-4 border-b border-r border-cyan-400/30 pointer-events-none transition-colors duration-500 group-hover:border-cyan-400/60"
             aria-hidden="true"
           />
 
-          {/* Subtle Filmic Edge Vignette */}
+          {/* ─── Portrait Photo Container ─── */}
           <div
-            className="absolute inset-0 rounded-2xl pointer-events-none ring-1 ring-inset ring-white/10"
+            className="relative rounded-2xl overflow-hidden border border-white/10 bg-slate-950/60 shadow-[0_20px_50px_rgba(0,0,0,0.85)] transition-shadow duration-500 group-hover:shadow-[0_20px_60px_rgba(6,182,212,0.15)]"
             style={{
-              background:
-                'radial-gradient(ellipse at 50% 40%, transparent 68%, rgba(5,5,7,0.35) 100%)',
+              aspectRatio: '576 / 1024',
             }}
-            aria-hidden="true"
-          />
+          >
+            {/* Responsive High-Fidelity Picture */}
+            <picture className="block w-full h-full">
+              <source
+                type="image/webp"
+                srcSet="/assets/images/profile-400.webp 400w, /assets/images/profile-600.webp 600w, /assets/images/profile.webp 576w"
+                sizes="(max-width: 640px) 340px, (max-width: 1024px) 460px, 500px"
+              />
+              <img
+                src="/assets/images/profile.webp"
+                alt={profile.photo.alt || 'Md Habib Munsar Ahmed — Software Engineer'}
+                loading={priority ? 'eager' : 'lazy'}
+                decoding="async"
+                className={`block w-full h-full object-contain filter contrast-[1.01] brightness-[1.01] transition-transform duration-700 ease-out group-hover:scale-[1.012] ${sizeStyles}`}
+                style={{
+                  aspectRatio: '576 / 1024',
+                }}
+                onError={(e) => {
+                  // Fallback to jpg or png if webp fails
+                  const target = e.currentTarget
+                  if (target.src.endsWith('.webp')) {
+                    target.src = '/assets/images/profile.jpg'
+                  }
+                }}
+              />
+            </picture>
 
-          {/* Cinematic Scanline Overlay (Subtle Digital Artifact) */}
-          <div
-            className="absolute inset-0 pointer-events-none opacity-[0.025] bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%)] bg-[length:100%_4px]"
-            aria-hidden="true"
-          />
+            {/* Environmental Floor Blend: Soft gradient at base to merge into UI darkness */}
+            <div
+              className="absolute inset-x-0 bottom-0 h-16 sm:h-20 bg-gradient-to-t from-[var(--color-void,#050507)] via-[var(--color-void,#050507)]/40 to-transparent pointer-events-none"
+              aria-hidden="true"
+            />
+
+            {/* Subtle Filmic Edge Vignette */}
+            <div
+              className="absolute inset-0 rounded-2xl pointer-events-none ring-1 ring-inset ring-white/10"
+              style={{
+                background:
+                  'radial-gradient(ellipse at 50% 40%, transparent 68%, rgba(5,5,7,0.35) 100%)',
+              }}
+              aria-hidden="true"
+            />
+
+            {/* Cinematic Scanline Overlay (Subtle Digital Artifact) */}
+            <div
+              className="absolute inset-0 pointer-events-none opacity-[0.025] bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%)] bg-[length:100%_4px]"
+              aria-hidden="true"
+            />
+          </div>
         </div>
 
-        {/* Status / Title Telemetry Chip (Rule 17: SOFTWARE ENGINEER) */}
+        {/* ─── Profile Caption Badge (Deliberate cinematic profile caption, 12-14px gap below photo) ─── */}
         <motion.div
-          initial={{ opacity: 0, y: 6 }}
+          initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8, duration: 0.6 }}
-          className="absolute -bottom-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full border border-cyan-500/25 bg-slate-950/90 backdrop-blur-md flex items-center gap-2 shadow-lg whitespace-nowrap"
+          className="mt-3 sm:mt-3.5 h-[34px] sm:h-[36px] min-w-[165px] sm:min-w-[185px] px-4 sm:px-5 rounded-full border border-cyan-500/30 bg-slate-950/85 hover:border-cyan-400/50 backdrop-blur-md flex items-center justify-center gap-2.5 shadow-[0_4px_16px_rgba(0,0,0,0.6),0_0_12px_rgba(6,182,212,0.12)] whitespace-nowrap select-none"
         >
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-          <span className="font-mono text-[0.625rem] text-slate-300 tracking-wider uppercase font-semibold">
+          {/* Status Dot: 7-9px, emerald glowing pulse */}
+          <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)] animate-pulse flex-shrink-0" />
+          <span className="font-mono text-xs sm:text-[0.8125rem] text-slate-100 tracking-[0.08em] uppercase font-bold">
             SOFTWARE ENGINEER
           </span>
         </motion.div>
