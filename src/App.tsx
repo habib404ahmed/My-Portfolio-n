@@ -152,9 +152,9 @@ export default function App() {
           )}
         </AnimatePresence>
 
-        {/* Hero Ambient Dual Lighting: Cool Technology (Left) / Warm Person (Right) */}
+        {/* Hero Ambient Dual Lighting: Cool Technology (Left) / Warm Person (Right) — Layer 3 */}
         <div
-          className="absolute inset-0 pointer-events-none z-[1]"
+          className="absolute inset-0 pointer-events-none z-[3]"
           aria-hidden="true"
           style={{
             background:

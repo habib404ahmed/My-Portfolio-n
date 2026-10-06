@@ -39,8 +39,9 @@ export function AICoreMesh({
       const i3 = i * 3
       const angle = (i / orbitCount) * Math.PI * 2
       const orbitLayer = Math.floor(i / (orbitCount / 3))
-      const radius = 1.2 + orbitLayer * 0.35 + Math.random() * 0.3
-      const yOffset = (Math.random() - 0.5) * 0.4
+      // Particle orbit radius scaled to reach 2.06x core diameter (core r=0.55, outer r~1.15-1.25)
+      const radius = 0.85 + orbitLayer * 0.14 + Math.random() * 0.12
+      const yOffset = (Math.random() - 0.5) * 0.35
 
       positions[i3] = Math.cos(angle) * radius
       positions[i3 + 1] = yOffset
@@ -124,19 +125,19 @@ export function AICoreMesh({
 
       {/* Ring 1 */}
       <mesh ref={ringRef}>
-        <torusGeometry args={[1.1, 0.003, 6, 128]} />
+        <torusGeometry args={[0.95, 0.003, 6, 128]} />
         <meshBasicMaterial color="#06b6d4" transparent opacity={0.25} />
       </mesh>
 
       {/* Ring 2 */}
       <mesh ref={ring2Ref}>
-        <torusGeometry args={[0.9, 0.002, 6, 96]} />
+        <torusGeometry args={[0.82, 0.002, 6, 96]} />
         <meshBasicMaterial color="#7c3aed" transparent opacity={0.16} />
       </mesh>
 
       {/* Ring 3 */}
       <mesh rotation={[Math.PI / 3, 0, 0]}>
-        <torusGeometry args={[1.35, 0.002, 6, 128]} />
+        <torusGeometry args={[1.15, 0.002, 6, 128]} />
         <meshBasicMaterial color="#3b82f6" transparent opacity={0.12} />
       </mesh>
 
