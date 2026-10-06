@@ -17,7 +17,7 @@ export function Scene05CapabilityMatrix() {
         subtitle="Transforming architectural concepts into living, resilient digital systems. Click a capability to trace its execution pipeline."
       >
         {/* Capability Selector Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mb-10">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-3 mb-10">
           {capabilities.map((cap) => {
             const isSelected = cap.id === selectedCapId
             return (

@@ -31,13 +31,13 @@ export const profile = {
     display: ['MD HABIB', 'MUNSAR AHMED'],
   },
   title: 'Software Engineer',
-  positioning: 'AI/ML • Full-Stack Development • Cybersecurity',
+  positioning: 'AI/ML Engineering • Full-Stack Development • Cybersecurity & Ethical Hacking',
   tagline:
-    'Building intelligent, scalable and secure software systems at the intersection of AI, full-stack engineering and cybersecurity.',
+    'Software Engineer building intelligent, secure and scalable digital systems across AI, full-stack development and cybersecurity.',
   statement:
-    'Software Engineer and BCA student focused on building intelligent, scalable and secure software systems.',
+    'Software Engineer building intelligent, secure and scalable digital systems across AI, full-stack development and cybersecurity.',
   subStatement:
-    'I enjoy turning complex problems into practical software solutions. My work combines software engineering, artificial intelligence, security, and modern web technologies.',
+    'My engineering foundation was built by working across software, systems and security. Alongside application development, I have explored Linux, networking, ethical hacking, hardware troubleshooting and AI/ML—giving me a broader understanding of how modern systems are built, deployed and secured.',
   location: 'Bongaigaon, Assam, India',
   contact: {
     email: 'habibmunsarahmed@gmail.com',

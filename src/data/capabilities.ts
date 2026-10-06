@@ -97,4 +97,19 @@ export const capabilities: Capability[] = [
       { step: '05', label: 'Live Production' },
     ],
   },
+  {
+    id: 'systems-support',
+    title: 'Systems & Technical Support',
+    domain: 'Systems',
+    color: '#f59e0b',
+    description:
+      'Hands-on systems administration, hardware diagnostics, Windows & Linux setup, driver installation, network troubleshooting, and system optimization.',
+    flow: [
+      { step: '01', label: 'Diagnostic Scan' },
+      { step: '02', label: 'Hardware/OS Setup' },
+      { step: '03', label: 'Driver Config' },
+      { step: '04', label: 'Tuning & Recovery' },
+      { step: '05', label: 'Verified System' },
+    ],
+  },
 ]

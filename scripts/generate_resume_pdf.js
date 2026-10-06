@@ -208,7 +208,8 @@ async function generateResume() {
     { label: 'Frontend:', list: 'React, HTML, CSS, Tailwind CSS' },
     { label: 'Backend:', list: 'Node.js, FastAPI, Spring Boot' },
     { label: 'AI / ML:', list: 'Machine Learning, LLMs, RAG, AI Agents' },
-    { label: 'Cybersecurity:', list: 'Kali Linux, Ethical Hacking, Network Security' },
+    { label: 'Cybersecurity:', list: 'Ethical Hacking, Kali Linux, Network Security' },
+    { label: 'Systems:', list: 'Linux Admin, Windows Setup, Hardware Diagnostics, Tuning' },
     { label: 'Databases:', list: 'MySQL, MongoDB, PostgreSQL, Firebase, Supabase' },
     { label: 'Tools / Cloud:', list: 'Git, GitHub, Docker, AWS, Vercel, Render' },
   ]

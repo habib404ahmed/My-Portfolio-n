@@ -15,33 +15,48 @@ interface EnvironmentStyle {
 const ENVIRONMENTS: Record<string, EnvironmentStyle> = {
   'bca-foundation': {
     ambientBg: 'radial-gradient(circle at 60% 40%, rgba(56, 189, 248, 0.08) 0%, transparent 70%)',
-    gridType: 'ARCHITECTURAL_NODES',
-    visualElements: 'Clean geometric forms & core algorithmic primitives',
+    gridType: 'ACADEMIC_FOUNDATION',
+    visualElements: 'Core algorithms, discrete math & data structures at Assam Down Town University',
   },
-  'ai-foundation': {
+  'systems-experience': {
+    ambientBg: 'radial-gradient(circle at 60% 40%, rgba(245, 158, 11, 0.1) 0%, transparent 70%)',
+    gridType: 'SYSTEMS_DIAGNOSTICS',
+    visualElements: 'Hardware architecture, PC configuration, dual-boot setups & system optimization',
+  },
+  'cybersecurity-learning': {
+    ambientBg: 'radial-gradient(circle at 60% 40%, rgba(16, 185, 129, 0.1) 0%, transparent 70%)',
+    gridType: 'SECURITY_LABS',
+    visualElements: 'Kali Linux terminal mastery, penetration testing tools, Nmap & network defense',
+  },
+  'ai-exploration': {
     ambientBg: 'radial-gradient(circle at 60% 40%, rgba(167, 139, 250, 0.12) 0%, transparent 70%)',
     gridType: 'NEURAL_STREAMS',
-    visualElements: 'Autonomous weights, embedding vectors & RAG pipelines',
+    visualElements: 'Cisco modern AI foundations, Python machine learning, RAG & agent architectures',
   },
   'technical-growth': {
     ambientBg: 'radial-gradient(circle at 60% 40%, rgba(6, 182, 212, 0.1) 0%, transparent 70%)',
-    gridType: 'API_ARCHITECTURE',
-    visualElements: 'Distributed event bus, microservice mesh & database clusters',
+    gridType: 'PRODUCTION_SYSTEMS',
+    visualElements: 'SENTRA passive SOC, multi-agent frameworks, Campus Care & UniBox platforms',
+  },
+  'content-creator': {
+    ambientBg: 'radial-gradient(circle at 60% 40%, rgba(244, 63, 94, 0.12) 0%, transparent 70%)',
+    gridType: 'TECHNICAL_BROADCAST',
+    visualElements: 'King of Kali Linux educational channel & practical cybersecurity knowledge sharing',
   },
   'ethical-hacking': {
-    ambientBg: 'radial-gradient(circle at 60% 40%, rgba(16, 185, 129, 0.1) 0%, transparent 70%)',
-    gridType: 'SECURITY_PERIMETER',
-    visualElements: 'Hardened network topology, vulnerability telemetry & zero-trust boundaries',
+    ambientBg: 'radial-gradient(circle at 60% 40%, rgba(16, 185, 129, 0.12) 0%, transparent 70%)',
+    gridType: 'CERTIFIED_AUDIT',
+    visualElements: 'Pitronix Solutions certified ethical penetration testing & defense standards',
   },
   'university-leadership': {
     ambientBg: 'radial-gradient(circle at 60% 40%, rgba(245, 158, 11, 0.14) 0%, transparent 75%)',
-    gridType: 'HUMAN_CENTERED_WARMTH',
-    visualElements: 'Institutional appreciation document & cross-campus coordination',
+    gridType: 'CAMPUS_COORDINATION',
+    visualElements: 'Assam Down Town University Certificate of Appreciation & program organization',
   },
   'future-chapter': {
     ambientBg: 'radial-gradient(circle at 50% 30%, rgba(226, 232, 240, 0.08) 0%, transparent 80%)',
     gridType: 'OPEN_HORIZON',
-    visualElements: 'Expansive digital frontier & lifelong engineering trajectory',
+    visualElements: 'Expansive digital frontier, lifelong engineering mastery & scalable impact',
   },
 }
 
@@ -53,16 +68,12 @@ export function Scene07TimelineLeadership() {
   const activeEvent = timelineEvents[activeIndex] || timelineEvents[0]
   const currentEnv = ENVIRONMENTS[activeEvent.id] || ENVIRONMENTS['bca-foundation']
 
-  const appreciationCert = certifications.find(
-    (c) => c.id === 'adtu-sunstone-appreciation'
-  )
-
   const activeCertForViewer = certifications.find((c) => c.id === viewerCertId) || null
 
   return (
     <SectionTransition id="achievements" ariaLabel="Cinematic Journey Timeline" className="border-b border-white/5">
       <div className="page-container relative">
-        {/* Dynamic Scene Environment Backdrop (Rule 05) */}
+        {/* Dynamic Scene Environment Backdrop */}
         <div
           className="absolute inset-0 pointer-events-none transition-all duration-700 -z-10"
           style={{ background: currentEnv.ambientBg }}
@@ -81,12 +92,12 @@ export function Scene07TimelineLeadership() {
           </h2>
 
           <p className="font-mono text-xs sm:text-sm text-slate-400">
-            The camera travels through foundational milestones, security hardening, and leadership.
+            Academic grounding, self-directed systems &amp; security exploration, production engineering, and leadership.
           </p>
         </div>
 
-        {/* ─── RULE 04: MILESTONE STEPPING TIMELINE ─── */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 mb-10">
+        {/* ─── MILESTONE STEPPING TIMELINE (9 Milestones Grid) ─── */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-9 gap-2 mb-10">
           {timelineEvents.map((evt, idx) => {
             const isActive = idx === activeIndex
             const isPast = idx < activeIndex
@@ -94,7 +105,7 @@ export function Scene07TimelineLeadership() {
               <button
                 key={evt.id}
                 onClick={() => setActiveIndex(idx)}
-                className={`p-3 rounded-xl border text-left transition-all duration-300 relative group focus:outline-none focus:ring-1 focus:ring-cyan-400 ${
+                className={`p-2.5 sm:p-3 rounded-xl border text-left transition-all duration-300 relative group focus:outline-none focus:ring-1 focus:ring-cyan-400 cursor-pointer ${
                   isActive
                     ? 'border-white/50 bg-slate-900/95 shadow-xl scale-102 opacity-100 ring-1 ring-cyan-400/40'
                     : isPast
@@ -120,7 +131,7 @@ export function Scene07TimelineLeadership() {
                     }}
                   />
                 </div>
-                <div className="font-display text-[0.6875rem] font-bold tracking-wider text-slate-200 uppercase truncate">
+                <div className="font-display text-[0.625rem] sm:text-[0.6875rem] font-bold tracking-wider text-slate-200 uppercase truncate">
                   {evt.label}
                 </div>
               </button>
@@ -128,7 +139,7 @@ export function Scene07TimelineLeadership() {
           })}
         </div>
 
-        {/* ─── ACTIVE MILESTONE HERO VIEWPORT (Rule 04, 05, 06) ─── */}
+        {/* ─── ACTIVE MILESTONE HERO VIEWPORT ─── */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-[380px]">
           {/* Left Column: Milestone Narrative */}
           <div className="lg:col-span-7">
@@ -148,7 +159,7 @@ export function Scene07TimelineLeadership() {
                     style={{ background: activeEvent.color }}
                   />
                   <span className="font-mono text-[0.625rem] tracking-widest uppercase text-slate-400 font-semibold">
-                    ENVIRONMENT &bull; {currentEnv.gridType}
+                    DISCIPLINE &bull; {currentEnv.gridType}
                   </span>
                 </div>
 
@@ -157,7 +168,7 @@ export function Scene07TimelineLeadership() {
                     className="font-mono text-xl sm:text-2xl font-bold"
                     style={{ color: activeEvent.color }}
                   >
-                    {activeEvent.year}
+                    {activeEvent.period}
                   </span>
                   <h3 className="font-display text-2xl sm:text-3xl font-extrabold text-white tracking-tight uppercase">
                     {activeEvent.label}
@@ -200,46 +211,92 @@ export function Scene07TimelineLeadership() {
             </AnimatePresence>
           </div>
 
-          {/* Right Column: Visual Evidence or Materializing Document (Rule 06) */}
+          {/* Right Column: Visual Evidence, Certificate Document, or Content Channel Card */}
           <div className="lg:col-span-5 flex justify-center">
             <AnimatePresence mode="wait">
-              {activeEvent.type === 'leadership' && appreciationCert ? (
-                /* ─── RULE 06: MATERIALIZING LEADERSHIP APPRECIATION DOCUMENT ─── */
+              {activeEvent.id === 'content-creator' ? (
+                /* ─── CONTENT CREATOR: KING OF KALI LINUX CARD ─── */
                 <motion.div
-                  key="leadership-doc"
+                  key="content-creator-card"
                   initial={{ opacity: 0, scale: 0.94, y: 15 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.94, y: -15 }}
                   transition={{ duration: 0.5 }}
-                  onClick={() => setViewerCertId('adtu-sunstone-appreciation')}
-                  className="w-full max-w-sm p-6 rounded-2xl border border-amber-500/30 bg-gradient-to-br from-amber-950/30 to-slate-950/80 backdrop-blur-md cursor-pointer hover:border-amber-400/60 shadow-[0_15px_40px_rgba(245,158,11,0.15)] transition-all group"
+                  className="w-full max-w-sm p-6 rounded-2xl border border-rose-500/30 bg-gradient-to-br from-rose-950/30 to-slate-950/80 backdrop-blur-md shadow-[0_15px_40px_rgba(244,63,94,0.15)] group"
+                >
+                  <div className="flex items-center justify-between pb-3 mb-4 border-b border-rose-500/20">
+                    <span className="font-mono text-[0.625rem] font-bold text-rose-400 uppercase tracking-widest">
+                      EDUCATIONAL OUTREACH
+                    </span>
+                    <span className="w-2 h-2 rounded-full bg-rose-400 animate-pulse" />
+                  </div>
+
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-10 h-10 rounded-xl bg-rose-500/20 border border-rose-500/40 flex items-center justify-center text-rose-400">
+                      <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22">
+                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <div className="font-display text-lg font-bold text-white group-hover:text-rose-300 transition-colors">
+                        King of Kali Linux
+                      </div>
+                      <div className="font-mono text-xs text-rose-300/80">
+                        @king_of_kali_linux_404
+                      </div>
+                    </div>
+                  </div>
+
+                  <p className="font-body text-xs text-slate-300 leading-relaxed mb-5">
+                    Producing practical technical guides demystifying ethical hacking, Kali Linux workflows, and defensive security architectures.
+                  </p>
+
+                  <a
+                    href="https://youtube.com/@king_of_kali_linux_404"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-3 rounded-lg border border-rose-500/30 bg-rose-500/10 hover:bg-rose-500/20 text-xs font-mono text-rose-300 flex items-center justify-between transition-all"
+                  >
+                    <span>VISIT YOUTUBE CHANNEL</span>
+                    <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
+                  </a>
+                </motion.div>
+              ) : activeEvent.certificateRef ? (
+                /* ─── CERTIFICATE DOCUMENT INSPECTION CARD ─── */
+                <motion.div
+                  key={activeEvent.certificateRef}
+                  initial={{ opacity: 0, scale: 0.94, y: 15 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.94, y: -15 }}
+                  transition={{ duration: 0.5 }}
+                  onClick={() => setViewerCertId(activeEvent.certificateRef || null)}
+                  className="w-full max-w-sm p-6 rounded-2xl border border-cyan-500/30 bg-gradient-to-br from-cyan-950/30 to-slate-950/80 backdrop-blur-md cursor-pointer hover:border-cyan-400/60 shadow-[0_15px_40px_rgba(6,182,212,0.15)] transition-all group"
                   role="button"
                   tabIndex={0}
                   onKeyDown={(e) =>
-                    e.key === 'Enter' && setViewerCertId('adtu-sunstone-appreciation')
+                    e.key === 'Enter' && setViewerCertId(activeEvent.certificateRef || null)
                   }
-                  aria-label="View verified Certificate of Appreciation"
+                  aria-label={`View verified certificate for ${activeEvent.label}`}
                 >
-                  <div className="flex items-center justify-between pb-3 mb-4 border-b border-amber-500/20">
-                    <span className="font-mono text-[0.625rem] font-bold text-amber-400 uppercase tracking-widest">
-                      DOCUMENT EVIDENCE &bull; ADTU
+                  <div className="flex items-center justify-between pb-3 mb-4 border-b border-cyan-500/20">
+                    <span className="font-mono text-[0.625rem] font-bold text-cyan-400 uppercase tracking-widest">
+                      DOCUMENT EVIDENCE &bull; VERIFIED
                     </span>
-                    <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+                    <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
                   </div>
 
-                  <div className="font-display text-lg font-bold text-white mb-1 group-hover:text-amber-300 transition-colors">
-                    Certificate of Appreciation
+                  <div className="font-display text-lg font-bold text-white mb-1 group-hover:text-cyan-300 transition-colors">
+                    {activeEvent.subtitle}
                   </div>
-                  <div className="font-mono text-xs text-amber-300/80 mb-3">
-                    Assam Down Town University &bull; Sunstone
+                  <div className="font-mono text-xs text-cyan-300/80 mb-3">
+                    {activeEvent.period}
                   </div>
                   <p className="font-body text-xs text-slate-300 leading-relaxed mb-4">
-                    Conferred for leadership & logistics execution during university Orientation &
-                    Independence Day programs.
+                    {activeEvent.description}
                   </p>
 
-                  <div className="p-3 rounded-lg border border-amber-500/20 bg-black/40 flex items-center justify-between text-xs font-mono text-amber-300">
-                    <span>INSPECT DOCUMENT</span>
+                  <div className="p-3 rounded-lg border border-cyan-500/20 bg-black/40 flex items-center justify-between text-xs font-mono text-cyan-300">
+                    <span>INSPECT VERIFIED DOCUMENT</span>
                     <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
                   </div>
                 </motion.div>

@@ -67,17 +67,17 @@ const PIPELINE_STAGES: PipelineStage[] = [
   {
     id: 'build',
     number: '04',
-    title: 'BUILD',
-    tagline: 'Write idiomatic, maintainable, typed software',
+    title: 'BUILD & AI',
+    tagline: 'Write modular software & integrate AI leverage',
     description:
-      'Implement features with strong static typing, declarative state flows, and modular abstraction layers.',
-    visualState: 'Strict Type Verification & Clean State Flow',
+      'Implement core features with strong static typing and clean design patterns, integrating AI models and multi-agent workflows where they create measurable leverage.',
+    visualState: 'Strict Type Verification & Intelligent Agent Flow',
     color: '#06b6d4',
-    heuristic: '"Types are not bureaucracy; they are mathematically verified guarantees."',
+    heuristic: '"Write software that is typed, modular, and enhanced with intelligent automation."',
     metrics: [
       { label: 'Type Safety', value: '100% Strict' },
-      { label: 'Reusability', value: 'Modular' },
-      { label: 'Clean Code', value: 'Pass' },
+      { label: 'Modularity', value: 'High' },
+      { label: 'AI Leverage', value: 'Integrated' },
     ],
   },
   {
@@ -100,16 +100,16 @@ const PIPELINE_STAGES: PipelineStage[] = [
     id: 'secure',
     number: '06',
     title: 'SECURE',
-    tagline: 'Zero-trust defense & vulnerability hardening',
+    tagline: 'Zero-trust defense & ethical hacking hardening',
     description:
-      'Incorporate ethical hacking mindset: sanitization, JWT/OAuth validation, role guards, and least-privilege scoping.',
+      'Apply an ethical hacker\'s mindset: input sanitization, penetration testing, network packet inspection, JWT/OAuth guards, and least-privilege scoping.',
     visualState: 'Cryptographic Hardening & Zero-Trust Perimeter',
     color: '#10b981',
-    heuristic: '"Treat all perimeter inputs as hostile. Enforce least privilege."',
+    heuristic: '"Treat all perimeter inputs as hostile. Design security into the architecture."',
     metrics: [
       { label: 'Threat Vector', value: 'Mitigated' },
       { label: 'Auth Guard', value: 'Zero Trust' },
-      { label: 'Sanitization', value: 'Enforced' },
+      { label: 'Audit Rigor', value: 'Enforced' },
     ],
   },
   {
@@ -131,13 +131,13 @@ const PIPELINE_STAGES: PipelineStage[] = [
   {
     id: 'improve',
     number: '08',
-    title: 'IMPROVE',
-    tagline: 'Continuous telemetry, profiling, and feedback loops',
+    title: 'OPTIMIZE',
+    tagline: 'System profiling, hardware efficiency & continuous refinement',
     description:
-      'Profile memory, inspect query plans, and evolve system capabilities with iterative optimizations.',
+      'Profile memory, inspect query plans, optimize OS/hardware throughput, and evolve system capabilities through continuous telemetry loops.',
     visualState: 'Real-Time Profiling & Feedback Equilibrium',
     color: '#ec4899',
-    heuristic: '"Measure before optimizing. Use telemetry to drive evolution."',
+    heuristic: '"Measure before optimizing. Use telemetry and system diagnostics to drive evolution."',
     metrics: [
       { label: 'Telemetry', value: 'Real-time' },
       { label: 'Performance', value: 'Optimized' },
@@ -156,7 +156,7 @@ export function Scene03EngineeringMindset() {
         badge="SCENE 03 // ARCHITECTURAL DISCIPLINE"
         title="HOW I"
         titleHighlight="BUILD"
-        subtitle="Great software isn't written by accident. It is systematically engineered through an 8-stage feedback pipeline."
+        subtitle="Great software isn't written by accident. It is systematically engineered through an 8-stage lifecycle: Problem → Architecture → Build → AI Integration → Security → Testing → Deployment → Optimization."
       >
         {/* 8-Stage Process Navigation (Horizontal scroll on mobile, 8 equal cols on desktop) */}
         <div className="relative mb-10">

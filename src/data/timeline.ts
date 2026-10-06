@@ -9,6 +9,8 @@ export interface TimelineEvent {
   isOpenNode?: boolean
   connectedProjects?: string[]
   certificateRef?: string
+  externalUrl?: string
+  externalLabel?: string
   color: string
 }
 
@@ -17,15 +19,37 @@ export const timelineEvents: TimelineEvent[] = [
     id: 'bca-foundation',
     year: '2025',
     period: '2025 — 2028',
-    label: 'FOUNDATION',
-    subtitle: 'Bachelor of Computer Applications (BCA)',
+    label: 'EDUCATION',
+    subtitle: 'Bachelor of Computer Applications (BCA) — AI & ML Focus',
     description:
-      'Enrolled in the Bachelor of Computer Applications program at Assam Down Town University. Achieved 8.05 SGPA in 1st Semester with deep focus on core algorithms and data systems.',
+      'Pursuing BCA at Assam Down Town University with a dedicated academic and practical focus on Artificial Intelligence, Machine Learning, and core algorithm design. Achieved 8.05 SGPA (1st Sem) and 8.10 SGPA (2nd Sem).',
     type: 'foundation',
     color: '#38bdf8',
   },
   {
-    id: 'ai-foundation',
+    id: 'systems-experience',
+    year: '2024',
+    period: '2024 — Present',
+    label: 'SYSTEMS EXPERIENCE',
+    subtitle: 'Hardware Diagnostics & Systems Engineering',
+    description:
+      'Hands-on practical experience diagnosing hardware faults, assembling and configuring PC builds, performing clean dual-boot OS installations (Windows/Linux), driver management, and system-level performance optimization.',
+    type: 'foundation',
+    color: '#f59e0b',
+  },
+  {
+    id: 'cybersecurity-learning',
+    year: '2024',
+    period: '2024 — Present',
+    label: 'CYBERSECURITY',
+    subtitle: 'Self-Directed Ethical Hacking & Kali Linux Mastery',
+    description:
+      'Independent exploration into penetration testing, Kali Linux terminal tools, network scanning, firewall defense, and vulnerability auditing across legal practice labs and security challenges.',
+    type: 'foundation',
+    color: '#10b981',
+  },
+  {
+    id: 'ai-exploration',
     year: '2025',
     period: 'Late 2025',
     label: 'AI FOUNDATION',
@@ -38,12 +62,12 @@ export const timelineEvents: TimelineEvent[] = [
   },
   {
     id: 'technical-growth',
-    year: '2026',
+    year: '2025',
     period: '2025 — 2026',
-    label: 'TECHNICAL DEVELOPMENT',
+    label: 'PROJECT SYSTEMS',
     subtitle: 'System Architecture & Production Engineering',
     description:
-      'Engineered five comprehensive software systems spanning AI threat detection, multi-agent frameworks, local service hubs, campus emergency dispatch, and athletic management.',
+      'Engineered five comprehensive software systems spanning AI threat detection (SENTRA), multi-agent frameworks, local service hubs, campus emergency dispatch, and athletic management.',
     type: 'projects',
     connectedProjects: [
       'SENTRA',
@@ -55,10 +79,23 @@ export const timelineEvents: TimelineEvent[] = [
     color: '#06b6d4',
   },
   {
+    id: 'content-creator',
+    year: '2025',
+    period: '2024 — Present',
+    label: 'CONTENT CREATOR',
+    subtitle: 'Technical Content Creator — King of Kali Linux',
+    description:
+      'Creating educational content around cybersecurity, ethical hacking, Kali Linux, Linux and emerging technologies, with a focus on making technical concepts accessible and practical.',
+    externalUrl: 'https://youtube.com/@king_of_kali_linux_404',
+    externalLabel: 'Visit YouTube Channel',
+    type: 'leadership',
+    color: '#f43f5e',
+  },
+  {
     id: 'ethical-hacking',
     year: '2026',
     period: '7 March 2026',
-    label: 'CYBERSECURITY',
+    label: 'CERTIFIED DEFENSE',
     subtitle: 'Ethical Hacking — Pitronix Solutions (#00102970)',
     description:
       'Formally assessed and certified in ethical penetration testing standards, perimeter defenses, zero-trust validation, and security auditing.',
@@ -70,10 +107,10 @@ export const timelineEvents: TimelineEvent[] = [
     id: 'university-leadership',
     year: '2026',
     period: 'August 2026',
-    label: 'UNIVERSITY LEADERSHIP',
+    label: 'LEADERSHIP',
     subtitle: 'Event Organizer — Orientation & Independence Day',
     description:
-      'Recognized with a Certificate of Appreciation by Sunstone / Assam Down Town University for organizing university programs and coordinating campus logistics.',
+      'Recognized with a Certificate of Appreciation by Sunstone / Assam Down Town University for organizing university programs, managing event logistics, and supporting campus activities.',
     type: 'leadership',
     certificateRef: 'adtu-sunstone-appreciation',
     color: '#f59e0b',

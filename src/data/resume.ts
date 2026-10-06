@@ -52,7 +52,7 @@ export interface ResumeData {
 export const resumeData: ResumeData = {
   name: 'Md Habib Munsar Ahmed',
   title: 'Software Engineer',
-  positioning: 'AI/ML • Full-Stack Development • Cybersecurity',
+  positioning: 'AI/ML Engineering • Full-Stack Development • Cybersecurity & Ethical Hacking',
   contact: {
     email: 'habibmunsarahmed@gmail.com',
     phone: '8099321737',
@@ -82,7 +82,11 @@ export const resumeData: ResumeData = {
     },
     {
       category: 'Cybersecurity',
-      skills: ['Kali Linux', 'Ethical Hacking', 'Network Security'],
+      skills: ['Ethical Hacking', 'Kali Linux', 'Network Security', 'Vulnerability Assessment'],
+    },
+    {
+      category: 'Systems',
+      skills: ['Linux Admin', 'Windows Setup', 'Hardware Diagnostics', 'Optimization'],
     },
     {
       category: 'Databases',

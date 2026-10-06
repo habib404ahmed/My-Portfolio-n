@@ -1,15 +1,21 @@
+export type SkillProficiency =
+  | 'Proficient'
+  | 'Hands-on'
+  | 'Working Knowledge'
+  | 'Practical Exposure'
+
+export interface Skill {
+  name: string
+  proficiency: SkillProficiency
+  domain?: string
+}
+
 export interface SkillCategory {
   id: string
   label: string
   icon: string
   color: string
   skills: Skill[]
-}
-
-export interface Skill {
-  name: string
-  level: number // 0-100
-  years?: number
 }
 
 export const skillCategories: SkillCategory[] = [
@@ -19,75 +25,89 @@ export const skillCategories: SkillCategory[] = [
     icon: 'code',
     color: '#06b6d4',
     skills: [
-      { name: 'Python', level: 85 },
-      { name: 'Java', level: 75 },
-      { name: 'JavaScript', level: 80 },
-      { name: 'SQL', level: 75 },
-      { name: 'HTML', level: 90 },
-      { name: 'CSS', level: 85 },
+      { name: 'Python', proficiency: 'Proficient' },
+      { name: 'Java', proficiency: 'Hands-on' },
+      { name: 'JavaScript', proficiency: 'Proficient' },
+      { name: 'SQL', proficiency: 'Hands-on' },
+      { name: 'HTML5', proficiency: 'Proficient' },
+      { name: 'CSS3', proficiency: 'Proficient' },
     ],
   },
   {
     id: 'frameworks',
-    label: 'Frameworks',
+    label: 'Frameworks & Web',
     icon: 'layers',
     color: '#8b5cf6',
     skills: [
-      { name: 'React', level: 80 },
-      { name: 'Tailwind CSS', level: 85 },
-      { name: 'Node.js', level: 75 },
-      { name: 'FastAPI', level: 75 },
-      { name: 'Spring Boot', level: 65 },
+      { name: 'React', proficiency: 'Proficient' },
+      { name: 'Tailwind CSS', proficiency: 'Proficient' },
+      { name: 'Node.js', proficiency: 'Hands-on' },
+      { name: 'FastAPI', proficiency: 'Hands-on' },
+      { name: 'Spring Boot', proficiency: 'Working Knowledge' },
     ],
   },
   {
     id: 'ai-ml',
-    label: 'AI / ML',
+    label: 'AI & Machine Learning',
     icon: 'brain',
     color: '#06b6d4',
     skills: [
-      { name: 'Machine Learning', level: 75 },
-      { name: 'LLMs', level: 70 },
-      { name: 'RAG', level: 70 },
-      { name: 'AI Agents', level: 70 },
+      { name: 'Machine Learning', proficiency: 'Hands-on' },
+      { name: 'LLM Orchestration', proficiency: 'Hands-on' },
+      { name: 'RAG Architectures', proficiency: 'Hands-on' },
+      { name: 'AI Multi-Agent Systems', proficiency: 'Hands-on' },
     ],
   },
   {
     id: 'cybersecurity',
-    label: 'Cybersecurity',
+    label: 'Cybersecurity & Ethical Hacking',
     icon: 'shield',
     color: '#10b981',
     skills: [
-      { name: 'Kali Linux', level: 80 },
-      { name: 'Ethical Hacking', level: 75 },
-      { name: 'Network Security', level: 70 },
+      { name: 'Ethical Hacking', proficiency: 'Hands-on' },
+      { name: 'Kali Linux Tools', proficiency: 'Hands-on' },
+      { name: 'Network Security', proficiency: 'Hands-on' },
+      { name: 'Vulnerability Assessment', proficiency: 'Working Knowledge' },
+      { name: 'Linux System Hardening', proficiency: 'Working Knowledge' },
+    ],
+  },
+  {
+    id: 'systems',
+    label: 'Systems & Troubleshooting',
+    icon: 'cpu',
+    color: '#f59e0b',
+    skills: [
+      { name: 'Hardware Troubleshooting', proficiency: 'Hands-on' },
+      { name: 'Linux Administration', proficiency: 'Working Knowledge' },
+      { name: 'Windows Systems Setup', proficiency: 'Hands-on' },
+      { name: 'System Optimization', proficiency: 'Hands-on' },
+      { name: 'Driver & OS Recovery', proficiency: 'Hands-on' },
     ],
   },
   {
     id: 'databases',
-    label: 'Databases',
+    label: 'Databases & Persistence',
     icon: 'database',
     color: '#f59e0b',
     skills: [
-      { name: 'MySQL', level: 80 },
-      { name: 'MongoDB', level: 75 },
-      { name: 'PostgreSQL', level: 70 },
-      { name: 'Firebase', level: 75 },
-      { name: 'Supabase', level: 70 },
+      { name: 'PostgreSQL', proficiency: 'Hands-on' },
+      { name: 'MySQL', proficiency: 'Hands-on' },
+      { name: 'MongoDB', proficiency: 'Hands-on' },
+      { name: 'Firebase', proficiency: 'Hands-on' },
+      { name: 'Supabase', proficiency: 'Hands-on' },
     ],
   },
   {
     id: 'devops',
-    label: 'DevOps / Cloud',
+    label: 'DevOps & Cloud',
     icon: 'cloud',
     color: '#3b82f6',
     skills: [
-      { name: 'Git', level: 85 },
-      { name: 'GitHub', level: 85 },
-      { name: 'Docker', level: 65 },
-      { name: 'AWS', level: 60 },
-      { name: 'Vercel', level: 80 },
-      { name: 'Render', level: 75 },
+      { name: 'Git & GitHub', proficiency: 'Proficient' },
+      { name: 'Docker', proficiency: 'Working Knowledge' },
+      { name: 'AWS', proficiency: 'Working Knowledge' },
+      { name: 'Vercel', proficiency: 'Hands-on' },
+      { name: 'Render', proficiency: 'Hands-on' },
     ],
   },
 ]

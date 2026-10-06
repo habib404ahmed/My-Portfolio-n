@@ -145,18 +145,18 @@ export function Scene02AboutIdentity() {
                 <span>CORE STATEMENT</span>
               </div>
               <p className="text-[19px] sm:text-[21px] lg:text-[24px] font-display font-semibold text-slate-100 leading-[1.35] max-w-[760px] m-0">
-                &ldquo;Software Engineer and BCA student focused on building intelligent, scalable and secure software systems.&rdquo;
+                &ldquo;Software Engineer building intelligent, secure and scalable digital systems across AI, full-stack development and cybersecurity.&rdquo;
               </p>
             </div>
 
             {/* 2. Editorial Description Block (14px gap below statement) */}
             <div className="profile-description w-full max-w-[850px] mt-[14px]">
               <p className="text-[15px] sm:text-[16px] text-slate-300 font-body leading-[1.55] max-w-[850px] m-0">
-                I enjoy turning complex problems into practical software. My engineering practice combines modern web architecture, artificial intelligence, and cybersecurity fundamentals to build systems where intelligence, reliability and security meet.
+                My engineering foundation was built by working across software, systems and security. Alongside application development, I have explored Linux, networking, ethical hacking, hardware troubleshooting and AI/ML—giving me a broader understanding of how modern systems are built, deployed and secured.
               </p>
               {/* Secondary Description (6px gap) */}
               <p className="mt-[6px] text-[14px] sm:text-[15px] text-slate-400 font-body leading-[1.5] max-w-[850px] m-0">
-                Currently exploring autonomous AI multi-agent workflows, full-stack microservice communication, and network security hardening.
+                From operating system configuration and network traffic analysis to autonomous multi-agent workflows and responsive full-stack architectures, I build with an end-to-end mindset where intelligence and resilience meet.
               </p>
             </div>
 

@@ -156,11 +156,11 @@ export function HeroContent({ visible }: HeroContentProps) {
             className="w-full flex flex-wrap items-center gap-x-2.5 gap-y-1 font-mono text-xs sm:text-sm tracking-wider uppercase text-cyan-300/90 mb-5"
           >
             <span className="w-6 h-[1.5px] bg-gradient-to-r from-cyan-400 to-transparent flex-shrink-0" />
-            <span>AI/ML</span>
+            <span>AI/ML ENGINEERING</span>
             <span className="text-cyan-500/50">&bull;</span>
             <span>FULL-STACK DEVELOPMENT</span>
             <span className="text-cyan-500/50">&bull;</span>
-            <span>CYBERSECURITY</span>
+            <span>CYBERSECURITY &amp; ETHICAL HACKING</span>
           </motion.div>
 
           {/* 5. Editorial Positioning Statement (Rule 11: Controlled 2-3 line block, max-w 540px) */}
