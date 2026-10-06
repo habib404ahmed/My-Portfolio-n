@@ -6,14 +6,14 @@ import { SceneContainer } from '@/components/ui/SceneContainer'
 const FOCUS_PILLARS = [
   {
     title: 'AI / Machine Learning',
-    desc: 'Autonomous agent architectures, retrieval-augmented generation (RAG), and intelligent reasoning systems.',
+    desc: 'Autonomous agent architectures, RAG, and intelligent reasoning systems.',
     accent: '#a78bfa',
     border: 'rgba(167, 139, 250, 0.22)',
     bg: 'rgba(167, 139, 250, 0.035)',
   },
   {
     title: 'Full-Stack Development',
-    desc: 'Scalable modern web applications, reactive user interfaces, and robust backend microservices.',
+    desc: 'Scalable modern web applications, reactive user interfaces, and backend microservices.',
     accent: '#38bdf8',
     border: 'rgba(56, 189, 248, 0.22)',
     bg: 'rgba(56, 189, 248, 0.035)',
@@ -29,7 +29,11 @@ const FOCUS_PILLARS = [
 
 export function Scene02AboutIdentity() {
   return (
-    <SectionTransition id="about" ariaLabel="Engineer Identity" className="py-24 md:py-32 border-b border-white/5">
+    <SectionTransition
+      id="about"
+      ariaLabel="Engineer Identity"
+      className="relative py-20 md:py-28 border-b border-white/5 bg-[var(--color-void,#050507)] overflow-hidden"
+    >
       <SceneContainer
         badge="SCENE 02 // IDENTITY & PHILOSOPHY"
         title="ENGINEER"
@@ -37,11 +41,11 @@ export function Scene02AboutIdentity() {
         subtitle="Bridging algorithmic intelligence, secure engineering fundamentals, and high-performance web architecture."
       >
         {/* ─── 12-Column Architectural Layout Grid: 2-Col on Tablet & Desktop (md+), 1-Col on Mobile ─── */}
-        <div className="grid grid-cols-1 md:grid-cols-[minmax(280px,0.85fr)_minmax(0,1.65fr)] gap-8 lg:gap-12 items-start w-full">
+        <div className="grid grid-cols-1 md:grid-cols-[minmax(260px,0.8fr)_minmax(0,1.2fr)] lg:grid-cols-[minmax(300px,0.85fr)_minmax(0,1.65fr)] gap-8 lg:gap-12 items-start w-full">
           {/* ─── Left Column: Portrait & Profile Visual Module (Cols 1-4) ─── */}
           <div className="w-full flex flex-col items-center">
             {/* Visual Frame Wrapper with Corner Markers */}
-            <div className="relative w-full max-w-[340px] lg:max-w-[390px] group">
+            <div className="relative w-full max-w-[340px] lg:max-w-[380px] group">
               {/* Subtle Refined Corner Markers */}
               <div
                 className="absolute -top-2 -left-2 w-3.5 h-3.5 border-t border-l border-cyan-400/40 pointer-events-none transition-colors duration-500 group-hover:border-cyan-400/70 z-10"
@@ -66,7 +70,7 @@ export function Scene02AboutIdentity() {
                   <source
                     type="image/webp"
                     srcSet="/assets/images/profile-400.webp 400w, /assets/images/profile-600.webp 600w, /assets/images/profile.webp 576w"
-                    sizes="(max-width: 640px) 340px, (max-width: 1024px) 340px, 390px"
+                    sizes="(max-width: 640px) 340px, (max-width: 1024px) 340px, 380px"
                   />
                   <img
                     src="/assets/images/profile.webp"
@@ -115,7 +119,7 @@ export function Scene02AboutIdentity() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3, duration: 0.5 }}
-              className="mt-4 h-[44px] w-full max-w-[340px] lg:max-w-[390px] px-4 rounded-xl border border-white/10 bg-slate-900/60 backdrop-blur-sm flex items-center justify-between select-none shadow-[0_4px_16px_rgba(0,0,0,0.4)]"
+              className="mt-4 h-[44px] w-full max-w-[340px] lg:max-w-[380px] px-4 rounded-xl border border-white/10 bg-slate-900/60 backdrop-blur-sm flex items-center justify-between select-none shadow-[0_4px_16px_rgba(0,0,0,0.4)]"
             >
               <div className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 flex-shrink-0" />
@@ -129,93 +133,80 @@ export function Scene02AboutIdentity() {
             </motion.div>
           </div>
 
-          {/* ─── Right Column: Profile Information Module (Cols 5-12) ─── */}
-          <div className="w-full flex flex-col">
-            {/* 1. Core Statement Box (Compact, natural height, strictly inside border) */}
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.55 }}
-              className="w-full p-5 sm:p-6 rounded-2xl border border-white/10 bg-slate-950/60 backdrop-blur-sm relative overflow-hidden shadow-[0_8px_24px_rgba(0,0,0,0.4)]"
-            >
-              <div className="font-mono text-xs font-bold text-cyan-400 mb-2.5 uppercase tracking-wider flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rotate-45 bg-cyan-400/90 inline-block flex-shrink-0" />
+          {/* ─── Right Column: Profile Information Module (Strictly contained, max-w 900px) ─── */}
+          <div
+            className="profile-content w-full flex flex-col box-border"
+            style={{ maxWidth: 'min(100%, 880px)' }}
+          >
+            {/* 1. Core Statement Box (Compact, natural content height, strictly inside border) */}
+            <div className="core-statement w-full p-4 sm:p-5 rounded-2xl border border-white/10 bg-slate-950/60 backdrop-blur-sm box-border shadow-[0_4px_20px_rgba(0,0,0,0.35)]">
+              <div className="font-mono text-[11px] sm:text-xs font-bold text-cyan-400 mb-2 uppercase tracking-[0.12em] flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse flex-shrink-0" />
                 <span>CORE STATEMENT</span>
               </div>
-              <p className="text-xl sm:text-2xl lg:text-[1.55rem] font-display font-bold text-slate-100 leading-[1.3] m-0">
+              <p className="text-[19px] sm:text-[21px] lg:text-[24px] font-display font-semibold text-slate-100 leading-[1.35] max-w-[760px] m-0">
                 &ldquo;Software Engineer and BCA student focused on building intelligent, scalable and secure software systems.&rdquo;
               </p>
-            </motion.div>
+            </div>
 
-            {/* 2. Editorial Description Paragraphs (14-18px gap below statement) */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.55, delay: 0.1 }}
-              className="mt-4 max-w-[820px] text-slate-300 font-body text-[0.9375rem] sm:text-base leading-[1.6]"
-            >
-              <p className="m-0">
+            {/* 2. Editorial Description Block (14px gap below statement) */}
+            <div className="profile-description w-full max-w-[850px] mt-[14px]">
+              <p className="text-[15px] sm:text-[16px] text-slate-300 font-body leading-[1.55] max-w-[850px] m-0">
                 I enjoy turning complex problems into practical software. My engineering practice combines modern web architecture, artificial intelligence, and cybersecurity fundamentals to build systems where intelligence, reliability and security meet.
               </p>
-              {/* Secondary Description (10-14px gap) */}
-              <p className="mt-3 m-0 text-slate-400 text-sm sm:text-[0.9375rem] leading-[1.6]">
+              {/* Secondary Description (6px gap) */}
+              <p className="mt-[6px] text-[14px] sm:text-[15px] text-slate-400 font-body leading-[1.5] max-w-[850px] m-0">
                 Currently exploring autonomous AI multi-agent workflows, full-stack microservice communication, and network security hardening.
               </p>
-            </motion.div>
+            </div>
 
-            {/* 3. Three Capability Cards (18-24px gap below description) */}
-            <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-[18px] items-stretch">
-              {FOCUS_PILLARS.map((pillar, i) => (
-                <motion.div
+            {/* 3. Three Capability Cards (18px gap below description, compact, content-determined height) */}
+            <div className="capability-grid mt-[18px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full items-stretch">
+              {FOCUS_PILLARS.map((pillar) => (
+                <div
                   key={pillar.title}
-                  initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.12 + i * 0.08 }}
-                  className="p-4 sm:p-[18px] rounded-2xl border flex flex-col justify-start min-h-[165px] transition-all duration-300 hover:border-white/25 hover:-translate-y-0.5 shadow-[0_4px_20px_rgba(0,0,0,0.3)]"
+                  className="p-[14px_16px] rounded-[14px] border flex flex-col items-start justify-start min-h-0 h-auto transition-all duration-300 hover:border-white/25 hover:-translate-y-0.5 shadow-[0_4px_16px_rgba(0,0,0,0.25)]"
                   style={{
                     borderColor: pillar.border,
                     backgroundColor: pillar.bg,
                   }}
                 >
                   <div
-                    className="font-display font-bold text-[0.9375rem] sm:text-base mb-2 leading-snug"
+                    className="font-display font-semibold text-[15px] leading-[1.3]"
                     style={{ color: pillar.accent }}
                   >
                     {pillar.title}
                   </div>
-                  <p className="text-xs sm:text-[0.875rem] text-slate-400 leading-[1.55] font-body m-0">
+                  <p className="text-[14px] leading-[1.5] text-slate-400 font-body mt-2 m-0">
                     {pillar.desc}
                   </p>
-                </motion.div>
+                </div>
               ))}
             </div>
 
-            {/* 4. Metadata Cards Row (16-18px gap below capability cards) */}
-            <div className="mt-4 sm:mt-[18px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-[18px]">
-              <div className="h-[60px] px-3.5 py-2.5 rounded-xl border border-white/10 bg-slate-900/50 backdrop-blur-sm flex flex-col justify-center shadow-sm">
-                <span className="text-slate-500 block font-mono text-[0.625rem] uppercase tracking-wider mb-0.5 font-semibold">
+            {/* 4. Metadata Cards Row (14px gap below capability cards, compact 58px height) */}
+            <div className="metadata-grid mt-[14px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
+              <div className="h-[58px] px-[14px] py-[9px] rounded-[12px] border border-white/10 bg-slate-900/50 backdrop-blur-sm box-border flex flex-col justify-center shadow-sm">
+                <span className="text-slate-500 block font-mono text-[10px] sm:text-[11px] uppercase tracking-wider mb-0.5 font-semibold">
                   AFFILIATION
                 </span>
-                <span className="text-slate-200 font-sans text-xs sm:text-[0.8125rem] font-medium leading-tight truncate">
+                <span className="text-slate-200 font-sans text-[13px] sm:text-[14px] font-medium leading-tight truncate">
                   Assam Down Town University
                 </span>
               </div>
-              <div className="h-[60px] px-3.5 py-2.5 rounded-xl border border-white/10 bg-slate-900/50 backdrop-blur-sm flex flex-col justify-center shadow-sm">
-                <span className="text-slate-500 block font-mono text-[0.625rem] uppercase tracking-wider mb-0.5 font-semibold">
+              <div className="h-[58px] px-[14px] py-[9px] rounded-[12px] border border-white/10 bg-slate-900/50 backdrop-blur-sm box-border flex flex-col justify-center shadow-sm">
+                <span className="text-slate-500 block font-mono text-[10px] sm:text-[11px] uppercase tracking-wider mb-0.5 font-semibold">
                   ACADEMIC PERIOD
                 </span>
-                <span className="text-slate-200 font-mono text-xs sm:text-[0.8125rem] font-medium leading-tight truncate">
+                <span className="text-slate-200 font-mono text-[13px] sm:text-[14px] font-medium leading-tight truncate">
                   2025 &mdash; 2028 (BCA)
                 </span>
               </div>
-              <div className="h-[60px] px-3.5 py-2.5 rounded-xl border border-white/10 bg-slate-900/50 backdrop-blur-sm flex flex-col justify-center shadow-sm">
-                <span className="text-slate-500 block font-mono text-[0.625rem] uppercase tracking-wider mb-0.5 font-semibold">
+              <div className="h-[58px] px-[14px] py-[9px] rounded-[12px] border border-white/10 bg-slate-900/50 backdrop-blur-sm box-border flex flex-col justify-center shadow-sm">
+                <span className="text-slate-500 block font-mono text-[10px] sm:text-[11px] uppercase tracking-wider mb-0.5 font-semibold">
                   LOCATION
                 </span>
-                <span className="text-slate-200 font-sans text-xs sm:text-[0.8125rem] font-medium leading-tight truncate">
+                <span className="text-slate-200 font-sans text-[13px] sm:text-[14px] font-medium leading-tight truncate">
                   {profile.location}
                 </span>
               </div>

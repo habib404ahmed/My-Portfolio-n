@@ -123,7 +123,7 @@ export default function App() {
           ────────────────────────────────────────── */}
       <section
         id="hero"
-        className="relative min-h-[100dvh] w-full overflow-x-hidden flex flex-col items-center justify-start md:justify-center layer-content"
+        className="relative min-h-[100dvh] w-full overflow-hidden flex flex-col items-center justify-start md:justify-center layer-content"
         style={{ paddingTop: 'var(--nav-height, 72px)' }}
         aria-label="Hero — Introduction"
       >
@@ -239,7 +239,7 @@ export default function App() {
       {/* ──────────────────────────────────────────
           MAIN CONTENT HIERARCHY (Section 30 Architecture)
           ────────────────────────────────────────── */}
-      <main id="main-content" className="relative z-10 layer-content">
+      <main id="main-content" className="relative z-10 layer-content bg-[var(--color-void)]">
         {/* Scene 01: Enter the Engineering System */}
         <Scene01EnterSystem />
 
