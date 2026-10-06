@@ -1,5 +1,6 @@
 import fs from 'fs'
 import path from 'path'
+import sharp from 'sharp'
 import { PDFDocument, StandardFonts, rgb } from 'pdf-lib'
 
 async function generateResume() {
@@ -20,13 +21,129 @@ async function generateResume() {
   const accentColor = rgb(0.02, 0.45, 0.6)
   const dividerColor = rgb(0.8, 0.82, 0.85)
 
+  // =========================================================================
+  // 1. VERIFY & EMBED PROFILE PHOTO (MANDATORY ATS CANONICAL ASSET)
+  // =========================================================================
+  const candidateImagePaths = [
+    path.resolve('public/assets/images/profile.png'),
+    path.resolve('public/assets/images/profile.jpg'),
+  ]
+
+  const imagePath = candidateImagePaths.find((p) => fs.existsSync(p))
+  if (!imagePath) {
+    throw new Error(
+      `CRITICAL: Profile photo not found on disk. Searched: ${candidateImagePaths.join(', ')}`
+    )
+  }
+
+  const rawImageBytes = fs.readFileSync(imagePath)
+  if (!rawImageBytes || rawImageBytes.length === 0) {
+    throw new Error(`CRITICAL: Profile photo at "${imagePath}" is empty (0 bytes).`)
+  }
+
+  // Programmatically verify image dimensions
+  const metadata = await sharp(rawImageBytes).metadata()
+  if (!metadata.width || !metadata.height || metadata.width <= 0 || metadata.height <= 0) {
+    throw new Error(
+      `CRITICAL: Profile photo at "${imagePath}" has invalid dimensions: ${metadata.width}x${metadata.height}`
+    )
+  }
+
+  console.log(
+    `Verified profile photo asset: ${imagePath} (${metadata.width}x${metadata.height}, ${metadata.format})`
+  )
+
+  // Generate crisp, optimized high-fidelity buffer for PDF embedding
+  let embeddedImage
+  try {
+    const optimizedJpgBuffer = await sharp(rawImageBytes)
+      .resize({ width: 360, withoutEnlargement: true })
+      .jpeg({ quality: 92 })
+      .toBuffer()
+    embeddedImage = await pdfDoc.embedJpg(optimizedJpgBuffer)
+  } catch (optErr) {
+    console.warn(
+      'Sharp JPEG optimization fallback, embedding raw PNG directly:',
+      optErr.message
+    )
+    embeddedImage = await pdfDoc.embedPng(rawImageBytes)
+  }
+
+  if (!embeddedImage || embeddedImage.width <= 0 || embeddedImage.height <= 0) {
+    throw new Error('CRITICAL: Failed to embed profile photo into PDF document.')
+  }
+
+  // Calculate photo placement in header (top-right, preserving exact aspect ratio)
+  // Native aspect ratio: 576 / 1024 (~0.5625)
+  const photoWidth = 52
+  const photoHeight = Math.round(photoWidth * (metadata.height / metadata.width)) // ~92 pt
+  const photoX = width - margin - photoWidth
+  const photoY = y - photoHeight
+
+  // Draw subtle framing border and candidate photo
+  page.drawRectangle({
+    x: photoX - 0.75,
+    y: photoY - 0.75,
+    width: photoWidth + 1.5,
+    height: photoHeight + 1.5,
+    borderColor: dividerColor,
+    borderWidth: 0.75,
+  })
+  page.drawImage(embeddedImage, {
+    x: photoX,
+    y: photoY,
+    width: photoWidth,
+    height: photoHeight,
+  })
+
+  // =========================================================================
+  // 2. HEADER TEXT (Positioned cleanly to the left of the profile photo)
+  // =========================================================================
+  page.drawText('MD HABIB MUNSAR AHMED', {
+    x: margin,
+    y: y - 14,
+    size: 17,
+    font: helveticaBold,
+    color: primaryColor,
+  })
+  y -= 28
+
+  page.drawText('SOFTWARE ENGINEER  |  AI/ML • Full-Stack Development • Cybersecurity', {
+    x: margin,
+    y,
+    size: 9.5,
+    font: helveticaBold,
+    color: secondaryColor,
+  })
+  y -= 13
+
+  page.drawText('Bongaigaon, Assam, India  |  +91 8099321737  |  habibmunsarahmed@gmail.com', {
+    x: margin,
+    y,
+    size: 8.5,
+    font: helvetica,
+    color: secondaryColor,
+  })
+  y -= 12
+
+  page.drawText('github.com/habib404ahmed  |  linkedin.com/in/habib404ahmed', {
+    x: margin,
+    y,
+    size: 8.5,
+    font: helvetica,
+    color: secondaryColor,
+  })
+
+  // Ensure next section divider begins cleanly below both text and portrait photo
+  y = Math.min(y, photoY) - 8
+
   // Helper function to draw section header
   function drawSectionHeader(title) {
-    y -= 14
+    y -= 13
     page.drawText(title.toUpperCase(), {
       x: margin,
       y,
-      size: 10,
+      size: 9.5,
       font: helveticaBold,
       color: accentColor,
     })
@@ -41,7 +158,15 @@ async function generateResume() {
   }
 
   // Helper function to wrap and draw text
-  function drawWrappedText(text, fontSize = 9, font = helvetica, color = primaryColor, x = margin, maxWidth = width - margin * 2, lineSpacing = 12) {
+  function drawWrappedText(
+    text,
+    fontSize = 8.5,
+    font = helvetica,
+    color = primaryColor,
+    x = margin,
+    maxWidth = width - margin * 2,
+    lineSpacing = 11.5
+  ) {
     const words = text.split(' ')
     let currentLine = ''
 
@@ -64,36 +189,7 @@ async function generateResume() {
     }
   }
 
-  // 1. Header
-  page.drawText('MD HABIB MUNSAR AHMED', {
-    x: margin,
-    y,
-    size: 18,
-    font: helveticaBold,
-    color: primaryColor,
-  })
-  y -= 15
-
-  page.drawText('SOFTWARE ENGINEER  |  AI/ML • Full-Stack Development • Cybersecurity', {
-    x: margin,
-    y,
-    size: 10,
-    font: helveticaBold,
-    color: secondaryColor,
-  })
-  y -= 14
-
-  const contactLine = 'Bongaigaon, Assam, India  |  +91 8099321737  |  habibmunsarahmed@gmail.com  |  github.com/habib404ahmed'
-  page.drawText(contactLine, {
-    x: margin,
-    y,
-    size: 8.5,
-    font: helvetica,
-    color: secondaryColor,
-  })
-  y -= 10
-
-  // 2. Summary
+  // 3. Summary
   drawSectionHeader('Professional Summary')
   drawWrappedText(
     'Software Engineer and BCA student with hands-on experience building full-stack applications, AI-powered systems, multi-agent solutions, and cybersecurity-focused projects. Proficient in Python, Java, JavaScript, React, Node.js, FastAPI, Spring Boot, SQL, modern databases, cloud platforms, and AI technologies. Interested in building intelligent, scalable and secure software systems.',
@@ -105,7 +201,7 @@ async function generateResume() {
     11.5
   )
 
-  // 3. Technical Skills
+  // 4. Technical Skills
   drawSectionHeader('Technical Skills')
   const skills = [
     { label: 'Programming:', list: 'Python, Java, JavaScript, SQL' },
@@ -120,10 +216,10 @@ async function generateResume() {
   for (const s of skills) {
     page.drawText(s.label, { x: margin, y, size: 8.5, font: helveticaBold, color: primaryColor })
     page.drawText(s.list, { x: margin + 85, y, size: 8.5, font: helvetica, color: primaryColor })
-    y -= 11
+    y -= 10.5
   }
 
-  // 4. Projects
+  // 5. Projects
   drawSectionHeader('Software Engineering Projects')
 
   const projects = [
@@ -171,28 +267,49 @@ async function generateResume() {
 
   for (const proj of projects) {
     page.drawText(proj.title, { x: margin, y, size: 9, font: helveticaBold, color: primaryColor })
-    y -= 10
+    y -= 9.5
     page.drawText(proj.meta, { x: margin, y, size: 8, font: helveticaOblique, color: secondaryColor })
-    y -= 10
+    y -= 9.5
     for (const b of proj.bullets) {
       page.drawText('•', { x: margin + 4, y, size: 8, font: helvetica, color: primaryColor })
       page.drawText(b, { x: margin + 14, y, size: 8, font: helvetica, color: primaryColor })
-      y -= 10
+      y -= 9.5
     }
     y -= 2
   }
 
-  // 5. Education
+  // 6. Education
   drawSectionHeader('Education')
-  page.drawText('Bachelor of Computer Applications (BCA)', { x: margin, y, size: 9, font: helveticaBold, color: primaryColor })
-  page.drawText('2025 — 2028', { x: width - margin - 60, y, size: 8.5, font: helvetica, color: secondaryColor })
-  y -= 11
-  page.drawText('Assam Down Town University  |  1st Semester SGPA: 8.05  |  2nd Semester SGPA: 8.10', { x: margin, y, size: 8.5, font: helvetica, color: primaryColor })
-  y -= 11
-  page.drawText('Class XII: 58%  |  Class X: 72%', { x: margin, y, size: 8, font: helvetica, color: secondaryColor })
-  y -= 4
+  page.drawText('Bachelor of Computer Applications (BCA)', {
+    x: margin,
+    y,
+    size: 9,
+    font: helveticaBold,
+    color: primaryColor,
+  })
+  page.drawText('2025 — 2028', {
+    x: width - margin - 60,
+    y,
+    size: 8.5,
+    font: helvetica,
+    color: secondaryColor,
+  })
+  y -= 10.5
+  page.drawText(
+    'Assam Down Town University  |  1st Semester SGPA: 8.05  |  2nd Semester SGPA: 8.10',
+    { x: margin, y, size: 8.5, font: helvetica, color: primaryColor }
+  )
+  y -= 10.5
+  page.drawText('Class XII: 58%  |  Class X: 72%', {
+    x: margin,
+    y,
+    size: 8,
+    font: helvetica,
+    color: secondaryColor,
+  })
+  y -= 3
 
-  // 6. Certifications & Leadership
+  // 7. Certifications & Leadership
   drawSectionHeader('Certifications & Leadership')
   const certs = [
     'Introduction to Modern AI — Cisco Networking Academy (2025)',
@@ -202,10 +319,10 @@ async function generateResume() {
   for (const c of certs) {
     page.drawText('•', { x: margin + 4, y, size: 8, font: helvetica, color: primaryColor })
     page.drawText(c, { x: margin + 14, y, size: 8, font: helvetica, color: primaryColor })
-    y -= 10.5
+    y -= 10
   }
 
-  // 7. Languages
+  // 8. Languages
   y -= 2
   page.drawText('Languages: English (Professional), Hindi (Fluent), Assamese (Fluent)', {
     x: margin,
@@ -217,17 +334,35 @@ async function generateResume() {
 
   // Save PDF
   const pdfBytes = await pdfDoc.save()
-  const outputDir = path.resolve('public/assets')
-  if (!fs.existsSync(outputDir)) {
-    fs.mkdirSync(outputDir, { recursive: true })
+  const publicOutputDir = path.resolve('public/assets')
+  if (!fs.existsSync(publicOutputDir)) {
+    fs.mkdirSync(publicOutputDir, { recursive: true })
   }
 
-  const primaryPath = path.join(outputDir, 'MD_Habib_Munsar_Ahmed_Resume.pdf')
-  const aliasPath = path.join(outputDir, 'resume.pdf')
+  // Write all canonical download targets
+  const targetFiles = [
+    path.join(publicOutputDir, 'Md-Habib-Munsar-Ahmed-Resume.pdf'),
+    path.join(publicOutputDir, 'MD_Habib_Munsar_Ahmed_Resume.pdf'),
+    path.join(publicOutputDir, 'resume.pdf'),
+  ]
 
-  fs.writeFileSync(primaryPath, pdfBytes)
-  fs.writeFileSync(aliasPath, pdfBytes)
-  console.log(`Generated ATS PDF: ${primaryPath} (${pdfBytes.length} bytes)`)
+  // Also update dist/assets if dist folder exists
+  const distOutputDir = path.resolve('dist/assets')
+  if (fs.existsSync(distOutputDir)) {
+    targetFiles.push(
+      path.join(distOutputDir, 'Md-Habib-Munsar-Ahmed-Resume.pdf'),
+      path.join(distOutputDir, 'MD_Habib_Munsar_Ahmed_Resume.pdf'),
+      path.join(distOutputDir, 'resume.pdf')
+    )
+  }
+
+  for (const targetPath of targetFiles) {
+    fs.writeFileSync(targetPath, pdfBytes)
+    console.log(`Generated ATS PDF with profile photo: ${targetPath} (${pdfBytes.length} bytes)`)
+  }
 }
 
-generateResume().catch(console.error)
+generateResume().catch((err) => {
+  console.error('FATAL: Resume PDF generation failed:', err)
+  process.exit(1)
+})
