@@ -24,15 +24,15 @@ export function ThreeScene({
 }: ThreeSceneProps) {
   const streamCount = deviceClass === 'low' ? 3 : deviceClass === 'medium' ? 5 : 7
 
-  // Responsive safe-zone offsets (Rule 19: 20-30% reduction, deeper in background)
+  // Responsive safe-zone offsets (Rule 18: Negative space between columns 6-8)
   const isMobile = typeof window !== 'undefined' ? window.innerWidth < 768 : false
   const corePosition: [number, number, number] = useMemo(() => {
-    if (isMobile) return [0, -1.4, -3.0]
-    return [0.4, 0.0, -2.4]
+    if (isMobile) return [0, -1.6, -3.2]
+    return [0.75, 0.0, -2.8]
   }, [isMobile])
 
-  // Reduced core scale so Habib's face and identity remain primary
-  const coreScale = isMobile ? 0.42 : 0.62
+  // Reduced core scale by ~22% so Habib's identity and face remain dominant
+  const coreScale = isMobile ? 0.32 : 0.48
 
   return (
     <Canvas
@@ -51,13 +51,13 @@ export function ThreeScene({
 
       {/* Atmospheric Ambient Lighting (Restrained Cyan & Soft White) */}
       <ambientLight intensity={0.05} color="#ffffff" />
-      <pointLight position={[10, 10, 10]} intensity={0.18} color="#38bdf8" />
-      <pointLight position={[-10, -5, -10]} intensity={0.12} color="#818cf8" />
+      <pointLight position={[10, 10, 10]} intensity={0.16} color="#38bdf8" />
+      <pointLight position={[-10, -5, -10]} intensity={0.10} color="#818cf8" />
 
       <Suspense fallback={null}>
         <AmbientParticles deviceClass={deviceClass} />
 
-        {/* 3D Core sitting strictly in background layer (Layer 2) */}
+        {/* 3D Core sitting strictly in background negative space (Layer 2) */}
         <group position={corePosition} scale={coreScale}>
           <AICoreMesh
             mouseX={mouseX}
@@ -67,8 +67,8 @@ export function ThreeScene({
           />
         </group>
 
-        {deviceClass !== 'low' && <DataStreams count={streamCount} />}
-        {showGrid && <GridPlane opacity={0.045} />}
+        {/* Removed DataStreams to eliminate vertical cyan lines intersecting content (Rule 26) */}
+        {showGrid && <GridPlane opacity={0.035} />}
       </Suspense>
     </Canvas>
   )

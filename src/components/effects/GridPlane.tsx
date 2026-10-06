@@ -29,7 +29,7 @@ export function GridPlane({ opacity = 0.04 }: GridPlaneProps) {
     <group>
       <gridHelper
         ref={gridRef}
-        args={[40, 40, '#0369a1', '#020b18']}
+        args={[40, 40, '#020b18', '#020b18']}
         position={[0, -3.8, 0]}
         rotation={[0, 0, 0]}
       />
