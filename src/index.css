@@ -1,0 +1,479 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+@import "tailwindcss";
+
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
+:root {
+  /* Core palette */
+  --color-void: #050507;
+  --color-deep: #080a0f;
+  --color-surface: #0d1117;
+  --color-elevated: #141822;
+  --color-border: rgba(255, 255, 255, 0.06);
+  --color-border-accent: rgba(6, 182, 212, 0.2);
+
+  /* Accent - electric cyan primary */
+  --color-cyan: #06b6d4;
+  --color-cyan-dim: rgba(6, 182, 212, 0.15);
+  --color-cyan-glow: rgba(6, 182, 212, 0.35);
+
+  /* Accent - cool blue */
+  --color-blue: #3b82f6;
+  --color-blue-dim: rgba(59, 130, 246, 0.12);
+
+  /* Accent - violet */
+  --color-violet: #7c3aed;
+  --color-violet-dim: rgba(124, 58, 237, 0.12);
+
+  /* Accent - emerald (security) */
+  --color-emerald: #10b981;
+
+  /* Text */
+  --color-text-primary: #f0f4f8;
+  --color-text-secondary: #8892a4;
+  --color-text-muted: #4a5568;
+  --color-text-accent: #06b6d4;
+
+  /* Typography */
+  --font-display: 'Space Grotesk', 'Inter', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'Space Mono', monospace;
+
+  /* Animation timing */
+  --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-in-out: cubic-bezier(0.45, 0, 0.55, 1);
+
+  /* Spacing */
+  --nav-height: 72px;
+
+  /* Layer System (Step 2 Hierarchy) */
+  --z-bg: 0;
+  --z-env: 1;
+  --z-3d: 2;
+  --z-ambient: 3;
+  --z-content: 10;
+  --z-nav: 100;
+  --z-modal: 1000;
+}
+
+/* ============================================================
+   GLOBAL CONTENT GRID & LAYER UTILITIES
+   ============================================================ */
+.page-container {
+  width: min(1240px, calc(100% - 48px));
+  margin-inline: auto;
+}
+
+@media (max-width: 640px) {
+  .page-container {
+    width: calc(100% - 32px);
+    margin-inline: auto;
+  }
+}
+
+.layer-bg { z-index: var(--z-bg); }
+.layer-env { z-index: var(--z-env); }
+.layer-3d { z-index: var(--z-3d); }
+.layer-ambient { z-index: var(--z-ambient); }
+.layer-content { z-index: var(--z-content); position: relative; }
+.layer-nav { z-index: var(--z-nav); }
+.layer-modal { z-index: var(--z-modal); }
+
+/* ============================================================
+   NAVBAR ARCHITECTURE (Phase 6.9.1A)
+   ============================================================ */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--nav-height, 72px);
+  z-index: var(--z-nav, 100);
+  background: rgba(7, 10, 15, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
+  pointer-events: auto;
+  transition: all 0.3s ease;
+}
+
+.site-header-inner {
+  height: 100%;
+  width: min(1240px, calc(100% - 48px));
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@media (max-width: 640px) {
+  .site-header-inner {
+    width: calc(100% - 32px);
+  }
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-void);
+  color: var(--color-text-primary);
+  overflow-x: hidden;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ensure fixed navbar never covers section headings when scrolled */
+section[id] {
+  scroll-margin-top: calc(var(--nav-height) + 20px);
+}
+
+#root {
+  position: relative;
+  min-height: 100dvh;
+  overflow-x: hidden;
+}
+
+/* ============================================================
+   SELECTION
+   ============================================================ */
+::selection {
+  background: rgba(6, 182, 212, 0.25);
+  color: #fff;
+}
+
+/* ============================================================
+   SCROLLBAR
+   ============================================================ */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-void);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(6, 182, 212, 0.3);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(6, 182, 212, 0.6);
+}
+
+/* ============================================================
+   TYPOGRAPHY SYSTEM
+   ============================================================ */
+.font-display { font-family: var(--font-display); }
+.font-mono { font-family: var(--font-mono); }
+
+/* Hero / cinematic headings */
+.text-hero {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+
+.text-cinematic {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.text-label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+}
+
+/* ============================================================
+   GLOW ACCENTS (50% RESTRAINED FOR READABILITY)
+   ============================================================ */
+.glow-cyan {
+  text-shadow: 0 0 14px rgba(6, 182, 212, 0.3), 0 0 24px rgba(6, 182, 212, 0.1);
+}
+
+.glow-white {
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.15);
+}
+
+.box-glow-cyan {
+  box-shadow: 0 0 14px rgba(6, 182, 212, 0.08), 0 0 1px rgba(6, 182, 212, 0.25) inset;
+}
+
+/* ============================================================
+   GLASS SURFACE
+   ============================================================ */
+.glass {
+  background: rgba(8, 10, 15, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border);
+}
+
+.glass-accent {
+  background: rgba(6, 182, 212, 0.04);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(6, 182, 212, 0.15);
+}
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.btn-primary {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  font-family: var(--font-display);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-void);
+  background: var(--color-cyan);
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.3s var(--ease-cinematic);
+  text-decoration: none;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.15);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.btn-primary:hover::before {
+  opacity: 1;
+}
+
+.btn-primary:hover {
+  box-shadow: 0 0 30px rgba(6, 182, 212, 0.5), 0 4px 20px rgba(6, 182, 212, 0.3);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  font-family: var(--font-display);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-primary);
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.3s var(--ease-cinematic);
+  text-decoration: none;
+}
+
+.btn-secondary:hover {
+  border-color: var(--color-cyan);
+  color: var(--color-cyan);
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.1);
+  transform: translateY(-1px);
+}
+
+/* ============================================================
+   FOCUS STATES (ACCESSIBILITY)
+   ============================================================ */
+:focus-visible {
+  outline: 2px solid var(--color-cyan);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ============================================================
+   INIT SEQUENCE ANIMATIONS
+   ============================================================ */
+@keyframes init-text-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes scan-line {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(100vh); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+@keyframes data-stream {
+  from { transform: translateY(-100%); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  to { transform: translateY(100%); opacity: 0; }
+}
+
+/* ============================================================
+   REDUCED MOTION OVERRIDES
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE UTILITIES
+   ============================================================ */
+
+
+/* ============================================================
+   CANVAS / SCENE CONTAINER
+   ============================================================ */
+.scene-container {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.scene-container.interactive {
+  pointer-events: auto;
+}
+
+/* ============================================================
+   GRADIENT BORDERS
+   ============================================================ */
+.border-gradient-cyan {
+  border: 1px solid transparent;
+  background-clip: padding-box;
+  position: relative;
+}
+
+.border-gradient-cyan::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.4), rgba(59, 130, 246, 0.2), transparent);
+  z-index: -1;
+}
+
+/* ============================================================
+   NOISE TEXTURE OVERLAY
+   ============================================================ */
+.noise-overlay {
+  position: fixed;
+  inset: 0;
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* ============================================================
+   PRINT STYLESHEET (ATS-FRIENDLY WEB RESUME PRINTING)
+   ============================================================ */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  .noise-overlay,
+  .scene-container,
+  nav,
+  footer,
+  #hero,
+  #enter-system,
+  #about,
+  #mindset,
+  #universe,
+  #capabilities,
+  #projects,
+  #achievements,
+  .no-print {
+    display: none !important;
+  }
+
+  #resume-experience {
+    padding: 0 !important;
+    margin: 0 !important;
+    background: #ffffff !important;
+  }
+
+  #web-resume-document {
+    background: #ffffff !important;
+    color: #111827 !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  #web-resume-document * {
+    color: #111827 !important;
+    border-color: #e5e7eb !important;
+  }
+
+  #web-resume-document h1,
+  #web-resume-document h2,
+  #web-resume-document h3,
+  #web-resume-document h4 {
+    color: #000000 !important;
+  }
+
+  #web-resume-document a {
+    text-decoration: underline !important;
+    color: #0284c7 !important;
+  }
+}
+

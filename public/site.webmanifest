@@ -1,0 +1,16 @@
+{
+  "name": "Md Habib Munsar Ahmed | Software Engineer",
+  "short_name": "Habib Ahmed",
+  "description": "Software Engineer — AI/ML, Full-Stack, Cybersecurity",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#050507",
+  "theme_color": "#050507",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any"
+    }
+  ]
+}

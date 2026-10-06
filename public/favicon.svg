@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <rect width="32" height="32" rx="4" fill="#050507"/>
+  <rect x="4" y="4" width="10" height="1.5" fill="#06b6d4" opacity="0.6"/>
+  <rect x="4" y="4" width="1.5" height="10" fill="#06b6d4" opacity="0.6"/>
+  <rect x="18" y="4" width="10" height="1.5" fill="#06b6d4" opacity="0.6"/>
+  <rect x="26.5" y="4" width="1.5" height="10" fill="#06b6d4" opacity="0.6"/>
+  <rect x="4" y="26.5" width="10" height="1.5" fill="#06b6d4" opacity="0.6"/>
+  <rect x="4" y="18" width="1.5" height="10" fill="#06b6d4" opacity="0.6"/>
+  <rect x="18" y="26.5" width="10" height="1.5" fill="#06b6d4" opacity="0.6"/>
+  <rect x="26.5" y="18" width="1.5" height="10" fill="#06b6d4" opacity="0.6"/>
+  <text x="16" y="21" text-anchor="middle" font-family="monospace" font-weight="700" font-size="13" fill="#06b6d4">H</text>
+</svg>
