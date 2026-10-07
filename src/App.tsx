@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { InitSequence } from '@/scenes/IntroScene/InitSequence'
-import { ThreeScene } from '@/scenes/HeroScene/ThreeScene'
+import { Global3DWorld } from '@/components/effects/cinematic/Global3DWorld'
 import { HeroContent } from '@/scenes/HeroScene/HeroContent'
 import { WebGLFallback } from '@/scenes/HeroScene/WebGLFallback'
 import { Navigation } from '@/components/navigation/Navigation'
@@ -119,6 +119,28 @@ export default function App() {
       <Navigation visible={navVisible} />
 
       {/* ──────────────────────────────────────────
+          GLOBAL 3D WORLD — Unified Persistent WebGL Canvas (Layer 2)
+          Persistent cinematic 3D environment across all sections
+          ────────────────────────────────────────── */}
+      <AnimatePresence>
+        {showScene && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1.8, ease: 'easeOut' }}
+            className="fixed inset-0 pointer-events-none z-[2]"
+            aria-hidden="true"
+          >
+            {webGLSupported ? (
+              <Global3DWorld deviceClass={deviceClass} />
+            ) : (
+              <WebGLFallback visible={heroContentVisible} />
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* ──────────────────────────────────────────
           HERO SECTION — pinned full viewport
           ────────────────────────────────────────── */}
       <section
@@ -127,30 +149,6 @@ export default function App() {
         style={{ paddingTop: 'var(--nav-height, 72px)' }}
         aria-label="Hero — Introduction"
       >
-        {/* 3D Canvas — strictly background layer (Layer 2) inside Hero boundary */}
-        <AnimatePresence>
-          {showScene && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1.8, ease: 'easeOut' }}
-              className="absolute inset-0 pointer-events-none z-[2]"
-              aria-hidden="true"
-            >
-              {webGLSupported ? (
-                <ThreeScene
-                  mouseX={normalized.x}
-                  mouseY={normalized.y}
-                  deviceClass={deviceClass}
-                  corePhase={corePhase}
-                  showGrid={phase === 'ready'}
-                />
-              ) : (
-                <WebGLFallback visible={heroContentVisible} />
-              )}
-            </motion.div>
-          )}
-        </AnimatePresence>
 
         {/* Hero Ambient Dual Lighting: Cool Technology (Left) / Warm Person (Right) — Layer 3 */}
         <div
@@ -239,7 +237,7 @@ export default function App() {
       {/* ──────────────────────────────────────────
           MAIN CONTENT HIERARCHY (Section 30 Architecture)
           ────────────────────────────────────────── */}
-      <main id="main-content" className="relative z-10 layer-content bg-[var(--color-void)]">
+      <main id="main-content" className="relative z-10 layer-content bg-transparent">
         {/* Scene 01: Enter the Engineering System */}
         <Scene01EnterSystem />
 

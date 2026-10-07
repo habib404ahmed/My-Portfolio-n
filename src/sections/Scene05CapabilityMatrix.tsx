@@ -104,7 +104,7 @@ export function Scene05CapabilityMatrix() {
                 {currentCapability.flow.map((step, idx) => (
                   <div key={idx} className="relative flex flex-col">
                     <div
-                      className="p-4 rounded-lg border border-white/10 bg-black/50 backdrop-blur-sm flex flex-col justify-between min-h-[110px] hover:border-white/30 transition-all group"
+                      className="card-3d-tilt p-4 rounded-lg border border-white/10 bg-black/50 backdrop-blur-sm flex flex-col justify-between min-h-[110px] hover:border-white/30 transition-all group"
                       style={{
                         boxShadow: `0 4px 20px rgba(0,0,0,0.5)`,
                       }}

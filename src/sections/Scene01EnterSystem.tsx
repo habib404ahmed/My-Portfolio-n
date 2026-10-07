@@ -69,7 +69,7 @@ export function Scene01EnterSystem() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="p-5 rounded-xl border border-white/10 bg-slate-950/40 backdrop-blur-sm text-left flex flex-col justify-between min-h-[120px] hover:border-white/20 transition-all duration-300"
+              className="card-3d-tilt p-5 rounded-xl border border-white/10 bg-slate-950/50 backdrop-blur-sm text-left flex flex-col justify-between min-h-[120px] hover:border-cyan-500/30 transition-all duration-300"
             >
               <div>
                 <span className="font-mono text-[0.6875rem] font-bold text-slate-500 block mb-1.5">{node.id}</span>
