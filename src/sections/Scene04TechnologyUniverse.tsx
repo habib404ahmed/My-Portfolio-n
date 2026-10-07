@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { motion } from 'framer-motion'
 import {
   techDomains,
   pipelinesData,
@@ -9,7 +8,7 @@ import {
 } from '@/data/techStack'
 import { TechnologyDetailModal } from '@/components/technology/TechnologyDetailModal'
 import { PipelineDetailModal } from '@/components/technology/PipelineDetailModal'
-import { CategoryAbstractVisual } from '@/components/technology/CategoryAbstractVisual'
+import { CinematicDepthCard } from '@/components/technology/CinematicDepthCard'
 
 export function Scene04TechnologyUniverse() {
   const [selectedDomain, setSelectedDomain] = useState<TechDomain | null>(null)
@@ -18,13 +17,13 @@ export function Scene04TechnologyUniverse() {
   const [clickedCardId, setClickedCardId] = useState<string | null>(null)
 
   const handleOpenDomain = (domain: TechDomain, initialTechItem?: TechItem) => {
-    // Subtle card compression & pulse feedback before opening
+    // Cinematic compression & pulse sequence before opening detail panel
     setClickedCardId(domain.id)
     setTimeout(() => {
       setClickedCardId(null)
       setSelectedDomain(domain)
       setSelectedTech(initialTechItem || null)
-    }, 120)
+    }, 220)
   }
 
   const handleOpenPipeline = (pipelineId: 'intelligent' | 'zero-trust') => {
@@ -134,93 +133,16 @@ export function Scene04TechnologyUniverse() {
           </button>
         </div>
 
-        {/* ─── Technology Grid: Clean Interactive Category Modules (NO technology names visible in default state) ─── */}
+        {/* ─── Technology Grid: Style 09 Cinematic Depth Category Cards ─── */}
         <div className="tech-grid">
-          {techDomains.map((domain: TechDomain) => {
-            const isClicking = clickedCardId === domain.id
-
-            return (
-              <motion.button
-                key={domain.id}
-                type="button"
-                onClick={() => handleOpenDomain(domain)}
-                className={`w-full min-w-0 box-border p-[18px_20px] rounded-2xl glass-card liquid-edge flex flex-col justify-between text-left transition-all duration-300 shadow-[0_8px_24px_rgba(0,0,0,0.35)] h-auto min-h-[220px] cursor-pointer group relative overflow-hidden select-none ${
-                  isClicking
-                    ? 'scale-[0.98] ring-2 ring-cyan-400/60'
-                    : 'hover:-translate-y-1 hover:shadow-[0_16px_36px_rgba(0,0,0,0.45)]'
-                }`}
-                style={{
-                  outline: 'none',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = domain.color
-                  e.currentTarget.style.boxShadow = `0 16px 40px rgba(0,0,0,0.45), 0 0 25px ${domain.glowColor}`
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = ''
-                  e.currentTarget.style.boxShadow = ''
-                }}
-                aria-label={`Open ${domain.label} technology module containing ${domain.tech.length} verified technologies`}
-                aria-haspopup="dialog"
-                aria-expanded={selectedDomain?.id === domain.id}
-              >
-                {/* Subtle top-edge accent highlight on hover */}
-                <div
-                  className="absolute top-0 inset-x-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                  style={{
-                    background: `linear-gradient(90deg, transparent 0%, ${domain.color} 50%, transparent 100%)`,
-                  }}
-                  aria-hidden="true"
-                />
-
-                <div className="w-full">
-                  {/* Card Header: ● CATEGORY CODE */}
-                  <div className="flex items-center justify-between pb-2.5 mb-2 border-b border-white/10">
-                    <div className="flex items-center gap-2.5 min-w-0">
-                      <span
-                        className="w-2 h-2 rounded-full flex-shrink-0 group-hover:animate-ping"
-                        style={{ background: domain.color }}
-                      />
-                      <h3 className="font-mono text-[14px] sm:text-[15px] font-extrabold tracking-[0.06em] text-[#F4F7FA] group-hover:text-cyan-300 transition-colors m-0 truncate">
-                        {domain.label}
-                      </h3>
-                    </div>
-                    <span
-                      className="font-mono text-[10px] px-2 py-0.5 rounded-full border border-white/10 uppercase font-semibold flex-shrink-0 ml-2 text-slate-300 group-hover:border-cyan-500/40"
-                      style={{ color: domain.color }}
-                    >
-                      {domain.shortLabel}
-                    </span>
-                  </div>
-
-                  {/* Card Description */}
-                  <p className="font-body text-[12px] sm:text-[13px] text-[#A8B4C2] leading-[1.45] mt-1 mb-2 m-0 line-clamp-2">
-                    {domain.description}
-                  </p>
-
-                  {/* Category-Specific Abstract Visual Module (NO technology names!) */}
-                  <div className="my-2.5 h-[64px] sm:h-[70px] w-full rounded-xl bg-white/[0.025] border border-white/[0.06] group-hover:border-white/[0.12] transition-colors flex items-center justify-center relative overflow-hidden px-3">
-                    <CategoryAbstractVisual domainId={domain.id} color={domain.color} />
-                  </div>
-                </div>
-
-                {/* Card Footer: 4 Technologies • VERIFIED  EXPLORE → */}
-                <div className="mt-auto pt-3 border-t border-[rgba(140,190,210,0.12)] flex items-center justify-between font-mono text-[11px] text-[#687687] w-full">
-                  <span className="flex items-center gap-1.5">
-                    <span>{domain.tech.length} Technologies</span>
-                    <span className="text-slate-600">&bull;</span>
-                    <span className="font-semibold" style={{ color: domain.color }}>
-                      VERIFIED
-                    </span>
-                  </span>
-                  <span className="text-cyan-400 font-semibold group-hover:translate-x-1 transition-transform flex items-center gap-1">
-                    <span>EXPLORE</span>
-                    <span>&rarr;</span>
-                  </span>
-                </div>
-              </motion.button>
-            )
-          })}
+          {techDomains.map((domain: TechDomain) => (
+            <CinematicDepthCard
+              key={domain.id}
+              domain={domain}
+              onOpen={handleOpenDomain}
+              isOpening={clickedCardId === domain.id}
+            />
+          ))}
         </div>
       </div>
 
