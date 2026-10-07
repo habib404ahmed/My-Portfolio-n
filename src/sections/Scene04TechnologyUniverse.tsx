@@ -9,6 +9,7 @@ import {
 } from '@/data/techStack'
 import { TechnologyDetailModal } from '@/components/technology/TechnologyDetailModal'
 import { PipelineDetailModal } from '@/components/technology/PipelineDetailModal'
+import { CategoryAbstractVisual } from '@/components/technology/CategoryAbstractVisual'
 
 export function Scene04TechnologyUniverse() {
   const [selectedDomain, setSelectedDomain] = useState<TechDomain | null>(null)
@@ -56,17 +57,17 @@ export function Scene04TechnologyUniverse() {
           </p>
         </header>
 
-        {/* ─── Pipeline Area (Interactive Liquid Glass Laboratory Flows) ─── */}
+        {/* ─── Pipeline Area (Compact Laboratory Flows) ─── */}
         <div className="pipeline-grid">
           {/* Flow 1: Intelligent Systems Pipeline — Interactive Module */}
           <button
             type="button"
             onClick={() => handleOpenPipeline('intelligent')}
-            className="p-[14px_16px] rounded-[16px] glass-level-1 liquid-edge min-h-[64px] h-auto flex flex-col justify-center shadow-sm w-full box-border min-w-0 text-left transition-all duration-300 hover:border-[#8B7CFF]/50 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(139,124,255,0.18)] cursor-pointer group active:scale-[0.98]"
+            className="p-[16px_18px] rounded-[16px] glass-level-1 liquid-edge min-h-[72px] h-auto flex flex-col justify-center shadow-sm w-full box-border min-w-0 text-left transition-all duration-300 hover:border-[#8B7CFF]/50 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(139,124,255,0.18)] cursor-pointer group active:scale-[0.98]"
             aria-label="Open Intelligent Systems Pipeline details"
             aria-haspopup="dialog"
           >
-            <div className="flex items-center justify-between mb-[7px]">
+            <div className="flex items-center justify-between mb-2">
               <span className="font-mono text-[10px] sm:text-[11px] text-[#8B7CFF] font-semibold tracking-[0.08em] uppercase flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#8B7CFF] animate-pulse" />
                 INTELLIGENT SYSTEMS PIPELINE
@@ -99,11 +100,11 @@ export function Scene04TechnologyUniverse() {
           <button
             type="button"
             onClick={() => handleOpenPipeline('zero-trust')}
-            className="p-[14px_16px] rounded-[16px] glass-level-1 liquid-edge min-h-[64px] h-auto flex flex-col justify-center shadow-sm w-full box-border min-w-0 text-left transition-all duration-300 hover:border-[#00D9FF]/50 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(0,217,255,0.18)] cursor-pointer group active:scale-[0.98]"
+            className="p-[16px_18px] rounded-[16px] glass-level-1 liquid-edge min-h-[72px] h-auto flex flex-col justify-center shadow-sm w-full box-border min-w-0 text-left transition-all duration-300 hover:border-[#00D9FF]/50 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(0,217,255,0.18)] cursor-pointer group active:scale-[0.98]"
             aria-label="Open Zero-Trust Defense Pipeline details"
             aria-haspopup="dialog"
           >
-            <div className="flex items-center justify-between mb-[7px]">
+            <div className="flex items-center justify-between mb-2">
               <span className="font-mono text-[10px] sm:text-[11px] text-[#00D9FF] font-semibold tracking-[0.08em] uppercase flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#00D9FF] animate-pulse" />
                 ZERO-TRUST DEFENSE PIPELINE
@@ -133,7 +134,7 @@ export function Scene04TechnologyUniverse() {
           </button>
         </div>
 
-        {/* ─── Technology Grid: Interactive Liquid Glass Modules (9 Categories) ─── */}
+        {/* ─── Technology Grid: Clean Interactive Category Modules (NO technology names visible in default state) ─── */}
         <div className="tech-grid">
           {techDomains.map((domain: TechDomain) => {
             const isClicking = clickedCardId === domain.id
@@ -143,8 +144,10 @@ export function Scene04TechnologyUniverse() {
                 key={domain.id}
                 type="button"
                 onClick={() => handleOpenDomain(domain)}
-                className={`w-full min-w-0 box-border p-[16px_18px] rounded-2xl glass-card liquid-edge flex flex-col justify-between text-left transition-all duration-300 shadow-[0_8px_24px_rgba(0,0,0,0.35)] h-auto min-h-[220px] cursor-pointer group relative overflow-hidden select-none ${
-                  isClicking ? 'scale-[0.98] ring-2 ring-cyan-400/60' : 'hover:-translate-y-1 hover:shadow-[0_16px_36px_rgba(0,0,0,0.45)]'
+                className={`w-full min-w-0 box-border p-[18px_20px] rounded-2xl glass-card liquid-edge flex flex-col justify-between text-left transition-all duration-300 shadow-[0_8px_24px_rgba(0,0,0,0.35)] h-auto min-h-[220px] cursor-pointer group relative overflow-hidden select-none ${
+                  isClicking
+                    ? 'scale-[0.98] ring-2 ring-cyan-400/60'
+                    : 'hover:-translate-y-1 hover:shadow-[0_16px_36px_rgba(0,0,0,0.45)]'
                 }`}
                 style={{
                   outline: 'none',
@@ -161,7 +164,7 @@ export function Scene04TechnologyUniverse() {
                 aria-haspopup="dialog"
                 aria-expanded={selectedDomain?.id === domain.id}
               >
-                {/* Subtle top-edge cyan pulse on hover */}
+                {/* Subtle top-edge accent highlight on hover */}
                 <div
                   className="absolute top-0 inset-x-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
                   style={{
@@ -171,7 +174,7 @@ export function Scene04TechnologyUniverse() {
                 />
 
                 <div className="w-full">
-                  {/* Card Header */}
+                  {/* Card Header: ● CATEGORY CODE */}
                   <div className="flex items-center justify-between pb-2.5 mb-2 border-b border-white/10">
                     <div className="flex items-center gap-2.5 min-w-0">
                       <span
@@ -191,34 +194,17 @@ export function Scene04TechnologyUniverse() {
                   </div>
 
                   {/* Card Description */}
-                  <p className="font-body text-[12px] sm:text-[13px] text-[#A8B4C2] leading-[1.45] mt-1 mb-3 m-0 line-clamp-2">
+                  <p className="font-body text-[12px] sm:text-[13px] text-[#A8B4C2] leading-[1.45] mt-1 mb-2 m-0 line-clamp-2">
                     {domain.description}
                   </p>
 
-                  {/* Technology Rows — Interactive Sub-Nodes */}
-                  <div className="space-y-1.5 my-2">
-                    {domain.tech.map((item: TechItem) => (
-                      <div
-                        key={item.name}
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          handleOpenDomain(domain, item)
-                        }}
-                        className="w-full text-left px-3 h-[30px] rounded-lg bg-white/[0.035] border border-white/[0.08] hover:bg-white/[0.08] hover:border-cyan-500/40 hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-between text-[#A8B4C2] hover:text-[#F4F7FA] cursor-pointer"
-                        title={`Click to inspect ${item.name} details & project connections`}
-                      >
-                        <span className="font-mono text-[12px] sm:text-[13px] font-medium truncate whitespace-nowrap">
-                          {item.name}
-                        </span>
-                        <span className="text-[11px] font-mono text-[#687687] hover:text-cyan-400 transition-colors flex-shrink-0 ml-2">
-                          &rarr;
-                        </span>
-                      </div>
-                    ))}
+                  {/* Category-Specific Abstract Visual Module (NO technology names!) */}
+                  <div className="my-2.5 h-[64px] sm:h-[70px] w-full rounded-xl bg-white/[0.025] border border-white/[0.06] group-hover:border-white/[0.12] transition-colors flex items-center justify-center relative overflow-hidden px-3">
+                    <CategoryAbstractVisual domainId={domain.id} color={domain.color} />
                   </div>
                 </div>
 
-                {/* Card Footer: Clear Call to Action */}
+                {/* Card Footer: 4 Technologies • VERIFIED  EXPLORE → */}
                 <div className="mt-auto pt-3 border-t border-[rgba(140,190,210,0.12)] flex items-center justify-between font-mono text-[11px] text-[#687687] w-full">
                   <span className="flex items-center gap-1.5">
                     <span>{domain.tech.length} Technologies</span>
@@ -228,7 +214,7 @@ export function Scene04TechnologyUniverse() {
                     </span>
                   </span>
                   <span className="text-cyan-400 font-semibold group-hover:translate-x-1 transition-transform flex items-center gap-1">
-                    <span className="hidden sm:inline text-[10px] tracking-wider uppercase">EXPLORE</span>
+                    <span>EXPLORE</span>
                     <span>&rarr;</span>
                   </span>
                 </div>
@@ -238,7 +224,7 @@ export function Scene04TechnologyUniverse() {
         </div>
       </div>
 
-      {/* ─── Liquid Glass Modals ─── */}
+      {/* ─── Liquid Glass Modals (Technologies appear ONLY here when opened) ─── */}
       <TechnologyDetailModal
         domain={selectedDomain}
         initialTech={selectedTech}
