@@ -17,46 +17,30 @@ interface PipelineStage {
 
 const PIPELINE_STAGES: PipelineStage[] = [
   {
-    id: 'problem',
+    id: 'discover',
     number: '01',
-    title: 'PROBLEM',
+    title: 'DISCOVER',
     tagline: 'Deconstruct complexity into foundational constraints',
     description:
-      'Begin by isolating root causes, user bottlenecks, and performance limits rather than jumping straight to code.',
-    visualState: 'Constraint Isolation & Entropy State',
-    color: '#f43f5e',
+      'Begin by isolating root causes, user bottlenecks, and operational performance limits rather than jumping straight to code.',
+    visualState: 'Constraint Isolation & Boundary State',
+    color: '#6575FF',
     heuristic: '"Don\'t solve the wrong problem faster. Isolate constraints first."',
     metrics: [
-      { label: 'Entropy', value: 'High' },
-      { label: 'Uncertainty', value: 'Max' },
-      { label: 'Constraints', value: 'Isolated' },
+      { label: 'Entropy', value: 'Isolated' },
+      { label: 'Uncertainty', value: 'Resolved' },
+      { label: 'Constraints', value: 'Cataloged' },
     ],
   },
   {
-    id: 'understand',
+    id: 'architect',
     number: '02',
-    title: 'UNDERSTAND',
-    tagline: 'Synthesize data structures & operational requirements',
+    title: 'ARCHITECT',
+    tagline: 'Synthesize data structures & decoupled system topology',
     description:
-      'Map domain entities, data lifecycle, interface contracts, and boundary conditions.',
-    visualState: 'Entity Graph & Relationship Mapping',
-    color: '#fb923c',
-    heuristic: '"If you cannot model the data transitions on paper, code won\'t help."',
-    metrics: [
-      { label: 'Domain Spec', value: 'Synthesized' },
-      { label: 'Data Model', value: 'Mapped' },
-      { label: 'Edge Cases', value: 'Cataloged' },
-    ],
-  },
-  {
-    id: 'design',
-    number: '03',
-    title: 'DESIGN',
-    tagline: 'Architect resilient, scalable, decoupled systems',
-    description:
-      'Establish clean separation of concerns, API schemas, database indexing strategies, and component trees.',
+      'Map domain entities, data lifecycles, microservice interfaces, database schemas, and clean separation of concerns.',
     visualState: 'Decoupled Topology & Microservice Mesh',
-    color: '#eab308',
+    color: '#00D9FF',
     heuristic: '"Systems should be composed of single-responsibility, stateless units."',
     metrics: [
       { label: 'Modularity', value: 'High' },
@@ -66,29 +50,61 @@ const PIPELINE_STAGES: PipelineStage[] = [
   },
   {
     id: 'build',
-    number: '04',
-    title: 'BUILD & AI',
-    tagline: 'Write modular software & integrate AI leverage',
+    number: '03',
+    title: 'BUILD',
+    tagline: 'Strict type verification & modular software implementation',
     description:
-      'Implement core features with strong static typing and clean design patterns, integrating AI models and multi-agent workflows where they create measurable leverage.',
-    visualState: 'Strict Type Verification & Intelligent Agent Flow',
-    color: '#06b6d4',
-    heuristic: '"Write software that is typed, modular, and enhanced with intelligent automation."',
+      'Implement core logic with strict static typing, robust error handling, and clean software engineering patterns.',
+    visualState: 'Type-Safe Architecture & Logic Implementation',
+    color: '#00D9FF',
+    heuristic: '"Write software that is readable, statically verified, and modular."',
     metrics: [
       { label: 'Type Safety', value: '100% Strict' },
-      { label: 'Modularity', value: 'High' },
-      { label: 'AI Leverage', value: 'Integrated' },
+      { label: 'Maintainability', value: 'A+' },
+      { label: 'Code Quality', value: 'Verified' },
+    ],
+  },
+  {
+    id: 'integrate',
+    number: '04',
+    title: 'INTEGRATE',
+    tagline: 'Autonomous AI pipelines & external service orchestration',
+    description:
+      'Orchestrate multi-agent workflows, vector retrieval pipelines (RAG), and resilient external API integrations.',
+    visualState: 'Intelligent Agent Flow & Vector Embeddings',
+    color: '#38E8FF',
+    heuristic: '"Integrate intelligence where it creates measurable architectural leverage."',
+    metrics: [
+      { label: 'Agent Pipeline', value: 'Active' },
+      { label: 'Vector Stores', value: 'Connected' },
+      { label: 'Latency', value: 'Optimized' },
+    ],
+  },
+  {
+    id: 'secure',
+    number: '05',
+    title: 'SECURE',
+    tagline: 'Zero-trust perimeter & ethical hacking verification',
+    description:
+      'Apply an ethical hacker\'s defense: input sanitization, penetration testing, network packet inspection, JWT guards, and least privilege.',
+    visualState: 'Cryptographic Hardening & Zero-Trust Perimeter',
+    color: '#00D9FF',
+    heuristic: '"Treat all perimeter inputs as hostile. Design defense directly into the code."',
+    metrics: [
+      { label: 'Threat Vector', value: 'Mitigated' },
+      { label: 'Auth Guard', value: 'Zero Trust' },
+      { label: 'Audit Rigor', value: 'Enforced' },
     ],
   },
   {
     id: 'test',
-    number: '05',
+    number: '06',
     title: 'TEST',
-    tagline: 'Automated verification & boundary fuzzing',
+    tagline: 'Automated verification, regression defense & boundary fuzzing',
     description:
       'Validate system behavior through automated unit suites, integration tests, and simulated network latency.',
     visualState: 'Automated Test Matrix & Fuzzing Pass',
-    color: '#3b82f6',
+    color: '#6575FF',
     heuristic: '"Untested code is simply broken code that hasn\'t been discovered yet."',
     metrics: [
       { label: 'Coverage', value: 'Comprehensive' },
@@ -97,30 +113,14 @@ const PIPELINE_STAGES: PipelineStage[] = [
     ],
   },
   {
-    id: 'secure',
-    number: '06',
-    title: 'SECURE',
-    tagline: 'Zero-trust defense & ethical hacking hardening',
-    description:
-      'Apply an ethical hacker\'s mindset: input sanitization, penetration testing, network packet inspection, JWT/OAuth guards, and least-privilege scoping.',
-    visualState: 'Cryptographic Hardening & Zero-Trust Perimeter',
-    color: '#10b981',
-    heuristic: '"Treat all perimeter inputs as hostile. Design security into the architecture."',
-    metrics: [
-      { label: 'Threat Vector', value: 'Mitigated' },
-      { label: 'Auth Guard', value: 'Zero Trust' },
-      { label: 'Audit Rigor', value: 'Enforced' },
-    ],
-  },
-  {
     id: 'deploy',
     number: '07',
     title: 'DEPLOY',
     tagline: 'Reproducible containers & global edge delivery',
     description:
-      'Package microservices into Docker containers and orchestrate reliable zero-downtime deployment pipelines.',
+      'Package services into containerized multi-stage builds and deploy via automated zero-downtime CI/CD pipelines.',
     visualState: 'Container Registry & Global Edge Runtime',
-    color: '#8b5cf6',
+    color: '#8B7CFF',
     heuristic: '"If deployment requires manual intervention, it is not reliable."',
     metrics: [
       { label: 'Containers', value: 'Multi-stage' },
@@ -129,15 +129,15 @@ const PIPELINE_STAGES: PipelineStage[] = [
     ],
   },
   {
-    id: 'improve',
+    id: 'iterate',
     number: '08',
-    title: 'OPTIMIZE',
-    tagline: 'System profiling, hardware efficiency & continuous refinement',
+    title: 'ITERATE',
+    tagline: 'System profiling, hardware efficiency & continuous telemetry',
     description:
-      'Profile memory, inspect query plans, optimize OS/hardware throughput, and evolve system capabilities through continuous telemetry loops.',
-    visualState: 'Real-Time Profiling & Feedback Equilibrium',
-    color: '#ec4899',
-    heuristic: '"Measure before optimizing. Use telemetry and system diagnostics to drive evolution."',
+      'Profile memory, inspect query plans, optimize OS/hardware throughput, and evolve capabilities through telemetry loops.',
+    visualState: 'Real-Time Telemetry & Performance Optimization',
+    color: '#6575FF',
+    heuristic: '"Measure before optimizing. Use telemetry to drive continuous evolution."',
     metrics: [
       { label: 'Telemetry', value: 'Real-time' },
       { label: 'Performance', value: 'Optimized' },
@@ -147,16 +147,16 @@ const PIPELINE_STAGES: PipelineStage[] = [
 ]
 
 export function Scene03EngineeringMindset() {
-  const [activeStageId, setActiveStageId] = useState('design')
-  const currentStage = PIPELINE_STAGES.find((s) => s.id === activeStageId) || PIPELINE_STAGES[2]
+  const [activeStageId, setActiveStageId] = useState('discover')
+  const currentStage = PIPELINE_STAGES.find((s) => s.id === activeStageId) || PIPELINE_STAGES[0]
 
   return (
-    <SectionTransition id="mindset" ariaLabel="Engineering Mindset & Pipeline" className="border-b border-white/5">
+    <SectionTransition id="mindset" ariaLabel="Engineering Mindset & Pipeline" className="border-b border-[rgba(140,190,210,0.16)]">
       <SceneContainer
         badge="SCENE 03 // ARCHITECTURAL DISCIPLINE"
         title="HOW I"
         titleHighlight="BUILD"
-        subtitle="Great software isn't written by accident. It is systematically engineered through an 8-stage lifecycle: Problem → Architecture → Build → AI Integration → Security → Testing → Deployment → Optimization."
+        subtitle="Great software isn't written by accident. It is systematically engineered through an 8-stage lifecycle: Discover → Architect → Build → Integrate → Secure → Test → Deploy → Iterate."
       >
         {/* 8-Stage Process Navigation (Horizontal scroll on mobile, 8 equal cols on desktop) */}
         <div className="relative mb-10">
@@ -167,25 +167,22 @@ export function Scene03EngineeringMindset() {
                 <button
                   key={stage.id}
                   onClick={() => setActiveStageId(stage.id)}
-                  className={`flex-shrink-0 min-w-[120px] md:min-w-0 snap-start flex flex-col items-center p-3 rounded-xl border text-center transition-all duration-300 ${
+                  className={`flex-shrink-0 min-w-[120px] md:min-w-0 snap-start flex flex-col items-center p-3 rounded-xl border text-center transition-all duration-300 cursor-pointer ${
                     isActive
-                      ? 'border-white/40 bg-slate-900/90 shadow-md'
-                      : 'border-white/5 bg-slate-950/40 hover:border-white/20'
+                      ? 'border-[#00D9FF] bg-[#111922] shadow-[0_0_16px_rgba(0,217,255,0.2)]'
+                      : 'border-[rgba(140,190,210,0.16)] bg-[#0D131A]/60 hover:border-[rgba(0,217,255,0.3)]'
                   }`}
-                  style={{
-                    boxShadow: isActive ? `0 0 16px ${stage.color}25` : 'none',
-                  }}
                   aria-pressed={isActive}
                 >
                   <span
                     className="font-mono text-[0.6875rem] font-bold mb-1"
-                    style={{ color: isActive ? stage.color : '#94a3b8' }}
+                    style={{ color: isActive ? stage.color : '#687687' }}
                   >
                     {stage.number}
                   </span>
                   <span
                     className={`font-display text-xs font-bold tracking-wider ${
-                      isActive ? 'text-white' : 'text-slate-400'
+                      isActive ? 'text-[#F4F7FA]' : 'text-[#A8B4C2]'
                     }`}
                   >
                     {stage.title}
@@ -205,25 +202,25 @@ export function Scene03EngineeringMindset() {
         {/* Active Stage Area: Left (Visualization) & Right (Rationale) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch mb-8">
           {/* Left Column: Visual Simulation */}
-          <div className="lg:col-span-7 rounded-2xl border border-white/10 bg-slate-950/80 p-6 sm:p-8 flex flex-col justify-between backdrop-blur-sm">
+          <div className="lg:col-span-7 rounded-2xl border border-[rgba(140,190,210,0.16)] bg-[#0D131A]/80 p-6 sm:p-8 flex flex-col justify-between backdrop-blur-sm">
             {/* Header */}
-            <div className="flex items-center justify-between border-b border-white/10 pb-4 mb-6">
+            <div className="flex items-center justify-between border-b border-[rgba(140,190,210,0.16)] pb-4 mb-6">
               <div className="flex items-center gap-2.5">
                 <span
                   className="w-2.5 h-2.5 rounded-full"
                   style={{ background: currentStage.color }}
                 />
-                <span className="font-mono text-xs font-bold tracking-wider text-slate-200 uppercase">
+                <span className="font-mono text-xs font-bold tracking-wider text-[#F4F7FA] uppercase">
                   PHASE {currentStage.number} &bull; {currentStage.title}
                 </span>
               </div>
-              <span className="font-mono text-[0.6875rem] text-slate-500 uppercase tracking-widest">
+              <span className="font-mono text-[0.6875rem] text-[#687687] uppercase tracking-widest">
                 METHODOLOGY
               </span>
             </div>
 
             {/* Dynamic Stage Representation Box */}
-            <div className="min-h-[200px] flex flex-col items-center justify-center text-center p-6 rounded-xl border border-white/5 bg-black/40 mb-6">
+            <div className="min-h-[200px] flex flex-col items-center justify-center text-center p-6 rounded-xl border border-[rgba(140,190,210,0.16)] bg-[#090D12]/70 mb-6">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentStage.id}
@@ -255,36 +252,36 @@ export function Scene03EngineeringMindset() {
             </div>
 
             {/* Focus Metrics Bar */}
-            <div className="grid grid-cols-3 gap-3 pt-4 border-t border-white/10">
+            <div className="grid grid-cols-3 gap-3 pt-4 border-t border-[rgba(140,190,210,0.16)]">
               {currentStage.metrics.map((m, i) => (
-                <div key={i} className="p-3 rounded-lg bg-white/[0.02] border border-white/5">
-                  <div className="font-mono text-[0.625rem] text-slate-500 uppercase tracking-wider">{m.label}</div>
-                  <div className="font-mono text-xs text-white font-bold mt-0.5">{m.value}</div>
+                <div key={i} className="p-3 rounded-lg bg-[#090D12]/80 border border-[rgba(140,190,210,0.16)]">
+                  <div className="font-mono text-[0.625rem] text-[#687687] uppercase tracking-wider">{m.label}</div>
+                  <div className="font-mono text-xs text-[#F4F7FA] font-bold mt-0.5">{m.value}</div>
                 </div>
               ))}
             </div>
           </div>
 
           {/* Right Column: Architectural Approach */}
-          <div className="lg:col-span-5 rounded-2xl border border-white/10 bg-slate-900/40 p-6 sm:p-8 flex flex-col justify-between backdrop-blur-sm">
+          <div className="lg:col-span-5 rounded-2xl border border-[rgba(140,190,210,0.16)] bg-[#0D131A]/80 p-6 sm:p-8 flex flex-col justify-between backdrop-blur-sm">
             <div>
-              <div className="font-mono text-xs font-bold text-cyan-400 uppercase tracking-wider mb-2">
+              <div className="font-mono text-xs font-bold text-[#00D9FF] uppercase tracking-wider mb-2">
                 ARCHITECTURAL APPROACH
               </div>
-              <h3 className="text-2xl font-display font-bold text-white mb-3">
+              <h3 className="text-2xl font-display font-bold text-[#F4F7FA] mb-3">
                 {currentStage.title}
               </h3>
-              <p className="text-slate-300 font-body text-sm leading-relaxed mb-6">
+              <p className="text-[#A8B4C2] font-body text-sm leading-relaxed mb-6">
                 {currentStage.description}
               </p>
             </div>
 
             {/* Objective Callout */}
-            <div className="p-4 rounded-xl border border-white/10 bg-black/40">
-              <span className="font-mono text-[0.625rem] text-slate-400 uppercase tracking-wider block mb-1 font-semibold">
+            <div className="p-4 rounded-xl border border-[rgba(140,190,210,0.16)] bg-[#090D12]/80">
+              <span className="font-mono text-[0.625rem] text-[#687687] uppercase tracking-wider block mb-1 font-semibold">
                 CORE OBJECTIVE
               </span>
-              <p className="font-body text-xs text-slate-300 leading-normal">
+              <p className="font-body text-xs text-[#F4F7FA] leading-normal">
                 {currentStage.tagline}
               </p>
             </div>
@@ -297,17 +294,17 @@ export function Scene03EngineeringMindset() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="p-5 rounded-xl border border-white/10 bg-slate-950/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-left"
+          className="p-5 rounded-xl border border-[rgba(140,190,210,0.16)] bg-[#0D131A]/70 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-left"
         >
           <div>
-            <span className="font-mono text-[0.6875rem] text-cyan-400 uppercase tracking-wider font-bold block mb-1">
+            <span className="font-mono text-[0.6875rem] text-[#00D9FF] uppercase tracking-wider font-bold block mb-1">
               GUIDING PRINCIPLE // STAGE {currentStage.number}
             </span>
-            <p className="font-body text-xs sm:text-sm text-slate-200 italic">
+            <p className="font-body text-xs sm:text-sm text-[#F4F7FA] italic">
               {currentStage.heuristic}
             </p>
           </div>
-          <span className="font-mono text-[0.6875rem] text-slate-500 self-start sm:self-center uppercase flex-shrink-0">
+          <span className="font-mono text-[0.6875rem] text-[#687687] self-start sm:self-center uppercase flex-shrink-0">
             ENGINEERING DISCIPLINE
           </span>
         </motion.div>

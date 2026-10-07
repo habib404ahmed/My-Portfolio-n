@@ -28,9 +28,9 @@ export function Scene01EnterSystem() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 px-3 py-1 mb-4 rounded-full border border-white/10 bg-white/[0.03] font-mono text-[0.6875rem] tracking-widest uppercase text-slate-400"
+          className="inline-flex items-center gap-2 px-3.5 py-1 mb-4 rounded-full border border-[rgba(140,190,210,0.16)] bg-[#0D131A]/60 font-mono text-[0.6875rem] tracking-widest uppercase text-[#A8B4C2]"
         >
-          <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
+          <span className="w-1.5 h-1.5 rounded-full bg-[#00D9FF]" />
           <span>SCENE 01 // ARCHITECTURAL FOUNDATION</span>
         </motion.div>
 
@@ -40,10 +40,10 @@ export function Scene01EnterSystem() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.05 }}
-          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-extrabold text-white tracking-tight uppercase leading-tight mb-4"
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-extrabold text-[#F4F7FA] tracking-tight uppercase leading-tight mb-4"
         >
           ENTER THE{' '}
-          <span className="text-cyan-400">
+          <span className="text-[#00D9FF]">
             ENGINEERING SYSTEM
           </span>
         </motion.h2>
@@ -54,7 +54,7 @@ export function Scene01EnterSystem() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-sm sm:text-base text-slate-300 font-body max-w-2xl leading-relaxed mb-12"
+          className="text-sm sm:text-base text-[#A8B4C2] font-body max-w-2xl leading-relaxed mb-12"
         >
           Step beyond the interface. Explore the software methodology, code quality standards,
           and core technical focus areas of an engineer dedicated to building reliable digital systems.
@@ -69,15 +69,15 @@ export function Scene01EnterSystem() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="card-3d-tilt p-5 rounded-xl border border-white/10 bg-slate-950/50 backdrop-blur-sm text-left flex flex-col justify-between min-h-[120px] hover:border-cyan-500/30 transition-all duration-300"
+              className="card-3d-tilt p-5 rounded-xl border border-[rgba(140,190,210,0.16)] bg-[#0D131A]/70 backdrop-blur-sm text-left flex flex-col justify-between min-h-[120px] hover:border-[rgba(0,217,255,0.35)] transition-all duration-300"
             >
               <div>
-                <span className="font-mono text-[0.6875rem] font-bold text-slate-500 block mb-1.5">{node.id}</span>
-                <div className="font-display text-sm font-bold text-slate-100 tracking-wide mb-2">
+                <span className="font-mono text-[0.6875rem] font-bold text-[#687687] block mb-1.5">{node.id}</span>
+                <div className="font-display text-sm font-bold text-[#F4F7FA] tracking-wide mb-2">
                   {node.title}
                 </div>
               </div>
-              <p className="font-body text-xs text-slate-400 leading-relaxed">
+              <p className="font-body text-xs text-[#A8B4C2] leading-relaxed">
                 {node.desc}
               </p>
             </motion.div>
@@ -90,22 +90,22 @@ export function Scene01EnterSystem() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="w-full max-w-2xl rounded-xl border border-white/10 bg-slate-950/80 p-5 font-mono text-left mb-12 shadow-xl overflow-hidden"
+          className="w-full max-w-2xl rounded-xl border border-[rgba(140,190,210,0.16)] bg-[#090D12]/90 p-5 font-mono text-left mb-12 shadow-xl overflow-hidden"
         >
-          <div className="flex items-center justify-between pb-3 mb-3 border-b border-white/10">
+          <div className="flex items-center justify-between pb-3 mb-3 border-b border-[rgba(140,190,210,0.16)]">
             <div className="flex items-center gap-2">
-              <div className="w-2.5 h-2.5 rounded-full bg-slate-700" />
-              <div className="w-2.5 h-2.5 rounded-full bg-slate-700" />
-              <div className="w-2.5 h-2.5 rounded-full bg-slate-700" />
+              <div className="w-2.5 h-2.5 rounded-full bg-[#111922]" />
+              <div className="w-2.5 h-2.5 rounded-full bg-[#111922]" />
+              <div className="w-2.5 h-2.5 rounded-full bg-[#111922]" />
             </div>
-            <span className="text-[0.6875rem] text-slate-400 uppercase tracking-widest font-semibold font-mono">
+            <span className="text-[0.6875rem] text-[#A8B4C2] uppercase tracking-widest font-semibold font-mono">
               agent.service.ts &mdash; AI Service Architecture
             </span>
           </div>
-          <pre className="overflow-x-auto text-[0.8125rem] leading-relaxed text-cyan-300/90 font-mono py-1">
+          <pre className="overflow-x-auto text-[0.8125rem] leading-relaxed text-[#38E8FF]/90 font-mono py-1">
             {CODE_FRAGMENTS.map((line, idx) => (
               <div key={idx} className="flex gap-4">
-                <span className="text-slate-600 select-none w-5 text-right font-mono">{idx + 1}</span>
+                <span className="text-[#687687] select-none w-5 text-right font-mono">{idx + 1}</span>
                 <span className="whitespace-pre">{line}</span>
               </div>
             ))}
@@ -119,10 +119,10 @@ export function Scene01EnterSystem() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/15 bg-white/[0.04] text-slate-200 font-display text-xs tracking-wider uppercase hover:bg-white/[0.08] hover:text-white transition-all duration-300 group"
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-[rgba(140,190,210,0.16)] bg-[#0D131A]/60 text-[#F4F7FA] font-display text-xs tracking-wider uppercase hover:border-[rgba(0,217,255,0.4)] hover:text-[#00D9FF] hover:bg-[#111922] transition-all duration-300 group cursor-pointer"
         >
           <span>PROCEED TO IDENTITY</span>
-          <svg className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <svg className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-y-0.5 text-[#00D9FF]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
           </svg>
         </motion.a>

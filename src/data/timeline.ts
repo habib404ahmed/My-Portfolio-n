@@ -24,7 +24,7 @@ export const timelineEvents: TimelineEvent[] = [
     description:
       'Pursuing BCA at Assam Down Town University with a dedicated academic and practical focus on Artificial Intelligence, Machine Learning, and core algorithm design. Achieved 8.05 SGPA (1st Sem) and 8.10 SGPA (2nd Sem).',
     type: 'foundation',
-    color: '#38bdf8',
+    color: '#6575FF',
   },
   {
     id: 'systems-experience',
@@ -35,7 +35,7 @@ export const timelineEvents: TimelineEvent[] = [
     description:
       'Hands-on practical experience diagnosing hardware faults, assembling and configuring PC builds, performing clean dual-boot OS installations (Windows/Linux), driver management, and system-level performance optimization.',
     type: 'foundation',
-    color: '#f59e0b',
+    color: '#6575FF',
   },
   {
     id: 'cybersecurity-learning',
@@ -46,7 +46,7 @@ export const timelineEvents: TimelineEvent[] = [
     description:
       'Independent exploration into penetration testing, Kali Linux terminal tools, network scanning, firewall defense, and vulnerability auditing across legal practice labs and security challenges.',
     type: 'foundation',
-    color: '#10b981',
+    color: '#00D9FF',
   },
   {
     id: 'ai-exploration',
@@ -58,7 +58,7 @@ export const timelineEvents: TimelineEvent[] = [
       'Earned Cisco certification exploring modern artificial intelligence foundations, machine learning mechanisms, multimodal systems, and practical agent applications.',
     type: 'certification',
     certificateRef: 'cisco-modern-ai',
-    color: '#a78bfa',
+    color: '#38E8FF',
   },
   {
     id: 'technical-growth',
@@ -76,7 +76,7 @@ export const timelineEvents: TimelineEvent[] = [
       'Campus Care',
       'Box Cricket',
     ],
-    color: '#06b6d4',
+    color: '#00D9FF',
   },
   {
     id: 'content-creator',
@@ -89,7 +89,7 @@ export const timelineEvents: TimelineEvent[] = [
     externalUrl: 'https://youtube.com/@king_of_kali_linux_404',
     externalLabel: 'Visit YouTube Channel',
     type: 'leadership',
-    color: '#f43f5e',
+    color: '#8B7CFF',
   },
   {
     id: 'ethical-hacking',
@@ -101,7 +101,7 @@ export const timelineEvents: TimelineEvent[] = [
       'Formally assessed and certified in ethical penetration testing standards, perimeter defenses, zero-trust validation, and security auditing.',
     type: 'certification',
     certificateRef: 'ethical-hacking',
-    color: '#10b981',
+    color: '#00D9FF',
   },
   {
     id: 'university-leadership',
@@ -113,7 +113,7 @@ export const timelineEvents: TimelineEvent[] = [
       'Recognized with a Certificate of Appreciation by Sunstone / Assam Down Town University for organizing university programs, managing event logistics, and supporting campus activities.',
     type: 'leadership',
     certificateRef: 'adtu-sunstone-appreciation',
-    color: '#f59e0b',
+    color: '#6575FF',
   },
   {
     id: 'future-chapter',
@@ -125,6 +125,6 @@ export const timelineEvents: TimelineEvent[] = [
       'The engineering path remains open and forward-looking. Continuing to build scalable software, contribute to impactful teams, and master cutting-edge systems.',
     type: 'future',
     isOpenNode: true,
-    color: '#e2e8f0',
+    color: '#F4F7FA',
   },
 ]

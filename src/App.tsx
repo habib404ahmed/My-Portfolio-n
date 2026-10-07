@@ -112,6 +112,10 @@ export default function App() {
       {/* Subtle film grain noise */}
       <div className="noise-overlay" aria-hidden="true" />
 
+      {/* Phase 8 Cinematic Vignette & Global Color Grade */}
+      <div className="cinematic-vignette" aria-hidden="true" />
+      <div className="cinematic-grade" aria-hidden="true" />
+
       {/* Custom cursor — desktop only */}
       <CustomCursor />
 

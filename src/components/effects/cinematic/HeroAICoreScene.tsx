@@ -8,6 +8,7 @@ import type { SectionId } from '@/hooks/useCinematicScroll'
 interface HeroAICoreSceneProps {
   activeSection: SectionId
   sectionProgress: number
+  scrollVelocity: number
   deviceClass: DeviceClass
   mouseX: number
   mouseY: number
@@ -16,6 +17,7 @@ interface HeroAICoreSceneProps {
 export function HeroAICoreScene({
   activeSection,
   sectionProgress,
+  scrollVelocity,
   deviceClass,
   mouseX,
   mouseY,
@@ -65,18 +67,21 @@ export function HeroAICoreScene({
     let targetY = heroPosition[1]
     let targetZ = 0
 
+    // Velocity increases energy rotation & scale breathing
+    const velocityEnergy = scrollVelocity * 0.4
+
     if (isHero) {
-      currentScaleFactor = 1.0
+      currentScaleFactor = 1.0 + velocityEnergy * 0.08
       targetX = heroPosition[0]
       targetY = heroPosition[1]
       targetZ = 0
     } else if (isTransitioning) {
-      // Contracts, moves to center x=0, and recedes deeper into space
+      // Event: Core compresses, moves to center x=0, and recedes deeper into space
       const t = sectionProgress
-      currentScaleFactor = Math.max(1.0 - t * 0.72, 0.2)
+      currentScaleFactor = Math.max(1.0 - t * 0.75, 0.18)
       targetX = heroPosition[0] * (1.0 - t)
       targetY = heroPosition[1] * (1.0 - t) - t * 0.2
-      targetZ = -t * 4.2
+      targetZ = -t * 4.6
     } else {
       currentScaleFactor = 0.001
       targetZ = -10
@@ -90,7 +95,9 @@ export function HeroAICoreScene({
     groupRef.current.position.y += (targetY - groupRef.current.position.y) * lerpSpeed
     groupRef.current.position.z += (targetZ - groupRef.current.position.z) * lerpSpeed
 
-    groupRef.current.rotation.y += delta * (isTransitioning ? 0.35 : 0.04)
+    // Dynamic rotational velocity: idle is calm, scroll increases energy
+    const baseRotSpeed = isTransitioning ? 0.4 : 0.035
+    groupRef.current.rotation.y += delta * (baseRotSpeed + velocityEnergy * 0.6)
   })
 
   if (!isVisible && groupRef.current?.scale.x === 0.001) return null

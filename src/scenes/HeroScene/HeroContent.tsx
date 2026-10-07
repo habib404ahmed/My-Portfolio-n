@@ -8,39 +8,123 @@ interface HeroContentProps {
   visible: boolean
 }
 
-// Deliberate cinematic sequence variants (Phase 6.9.3)
-const containerVariants: Variants = {
+// Phase 8 Cinematic Movie Trailer Timing & Hierarchy
+// 0.0s Scene calm -> 0.5s Camera pushes -> 0.8s 3D core emerges -> 1.1s Name reveals -> 1.4s Title -> 1.8s CTA/Visual peak
+const heroSceneContainer: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.15,
+      staggerChildren: 0.16,
+      delayChildren: 0.2,
     },
   },
 }
 
-const itemFadeUp: Variants = {
+// Location / System Status
+const metaVariants: Variants = {
+  hidden: { opacity: 0, y: 6, filter: 'blur(2px)' },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    transition: {
+      duration: 0.7,
+      ease: [0.16, 1, 0.3, 1],
+    },
+  },
+}
+
+// Canonical Name: Opacity + Tracking Reveal (Phase 8 Rule 8)
+const nameVariants: Variants = {
+  hidden: { opacity: 0, filter: 'blur(4px)', y: 6 },
+  visible: {
+    opacity: 1,
+    filter: 'blur(0px)',
+    y: 0,
+    transition: {
+      duration: 1.1,
+      ease: [0.16, 1, 0.3, 1],
+    },
+  },
+}
+
+// Primary Title: Vertical movement + sharp crisp snap
+const titleVariants: Variants = {
+  hidden: { opacity: 0, y: 12, filter: 'blur(2px)' },
+  visible: {
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    transition: {
+      duration: 0.75,
+      ease: [0.25, 1, 0.5, 1],
+    },
+  },
+}
+
+// Specializations: Staggered, extremely subtle scale/glow reveal
+const specializationVariants: Variants = {
+  hidden: { opacity: 0, scale: 0.98 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.65,
+      ease: [0.16, 1, 0.3, 1],
+    },
+  },
+}
+
+// Editorial Statement: Delayed soft reveal
+const descriptionVariants: Variants = {
+  hidden: { opacity: 0, y: 8 },
+  visible: {
+    opacity: 0.92,
+    y: 0,
+    transition: {
+      duration: 0.85,
+      ease: [0.16, 1, 0.3, 1],
+    },
+  },
+}
+
+// CTA Pair: Appears after the main visual has settled
+const ctaVariants: Variants = {
   hidden: { opacity: 0, y: 14 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.65,
-      ease: CINEMATIC_EASE,
+      duration: 0.7,
+      ease: [0.16, 1, 0.3, 1],
     },
   },
 }
 
+// Social links metadata row
+const socialVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 0.6,
+      ease: 'easeOut',
+    },
+  },
+}
+
+// Portrait: Controlled cinematic entrance with brightness normalization
 const portraitVariants: Variants = {
-  hidden: { opacity: 0, scale: 0.96 },
+  hidden: { opacity: 0, scale: 0.96, filter: 'brightness(0.7) blur(2px)' },
   visible: {
     opacity: 1,
     scale: 1,
+    filter: 'brightness(1) blur(0px)',
     transition: {
-      duration: 1.0,
-      ease: CINEMATIC_EASE,
-      delay: 0.35,
+      duration: 1.2,
+      ease: [0.16, 1, 0.3, 1],
+      delay: 0.4,
     },
   },
 }
@@ -114,68 +198,68 @@ export function HeroContent({ visible }: HeroContentProps) {
         <motion.div
           initial="hidden"
           animate={visible ? 'visible' : 'hidden'}
-          variants={containerVariants}
+          variants={heroSceneContainer}
           className="hero-copy col-span-12 md:col-span-7 lg:col-span-7 flex flex-col items-start text-left w-full max-w-[600px]"
         >
-          {/* 1. Location / Role Line (Rule 5: Zero left offset, exact alignment with name) */}
+          {/* 1. Location / Role Line */}
           <motion.div
-            variants={itemFadeUp}
-            className="w-full flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-xs text-slate-400 tracking-[0.2em] uppercase mb-5"
+            variants={metaVariants}
+            className="w-full flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-xs text-[#A8B4C2] tracking-[0.2em] uppercase mb-5"
           >
-            <span className="w-1.5 h-1.5 rotate-45 bg-cyan-400/90 inline-block flex-shrink-0" />
+            <span className="w-1.5 h-1.5 rotate-45 bg-[#00D9FF] inline-block flex-shrink-0" />
             <span className="whitespace-nowrap">SOFTWARE ENGINEER</span>
-            <span className="text-slate-600">&bull;</span>
+            <span className="text-[#687687]">&bull;</span>
             <span className="whitespace-nowrap">BONGAIGAON, ASSAM, INDIA</span>
           </motion.div>
 
-          {/* 2. Canonical Name (Rules 6, 7: Responsive typography, contained in column) */}
+          {/* 2. Canonical Name (Movie Title Sequence Tracking Reveal) */}
           <motion.h1
-            variants={itemFadeUp}
+            variants={nameVariants}
             aria-label={profile.name.full}
             className="w-full tracking-tight select-none mb-4"
           >
-            <span className="block font-display text-[clamp(2.25rem,3.8vw,3.6rem)] font-black text-white uppercase leading-[0.95]">
+            <span className="block font-display text-[clamp(2.25rem,3.8vw,3.6rem)] font-black text-[#F4F7FA] uppercase leading-[0.95] tracking-cinematic">
               {profile.name.display[0]}
             </span>
-            <span className="block font-display text-[clamp(2.25rem,3.8vw,3.6rem)] font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-300 to-cyan-200 uppercase leading-[0.95] drop-shadow-[0_0_24px_rgba(6,182,212,0.18)]">
+            <span className="block font-display text-[clamp(2.25rem,3.8vw,3.6rem)] font-black text-transparent bg-clip-text bg-gradient-to-r from-[#00D9FF] via-[#38E8FF] to-[#F4F7FA] uppercase leading-[0.95] drop-shadow-[0_0_24px_rgba(0,217,255,0.22)]">
               {profile.name.display[1]}
             </span>
           </motion.h1>
 
-          {/* 3. Primary Professional Title (Rule 9: Aligned with name, no indentation) */}
+          {/* 3. Primary Professional Title (Sharp Vertical Reveal) */}
           <motion.div
-            variants={itemFadeUp}
-            className="w-full font-mono text-sm sm:text-base font-bold text-slate-100 tracking-[0.25em] uppercase mb-2.5"
+            variants={titleVariants}
+            className="w-full font-mono text-sm sm:text-base font-bold text-[#F4F7FA] tracking-[0.25em] uppercase mb-2.5"
           >
             {profile.title.toUpperCase()}
           </motion.div>
 
-          {/* 4. Specialization Line (Rule 10: Inline-flex wrap structure, controlled gap) */}
+          {/* 4. Specialization Line (Staggered Subtle Scale Reveal) */}
           <motion.div
-            variants={itemFadeUp}
-            className="w-full flex flex-wrap items-center gap-x-2.5 gap-y-1 font-mono text-xs sm:text-sm tracking-wider uppercase text-cyan-300/90 mb-5"
+            variants={specializationVariants}
+            className="w-full flex flex-wrap items-center gap-x-2.5 gap-y-1 font-mono text-xs sm:text-sm tracking-wider uppercase text-[#38E8FF]/95 mb-5"
           >
-            <span className="w-6 h-[1.5px] bg-gradient-to-r from-cyan-400 to-transparent flex-shrink-0" />
+            <span className="w-6 h-[1.5px] bg-gradient-to-r from-[#00D9FF] to-transparent flex-shrink-0" />
             <span>AI/ML ENGINEERING</span>
-            <span className="text-cyan-500/50">&bull;</span>
+            <span className="text-[#007C99]">&bull;</span>
             <span>FULL-STACK DEVELOPMENT</span>
-            <span className="text-cyan-500/50">&bull;</span>
+            <span className="text-[#007C99]">&bull;</span>
             <span>CYBERSECURITY &amp; ETHICAL HACKING</span>
           </motion.div>
 
-          {/* 5. Editorial Positioning Statement (Rule 11: Controlled 2-3 line block, max-w 540px) */}
+          {/* 5. Editorial Positioning Statement (Delayed Soft Reveal) */}
           <motion.p
-            variants={itemFadeUp}
-            className="w-full max-w-[540px] font-body text-[0.9375rem] sm:text-base text-slate-300/90 leading-[1.6] mb-7"
+            variants={descriptionVariants}
+            className="w-full max-w-[540px] font-body text-[0.9375rem] sm:text-base text-[#A8B4C2] leading-[1.6] mb-7"
           >
             {profile.tagline}
           </motion.p>
 
-          {/* 6. CTA Container (Rules 12-16, 35: Matched pair, equal height, responsive min-width, aligned left) */}
-          <motion.div variants={itemFadeUp} className="hero-actions w-full flex flex-wrap items-center gap-3.5 mb-5">
+          {/* 6. CTA Container (Settled Film Trailer CTA Reveal) */}
+          <motion.div variants={ctaVariants} className="hero-actions w-full flex flex-wrap items-center gap-3.5 mb-5">
             <button
               onClick={handleExplore}
-              className="h-[52px] sm:h-[54px] min-w-[180px] sm:min-w-[195px] lg:min-w-[220px] px-5 sm:px-6 rounded-sm bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-display text-xs sm:text-sm font-bold tracking-wider uppercase transition-all duration-300 hover:-translate-y-0.5 flex items-center justify-center gap-2.5 shadow-[0_4px_16px_rgba(6,182,212,0.22)] active:translate-y-0 cursor-pointer"
+              className="h-[52px] sm:h-[54px] min-w-[180px] sm:min-w-[195px] lg:min-w-[220px] px-5 sm:px-6 rounded-sm bg-[#00D9FF] hover:bg-[#38E8FF] text-[#050608] font-display text-xs sm:text-sm font-bold tracking-wider uppercase transition-all duration-300 hover:-translate-y-0.5 flex items-center justify-center gap-2.5 shadow-[0_4px_20px_rgba(0,217,255,0.28)] active:translate-y-0 cursor-pointer"
               aria-label="Explore engineering work"
             >
               <span>Explore My Work</span>
@@ -186,7 +270,7 @@ export function HeroContent({ visible }: HeroContentProps) {
 
             <button
               onClick={handleResume}
-              className="h-[52px] sm:h-[54px] min-w-[180px] sm:min-w-[195px] lg:min-w-[220px] px-5 sm:px-6 rounded-sm border border-white/20 hover:border-cyan-400/70 bg-slate-900/60 hover:bg-slate-900/90 text-slate-100 hover:text-cyan-300 font-display text-xs sm:text-sm font-semibold tracking-wider uppercase transition-all duration-300 hover:-translate-y-0.5 flex items-center justify-center gap-2.5 backdrop-blur-sm active:translate-y-0 cursor-pointer"
+              className="h-[52px] sm:h-[54px] min-w-[180px] sm:min-w-[195px] lg:min-w-[220px] px-5 sm:px-6 rounded-sm border border-[rgba(140,190,210,0.16)] hover:border-[rgba(0,217,255,0.45)] bg-[#0D131A]/80 hover:bg-[#111922] text-[#F4F7FA] hover:text-[#00D9FF] font-display text-xs sm:text-sm font-semibold tracking-wider uppercase transition-all duration-300 hover:-translate-y-0.5 flex items-center justify-center gap-2.5 backdrop-blur-sm active:translate-y-0 cursor-pointer"
               aria-label="Download resume PDF"
             >
               <svg width="13" height="13" viewBox="0 0 14 14" fill="none" className="flex-shrink-0">
@@ -196,8 +280,8 @@ export function HeroContent({ visible }: HeroContentProps) {
             </button>
           </motion.div>
 
-          {/* 7. Clean Metadata Social Row (Rule 17: Left-aligned with hero copy, consistent spacing) */}
-          <motion.div variants={itemFadeUp} className="hero-socials w-full flex items-center gap-4 pt-1">
+          {/* 7. Clean Metadata Social Row */}
+          <motion.div variants={socialVariants} className="hero-socials w-full flex items-center gap-4 pt-1">
             <div className="flex items-center gap-3">
               {socialLinks.map(({ label, href, icon }) => (
                 <a
@@ -206,7 +290,7 @@ export function HeroContent({ visible }: HeroContentProps) {
                   target={href.startsWith('http') ? '_blank' : undefined}
                   rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
                   aria-label={label}
-                  className="w-8 h-8 rounded flex items-center justify-center text-slate-400 hover:text-cyan-400 hover:bg-white/5 transition-all duration-200 hover:-translate-y-0.5"
+                  className="w-8 h-8 rounded flex items-center justify-center text-[#A8B4C2] hover:text-[#00D9FF] hover:bg-white/5 transition-all duration-200 hover:-translate-y-0.5"
                 >
                   {icon}
                 </a>
@@ -215,14 +299,14 @@ export function HeroContent({ visible }: HeroContentProps) {
             <div className="w-[1px] h-3.5 bg-white/15" />
             <a
               href={`mailto:${profile.contact.email}`}
-              className="font-mono text-xs text-slate-400 hover:text-cyan-300 transition-colors tracking-wide"
+              className="font-mono text-xs text-[#A8B4C2] hover:text-[#00D9FF] transition-colors tracking-wide"
             >
               {profile.contact.email}
             </a>
           </motion.div>
         </motion.div>
 
-        {/* Right Column: Hero Portrait Asset (Rules 20, 21, 22: Isolated right column, 360-380px max) */}
+        {/* Right Column: Hero Portrait Asset */}
         <motion.div
           initial="hidden"
           animate={visible ? 'visible' : 'hidden'}
@@ -247,64 +331,64 @@ export function HeroContent({ visible }: HeroContentProps) {
       <motion.div
         initial="hidden"
         animate={visible ? 'visible' : 'hidden'}
-        variants={containerVariants}
+        variants={heroSceneContainer}
         className="flex md:hidden flex-col items-center text-center pt-4 pb-12 space-y-3 w-full"
       >
         {/* 1. Location Line */}
         <motion.div
-          variants={itemFadeUp}
-          className="w-full flex items-center justify-center gap-1.5 font-mono text-[0.625rem] text-slate-400 tracking-[0.14em] uppercase whitespace-nowrap"
+          variants={metaVariants}
+          className="w-full flex items-center justify-center gap-1.5 font-mono text-[0.625rem] text-[#A8B4C2] tracking-[0.14em] uppercase whitespace-nowrap"
         >
-          <span className="w-1.5 h-1.5 rotate-45 bg-cyan-400/90 inline-block flex-shrink-0" />
+          <span className="w-1.5 h-1.5 rotate-45 bg-[#00D9FF] inline-block flex-shrink-0" />
           <span>SOFTWARE ENGINEER</span>
-          <span className="text-slate-600">&bull;</span>
+          <span className="text-[#687687]">&bull;</span>
           <span>BONGAIGAON, ASSAM, INDIA</span>
         </motion.div>
 
         {/* 2. Name */}
         <motion.h1
-          variants={itemFadeUp}
+          variants={nameVariants}
           aria-label={profile.name.full}
           className="w-full tracking-tight select-none"
         >
-          <span className="block font-display text-3xl sm:text-4xl font-black text-white uppercase leading-[0.95]">
+          <span className="block font-display text-3xl sm:text-4xl font-black text-[#F4F7FA] uppercase leading-[0.95]">
             {profile.name.display[0]}
           </span>
-          <span className="block font-display text-3xl sm:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-300 to-cyan-200 uppercase leading-[0.95] drop-shadow-[0_0_20px_rgba(6,182,212,0.2)]">
+          <span className="block font-display text-3xl sm:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#00D9FF] via-[#38E8FF] to-[#F4F7FA] uppercase leading-[0.95] drop-shadow-[0_0_20px_rgba(0,217,255,0.22)]">
             {profile.name.display[1]}
           </span>
         </motion.h1>
 
         {/* 3. Title */}
         <motion.div
-          variants={itemFadeUp}
-          className="w-full font-mono text-xs font-bold text-slate-100 tracking-[0.22em] uppercase"
+          variants={titleVariants}
+          className="w-full font-mono text-xs font-bold text-[#F4F7FA] tracking-[0.22em] uppercase"
         >
           {profile.title.toUpperCase()}
         </motion.div>
 
         {/* 4. Specialization Line */}
         <motion.div
-          variants={itemFadeUp}
-          className="w-full font-mono text-[0.6875rem] tracking-wider uppercase text-cyan-300/90 flex flex-wrap items-center justify-center gap-1.5 max-w-xs"
+          variants={specializationVariants}
+          className="w-full font-mono text-[0.6875rem] tracking-wider uppercase text-[#38E8FF]/90 flex flex-wrap items-center justify-center gap-1.5 max-w-xs"
         >
           <span>AI/ML</span>
-          <span className="text-cyan-500/50">&bull;</span>
+          <span className="text-[#007C99]">&bull;</span>
           <span>FULL-STACK</span>
-          <span className="text-cyan-500/50">&bull;</span>
+          <span className="text-[#007C99]">&bull;</span>
           <span>CYBERSECURITY</span>
         </motion.div>
 
         {/* 5. Description */}
         <motion.p
-          variants={itemFadeUp}
-          className="w-full font-body text-xs sm:text-sm text-slate-300/90 leading-relaxed max-w-sm px-2"
+          variants={descriptionVariants}
+          className="w-full font-body text-xs sm:text-sm text-[#A8B4C2] leading-relaxed max-w-sm px-2"
         >
           {profile.tagline}
         </motion.p>
 
-        {/* 6. Portrait (Rule 29: Controlled max-width, natural aspect ratio, no side-by-side) */}
-        <motion.div variants={itemFadeUp} className="w-full flex justify-center py-2 max-w-[270px]">
+        {/* 6. Portrait */}
+        <motion.div variants={portraitVariants} className="w-full flex justify-center py-2 max-w-[270px]">
           <ProfilePhoto
             visible={visible}
             size="standard"
@@ -312,11 +396,11 @@ export function HeroContent({ visible }: HeroContentProps) {
           />
         </motion.div>
 
-        {/* 7 & 8. Matched CTA Buttons (Rule 30: Equal width, matched height, full width on small screens) */}
-        <motion.div variants={itemFadeUp} className="flex flex-col sm:flex-row items-center gap-2.5 w-full max-w-xs pt-1">
+        {/* 7 & 8. Matched CTA Buttons */}
+        <motion.div variants={ctaVariants} className="flex flex-col sm:flex-row items-center gap-2.5 w-full max-w-xs pt-1">
           <button
             onClick={handleExplore}
-            className="w-full h-[50px] px-5 rounded-sm bg-cyan-400 hover:bg-cyan-300 text-slate-950 font-display text-xs font-bold tracking-wider uppercase transition-all duration-300 flex items-center justify-center gap-2 shadow-[0_4px_16px_rgba(6,182,212,0.2)] cursor-pointer"
+            className="w-full h-[50px] px-5 rounded-sm bg-[#00D9FF] hover:bg-[#38E8FF] text-[#050608] font-display text-xs font-bold tracking-wider uppercase transition-all duration-300 flex items-center justify-center gap-2 shadow-[0_4px_18px_rgba(0,217,255,0.24)] cursor-pointer"
             aria-label="Explore engineering work"
           >
             <span>Explore My Work</span>
@@ -327,7 +411,7 @@ export function HeroContent({ visible }: HeroContentProps) {
 
           <button
             onClick={handleResume}
-            className="w-full h-[50px] px-5 rounded-sm border border-white/20 hover:border-cyan-400/70 bg-slate-900/60 text-slate-100 hover:text-cyan-300 font-display text-xs font-semibold tracking-wider uppercase transition-all duration-300 flex items-center justify-center gap-2 backdrop-blur-sm cursor-pointer"
+            className="w-full h-[50px] px-5 rounded-sm border border-[rgba(140,190,210,0.16)] hover:border-[rgba(0,217,255,0.45)] bg-[#0D131A]/80 text-[#F4F7FA] hover:text-[#00D9FF] font-display text-xs font-semibold tracking-wider uppercase transition-all duration-300 flex items-center justify-center gap-2 backdrop-blur-sm cursor-pointer"
             aria-label="Download resume PDF"
           >
             <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
@@ -338,7 +422,7 @@ export function HeroContent({ visible }: HeroContentProps) {
         </motion.div>
 
         {/* 9. Social Links + Email */}
-        <motion.div variants={itemFadeUp} className="flex flex-col items-center gap-2 pt-1.5">
+        <motion.div variants={socialVariants} className="flex flex-col items-center gap-2 pt-1.5">
           <div className="flex items-center gap-3">
             {socialLinks.map(({ label, href, icon }) => (
               <a
@@ -347,7 +431,7 @@ export function HeroContent({ visible }: HeroContentProps) {
                 target={href.startsWith('http') ? '_blank' : undefined}
                 rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
                 aria-label={label}
-                className="w-8 h-8 rounded flex items-center justify-center text-slate-400 hover:text-cyan-400 hover:bg-white/5 transition-colors"
+                className="w-8 h-8 rounded flex items-center justify-center text-[#A8B4C2] hover:text-[#00D9FF] hover:bg-white/5 transition-colors"
               >
                 {icon}
               </a>
@@ -355,7 +439,7 @@ export function HeroContent({ visible }: HeroContentProps) {
           </div>
           <a
             href={`mailto:${profile.contact.email}`}
-            className="font-mono text-[0.6875rem] text-slate-400 hover:text-cyan-300 transition-colors tracking-wide"
+            className="font-mono text-[0.6875rem] text-[#A8B4C2] hover:text-[#00D9FF] transition-colors tracking-wide"
           >
             {profile.contact.email}
           </a>

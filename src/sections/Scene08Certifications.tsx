@@ -13,21 +13,21 @@ interface NodeTheme {
 
 const THEMES: Record<string, NodeTheme> = {
   ai: {
-    color: '#38bdf8',
-    subtleGlow: 'rgba(56, 189, 248, 0.25)',
-    environmentBg: 'radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.08) 0%, transparent 70%)',
+    color: '#38E8FF',
+    subtleGlow: 'rgba(56, 232, 255, 0.22)',
+    environmentBg: 'radial-gradient(circle at 50% 50%, rgba(56, 232, 255, 0.08) 0%, transparent 70%)',
     nodeType: 'AI_NETWORK_NODE',
   },
   security: {
-    color: '#10b981',
-    subtleGlow: 'rgba(16, 185, 129, 0.25)',
-    environmentBg: 'radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.08) 0%, transparent 70%)',
+    color: '#00D9FF',
+    subtleGlow: 'rgba(0, 217, 255, 0.22)',
+    environmentBg: 'radial-gradient(circle at 50% 50%, rgba(0, 217, 255, 0.08) 0%, transparent 70%)',
     nodeType: 'SECURITY_PERIMETER',
   },
   recognition: {
-    color: '#f59e0b',
-    subtleGlow: 'rgba(245, 158, 11, 0.25)',
-    environmentBg: 'radial-gradient(circle at 50% 50%, rgba(245, 158, 11, 0.09) 0%, transparent 70%)',
+    color: '#6575FF',
+    subtleGlow: 'rgba(101, 117, 255, 0.22)',
+    environmentBg: 'radial-gradient(circle at 50% 50%, rgba(101, 117, 255, 0.08) 0%, transparent 70%)',
     nodeType: 'HONOR_DOCUMENT',
   },
 }
@@ -41,7 +41,7 @@ export function Scene08Certifications() {
   ] || THEMES.ai
 
   return (
-    <SectionTransition id="certifications" ariaLabel="Verified Certifications" className="border-b border-white/5">
+    <SectionTransition id="certifications" ariaLabel="Verified Certifications" className="border-b border-[rgba(140,190,210,0.16)]">
       <div className="page-container relative">
         {/* Dynamic Spatial Environment Backdrop (Rule 08) */}
         <div
@@ -50,21 +50,21 @@ export function Scene08Certifications() {
           aria-hidden="true"
         />
 
-        {/* ─── RULE 07: CONTROLLED HIERARCHY & VERIFIED COUNTER ─── */}
+        {/* ─── CONTROLLED HIERARCHY & VERIFIED COUNTER ─── */}
         <div className="text-center max-w-2xl mx-auto mb-12">
           {/* Small Scene Label */}
-          <div className="inline-flex items-center gap-2 font-mono text-[0.6875rem] uppercase tracking-[0.25em] text-cyan-400 mb-3 px-3 py-1 rounded-full border border-cyan-500/20 bg-cyan-950/20">
-            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+          <div className="inline-flex items-center gap-2 font-mono text-[0.6875rem] uppercase tracking-[0.25em] text-[#00D9FF] mb-3 px-3 py-1 rounded-full border border-[rgba(0,217,255,0.25)] bg-[#00D9FF]/[0.05]">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#00D9FF] animate-pulse" />
             <span>SCENE 10 // CREDENTIAL CONSTELLATION</span>
           </div>
 
           {/* Controlled heading */}
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold text-white tracking-tight uppercase mb-3">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold text-[#F4F7FA] tracking-tight uppercase mb-3">
             CERTIFICATIONS
           </h2>
 
           {/* Small supporting text */}
-          <p className="font-mono text-xs sm:text-sm text-slate-400 tracking-wide">
+          <p className="font-mono text-xs sm:text-sm text-[#A8B4C2] tracking-wide">
             Technical learning that shaped my engineering journey.
           </p>
         </div>
@@ -87,8 +87,8 @@ export function Scene08Certifications() {
                 onClick={() => setActiveCert(cert)}
                 className={`relative group rounded-2xl border transition-all duration-300 p-6 sm:p-7 flex flex-col justify-between cursor-pointer select-none ${
                   isFocused
-                    ? 'border-white/40 bg-slate-900/90 shadow-xl'
-                    : 'border-white/10 bg-slate-950/60 hover:border-white/25'
+                    ? 'border-[#00D9FF]/60 bg-[#111922] shadow-xl'
+                    : 'border-[rgba(140,190,210,0.16)] bg-[#0D131A]/70 hover:border-[rgba(0,217,255,0.3)]'
                 }`}
                 style={{
                   boxShadow: isFocused ? `0 0 35px ${theme.subtleGlow}` : 'none',

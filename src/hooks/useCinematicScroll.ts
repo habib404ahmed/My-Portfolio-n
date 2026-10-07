@@ -19,6 +19,7 @@ export interface CinematicScrollState {
   scrollProgress: number // Overall 0 -> 1
   sectionProgress: number // 0 -> 1 within active section
   scrollY: number
+  scrollVelocity: number // Clamped 0 -> 1 for subtle cinematic momentum
   mouse: { x: number; y: number }
 }
 
@@ -42,9 +43,13 @@ export function useCinematicScroll(): CinematicScrollState {
   const [scrollProgress, setScrollProgress] = useState(0)
   const [sectionProgress, setSectionProgress] = useState(0)
   const [scrollY, setScrollY] = useState(0)
+  const [scrollVelocity, setScrollVelocity] = useState(0)
   const [mouse, setMouse] = useState({ x: 0, y: 0 })
 
   const rafId = useRef<number | null>(null)
+  const lastScrollY = useRef(0)
+  const lastTime = useRef(performance.now())
+  const decayTimeout = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   // Mouse parallax handler
   useEffect(() => {
@@ -58,9 +63,20 @@ export function useCinematicScroll(): CinematicScrollState {
     return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [])
 
-  // Optimized scroll calculations
+  // Optimized scroll & velocity calculations
   const calculateScroll = useCallback(() => {
     const y = window.scrollY
+    const now = performance.now()
+    const dt = Math.max(now - lastTime.current, 8)
+    const dy = Math.abs(y - lastScrollY.current)
+
+    // Calculate normalized velocity (clamped to 0..1)
+    const rawVel = dy / dt // px/ms
+    const targetVel = Math.min(rawVel / 3.0, 1.0)
+    setScrollVelocity((prev) => prev * 0.6 + targetVel * 0.4)
+
+    lastScrollY.current = y
+    lastTime.current = now
     setScrollY(y)
 
     const docHeight = document.documentElement.scrollHeight - window.innerHeight
@@ -68,7 +84,7 @@ export function useCinematicScroll(): CinematicScrollState {
     setScrollProgress(globalProgress)
 
     // Determine current section by viewport intersection
-    const middleY = y + window.innerHeight * 0.4
+    const middleY = y + window.innerHeight * 0.45
     let currentSec: SectionId = 'hero'
     let secProg = 0
 
@@ -91,6 +107,12 @@ export function useCinematicScroll(): CinematicScrollState {
 
     setActiveSection(currentSec)
     setSectionProgress(secProg)
+
+    // Schedule smooth decay to zero when scroll ceases
+    if (decayTimeout.current) clearTimeout(decayTimeout.current)
+    decayTimeout.current = setTimeout(() => {
+      setScrollVelocity(0)
+    }, 150)
   }, [])
 
   useEffect(() => {
@@ -105,6 +127,7 @@ export function useCinematicScroll(): CinematicScrollState {
     return () => {
       window.removeEventListener('scroll', onScroll)
       if (rafId.current) cancelAnimationFrame(rafId.current)
+      if (decayTimeout.current) clearTimeout(decayTimeout.current)
     }
   }, [calculateScroll])
 
@@ -113,6 +136,7 @@ export function useCinematicScroll(): CinematicScrollState {
     scrollProgress,
     sectionProgress,
     scrollY,
+    scrollVelocity,
     mouse,
   }
 }

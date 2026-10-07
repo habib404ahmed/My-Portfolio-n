@@ -14,47 +14,47 @@ interface EnvironmentStyle {
 
 const ENVIRONMENTS: Record<string, EnvironmentStyle> = {
   'bca-foundation': {
-    ambientBg: 'radial-gradient(circle at 60% 40%, rgba(56, 189, 248, 0.08) 0%, transparent 70%)',
+    ambientBg: 'radial-gradient(circle at 60% 40%, rgba(101, 117, 255, 0.12) 0%, transparent 70%)',
     gridType: 'ACADEMIC_FOUNDATION',
     visualElements: 'Core algorithms, discrete math & data structures at Assam Down Town University',
   },
   'systems-experience': {
-    ambientBg: 'radial-gradient(circle at 60% 40%, rgba(245, 158, 11, 0.1) 0%, transparent 70%)',
+    ambientBg: 'radial-gradient(circle at 60% 40%, rgba(101, 117, 255, 0.10) 0%, transparent 70%)',
     gridType: 'SYSTEMS_DIAGNOSTICS',
     visualElements: 'Hardware architecture, PC configuration, dual-boot setups & system optimization',
   },
   'cybersecurity-learning': {
-    ambientBg: 'radial-gradient(circle at 60% 40%, rgba(16, 185, 129, 0.1) 0%, transparent 70%)',
+    ambientBg: 'radial-gradient(circle at 60% 40%, rgba(0, 217, 255, 0.12) 0%, transparent 70%)',
     gridType: 'SECURITY_LABS',
     visualElements: 'Kali Linux terminal mastery, penetration testing tools, Nmap & network defense',
   },
   'ai-exploration': {
-    ambientBg: 'radial-gradient(circle at 60% 40%, rgba(167, 139, 250, 0.12) 0%, transparent 70%)',
+    ambientBg: 'radial-gradient(circle at 60% 40%, rgba(56, 232, 255, 0.12) 0%, transparent 70%)',
     gridType: 'NEURAL_STREAMS',
     visualElements: 'Cisco modern AI foundations, Python machine learning, RAG & agent architectures',
   },
   'technical-growth': {
-    ambientBg: 'radial-gradient(circle at 60% 40%, rgba(6, 182, 212, 0.1) 0%, transparent 70%)',
+    ambientBg: 'radial-gradient(circle at 60% 40%, rgba(0, 217, 255, 0.14) 0%, transparent 70%)',
     gridType: 'PRODUCTION_SYSTEMS',
     visualElements: 'SENTRA passive SOC, multi-agent frameworks, Campus Care & UniBox platforms',
   },
   'content-creator': {
-    ambientBg: 'radial-gradient(circle at 60% 40%, rgba(244, 63, 94, 0.12) 0%, transparent 70%)',
+    ambientBg: 'radial-gradient(circle at 60% 40%, rgba(139, 124, 255, 0.12) 0%, transparent 70%)',
     gridType: 'TECHNICAL_BROADCAST',
     visualElements: 'King of Kali Linux educational channel & practical cybersecurity knowledge sharing',
   },
   'ethical-hacking': {
-    ambientBg: 'radial-gradient(circle at 60% 40%, rgba(16, 185, 129, 0.12) 0%, transparent 70%)',
+    ambientBg: 'radial-gradient(circle at 60% 40%, rgba(0, 217, 255, 0.12) 0%, transparent 70%)',
     gridType: 'CERTIFIED_AUDIT',
     visualElements: 'Pitronix Solutions certified ethical penetration testing & defense standards',
   },
   'university-leadership': {
-    ambientBg: 'radial-gradient(circle at 60% 40%, rgba(245, 158, 11, 0.14) 0%, transparent 75%)',
+    ambientBg: 'radial-gradient(circle at 60% 40%, rgba(101, 117, 255, 0.12) 0%, transparent 75%)',
     gridType: 'CAMPUS_COORDINATION',
     visualElements: 'Assam Down Town University Certificate of Appreciation & program organization',
   },
   'future-chapter': {
-    ambientBg: 'radial-gradient(circle at 50% 30%, rgba(226, 232, 240, 0.08) 0%, transparent 80%)',
+    ambientBg: 'radial-gradient(circle at 50% 30%, rgba(244, 247, 250, 0.08) 0%, transparent 80%)',
     gridType: 'OPEN_HORIZON',
     visualElements: 'Expansive digital frontier, lifelong engineering mastery & scalable impact',
   },

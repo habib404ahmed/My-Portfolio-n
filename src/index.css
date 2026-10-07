@@ -6,43 +6,46 @@
    DESIGN TOKENS
    ============================================================ */
 :root {
-  /* Core palette */
-  --color-void: #050507;
-  --color-deep: #080a0f;
-  --color-surface: #0d1117;
-  --color-elevated: #141822;
-  --color-border: rgba(255, 255, 255, 0.06);
-  --color-border-accent: rgba(6, 182, 212, 0.2);
+  /* Phase 8 Cinematic Color System */
+  --color-void: #050608;
+  --color-deep: #090D12;
+  --color-surface: #0D131A;
+  --color-elevated: #111922;
+  --color-border: rgba(140, 190, 210, 0.16);
+  --color-border-strong: rgba(0, 217, 255, 0.35);
+  --color-border-accent: rgba(0, 217, 255, 0.28);
 
-  /* Accent - electric cyan primary */
-  --color-cyan: #06b6d4;
-  --color-cyan-dim: rgba(6, 182, 212, 0.15);
-  --color-cyan-glow: rgba(6, 182, 212, 0.35);
+  /* Primary Accent: Reserved for Interaction, System Energy, and Focus (7%) */
+  --color-cyan: #00D9FF;
+  --color-cyan-bright: #38E8FF;
+  --color-cyan-dark: #007C99;
+  --color-cyan-dim: rgba(0, 217, 255, 0.12);
+  --color-cyan-glow: rgba(0, 217, 255, 0.32);
 
-  /* Accent - cool blue */
-  --color-blue: #3b82f6;
-  --color-blue-dim: rgba(59, 130, 246, 0.12);
+  /* Secondary Accent: Cool Blue (20%) & Atmospheric Violet (3%) */
+  --color-blue: #6575FF;
+  --color-blue-dim: rgba(101, 117, 255, 0.12);
+  --color-violet: #8B7CFF;
+  --color-violet-dim: rgba(139, 124, 255, 0.12);
 
-  /* Accent - violet */
-  --color-violet: #7c3aed;
-  --color-violet-dim: rgba(124, 58, 237, 0.12);
-
-  /* Accent - emerald (security) */
+  /* Emerald (Security status indicator) */
   --color-emerald: #10b981;
 
-  /* Text */
-  --color-text-primary: #f0f4f8;
-  --color-text-secondary: #8892a4;
-  --color-text-muted: #4a5568;
-  --color-text-accent: #06b6d4;
+  /* Typography Colors */
+  --color-text-primary: #F4F7FA;
+  --color-text-secondary: #A8B4C2;
+  --color-text-muted: #687687;
+  --color-text-accent: #00D9FF;
 
   /* Typography */
   --font-display: 'Space Grotesk', 'Inter', sans-serif;
   --font-body: 'Inter', sans-serif;
   --font-mono: 'Space Mono', monospace;
 
-  /* Animation timing */
+  /* Cinematic Animation Timing & Curves (Phase 8) */
   --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-trailer-in: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-trailer-out: cubic-bezier(0.7, 0, 0.84, 0);
   --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
   --ease-in-out: cubic-bezier(0.45, 0, 0.55, 1);
 
@@ -358,35 +361,35 @@ body {
 }
 
 /* ============================================================
-   GLOW ACCENTS (50% RESTRAINED FOR READABILITY)
+   GLOW ACCENTS (PHASE 8: RESTRICTED TO KEY SYSTEM STATES)
    ============================================================ */
 .glow-cyan {
-  text-shadow: 0 0 14px rgba(6, 182, 212, 0.3), 0 0 24px rgba(6, 182, 212, 0.1);
+  text-shadow: 0 0 16px rgba(0, 217, 255, 0.32), 0 0 28px rgba(0, 217, 255, 0.12);
 }
 
 .glow-white {
-  text-shadow: 0 0 12px rgba(255, 255, 255, 0.15);
+  text-shadow: 0 0 12px rgba(244, 247, 250, 0.16);
 }
 
 .box-glow-cyan {
-  box-shadow: 0 0 14px rgba(6, 182, 212, 0.08), 0 0 1px rgba(6, 182, 212, 0.25) inset;
+  box-shadow: 0 0 16px rgba(0, 217, 255, 0.12), 0 0 1px rgba(0, 217, 255, 0.35) inset;
 }
 
 /* ============================================================
-   GLASS SURFACE
+   GLASS SURFACE (PHASE 8 CINEMATIC SURFACES)
    ============================================================ */
 .glass {
-  background: rgba(8, 10, 15, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(13, 19, 26, 0.72);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border: 1px solid var(--color-border);
 }
 
 .glass-accent {
-  background: rgba(6, 182, 212, 0.04);
+  background: rgba(0, 217, 255, 0.035);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(6, 182, 212, 0.15);
+  border: 1px solid var(--color-border-accent);
 }
 
 /* ============================================================
@@ -649,9 +652,56 @@ body {
   box-shadow: 0 20px 40px -15px rgba(6, 182, 212, 0.15), 0 0 25px rgba(255, 255, 255, 0.03);
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .card-3d-tilt:hover {
-    transform: none;
-  }
+/* ============================================================
+   PHASE 8 — CINEMATIC COLOR GRADING & MOVIE TRAILER ATMOSPHERE
+   ============================================================ */
+.cinematic-vignette {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+  background: radial-gradient(circle at 50% 50%, transparent 60%, rgba(5, 6, 8, 0.45) 100%);
+  mix-blend-mode: multiply;
+}
+
+.cinematic-grade {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  background: linear-gradient(180deg, rgba(5, 6, 8, 0.25) 0%, transparent 15%, transparent 85%, rgba(5, 6, 8, 0.4) 100%);
+}
+
+.anticipation-beam {
+  position: absolute;
+  top: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(0, 217, 255, 0.45) 50%, transparent 100%);
+  filter: blur(0.5px);
+  pointer-events: none;
+}
+
+.anticipation-glow {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 280px;
+  height: 24px;
+  background: radial-gradient(ellipse at center, rgba(0, 217, 255, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+  filter: blur(8px);
+}
+
+/* Cinematic film-title tracking reveal */
+.tracking-cinematic {
+  letter-spacing: 0.18em;
+  transition: letter-spacing 1.2s var(--ease-cinematic);
+}
+
+.tracking-cinematic:hover {
+  letter-spacing: 0.22em;
 }
 

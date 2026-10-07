@@ -12,10 +12,10 @@ interface SectionTransitionProps {
 }
 
 /**
- * Reusable section wrapper that:
- * - provides a consistent reveal animation when scrolled into view
- * - applies the correct section background + border treatment
- * - anchors the section with a stable id for navigation
+ * Phase 8 Cinematic Section Wrapper:
+ * - Anticipation light beam at the threshold of the scene
+ * - Optical blur-to-sharp focus reveal
+ * - Physical presence with disciplined cinematic easing
  */
 export function SectionTransition({
   id,
@@ -27,7 +27,7 @@ export function SectionTransition({
 }: SectionTransitionProps) {
   const ref = useRef<HTMLElement>(null)
   const prefersReduced = useReducedMotion()
-  const isInView = useInView(ref, { once: true, amount: amount as any })
+  const isInView = useInView(ref, { once: true, amount: amount as any, margin: "-40px 0px" })
 
   const shouldAnimate = !prefersReduced && !isInView
 
@@ -39,10 +39,22 @@ export function SectionTransition({
       style={style}
       aria-label={ariaLabel}
     >
+      {/* Anticipation Beam & Threshold Glow (Phase 8 Rule 12) */}
+      <div className="anticipation-beam" aria-hidden="true" />
+      <div className="anticipation-glow" aria-hidden="true" />
+
       <motion.div
-        initial={prefersReduced ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
-        animate={shouldAnimate ? { opacity: 0, y: 24 } : { opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        initial={
+          prefersReduced
+            ? { opacity: 1, y: 0 }
+            : { opacity: 0, y: 20, filter: 'blur(3px)', scale: 0.992 }
+        }
+        animate={
+          shouldAnimate
+            ? { opacity: 0, y: 20, filter: 'blur(3px)', scale: 0.992 }
+            : { opacity: 1, y: 0, filter: 'blur(0px)', scale: 1 }
+        }
+        transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
       >
         {children}
       </motion.div>

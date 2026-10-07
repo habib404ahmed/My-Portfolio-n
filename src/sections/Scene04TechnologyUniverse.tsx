@@ -33,49 +33,49 @@ export function Scene04TechnologyUniverse() {
         {/* ─── Pipeline Area (Inside .page-container, 2 equal cols desktop, 1 col mobile/tablet) ─── */}
         <div className="pipeline-grid">
           {/* Flow 1: Intelligent Systems Pipeline */}
-          <div className="p-[14px_16px] rounded-[14px] border border-white/10 bg-slate-950/60 backdrop-blur-sm min-h-[64px] h-auto flex flex-col justify-center shadow-sm w-full box-border min-w-0">
-            <div className="font-mono text-[10px] sm:text-[11px] text-violet-400 mb-[7px] font-semibold tracking-[0.08em] uppercase">
+          <div className="p-[14px_16px] rounded-[14px] border border-[rgba(140,190,210,0.16)] bg-[#0D131A]/80 backdrop-blur-sm min-h-[64px] h-auto flex flex-col justify-center shadow-sm w-full box-border min-w-0">
+            <div className="font-mono text-[10px] sm:text-[11px] text-[#8B7CFF] mb-[7px] font-semibold tracking-[0.08em] uppercase">
               INTELLIGENT SYSTEMS PIPELINE
             </div>
-            <div className="flex items-center flex-wrap gap-1.5 font-mono text-[13px] text-slate-200 leading-[1.3]">
-              <span className="px-2 py-0.5 rounded bg-violet-500/15 border border-violet-500/25 text-violet-300 font-medium">
+            <div className="flex items-center flex-wrap gap-1.5 font-mono text-[13px] text-[#F4F7FA] leading-[1.3]">
+              <span className="px-2 py-0.5 rounded bg-[#8B7CFF]/15 border border-[#8B7CFF]/30 text-[#8B7CFF] font-medium">
                 AI / ML
               </span>
-              <span className="text-slate-600">&rarr;</span>
-              <span className="px-2 py-0.5 rounded bg-emerald-500/15 border border-emerald-500/25 text-emerald-300 font-medium">
-                Backend
+              <span className="text-[#687687]">&rarr;</span>
+              <span className="px-2 py-0.5 rounded bg-[#6575FF]/15 border border-[#6575FF]/30 text-[#6575FF] font-medium">
+                Backend API
               </span>
-              <span className="text-slate-600">&rarr;</span>
-              <span className="px-2 py-0.5 rounded bg-amber-500/15 border border-amber-500/25 text-amber-300 font-medium">
-                Database
+              <span className="text-[#687687]">&rarr;</span>
+              <span className="px-2 py-0.5 rounded bg-[#00D9FF]/15 border border-[#00D9FF]/30 text-[#00D9FF] font-medium">
+                Vector DB
               </span>
-              <span className="text-slate-600">&rarr;</span>
-              <span className="px-2 py-0.5 rounded bg-sky-500/15 border border-sky-500/25 text-sky-300 font-medium">
+              <span className="text-[#687687]">&rarr;</span>
+              <span className="px-2 py-0.5 rounded bg-[#6575FF]/15 border border-[#6575FF]/30 text-[#6575FF] font-medium">
                 Cloud
               </span>
             </div>
           </div>
 
           {/* Flow 2: Zero-Trust Defense Pipeline */}
-          <div className="p-[14px_16px] rounded-[14px] border border-white/10 bg-slate-950/60 backdrop-blur-sm min-h-[64px] h-auto flex flex-col justify-center shadow-sm w-full box-border min-w-0">
-            <div className="font-mono text-[10px] sm:text-[11px] text-emerald-400 mb-[7px] font-semibold tracking-[0.08em] uppercase">
+          <div className="p-[14px_16px] rounded-[14px] border border-[rgba(140,190,210,0.16)] bg-[#0D131A]/80 backdrop-blur-sm min-h-[64px] h-auto flex flex-col justify-center shadow-sm w-full box-border min-w-0">
+            <div className="font-mono text-[10px] sm:text-[11px] text-[#00D9FF] mb-[7px] font-semibold tracking-[0.08em] uppercase">
               ZERO-TRUST DEFENSE PIPELINE
             </div>
-            <div className="flex items-center flex-wrap gap-1.5 font-mono text-[13px] text-slate-200 leading-[1.3]">
-              <span className="px-2 py-0.5 rounded bg-emerald-500/15 border border-emerald-500/25 text-emerald-300 font-medium">
+            <div className="flex items-center flex-wrap gap-1.5 font-mono text-[13px] text-[#F4F7FA] leading-[1.3]">
+              <span className="px-2 py-0.5 rounded bg-[#00D9FF]/15 border border-[#00D9FF]/30 text-[#00D9FF] font-medium">
                 Cybersecurity
               </span>
-              <span className="text-slate-600">&rarr;</span>
-              <span className="px-2 py-0.5 rounded bg-cyan-500/15 border border-cyan-500/25 text-cyan-300 font-medium">
-                Network
+              <span className="text-[#687687]">&rarr;</span>
+              <span className="px-2 py-0.5 rounded bg-[#6575FF]/15 border border-[#6575FF]/30 text-[#6575FF] font-medium">
+                Packet Inspector
               </span>
-              <span className="text-slate-600">&rarr;</span>
-              <span className="px-2 py-0.5 rounded bg-emerald-500/15 border border-emerald-500/25 text-emerald-300 font-medium">
-                Backend
+              <span className="text-[#687687]">&rarr;</span>
+              <span className="px-2 py-0.5 rounded bg-[#00D9FF]/15 border border-[#00D9FF]/30 text-[#00D9FF] font-medium">
+                Auth Guard
               </span>
-              <span className="text-slate-600">&rarr;</span>
-              <span className="px-2 py-0.5 rounded bg-sky-500/15 border border-sky-500/25 text-sky-300 font-medium">
-                Infrastructure
+              <span className="text-[#687687]">&rarr;</span>
+              <span className="px-2 py-0.5 rounded bg-[#6575FF]/15 border border-[#6575FF]/30 text-[#6575FF] font-medium">
+                Encrypted Edge
               </span>
             </div>
           </div>
@@ -116,31 +116,31 @@ export function Scene04TechnologyUniverse() {
           {techDomains.map((domain: TechDomain) => (
             <div
               key={domain.id}
-              className="w-full min-w-0 box-border p-[14px_16px] rounded-[14px] border border-white/10 bg-slate-950/60 backdrop-blur-sm flex flex-col justify-between hover:border-white/20 transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.3)] h-auto min-h-0"
+              className="w-full min-w-0 box-border p-[14px_16px] rounded-[14px] border border-[rgba(140,190,210,0.16)] bg-[#0D131A]/70 backdrop-blur-sm flex flex-col justify-between hover:border-[rgba(0,217,255,0.3)] transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.3)] h-auto min-h-0"
             >
               <div>
-                {/* Card Header (14-15px font-weight 700, code 10px opacity 0.55) */}
-                <div className="flex items-center justify-between pb-2 mb-1.5 border-b border-white/5">
+                {/* Card Header */}
+                <div className="flex items-center justify-between pb-2 mb-1.5 border-b border-[rgba(140,190,210,0.12)]">
                   <div className="flex items-center gap-2 min-w-0">
                     <span
                       className="w-1.5 h-1.5 rounded-full flex-shrink-0"
                       style={{ background: domain.color }}
                     />
-                    <h3 className="font-mono text-[14px] sm:text-[15px] font-bold tracking-[0.04em] text-slate-100 m-0 truncate">
+                    <h3 className="font-mono text-[14px] sm:text-[15px] font-bold tracking-[0.04em] text-[#F4F7FA] m-0 truncate">
                       {domain.label}
                     </h3>
                   </div>
-                  <span className="font-mono text-[10px] text-slate-400/55 uppercase font-medium flex-shrink-0 ml-2">
+                  <span className="font-mono text-[10px] text-[#687687] uppercase font-medium flex-shrink-0 ml-2">
                     {domain.shortLabel}
                   </span>
                 </div>
 
-                {/* Card Description (12-13px, line-height 1.4, mt 6px, mb 6px, muted gray) */}
-                <p className="font-body text-[12px] sm:text-[13px] text-slate-400/80 leading-[1.4] mt-[6px] mb-[6px] m-0">
+                {/* Card Description */}
+                <p className="font-body text-[12px] sm:text-[13px] text-[#A8B4C2] leading-[1.4] mt-[6px] mb-[6px] m-0">
                   {domain.description}
                 </p>
 
-                {/* Technology Rows (height 24-26px, flex space-between, border-bottom, 13-14px font) */}
+                {/* Technology Rows */}
                 <div className="space-y-1 mt-1">
                   {domain.tech.map((item: TechItem) => {
                     const isSelected = activeItem?.item.name === item.name
@@ -152,17 +152,17 @@ export function Scene04TechnologyUniverse() {
                             isSelected ? null : { domainId: domain.id, item }
                           )
                         }
-                        className={`w-full text-left px-2.5 h-[26px] rounded transition-all duration-150 flex items-center justify-between group border-b border-white/5 cursor-pointer min-w-0 overflow-hidden ${
+                        className={`w-full text-left px-2.5 h-[26px] rounded transition-all duration-150 flex items-center justify-between group border-b border-[rgba(140,190,210,0.08)] cursor-pointer min-w-0 overflow-hidden ${
                           isSelected
-                            ? 'bg-cyan-950/40 text-cyan-200'
-                            : 'hover:bg-white/[0.04] text-slate-300 hover:text-white'
+                            ? 'bg-[#00D9FF]/15 text-[#38E8FF]'
+                            : 'hover:bg-white/[0.04] text-[#A8B4C2] hover:text-[#F4F7FA]'
                         }`}
                         aria-label={`View info for ${item.name}`}
                       >
                         <span className="font-mono text-[13px] sm:text-[14px] font-medium truncate whitespace-nowrap">
                           {item.name}
                         </span>
-                        <span className="text-[11px] font-mono text-slate-500 group-hover:text-cyan-400 transition-colors flex-shrink-0 ml-2">
+                        <span className="text-[11px] font-mono text-[#687687] group-hover:text-[#00D9FF] transition-colors flex-shrink-0 ml-2">
                           info &rarr;
                         </span>
                       </button>
@@ -171,8 +171,8 @@ export function Scene04TechnologyUniverse() {
                 </div>
               </div>
 
-              {/* Card Footer: margin-top: auto inside flex-column */}
-              <div className="mt-auto pt-2 border-t border-white/5 flex items-center justify-between font-mono text-[11px] text-slate-400">
+              {/* Card Footer */}
+              <div className="mt-auto pt-2 border-t border-[rgba(140,190,210,0.12)] flex items-center justify-between font-mono text-[11px] text-[#687687]">
                 <span>{domain.tech.length} Technologies</span>
                 <span className="font-semibold" style={{ color: domain.color }}>
                   VERIFIED

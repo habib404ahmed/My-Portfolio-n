@@ -19,7 +19,7 @@ export function Phase6ContactFinal({ onRestart }: Phase6ContactFinalProps) {
   return (
     <section
       id="contact"
-      className="relative bg-black text-slate-100 overflow-hidden"
+      className="relative bg-[#050608] text-[#F4F7FA] overflow-hidden"
       aria-label="Contact and Final Experience"
     >
       {/* ──────────────────────────────────────────
@@ -29,11 +29,11 @@ export function Phase6ContactFinal({ onRestart }: Phase6ContactFinalProps) {
 
       {/* Atmospheric Radial Gradients */}
       <div
-        className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-cyan-950/20 rounded-full blur-[140px] pointer-events-none -z-10"
+        className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-[#00D9FF]/[0.03] rounded-full blur-[140px] pointer-events-none -z-10"
         aria-hidden="true"
       />
       <div
-        className="absolute bottom-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-slate-900/30 rounded-full blur-[160px] pointer-events-none -z-10"
+        className="absolute bottom-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-[#6575FF]/[0.03] rounded-full blur-[160px] pointer-events-none -z-10"
         aria-hidden="true"
       />
 
@@ -46,34 +46,34 @@ export function Phase6ContactFinal({ onRestart }: Phase6ContactFinalProps) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 1.2, ease: 'easeOut' }}
-          className="text-center py-10 border-b border-white/10"
+          className="text-center py-10 border-b border-[rgba(140,190,210,0.16)]"
         >
           {/* Subtle Converging Singularity Glyph */}
           <div className="w-12 h-12 mx-auto mb-8 relative flex items-center justify-center">
             <motion.div
               animate={{ rotate: 360 }}
               transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-              className="absolute inset-0 rounded-full border border-cyan-500/20"
+              className="absolute inset-0 rounded-full border border-[rgba(0,217,255,0.25)]"
             />
             <motion.div
               animate={{ scale: [0.8, 1.2, 0.8] }}
               transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-              className="w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-[0_0_20px_#06b6d4]"
+              className="w-2.5 h-2.5 rounded-full bg-[#00D9FF] shadow-[0_0_20px_rgba(0,217,255,0.5)]"
             />
           </div>
 
-          <p className="font-mono text-xs sm:text-sm text-cyan-400 font-semibold tracking-[0.3em] uppercase mb-4">
+          <p className="font-mono text-xs sm:text-sm text-[#00D9FF] font-semibold tracking-[0.3em] uppercase mb-4">
             SCENE 12 &bull; FINAL CONNECTION
           </p>
 
-          <h2 className="font-display text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white mb-6 uppercase">
+          <h2 className="font-display text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-[#F4F7FA] mb-6 uppercase">
             LET&apos;S BUILD <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-200 to-emerald-400">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00D9FF] via-[#38E8FF] to-[#F4F7FA]">
               SOMETHING MEANINGFUL.
             </span>
           </h2>
 
-          <p className="font-body text-base sm:text-lg text-slate-300 max-w-xl mx-auto font-light leading-relaxed">
+          <p className="font-body text-base sm:text-lg text-[#A8B4C2] max-w-xl mx-auto font-light leading-relaxed">
             Open to software engineering, AI/ML, full-stack and cybersecurity opportunities.
           </p>
         </motion.div>
@@ -88,31 +88,31 @@ export function Phase6ContactFinal({ onRestart }: Phase6ContactFinalProps) {
           transition={{ duration: 0.9, delay: 0.1 }}
           className="text-center py-16"
         >
-          <div className="inline-block px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm mb-6">
-            <span className="font-mono text-[0.6875rem] uppercase tracking-widest text-slate-300">
+          <div className="inline-block px-4 py-1.5 rounded-full border border-[rgba(140,190,210,0.16)] bg-[#0D131A]/60 backdrop-blur-sm mb-6">
+            <span className="font-mono text-[0.6875rem] uppercase tracking-widest text-[#A8B4C2]">
               ENGINEER SPECIFICATION
             </span>
           </div>
 
-          <h3 className="font-display text-3xl sm:text-5xl font-black text-white tracking-tight uppercase mb-3">
+          <h3 className="font-display text-3xl sm:text-5xl font-black text-[#F4F7FA] tracking-tight uppercase mb-3">
             {profile.name.full}
           </h3>
 
-          <p className="font-mono text-sm sm:text-base text-cyan-400 tracking-[0.2em] uppercase font-bold mb-4">
+          <p className="font-mono text-sm sm:text-base text-[#00D9FF] tracking-[0.2em] uppercase font-bold mb-4">
             {profile.title}
           </p>
 
           {/* Specialization Trio */}
-          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6 font-mono text-xs sm:text-sm text-slate-300 tracking-wider">
-            <span className="px-3 py-1 rounded-md border border-cyan-500/20 bg-cyan-950/20 text-cyan-300">
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6 font-mono text-xs sm:text-sm text-[#A8B4C2] tracking-wider">
+            <span className="px-3 py-1 rounded-md border border-[rgba(0,217,255,0.25)] bg-[#0D131A]/70 text-[#00D9FF]">
               AI / ML
             </span>
-            <span className="text-slate-600">&bull;</span>
-            <span className="px-3 py-1 rounded-md border border-sky-500/20 bg-sky-950/20 text-sky-300">
+            <span className="text-[#687687]">&bull;</span>
+            <span className="px-3 py-1 rounded-md border border-[rgba(101,117,255,0.25)] bg-[#0D131A]/70 text-[#6575FF]">
               FULL-STACK
             </span>
-            <span className="text-slate-600">&bull;</span>
-            <span className="px-3 py-1 rounded-md border border-emerald-500/20 bg-emerald-950/20 text-emerald-300">
+            <span className="text-[#687687]">&bull;</span>
+            <span className="px-3 py-1 rounded-md border border-[rgba(56,232,255,0.25)] bg-[#0D131A]/70 text-[#38E8FF]">
               CYBERSECURITY
             </span>
           </div>
@@ -128,7 +128,7 @@ export function Phase6ContactFinal({ onRestart }: Phase6ContactFinalProps) {
           transition={{ duration: 0.9, delay: 0.2 }}
           className="text-center max-w-2xl mx-auto mb-14"
         >
-          <p className="font-body text-base text-slate-300 leading-relaxed font-light">
+          <p className="font-body text-base text-[#A8B4C2] leading-relaxed font-light">
             Whether you are discussing engineering roles, collaborative systems, or technical architecture &mdash; I am always eager to connect with fellow builders.
           </p>
         </motion.div>
@@ -147,7 +147,7 @@ export function Phase6ContactFinal({ onRestart }: Phase6ContactFinalProps) {
             {/* Primary CTA (Email Client Direct Link) */}
             <a
               href={`mailto:${profile.contact.email}`}
-              className="px-8 py-3.5 rounded-full font-display text-sm font-bold tracking-wider text-black bg-gradient-to-r from-cyan-400 via-sky-300 to-emerald-400 hover:brightness-110 shadow-[0_0_35px_rgba(6,182,212,0.4)] transition-all duration-300 text-center block"
+              className="px-8 py-3.5 rounded-full font-display text-sm font-bold tracking-wider text-[#050608] bg-[#00D9FF] hover:bg-[#38E8FF] shadow-[0_0_35px_rgba(0,217,255,0.35)] hover:shadow-[0_0_45px_rgba(0,217,255,0.5)] transition-all duration-300 text-center block cursor-pointer"
               aria-label={`Get in touch with Md Habib via email: ${profile.contact.email}`}
             >
               GET IN TOUCH &bull; {profile.contact.email}
@@ -164,8 +164,8 @@ export function Phase6ContactFinal({ onRestart }: Phase6ContactFinalProps) {
             </CinematicButton>
           </div>
 
-          <p className="font-mono text-xs text-slate-500 mt-2">
-            Direct inbox: <span className="text-slate-400 font-semibold">{profile.contact.email}</span>
+          <p className="font-mono text-xs text-[#687687] mt-2">
+            Direct inbox: <span className="text-[#A8B4C2] font-semibold">{profile.contact.email}</span>
           </p>
         </motion.div>
 

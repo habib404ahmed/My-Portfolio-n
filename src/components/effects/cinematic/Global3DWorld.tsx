@@ -7,6 +7,7 @@ import type { DeviceClass } from '@/hooks/useDeviceCapability'
 
 // 3D Cinematic Atmosphere & Camera
 import { CinematicCamera } from './CinematicCamera'
+import { CinematicLighting } from './CinematicLighting'
 import { AmbientParticles } from '@/components/effects/AmbientParticles'
 import { GridPlane } from '@/components/effects/GridPlane'
 
@@ -29,7 +30,7 @@ interface Global3DWorldProps {
 }
 
 export function Global3DWorld({ deviceClass }: Global3DWorldProps) {
-  const { activeSection, sectionProgress, scrollProgress, mouse } = useCinematicScroll()
+  const { activeSection, sectionProgress, scrollProgress, scrollVelocity, mouse } = useCinematicScroll()
   const prefersReduced = useReducedMotion()
 
   return (
@@ -56,18 +57,17 @@ export function Global3DWorld({ deviceClass }: Global3DWorldProps) {
           activeSection={activeSection}
           sectionProgress={sectionProgress}
           scrollProgress={scrollProgress}
+          scrollVelocity={scrollVelocity}
           mouseX={mouse.x}
           mouseY={mouse.y}
           prefersReducedMotion={prefersReduced}
         />
 
-        {/* Global Atmospheric Lighting */}
-        <ambientLight intensity={0.08} color="#ffffff" />
-        <pointLight position={[10, 10, 10]} intensity={0.25} color="#38bdf8" />
-        <pointLight position={[-10, -5, -10]} intensity={0.15} color="#818cf8" />
-
-        {/* Depth Fog */}
-        <fog attach="fog" args={['#050507', 4, 18]} />
+        {/* Dynamic Scene-Specific Cinematic Lighting & Fog Moods */}
+        <CinematicLighting
+          activeSection={activeSection}
+          sectionProgress={sectionProgress}
+        />
 
         <Suspense fallback={null}>
           {/* Persistent Atmospheric Digital Dust & Infinite Floor Grid */}
@@ -78,6 +78,7 @@ export function Global3DWorld({ deviceClass }: Global3DWorldProps) {
           <HeroAICoreScene
             activeSection={activeSection}
             sectionProgress={sectionProgress}
+            scrollVelocity={scrollVelocity}
             deviceClass={deviceClass}
             mouseX={mouse.x}
             mouseY={mouse.y}
