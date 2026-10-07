@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import type { TechDomain, TechItem } from '@/data/techStack'
+import { techUniverseStore } from '@/stores/techUniverseStore'
 
 interface TechnologyDetailModalProps {
   domain: TechDomain | null
@@ -22,6 +23,24 @@ export function TechnologyDetailModal({
   useEffect(() => {
     setSelectedTech(initialTech)
   }, [initialTech, domain])
+
+  // Sync with 3D Cinematic Scene Store (Vesper living motion system)
+  useEffect(() => {
+    if (domain) {
+      techUniverseStore.setActiveCategory(domain)
+    } else {
+      techUniverseStore.setActiveCategory(null)
+      techUniverseStore.setActiveTech(null)
+    }
+    return () => {
+      techUniverseStore.setActiveCategory(null)
+      techUniverseStore.setActiveTech(null)
+    }
+  }, [domain])
+
+  useEffect(() => {
+    techUniverseStore.setActiveTech(selectedTech)
+  }, [selectedTech])
 
   // Body scroll lock & ESC key handling
   useEffect(() => {
@@ -102,13 +121,13 @@ export function TechnologyDetailModal({
         aria-labelledby="tech-modal-title"
         aria-describedby="tech-modal-desc"
       >
-        {/* ─── Backdrop: Cinematic Dark Glass (Preserves 3D World visibility) ─── */}
+        {/* ─── Backdrop: Cinematic Atmospheric Glass (Preserves 3D Organism Visibility) ─── */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed inset-0 bg-black/60 backdrop-blur-[10px]"
+          className="fixed inset-0 bg-black/40 backdrop-blur-[6px]"
           onClick={onClose}
           aria-hidden="true"
         >
@@ -132,20 +151,20 @@ export function TechnologyDetailModal({
           </div>
         </motion.div>
 
-        {/* ─── Liquid Glass Modal Container ─── */}
+        {/* ─── Liquid Glass Modal Container (Floating Inside 3D World) ─── */}
         <motion.div
           ref={modalContainerRef}
-          initial={{ opacity: 0, scale: 0.92, y: 16 }}
+          initial={{ opacity: 0, scale: 0.94, y: 14 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.94, y: 12 }}
+          exit={{ opacity: 0, scale: 0.95, y: 10 }}
           transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
           className="relative w-full max-w-[740px] my-auto rounded-[24px] overflow-hidden text-left pointer-events-auto"
           style={{
-            background: 'rgba(10, 16, 23, 0.78)',
-            backdropFilter: 'blur(28px) saturate(150%)',
-            WebkitBackdropFilter: 'blur(28px) saturate(150%)',
-            border: '1px solid rgba(255, 255, 255, 0.16)',
-            boxShadow: `0 30px 100px rgba(0, 0, 0, 0.65), inset 0 1px 1px rgba(255, 255, 255, 0.22), 0 0 35px ${domain.glowColor}`,
+            background: 'rgba(8, 14, 22, 0.72)',
+            backdropFilter: 'blur(24px) saturate(140%)',
+            WebkitBackdropFilter: 'blur(24px) saturate(140%)',
+            border: '1px solid rgba(255, 255, 255, 0.14)',
+            boxShadow: `0 30px 100px rgba(0, 0, 0, 0.65), inset 0 1px 1px rgba(255, 255, 255, 0.20), 0 0 40px ${domain.glowColor}`,
             maxHeight: '85vh',
           }}
           onClick={(e) => e.stopPropagation()}
@@ -248,7 +267,7 @@ export function TechnologyDetailModal({
                       initial={{ opacity: 0, y: 12 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{
-                        delay: 0.08 * index,
+                        delay: 0.07 * index,
                         duration: 0.35,
                         ease: [0.16, 1, 0.3, 1],
                       }}
@@ -280,20 +299,34 @@ export function TechnologyDetailModal({
                       {/* Left Cyan Accent Edge on Hover */}
                       <span className="absolute left-0 top-0 bottom-0 w-[3px] bg-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity" />
 
-                      <div className="min-w-0 pr-4">
-                        <div className="flex items-center gap-2">
-                          <span className="font-mono text-[14px] sm:text-[15px] font-bold text-white group-hover:text-cyan-300 transition-colors">
-                            {item.name}
-                          </span>
-                          {item.projects && item.projects.length > 0 && (
-                            <span className="font-mono text-[10px] px-1.5 py-0.5 rounded border border-cyan-500/30 bg-cyan-500/10 text-cyan-300 font-medium">
-                              {item.projects.length} {item.projects.length === 1 ? 'PROJECT' : 'PROJECTS'}
-                            </span>
-                          )}
+                      <div className="flex items-center gap-3 min-w-0 pr-4">
+                        {/* Spatial Optical Node Dot & Conduit Line */}
+                        <div className="flex items-center gap-1.5 flex-shrink-0" aria-hidden="true">
+                          <span
+                            className="w-2 h-2 rounded-full transition-transform group-hover:scale-125"
+                            style={{
+                              backgroundColor: domain.color,
+                              boxShadow: `0 0 8px ${domain.color}`,
+                            }}
+                          />
+                          <span className="hidden sm:inline-block w-3 h-[1px] bg-gradient-to-r from-cyan-400/30 to-cyan-400/80 group-hover:w-5 transition-all duration-300" />
                         </div>
-                        <p className="font-body text-[12px] sm:text-[13px] text-slate-400 group-hover:text-slate-300 transition-colors mt-0.5 m-0 line-clamp-1">
-                          {item.description}
-                        </p>
+
+                        <div className="min-w-0">
+                          <div className="flex items-center gap-2">
+                            <span className="font-mono text-[14px] sm:text-[15px] font-bold text-white group-hover:text-cyan-300 transition-colors">
+                              {item.name}
+                            </span>
+                            {item.projects && item.projects.length > 0 && (
+                              <span className="font-mono text-[10px] px-1.5 py-0.5 rounded border border-cyan-500/30 bg-cyan-500/10 text-cyan-300 font-medium">
+                                {item.projects.length} {item.projects.length === 1 ? 'PROJECT' : 'PROJECTS'}
+                              </span>
+                            )}
+                          </div>
+                          <p className="font-body text-[12px] sm:text-[13px] text-slate-400 group-hover:text-slate-300 transition-colors mt-0.5 m-0 line-clamp-1">
+                            {item.description}
+                          </p>
+                        </div>
                       </div>
 
                       <div className="flex items-center gap-1.5 font-mono text-[13px] text-slate-400 group-hover:text-cyan-300 group-hover:translate-x-1 transition-all flex-shrink-0">

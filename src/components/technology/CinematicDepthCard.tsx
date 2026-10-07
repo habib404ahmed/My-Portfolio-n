@@ -3,6 +3,7 @@ import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import type { TechDomain } from '@/data/techStack'
 import { CinematicGlassObject } from './CinematicGlassObject'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
+import { techUniverseStore } from '@/stores/techUniverseStore'
 
 interface CinematicDepthCardProps {
   domain: TechDomain
@@ -62,10 +63,12 @@ export function CinematicDepthCard({
 
   const handleMouseEnter = () => {
     setIsHovered(true)
+    techUniverseStore.setHoveredCategory(domain.id)
   }
 
   const handleMouseLeave = () => {
     setIsHovered(false)
+    techUniverseStore.setHoveredCategory(null)
     mouseX.set(0)
     mouseY.set(0)
   }
@@ -86,7 +89,7 @@ export function CinematicDepthCard({
         outline: 'none',
       }}
       animate={{
-        y: isOpening ? 2 : isHovered ? -5 : 0,
+        y: isOpening ? 2 : isHovered ? -3 : 0,
         scale: isOpening ? 0.98 : 1,
       }}
       transition={{

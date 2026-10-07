@@ -2,6 +2,7 @@ import { useRef } from 'react'
 import { useFrame, useThree } from '@react-three/fiber'
 import * as THREE from 'three'
 import type { SectionId } from '@/hooks/useCinematicScroll'
+import { techUniverseStore } from '@/stores/techUniverseStore'
 
 interface CinematicCameraProps {
   activeSection: SectionId
@@ -96,6 +97,17 @@ export function CinematicCamera({
         const exitT = (sectionProgress - 0.75) / 0.25
         dollyZ = -exitT * 0.35
         panY = exitT * 0.1
+      }
+
+      // Vesper Motion System: Camera pushes forward into the living scene when category opens
+      if (activeSection === 'universe') {
+        const universeState = techUniverseStore.getState()
+        if (universeState.activeCategory) {
+          dollyZ -= 1.15
+          if (universeState.activeTech) {
+            dollyZ -= 0.3
+          }
+        }
       }
     }
 
