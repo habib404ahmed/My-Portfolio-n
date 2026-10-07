@@ -30,58 +30,58 @@ export function Scene04TechnologyUniverse() {
           </p>
         </header>
 
-        {/* ─── Pipeline Area (Inside .page-container, 2 equal cols desktop, 1 col mobile/tablet) ─── */}
+        {/* ─── Pipeline Area (Phase 9 Glass Laboratory Flows) ─── */}
         <div className="pipeline-grid">
           {/* Flow 1: Intelligent Systems Pipeline */}
-          <div className="p-[14px_16px] rounded-[14px] border border-[rgba(140,190,210,0.16)] bg-[#0D131A]/80 backdrop-blur-sm min-h-[64px] h-auto flex flex-col justify-center shadow-sm w-full box-border min-w-0">
+          <div className="p-[14px_16px] rounded-[16px] glass-level-1 liquid-edge min-h-[64px] h-auto flex flex-col justify-center shadow-sm w-full box-border min-w-0">
             <div className="font-mono text-[10px] sm:text-[11px] text-[#8B7CFF] mb-[7px] font-semibold tracking-[0.08em] uppercase">
               INTELLIGENT SYSTEMS PIPELINE
             </div>
             <div className="flex items-center flex-wrap gap-1.5 font-mono text-[13px] text-[#F4F7FA] leading-[1.3]">
-              <span className="px-2 py-0.5 rounded bg-[#8B7CFF]/15 border border-[#8B7CFF]/30 text-[#8B7CFF] font-medium">
+              <span className="glass-chip text-[#8B7CFF] font-medium">
                 AI / ML
               </span>
               <span className="text-[#687687]">&rarr;</span>
-              <span className="px-2 py-0.5 rounded bg-[#6575FF]/15 border border-[#6575FF]/30 text-[#6575FF] font-medium">
+              <span className="glass-chip text-[#6575FF] font-medium">
                 Backend API
               </span>
               <span className="text-[#687687]">&rarr;</span>
-              <span className="px-2 py-0.5 rounded bg-[#00D9FF]/15 border border-[#00D9FF]/30 text-[#00D9FF] font-medium">
+              <span className="glass-chip text-[#00D9FF] font-medium">
                 Vector DB
               </span>
               <span className="text-[#687687]">&rarr;</span>
-              <span className="px-2 py-0.5 rounded bg-[#6575FF]/15 border border-[#6575FF]/30 text-[#6575FF] font-medium">
+              <span className="glass-chip text-[#6575FF] font-medium">
                 Cloud
               </span>
             </div>
           </div>
 
           {/* Flow 2: Zero-Trust Defense Pipeline */}
-          <div className="p-[14px_16px] rounded-[14px] border border-[rgba(140,190,210,0.16)] bg-[#0D131A]/80 backdrop-blur-sm min-h-[64px] h-auto flex flex-col justify-center shadow-sm w-full box-border min-w-0">
+          <div className="p-[14px_16px] rounded-[16px] glass-level-1 liquid-edge min-h-[64px] h-auto flex flex-col justify-center shadow-sm w-full box-border min-w-0">
             <div className="font-mono text-[10px] sm:text-[11px] text-[#00D9FF] mb-[7px] font-semibold tracking-[0.08em] uppercase">
               ZERO-TRUST DEFENSE PIPELINE
             </div>
             <div className="flex items-center flex-wrap gap-1.5 font-mono text-[13px] text-[#F4F7FA] leading-[1.3]">
-              <span className="px-2 py-0.5 rounded bg-[#00D9FF]/15 border border-[#00D9FF]/30 text-[#00D9FF] font-medium">
+              <span className="glass-chip text-[#00D9FF] font-medium">
                 Cybersecurity
               </span>
               <span className="text-[#687687]">&rarr;</span>
-              <span className="px-2 py-0.5 rounded bg-[#6575FF]/15 border border-[#6575FF]/30 text-[#6575FF] font-medium">
+              <span className="glass-chip text-[#6575FF] font-medium">
                 Packet Inspector
               </span>
               <span className="text-[#687687]">&rarr;</span>
-              <span className="px-2 py-0.5 rounded bg-[#00D9FF]/15 border border-[#00D9FF]/30 text-[#00D9FF] font-medium">
+              <span className="glass-chip text-[#00D9FF] font-medium">
                 Auth Guard
               </span>
               <span className="text-[#687687]">&rarr;</span>
-              <span className="px-2 py-0.5 rounded bg-[#6575FF]/15 border border-[#6575FF]/30 text-[#6575FF] font-medium">
+              <span className="glass-chip text-[#6575FF] font-medium">
                 Encrypted Edge
               </span>
             </div>
           </div>
         </div>
 
-        {/* Selected Tech Detail Drawer */}
+        {/* Selected Tech Detail Drawer — Focus Glass */}
         <AnimatePresence>
           {activeItem && (
             <motion.div
@@ -89,7 +89,7 @@ export function Scene04TechnologyUniverse() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -6 }}
               transition={{ duration: 0.2 }}
-              className="mt-4 p-3.5 px-4 rounded-xl border border-cyan-500/30 bg-cyan-950/30 backdrop-blur-sm flex items-center justify-between shadow-lg"
+              className="mt-4 p-3.5 px-4 rounded-xl glass-focus liquid-edge flex items-center justify-between shadow-lg"
             >
               <div className="flex items-center gap-3">
                 <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse flex-shrink-0" />
@@ -111,16 +111,16 @@ export function Scene04TechnologyUniverse() {
           )}
         </AnimatePresence>
 
-        {/* ─── Technology Grid: Row 1 (3), Row 2 (3), Row 3 (1 in Column 1) ─── */}
+        {/* ─── Technology Grid: Floating Glass Clusters (Phase 9 Section 17 & 18) ─── */}
         <div className="tech-grid">
           {techDomains.map((domain: TechDomain) => (
             <div
               key={domain.id}
-              className="w-full min-w-0 box-border p-[14px_16px] rounded-[14px] border border-[rgba(140,190,210,0.16)] bg-[#0D131A]/70 backdrop-blur-sm flex flex-col justify-between hover:border-[rgba(0,217,255,0.3)] transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.3)] h-auto min-h-0"
+              className="w-full min-w-0 box-border p-[14px_16px] rounded-2xl glass-card liquid-edge flex flex-col justify-between hover:border-[rgba(0,217,255,0.4)] transition-all duration-300 shadow-[0_8px_24px_rgba(0,0,0,0.35)] h-auto min-h-0"
             >
               <div>
                 {/* Card Header */}
-                <div className="flex items-center justify-between pb-2 mb-1.5 border-b border-[rgba(140,190,210,0.12)]">
+                <div className="flex items-center justify-between pb-2 mb-1.5 border-b border-white/10">
                   <div className="flex items-center gap-2 min-w-0">
                     <span
                       className="w-1.5 h-1.5 rounded-full flex-shrink-0"
@@ -140,7 +140,7 @@ export function Scene04TechnologyUniverse() {
                   {domain.description}
                 </p>
 
-                {/* Technology Rows */}
+                {/* Technology Rows — Interactive Glass Chips */}
                 <div className="space-y-1 mt-1">
                   {domain.tech.map((item: TechItem) => {
                     const isSelected = activeItem?.item.name === item.name
@@ -152,10 +152,10 @@ export function Scene04TechnologyUniverse() {
                             isSelected ? null : { domainId: domain.id, item }
                           )
                         }
-                        className={`w-full text-left px-2.5 h-[26px] rounded transition-all duration-150 flex items-center justify-between group border-b border-[rgba(140,190,210,0.08)] cursor-pointer min-w-0 overflow-hidden ${
+                        className={`w-full text-left px-2.5 h-[28px] rounded-lg transition-all duration-200 flex items-center justify-between group cursor-pointer min-w-0 overflow-hidden ${
                           isSelected
-                            ? 'bg-[#00D9FF]/15 text-[#38E8FF]'
-                            : 'hover:bg-white/[0.04] text-[#A8B4C2] hover:text-[#F4F7FA]'
+                            ? 'glass-focus text-[#38E8FF]'
+                            : 'hover:bg-white/[0.05] hover:-translate-y-0.5 text-[#A8B4C2] hover:text-[#F4F7FA]'
                         }`}
                         aria-label={`View info for ${item.name}`}
                       >

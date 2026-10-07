@@ -64,9 +64,9 @@ export function Scene02AboutIdentity() {
                 aria-hidden="true"
               />
 
-              {/* Portrait Frame: Exactly 3/4 aspect ratio, rounded corners, tightly wrapped */}
-              <div className="relative w-full aspect-[3/4] rounded-[20px] overflow-hidden border border-[rgba(140,190,210,0.16)] bg-[#0D131A]/70 shadow-[0_16px_40px_rgba(0,0,0,0.65)] transition-shadow duration-500 group-hover:shadow-[0_20px_50px_rgba(0,217,255,0.12)]">
-                <picture className="block w-full h-full">
+              {/* Portrait Frame: Phase 9 Liquid Glass Frame (Section 11 & 15) */}
+              <div className="relative w-full aspect-[3/4] rounded-[24px] overflow-hidden glass-frame liquid-edge p-1.5 shadow-[0_24px_60px_rgba(0,0,0,0.85)] transition-all duration-500 group-hover:shadow-[0_28px_70px_rgba(0,217,255,0.18)]">
+                <picture className="block w-full h-full rounded-[20px] overflow-hidden">
                   <source
                     type="image/webp"
                     srcSet="/assets/images/profile-400.webp 400w, /assets/images/profile-600.webp 600w, /assets/images/profile.webp 576w"
@@ -99,13 +99,13 @@ export function Scene02AboutIdentity() {
               </div>
             </div>
 
-            {/* Role Badge */}
+            {/* Role Badge — Glass Level 2 */}
             <motion.div
               initial={{ opacity: 0, y: 6 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2, duration: 0.5 }}
-              className="mt-3.5 h-[38px] min-w-[190px] px-5 rounded-full border border-[rgba(0,217,255,0.25)] bg-[#0D131A]/85 backdrop-blur-md flex items-center justify-center gap-2.5 shadow-[0_4px_16px_rgba(0,0,0,0.5),0_0_12px_rgba(0,217,255,0.1)] whitespace-nowrap select-none"
+              className="mt-3.5 h-[38px] min-w-[190px] px-5 rounded-full glass-level-2 border border-[rgba(0,217,255,0.35)] flex items-center justify-center gap-2.5 shadow-[0_4px_16px_rgba(0,0,0,0.5),0_0_12px_rgba(0,217,255,0.12)] whitespace-nowrap select-none"
             >
               <span className="w-2 h-2 rounded-full bg-[#00D9FF] shadow-[0_0_8px_rgba(0,217,255,0.8)] animate-pulse flex-shrink-0" />
               <span className="font-mono text-xs text-[#F4F7FA] tracking-[0.08em] uppercase font-bold">
@@ -113,13 +113,13 @@ export function Scene02AboutIdentity() {
               </span>
             </motion.div>
 
-            {/* Profile Meta Footer Strip */}
+            {/* Profile Meta Footer Strip — Glass Level 1 */}
             <motion.div
               initial={{ opacity: 0, y: 6 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3, duration: 0.5 }}
-              className="mt-4 h-[44px] w-full max-w-[340px] lg:max-w-[380px] px-4 rounded-xl border border-[rgba(140,190,210,0.16)] bg-[#090D12]/70 backdrop-blur-sm flex items-center justify-between select-none shadow-[0_4px_16px_rgba(0,0,0,0.4)]"
+              className="mt-4 h-[44px] w-full max-w-[340px] lg:max-w-[380px] px-4 rounded-xl glass-level-1 border border-white/10 flex items-center justify-between select-none shadow-[0_4px_16px_rgba(0,0,0,0.4)]"
             >
               <div className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#00D9FF] flex-shrink-0" />
@@ -138,8 +138,8 @@ export function Scene02AboutIdentity() {
             className="profile-content w-full flex flex-col box-border"
             style={{ maxWidth: 'min(100%, 880px)' }}
           >
-            {/* 1. Core Statement Box */}
-            <div className="core-statement w-full p-4 sm:p-5 rounded-2xl border border-[rgba(140,190,210,0.16)] bg-[#0D131A]/70 backdrop-blur-sm box-border shadow-[0_4px_20px_rgba(0,0,0,0.35)]">
+            {/* 1. Core Statement Box — Focus Glass (Phase 9 Section 15) */}
+            <div className="core-statement w-full p-5 sm:p-6 rounded-2xl glass-focus liquid-edge glass-reflection-sweep box-border shadow-[0_16px_40px_rgba(0,0,0,0.45)]">
               <div className="font-mono text-[11px] sm:text-xs font-bold text-[#00D9FF] mb-2 uppercase tracking-[0.12em] flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#00D9FF] animate-pulse flex-shrink-0" />
                 <span>CORE STATEMENT</span>
@@ -160,16 +160,12 @@ export function Scene02AboutIdentity() {
               </p>
             </div>
 
-            {/* 3. Three Capability Cards */}
+            {/* 3. Three Capability Cards — Floating Glass Modules (Phase 9 Section 15 & 19) */}
             <div className="capability-grid mt-[18px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full items-stretch">
               {FOCUS_PILLARS.map((pillar) => (
                 <div
                   key={pillar.title}
-                  className="p-[14px_16px] rounded-[14px] border flex flex-col items-start justify-start min-h-0 h-auto transition-all duration-300 hover:border-white/25 hover:-translate-y-0.5 shadow-[0_4px_16px_rgba(0,0,0,0.25)]"
-                  style={{
-                    borderColor: pillar.border,
-                    backgroundColor: pillar.bg,
-                  }}
+                  className="glass-card liquid-edge p-[16px_18px] rounded-xl flex flex-col items-start justify-start min-h-0 h-auto transition-all duration-300 hover:-translate-y-1 shadow-[0_8px_24px_rgba(0,0,0,0.35)]"
                 >
                   <div
                     className="font-display font-semibold text-[15px] leading-[1.3]"
@@ -184,9 +180,9 @@ export function Scene02AboutIdentity() {
               ))}
             </div>
 
-            {/* 4. Metadata Cards Row */}
+            {/* 4. Metadata Cards Row — Glass Level 1 */}
             <div className="metadata-grid mt-[14px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
-              <div className="h-[58px] px-[14px] py-[9px] rounded-[12px] border border-[rgba(140,190,210,0.16)] bg-[#090D12]/70 backdrop-blur-sm box-border flex flex-col justify-center shadow-sm">
+              <div className="h-[58px] px-[14px] py-[9px] rounded-xl glass-level-1 liquid-edge border border-white/10 box-border flex flex-col justify-center shadow-sm">
                 <span className="text-[#687687] block font-mono text-[10px] sm:text-[11px] uppercase tracking-wider mb-0.5 font-semibold">
                   AFFILIATION
                 </span>
@@ -194,7 +190,7 @@ export function Scene02AboutIdentity() {
                   Assam Down Town University
                 </span>
               </div>
-              <div className="h-[58px] px-[14px] py-[9px] rounded-[12px] border border-[rgba(140,190,210,0.16)] bg-[#090D12]/70 backdrop-blur-sm box-border flex flex-col justify-center shadow-sm">
+              <div className="h-[58px] px-[14px] py-[9px] rounded-xl glass-level-1 liquid-edge border border-white/10 box-border flex flex-col justify-center shadow-sm">
                 <span className="text-[#687687] block font-mono text-[10px] sm:text-[11px] uppercase tracking-wider mb-0.5 font-semibold">
                   ACADEMIC PERIOD
                 </span>
@@ -202,7 +198,7 @@ export function Scene02AboutIdentity() {
                   2025 &mdash; 2028 (BCA)
                 </span>
               </div>
-              <div className="h-[58px] px-[14px] py-[9px] rounded-[12px] border border-[rgba(140,190,210,0.16)] bg-[#090D12]/70 backdrop-blur-sm box-border flex flex-col justify-center shadow-sm">
+              <div className="h-[58px] px-[14px] py-[9px] rounded-xl glass-level-1 liquid-edge border border-white/10 box-border flex flex-col justify-center shadow-sm">
                 <span className="text-[#687687] block font-mono text-[10px] sm:text-[11px] uppercase tracking-wider mb-0.5 font-semibold">
                   LOCATION
                 </span>

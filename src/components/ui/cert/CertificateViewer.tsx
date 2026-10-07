@@ -178,19 +178,19 @@ export function CertificateViewer({
           className="relative z-[1001] w-full max-w-[min(90vw,1000px)] flex flex-col items-center justify-center pointer-events-auto"
           onClick={(e) => e.stopPropagation()}
         >
-          {/* Certificate Image Frame */}
+          {/* Certificate Image Frame — Liquid Glass Frame (Phase 9 Section 40) */}
           <motion.div
             key={cert.id}
             initial={prefersReduced ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.97 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={prefersReduced ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.97 }}
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className="relative rounded-xl border border-white/15 bg-black/95 shadow-2xl overflow-hidden flex items-center justify-center w-auto max-h-[min(72vh,680px)]"
+            className="relative rounded-2xl glass-focus liquid-edge p-1.5 shadow-2xl overflow-hidden flex items-center justify-center w-auto max-h-[min(72vh,680px)]"
             style={{
-              boxShadow: `0 25px 60px rgba(0, 0, 0, 0.9), 0 0 45px ${accentColor}20`,
+              boxShadow: `0 28px 70px rgba(0, 0, 0, 0.95), 0 0 45px ${accentColor}25`,
             }}
           >
-            <picture className="block max-h-[min(72vh,680px)] w-auto">
+            <picture className="block max-h-[min(72vh,680px)] w-auto rounded-xl overflow-hidden">
               <source type="image/webp" srcSet={cert.imageWebp} />
               <img
                 src={cert.image}
@@ -201,8 +201,8 @@ export function CertificateViewer({
             </picture>
           </motion.div>
 
-          {/* ─── 5. Certificate Metadata & Action Bar (Inside Normal Flow Below Image) ─── */}
-          <div className="mt-4 sm:mt-5 w-full flex flex-col sm:flex-row items-center justify-between gap-3 px-1 font-mono text-xs text-slate-300">
+          {/* ─── 5. Certificate Metadata & Action Bar — Glass Level 1 ─── */}
+          <div className="mt-4 sm:mt-5 w-full glass-level-1 liquid-edge p-3.5 sm:p-4 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-3 font-mono text-xs text-slate-300">
             {/* Metadata Left */}
             <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 sm:gap-4 text-center sm:text-left">
               <span className="text-white font-semibold flex items-center gap-2">

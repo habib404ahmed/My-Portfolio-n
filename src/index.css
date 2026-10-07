@@ -6,33 +6,47 @@
    DESIGN TOKENS
    ============================================================ */
 :root {
-  /* Phase 8 Cinematic Color System */
-  --color-void: #050608;
-  --color-deep: #090D12;
-  --color-surface: #0D131A;
-  --color-elevated: #111922;
-  --color-border: rgba(140, 190, 210, 0.16);
+  /* Phase 9 Global Liquid Glass Design System */
+  --glass-bg: rgba(255, 255, 255, 0.045);
+  --glass-bg-strong: rgba(255, 255, 255, 0.075);
+  --glass-bg-focus: rgba(255, 255, 255, 0.10);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-border-highlight: rgba(255, 255, 255, 0.28);
+  --glass-border-hover: rgba(0, 217, 255, 0.32);
+  --glass-border-active: rgba(0, 217, 255, 0.50);
+  --glass-shadow: 0 24px 80px rgba(0, 0, 0, 0.38);
+  --glass-shadow-hover: 0 32px 90px rgba(0, 0, 0, 0.48), 0 0 30px rgba(0, 217, 255, 0.14);
+  --glass-blur: 24px;
+  --glass-saturation: 145%;
+  --glass-radius: 24px;
+
+  /* Phase 9 Color System */
+  --color-void: #030507;
+  --color-deep: #060A10;
+  --color-surface: #090E16;
+  --color-elevated: #0E1622;
+  --color-border: rgba(255, 255, 255, 0.12);
   --color-border-strong: rgba(0, 217, 255, 0.35);
   --color-border-accent: rgba(0, 217, 255, 0.28);
 
-  /* Primary Accent: Reserved for Interaction, System Energy, and Focus (7%) */
+  /* Primary Accent: Electric Cyan (7%) */
   --color-cyan: #00D9FF;
-  --color-cyan-bright: #38E8FF;
+  --color-cyan-bright: #4DEBFF;
   --color-cyan-dark: #007C99;
   --color-cyan-dim: rgba(0, 217, 255, 0.12);
-  --color-cyan-glow: rgba(0, 217, 255, 0.32);
+  --color-cyan-glow: rgba(0, 217, 255, 0.35);
 
-  /* Secondary Accent: Cool Blue (20%) & Atmospheric Violet (3%) */
-  --color-blue: #6575FF;
-  --color-blue-dim: rgba(101, 117, 255, 0.12);
-  --color-violet: #8B7CFF;
-  --color-violet-dim: rgba(139, 124, 255, 0.12);
+  /* Secondary Accent: Blue Atmosphere (20%) & Subtle Violet (3%) */
+  --color-blue: #5577FF;
+  --color-blue-dim: rgba(85, 119, 255, 0.12);
+  --color-violet: #8175FF;
+  --color-violet-dim: rgba(129, 117, 255, 0.12);
 
-  /* Emerald (Security status indicator) */
+  /* Emerald (Security indicator) */
   --color-emerald: #10b981;
 
   /* Typography Colors */
-  --color-text-primary: #F4F7FA;
+  --color-text-primary: #F5F8FA;
   --color-text-secondary: #A8B4C2;
   --color-text-muted: #687687;
   --color-text-accent: #00D9FF;
@@ -222,13 +236,74 @@ section[id] {
   right: 0;
   height: var(--nav-height, 72px);
   z-index: var(--z-nav, 100);
-  background: rgba(7, 10, 15, 0.88);
+  background: rgba(255, 255, 255, 0.035);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 -1px 0 rgba(255, 255, 255, 0.05);
+  pointer-events: auto;
+  transition: background 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.site-header.scrolled {
+  background: rgba(8, 13, 20, 0.72);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65), inset 0 -1px 0 rgba(0, 217, 255, 0.14);
+}
+
+/* Glass Buttons (Phase 9 Section 39) */
+.glass-btn-primary {
+  position: relative;
+  background: linear-gradient(135deg, rgba(0, 217, 255, 0.16) 0%, rgba(6, 10, 16, 0.88) 100%);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  border: 1px solid rgba(0, 217, 255, 0.45);
+  color: var(--color-cyan-bright);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 0 16px rgba(0, 217, 255, 0.15);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-style: preserve-3d;
+}
+
+.glass-btn-primary:hover {
+  transform: translateY(-2px) translateZ(8px);
+  border-color: rgba(0, 217, 255, 0.75);
+  background: linear-gradient(135deg, rgba(0, 217, 255, 0.24) 0%, rgba(9, 14, 22, 0.92) 100%);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 0 24px rgba(0, 217, 255, 0.30);
+  color: #FFFFFF;
+}
+
+.glass-btn-primary:active {
+  transform: translateY(0px) scale(0.98);
+}
+
+.glass-btn-secondary {
+  position: relative;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(7, 11, 18, 0.75) 100%);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.10);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
-  pointer-events: auto;
-  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--color-text-primary);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.10);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-btn-secondary:hover {
+  transform: translateY(-2px);
+  border-color: rgba(0, 217, 255, 0.35);
+  color: var(--color-cyan-bright);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.16), 0 0 16px rgba(0, 217, 255, 0.12);
+}
+
+.glass-btn-secondary:active {
+  transform: translateY(0px) scale(0.98);
 }
 
 .site-header-inner {
@@ -376,17 +451,157 @@ body {
 }
 
 /* ============================================================
-   GLASS SURFACE (PHASE 8 CINEMATIC SURFACES)
+   PHASE 9 — GLOBAL LIQUID GLASS MATERIAL SYSTEM
    ============================================================ */
-.glass {
-  background: rgba(13, 19, 26, 0.72);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid var(--color-border);
+.glass,
+.glass-level-1 {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.035) 0%, rgba(6, 10, 16, 0.72) 100%);
+  backdrop-filter: blur(20px) saturate(135%);
+  -webkit-backdrop-filter: blur(20px) saturate(135%);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.10);
+  border-radius: var(--glass-radius);
+}
+
+/* Level 2: Content Glass (Cards, Modules, Clusters) */
+.glass-level-2,
+.glass-card {
+  position: relative;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.055) 0%, rgba(9, 14, 22, 0.78) 100%);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  border-radius: 20px;
+  transform-style: preserve-3d;
+  transition: transform 0.45s var(--ease-cinematic), border-color 0.45s var(--ease-cinematic), box-shadow 0.45s var(--ease-cinematic);
+}
+
+.glass-level-2:hover,
+.glass-card:hover {
+  border-color: var(--glass-border-hover);
+  box-shadow: var(--glass-shadow-hover), inset 0 1px 0 rgba(0, 217, 255, 0.28);
+}
+
+/* Level 3: Focus Glass (Hero, Primary CTA, Active Project, Modal, Resume) */
+.glass-level-3,
+.glass-focus {
+  position: relative;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.085) 0%, rgba(12, 19, 30, 0.88) 100%);
+  backdrop-filter: blur(28px) saturate(155%);
+  -webkit-backdrop-filter: blur(28px) saturate(155%);
+  border: 1px solid var(--glass-border-highlight);
+  box-shadow: 0 32px 90px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.24), 0 0 28px rgba(0, 217, 255, 0.10);
+  border-radius: var(--glass-radius);
+  transform-style: preserve-3d;
+}
+
+/* Liquid Edge Highlight: Top-left catches cool light, bottom-right deeper */
+.liquid-edge {
+  position: relative;
+}
+
+.liquid-edge::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.32) 0%, rgba(255, 255, 255, 0.06) 45%, rgba(0, 217, 255, 0.22) 100%);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Subtle Reflection Sweep: Discovered gently, never like a flashy ad */
+@keyframes glass-reflection-travel {
+  0% { transform: translateX(-160%) rotate(25deg); opacity: 0; }
+  15% { opacity: 0.15; }
+  50% { opacity: 0.20; }
+  85% { opacity: 0.05; }
+  100% { transform: translateX(260%) rotate(25deg); opacity: 0; }
+}
+
+.glass-reflection-sweep {
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-reflection-sweep::after {
+  content: '';
+  position: absolute;
+  top: -60%;
+  bottom: -60%;
+  left: 0;
+  width: 50%;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.12) 50%, transparent 100%);
+  pointer-events: none;
+  opacity: 0;
+  animation: glass-reflection-travel 12s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  z-index: 1;
+}
+
+/* Glass Technology Chips (Section 18) */
+.glass-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.65rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  background: rgba(255, 255, 255, 0.035);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 8px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition: all 0.25s var(--ease-cinematic);
+  cursor: pointer;
+  user-select: none;
+}
+
+.glass-chip:hover {
+  transform: translateY(-3px);
+  color: var(--color-text-primary);
+  border-color: rgba(0, 217, 255, 0.35);
+  background: rgba(0, 217, 255, 0.08);
+  box-shadow: 0 4px 16px rgba(0, 217, 255, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.16);
+}
+
+/* Glass Frame for Portrait & Key Exhibits (Section 11) */
+.glass-frame {
+  position: relative;
+  border-radius: 24px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(6, 10, 16, 0.82) 100%);
+  backdrop-filter: blur(28px) saturate(145%);
+  -webkit-backdrop-filter: blur(28px) saturate(145%);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 28px 85px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.20), 0 0 24px rgba(0, 217, 255, 0.08);
+  transform-style: preserve-3d;
+}
+
+/* Non-backdrop-filter fallback (Section 46) */
+@supports not (backdrop-filter: blur(10px)) {
+  .glass,
+  .glass-level-1 {
+    background: rgba(9, 14, 22, 0.95);
+  }
+  .glass-level-2,
+  .glass-card {
+    background: rgba(14, 22, 34, 0.96);
+  }
+  .glass-level-3,
+  .glass-focus,
+  .glass-frame {
+    background: rgba(18, 28, 44, 0.98);
+  }
 }
 
 .glass-accent {
-  background: rgba(0, 217, 255, 0.035);
+  background: rgba(0, 217, 255, 0.045);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--color-border-accent);

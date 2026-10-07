@@ -96,7 +96,7 @@ export function Scene07TimelineLeadership() {
           </p>
         </div>
 
-        {/* ─── MILESTONE STEPPING TIMELINE (9 Milestones Grid) ─── */}
+        {/* ─── MILESTONE STEPPING TIMELINE — Glass Capsules (Phase 9 Section 20 & 24) ─── */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-9 gap-2 mb-10">
           {timelineEvents.map((evt, idx) => {
             const isActive = idx === activeIndex
@@ -105,15 +105,15 @@ export function Scene07TimelineLeadership() {
               <button
                 key={evt.id}
                 onClick={() => setActiveIndex(idx)}
-                className={`p-2.5 sm:p-3 rounded-xl border text-left transition-all duration-300 relative group focus:outline-none focus:ring-1 focus:ring-cyan-400 cursor-pointer ${
+                className={`p-2.5 sm:p-3 rounded-2xl text-left transition-all duration-300 relative group focus:outline-none focus:ring-1 focus:ring-cyan-400 cursor-pointer ${
                   isActive
-                    ? 'border-white/50 bg-slate-900/95 shadow-xl scale-102 opacity-100 ring-1 ring-cyan-400/40'
+                    ? 'glass-focus liquid-edge border-white/50 shadow-xl scale-102 opacity-100 ring-1 ring-cyan-400/50'
                     : isPast
-                    ? 'border-white/10 bg-slate-950/50 opacity-65 hover:opacity-95 hover:border-white/25'
-                    : 'border-white/5 bg-slate-950/30 opacity-35 hover:opacity-75 hover:border-white/15'
+                    ? 'glass-card opacity-70 hover:opacity-100 hover:border-white/30'
+                    : 'glass-level-1 opacity-45 hover:opacity-85 hover:border-white/20'
                 }`}
                 style={{
-                  boxShadow: isActive ? `0 0 20px ${evt.color}25` : 'none',
+                  boxShadow: isActive ? `0 0 24px ${evt.color}35` : 'none',
                 }}
                 aria-pressed={isActive}
               >
@@ -139,7 +139,7 @@ export function Scene07TimelineLeadership() {
           })}
         </div>
 
-        {/* ─── ACTIVE MILESTONE HERO VIEWPORT ─── */}
+        {/* ─── ACTIVE MILESTONE HERO VIEWPORT (Glass Focus Terminal) ─── */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-[380px]">
           {/* Left Column: Milestone Narrative */}
           <div className="lg:col-span-7">
@@ -150,7 +150,7 @@ export function Scene07TimelineLeadership() {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 20 }}
                 transition={{ duration: prefersReduced ? 0 : 0.4 }}
-                className="p-8 sm:p-10 rounded-2xl border border-white/10 bg-slate-950/70 backdrop-blur-md relative overflow-hidden"
+                className="p-8 sm:p-10 rounded-2xl glass-focus liquid-edge glass-reflection-sweep relative overflow-hidden shadow-[0_24px_70px_rgba(0,0,0,0.5)]"
               >
                 {/* Environment Indicator Pill */}
                 <div className="flex items-center gap-2 mb-4">
@@ -222,7 +222,7 @@ export function Scene07TimelineLeadership() {
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.94, y: -15 }}
                   transition={{ duration: 0.5 }}
-                  className="w-full max-w-sm p-6 rounded-2xl border border-rose-500/30 bg-gradient-to-br from-rose-950/30 to-slate-950/80 backdrop-blur-md shadow-[0_15px_40px_rgba(244,63,94,0.15)] group"
+                  className="w-full max-w-sm p-6 rounded-2xl glass-card liquid-edge shadow-[0_15px_40px_rgba(244,63,94,0.15)] group"
                 >
                   <div className="flex items-center justify-between pb-3 mb-4 border-b border-rose-500/20">
                     <span className="font-mono text-[0.625rem] font-bold text-rose-400 uppercase tracking-widest">
@@ -262,7 +262,7 @@ export function Scene07TimelineLeadership() {
                   </a>
                 </motion.div>
               ) : activeEvent.certificateRef ? (
-                /* ─── CERTIFICATE DOCUMENT INSPECTION CARD ─── */
+                /* ─── CERTIFICATE DOCUMENT INSPECTION CARD (Glass Document Frame) ─── */
                 <motion.div
                   key={activeEvent.certificateRef}
                   initial={{ opacity: 0, scale: 0.94, y: 15 }}
@@ -270,7 +270,7 @@ export function Scene07TimelineLeadership() {
                   exit={{ opacity: 0, scale: 0.94, y: -15 }}
                   transition={{ duration: 0.5 }}
                   onClick={() => setViewerCertId(activeEvent.certificateRef || null)}
-                  className="w-full max-w-sm p-6 rounded-2xl border border-cyan-500/30 bg-gradient-to-br from-cyan-950/30 to-slate-950/80 backdrop-blur-md cursor-pointer hover:border-cyan-400/60 shadow-[0_15px_40px_rgba(6,182,212,0.15)] transition-all group"
+                  className="w-full max-w-sm p-6 rounded-2xl glass-card liquid-edge glass-reflection-sweep cursor-pointer border border-cyan-500/30 hover:border-cyan-400/60 shadow-[0_15px_40px_rgba(6,182,212,0.18)] transition-all group"
                   role="button"
                   tabIndex={0}
                   onKeyDown={(e) =>
@@ -308,7 +308,7 @@ export function Scene07TimelineLeadership() {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.96 }}
                   transition={{ duration: 0.4 }}
-                  className="w-full max-w-sm p-6 rounded-2xl border border-white/10 bg-slate-950/50 backdrop-blur-sm text-center"
+                  className="w-full max-w-sm p-6 rounded-2xl glass-card liquid-edge text-center"
                 >
                   <div
                     className="w-16 h-16 rounded-full mx-auto mb-4 border flex items-center justify-center"

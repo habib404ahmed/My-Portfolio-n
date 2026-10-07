@@ -49,17 +49,17 @@ export function SocialConstellation() {
         Social & Network Nodes
       </h3>
 
-      {/* Central Hub Node */}
+      {/* Central Hub Node — Communication Core (Phase 9 Section 27) */}
       <div className="flex flex-col items-center">
         <motion.div
-          animate={{ scale: [1, 1.05, 1] }}
+          animate={{ scale: [1, 1.04, 1] }}
           transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-          className="p-3.5 px-6 rounded-2xl border border-cyan-500/30 bg-slate-900/90 shadow-[0_0_30px_rgba(6,182,212,0.25)] text-center mb-6 relative z-10"
+          className="p-4 px-8 rounded-2xl glass-focus liquid-edge glass-reflection-sweep shadow-[0_0_35px_rgba(0,217,255,0.3)] text-center mb-6 relative z-10"
         >
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 justify-center">
             <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
-            <span className="font-display font-bold text-sm text-white tracking-wider">
-              HABIB &bull; CORE HUB
+            <span className="font-display font-bold text-sm text-white tracking-wider uppercase">
+              COMMUNICATION CORE
             </span>
           </div>
           <div className="font-mono text-[0.625rem] text-slate-400 mt-0.5">
@@ -67,7 +67,7 @@ export function SocialConstellation() {
           </div>
         </motion.div>
 
-        {/* 4 Radiating Nodes */}
+        {/* 4 Radiating Nodes — Floating Glass Nodes */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
           {CONNECTIONS.map((conn) => {
             const isHovered = hoveredNode === conn.id
@@ -81,13 +81,13 @@ export function SocialConstellation() {
                 onMouseLeave={() => setHoveredNode(null)}
                 onFocus={() => setHoveredNode(conn.id)}
                 onBlur={() => setHoveredNode(null)}
-                className={`p-5 rounded-2xl border text-left transition-all duration-300 block relative overflow-hidden group ${
+                className={`p-5 rounded-2xl glass-card liquid-edge glass-reflection-sweep text-left transition-all duration-300 block relative overflow-hidden group cursor-pointer ${
                   isHovered
-                    ? 'border-white/40 bg-slate-900/90 -translate-y-1 shadow-xl'
-                    : 'border-white/10 bg-slate-950/70 hover:border-white/20'
+                    ? 'glass-focus -translate-y-1.5 shadow-2xl border-[#00D9FF]/70'
+                    : 'hover:border-white/30'
                 }`}
                 style={{
-                  boxShadow: isHovered ? `0 0 25px ${conn.color}30` : 'none',
+                  boxShadow: isHovered ? `0 0 25px ${conn.color}35` : 'none',
                 }}
                 aria-label={`Open ${conn.label}: ${conn.handle}`}
               >

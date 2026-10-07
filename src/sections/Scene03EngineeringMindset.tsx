@@ -158,9 +158,12 @@ export function Scene03EngineeringMindset() {
         titleHighlight="BUILD"
         subtitle="Great software isn't written by accident. It is systematically engineered through an 8-stage lifecycle: Discover → Architect → Build → Integrate → Secure → Test → Deploy → Iterate."
       >
-        {/* 8-Stage Process Navigation (Horizontal scroll on mobile, 8 equal cols on desktop) */}
+        {/* 8-Stage Process Navigation — Floating Glass Pipeline (Phase 9 Section 16) */}
         <div className="relative mb-10">
-          <div className="flex md:grid md:grid-cols-8 gap-2 overflow-x-auto pb-3 pt-1 scrollbar-none snap-x">
+          {/* Luminous Glass Energy Line */}
+          <div className="absolute top-1/2 left-4 right-4 h-[2px] bg-gradient-to-r from-[#5577FF]/30 via-[#00D9FF]/50 to-[#8175FF]/30 -translate-y-1/2 -z-0 hidden md:block pointer-events-none rounded-full shadow-[0_0_10px_rgba(0,217,255,0.4)]" />
+
+          <div className="flex md:grid md:grid-cols-8 gap-2 overflow-x-auto pb-3 pt-1 scrollbar-none snap-x relative z-10">
             {PIPELINE_STAGES.map((stage) => {
               const isActive = stage.id === activeStageId
               return (
@@ -169,8 +172,8 @@ export function Scene03EngineeringMindset() {
                   onClick={() => setActiveStageId(stage.id)}
                   className={`flex-shrink-0 min-w-[120px] md:min-w-0 snap-start flex flex-col items-center p-3 rounded-xl border text-center transition-all duration-300 cursor-pointer ${
                     isActive
-                      ? 'border-[#00D9FF] bg-[#111922] shadow-[0_0_16px_rgba(0,217,255,0.2)]'
-                      : 'border-[rgba(140,190,210,0.16)] bg-[#0D131A]/60 hover:border-[rgba(0,217,255,0.3)]'
+                      ? 'glass-focus liquid-edge border-[#00D9FF] shadow-[0_0_22px_rgba(0,217,255,0.35)] scale-102'
+                      : 'glass-card hover:border-[rgba(0,217,255,0.3)]'
                   }`}
                   aria-pressed={isActive}
                 >
@@ -191,6 +194,7 @@ export function Scene03EngineeringMindset() {
                     className="w-1.5 h-1.5 rounded-full mt-2 transition-all"
                     style={{
                       background: isActive ? stage.color : 'transparent',
+                      boxShadow: isActive ? `0 0 8px ${stage.color}` : 'none',
                     }}
                   />
                 </button>
@@ -201,8 +205,8 @@ export function Scene03EngineeringMindset() {
 
         {/* Active Stage Area: Left (Visualization) & Right (Rationale) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch mb-8">
-          {/* Left Column: Visual Simulation */}
-          <div className="lg:col-span-7 rounded-2xl border border-[rgba(140,190,210,0.16)] bg-[#0D131A]/80 p-6 sm:p-8 flex flex-col justify-between backdrop-blur-sm">
+          {/* Left Column: Visual Simulation (Glass Card) */}
+          <div className="lg:col-span-7 rounded-2xl glass-card liquid-edge p-6 sm:p-8 flex flex-col justify-between">
             {/* Header */}
             <div className="flex items-center justify-between border-b border-[rgba(140,190,210,0.16)] pb-4 mb-6">
               <div className="flex items-center gap-2.5">
@@ -262,8 +266,8 @@ export function Scene03EngineeringMindset() {
             </div>
           </div>
 
-          {/* Right Column: Architectural Approach */}
-          <div className="lg:col-span-5 rounded-2xl border border-[rgba(140,190,210,0.16)] bg-[#0D131A]/80 p-6 sm:p-8 flex flex-col justify-between backdrop-blur-sm">
+          {/* Right Column: Architectural Approach (Focus Glass) */}
+          <div className="lg:col-span-5 rounded-2xl glass-focus liquid-edge glass-reflection-sweep p-6 sm:p-8 flex flex-col justify-between">
             <div>
               <div className="font-mono text-xs font-bold text-[#00D9FF] uppercase tracking-wider mb-2">
                 ARCHITECTURAL APPROACH
@@ -277,7 +281,7 @@ export function Scene03EngineeringMindset() {
             </div>
 
             {/* Objective Callout */}
-            <div className="p-4 rounded-xl border border-[rgba(140,190,210,0.16)] bg-[#090D12]/80">
+            <div className="p-4 rounded-xl border border-white/10 bg-black/40">
               <span className="font-mono text-[0.625rem] text-[#687687] uppercase tracking-wider block mb-1 font-semibold">
                 CORE OBJECTIVE
               </span>
@@ -288,13 +292,13 @@ export function Scene03EngineeringMindset() {
           </div>
         </div>
 
-        {/* Guiding Principle Banner */}
+        {/* Guiding Principle Banner — Glass Level 1 */}
         <motion.div
           key={`heuristic-${currentStage.id}`}
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="p-5 rounded-xl border border-[rgba(140,190,210,0.16)] bg-[#0D131A]/70 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-left"
+          className="p-5 rounded-xl glass-level-1 liquid-edge flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-left"
         >
           <div>
             <span className="font-mono text-[0.6875rem] text-[#00D9FF] uppercase tracking-wider font-bold block mb-1">

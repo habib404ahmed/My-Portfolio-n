@@ -85,10 +85,10 @@ export function Scene08Certifications() {
                 onMouseEnter={() => setFocusedId(cert.id)}
                 onFocus={() => setFocusedId(cert.id)}
                 onClick={() => setActiveCert(cert)}
-                className={`relative group rounded-2xl border transition-all duration-300 p-6 sm:p-7 flex flex-col justify-between cursor-pointer select-none ${
+                className={`relative group rounded-2xl glass-card liquid-edge glass-reflection-sweep transition-all duration-400 p-6 sm:p-7 flex flex-col justify-between cursor-pointer select-none ${
                   isFocused
-                    ? 'border-[#00D9FF]/60 bg-[#111922] shadow-xl'
-                    : 'border-[rgba(140,190,210,0.16)] bg-[#0D131A]/70 hover:border-[rgba(0,217,255,0.3)]'
+                    ? 'glass-focus border-[#00D9FF]/70 shadow-2xl'
+                    : 'hover:border-[rgba(0,217,255,0.4)]'
                 }`}
                 style={{
                   boxShadow: isFocused ? `0 0 35px ${theme.subtleGlow}` : 'none',
@@ -120,9 +120,9 @@ export function Scene08Certifications() {
                     </span>
                   </div>
 
-                  {/* Real Document Thumbnail Preview */}
-                  <div className="relative aspect-[4/3] rounded-lg overflow-hidden border border-white/10 bg-black/60 mb-5 group-hover:border-white/20 transition-all">
-                    <picture className="block w-full h-full">
+                  {/* Real Document Thumbnail Preview — Glass Frame (Phase 9 Section 25) */}
+                  <div className="relative aspect-[4/3] rounded-xl overflow-hidden glass-frame liquid-edge p-1 mb-5 transition-all">
+                    <picture className="block w-full h-full rounded-lg overflow-hidden">
                       <source type="image/webp" srcSet={cert.imageWebp} />
                       <img
                         src={cert.image}

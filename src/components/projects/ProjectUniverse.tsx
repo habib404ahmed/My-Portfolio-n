@@ -88,11 +88,11 @@ export function ProjectUniverse() {
               {renderWorld(currentProject.id)}
             </div>
 
-            {/* Right: Technical Dossier & Immediate Actions */}
-            <div className="lg:col-span-5 rounded-xl border border-[rgba(140,190,210,0.16)] bg-[#0D131A]/80 p-6 sm:p-8 backdrop-blur-md flex flex-col justify-between">
+            {/* Right: Technical Dossier & Immediate Actions — Focus Glass (Phase 9 Section 21) */}
+            <div className="lg:col-span-5 rounded-2xl glass-focus liquid-edge glass-reflection-sweep p-6 sm:p-8 flex flex-col justify-between shadow-[0_24px_70px_rgba(0,0,0,0.5)]">
               <div>
                 {/* Meta Counter & Category */}
-                <div className="flex items-center justify-between pb-4 mb-4 border-b border-[rgba(140,190,210,0.16)]">
+                <div className="flex items-center justify-between pb-4 mb-4 border-b border-white/10">
                   <span
                     className="font-mono text-xs font-bold px-2 py-0.5 rounded"
                     style={{
@@ -117,7 +117,7 @@ export function ProjectUniverse() {
                   {currentProject.shortDescription}
                 </p>
 
-                {/* Tech Chips */}
+                {/* Tech Chips — Phase 9 Glass Chips */}
                 <div className="mb-6">
                   <div className="font-mono text-[0.625rem] text-[#687687] uppercase tracking-widest mb-2">
                     TECHNOLOGY STACK
@@ -126,7 +126,7 @@ export function ProjectUniverse() {
                     {currentProject.technologies.slice(0, 6).map((tech) => (
                       <span
                         key={tech}
-                        className="px-2.5 py-1 rounded border border-[rgba(140,190,210,0.16)] bg-[#090D12]/70 font-mono text-[0.6875rem] text-[#A8B4C2]"
+                        className="glass-chip"
                       >
                         {tech}
                       </span>
@@ -140,7 +140,7 @@ export function ProjectUniverse() {
                 </div>
 
                 {/* My Contribution Block */}
-                <div className="mb-6 p-3.5 rounded-lg border border-[rgba(0,217,255,0.2)] bg-[#00D9FF]/[0.04]">
+                <div className="mb-6 p-3.5 rounded-xl glass-level-1 liquid-edge border border-[rgba(0,217,255,0.25)]">
                   <div className="font-mono text-[0.625rem] text-[#38E8FF] uppercase tracking-widest mb-1 font-semibold flex items-center gap-1.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#00D9FF]" />
                     <span>MY CONTRIBUTION</span>
@@ -152,7 +152,7 @@ export function ProjectUniverse() {
 
                 {/* Metrics Bar */}
                 {currentProject.metrics && (
-                  <div className="grid grid-cols-3 gap-2 mb-6 p-3 rounded-lg border border-[rgba(140,190,210,0.16)] bg-[#090D12]/60">
+                  <div className="grid grid-cols-3 gap-2 mb-6 p-3 rounded-xl glass-level-1 liquid-edge">
                     {currentProject.metrics.map((m, i) => (
                       <div key={i}>
                         <div className="font-mono text-[0.5625rem] text-[#687687] uppercase">{m.label}</div>

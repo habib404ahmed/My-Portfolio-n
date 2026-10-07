@@ -30,8 +30,8 @@ export function WebResumeViewer() {
 
   return (
     <div id="resume-experience" className="w-full">
-      {/* Top Action Header Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-4 p-5 rounded-2xl border border-white/10 bg-slate-950/80 backdrop-blur-md mb-8 no-print">
+      {/* Top Action Header Bar — Glass Terminal Bar (Phase 9 Section 26) */}
+      <div className="flex flex-wrap items-center justify-between gap-4 p-5 rounded-2xl glass-focus liquid-edge mb-8 no-print shadow-[0_16px_40px_rgba(0,0,0,0.5)]">
         <div className="flex items-center gap-3">
           <div className="w-3 h-3 rounded-full bg-cyan-400 animate-pulse" />
           <div>
@@ -59,7 +59,7 @@ export function WebResumeViewer() {
           {/* View Fullscreen Modal - Secondary CTA */}
           <button
             onClick={() => setModalOpen(true)}
-            className="px-3.5 py-2 rounded-lg border border-cyan-500/30 bg-cyan-950/20 font-mono text-xs text-cyan-300 hover:text-white hover:border-cyan-400/50 transition-all flex items-center gap-1.5 cursor-pointer"
+            className="px-3.5 py-2 rounded-xl glass-btn-secondary font-mono text-xs text-cyan-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer"
             aria-label="View Resume in Full-Screen Modal"
           >
             <svg className="w-4 h-4 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -76,7 +76,7 @@ export function WebResumeViewer() {
           {/* Print Resume Button */}
           <button
             onClick={() => window.print()}
-            className="px-3 py-2 rounded-lg border border-white/10 bg-white/5 font-mono text-xs text-slate-300 hover:text-white hover:border-white/25 transition-all flex items-center gap-1.5 cursor-pointer"
+            className="px-3.5 py-2 rounded-xl glass-btn-secondary font-mono text-xs text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer"
             aria-label="Print Resume Document"
           >
             <svg className="w-4 h-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -96,9 +96,9 @@ export function WebResumeViewer() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* Left Sticky Index (Desktop Only) */}
         <aside className="lg:col-span-3 sticky top-24 hidden lg:block no-print">
-          <div className="p-5 rounded-2xl border border-white/10 bg-slate-950/80 backdrop-blur-md">
+          <div className="p-5 rounded-2xl glass-card liquid-edge">
             {/* Candidate Canonical Portrait Card */}
-            <div className="mb-5 overflow-hidden rounded-xl border border-cyan-500/20 bg-slate-900/60 p-2.5 text-center">
+            <div className="mb-5 overflow-hidden rounded-xl glass-frame liquid-edge p-2 text-center">
               <div className="relative aspect-[576/1024] max-h-[220px] mx-auto overflow-hidden rounded-lg bg-black/40">
                 <img
                   src="/assets/images/profile-400.webp"

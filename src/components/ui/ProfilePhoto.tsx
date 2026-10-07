@@ -108,9 +108,9 @@ export function ProfilePhoto({
             aria-hidden="true"
           />
 
-          {/* ─── Portrait Photo Container ─── */}
+          {/* ─── Portrait Photo Container (Phase 9 Glass Frame) ─── */}
           <div
-            className="relative rounded-2xl overflow-hidden border border-white/10 bg-slate-950/60 shadow-[0_20px_50px_rgba(0,0,0,0.85)] transition-shadow duration-500 group-hover:shadow-[0_20px_60px_rgba(6,182,212,0.15)]"
+            className="relative rounded-2xl overflow-hidden glass-frame liquid-edge p-1 shadow-[0_24px_70px_rgba(0,0,0,0.85)] transition-all duration-500 group-hover:shadow-[0_28px_80px_rgba(0,217,255,0.18)]"
             style={{
               aspectRatio: '576 / 1024',
             }}

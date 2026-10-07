@@ -53,7 +53,7 @@ export function Navigation({ visible }: NavigationProps) {
           animate="visible"
           role="banner"
           aria-label="Main navigation header"
-          className={`site-header ${scrolled ? 'shadow-[0_4px_30px_rgba(0,0,0,0.85)]' : ''}`}
+          className={`site-header ${scrolled ? 'scrolled shadow-[0_8px_32px_rgba(0,0,0,0.85)]' : ''}`}
         >
           <div className="site-header-inner">
             {/* Brand block: H emblem + Title & Role */}
@@ -108,7 +108,7 @@ export function Navigation({ visible }: NavigationProps) {
               {/* Primary Emphasized Resume CTA Button */}
               <button
                 onClick={() => handleNavClick('#resume')}
-                className="ml-4 lg:ml-6 h-8 px-4 rounded-full font-display text-xs font-semibold tracking-wider uppercase text-cyan-300 border border-cyan-500/40 bg-cyan-950/30 hover:bg-cyan-400 hover:text-black hover:border-cyan-400 transition-all duration-200 focus:outline-none focus:ring-1 focus:ring-cyan-400 cursor-pointer shrink-0"
+                className="ml-4 lg:ml-6 h-8 px-4 rounded-full font-display text-xs font-semibold tracking-wider uppercase glass-btn-primary hover:text-white transition-all duration-200 focus:outline-none focus:ring-1 focus:ring-cyan-400 cursor-pointer shrink-0"
               >
                 RESUME
               </button>

@@ -195,11 +195,12 @@ export function HeroContent({ visible }: HeroContentProps) {
           ───────────────────────────────────────────────────────────── */}
       <div className="hidden md:grid grid-cols-12 gap-8 lg:gap-12 xl:gap-16 items-center w-full min-h-[calc(100svh-72px)] py-6">
         {/* Left Column: Exactly aligned x-coordinate stack (Rules 3, 4, 8, 34) */}
+        {/* Left Column: Liquid Glass Control Room Panel (Phase 9 Section 10) */}
         <motion.div
           initial="hidden"
           animate={visible ? 'visible' : 'hidden'}
           variants={heroSceneContainer}
-          className="hero-copy col-span-12 md:col-span-7 lg:col-span-7 flex flex-col items-start text-left w-full max-w-[600px]"
+          className="hero-copy col-span-12 md:col-span-7 lg:col-span-7 flex flex-col items-start text-left w-full max-w-[620px] p-6 sm:p-8 md:p-9 rounded-[28px] glass-level-1 liquid-edge glass-reflection-sweep shadow-[0_24px_80px_rgba(0,0,0,0.45)]"
         >
           {/* 1. Location / Role Line */}
           <motion.div
@@ -255,11 +256,11 @@ export function HeroContent({ visible }: HeroContentProps) {
             {profile.tagline}
           </motion.p>
 
-          {/* 6. CTA Container (Settled Film Trailer CTA Reveal) */}
+          {/* 6. CTA Container (Glass Buttons - Phase 9 Section 39) */}
           <motion.div variants={ctaVariants} className="hero-actions w-full flex flex-wrap items-center gap-3.5 mb-5">
             <button
               onClick={handleExplore}
-              className="h-[52px] sm:h-[54px] min-w-[180px] sm:min-w-[195px] lg:min-w-[220px] px-5 sm:px-6 rounded-sm bg-[#00D9FF] hover:bg-[#38E8FF] text-[#050608] font-display text-xs sm:text-sm font-bold tracking-wider uppercase transition-all duration-300 hover:-translate-y-0.5 flex items-center justify-center gap-2.5 shadow-[0_4px_20px_rgba(0,217,255,0.28)] active:translate-y-0 cursor-pointer"
+              className="h-[52px] sm:h-[54px] min-w-[180px] sm:min-w-[195px] lg:min-w-[220px] px-5 sm:px-6 rounded-xl glass-btn-primary font-display text-xs sm:text-sm font-bold tracking-wider uppercase flex items-center justify-center gap-2.5 cursor-pointer"
               aria-label="Explore engineering work"
             >
               <span>Explore My Work</span>
@@ -270,7 +271,7 @@ export function HeroContent({ visible }: HeroContentProps) {
 
             <button
               onClick={handleResume}
-              className="h-[52px] sm:h-[54px] min-w-[180px] sm:min-w-[195px] lg:min-w-[220px] px-5 sm:px-6 rounded-sm border border-[rgba(140,190,210,0.16)] hover:border-[rgba(0,217,255,0.45)] bg-[#0D131A]/80 hover:bg-[#111922] text-[#F4F7FA] hover:text-[#00D9FF] font-display text-xs sm:text-sm font-semibold tracking-wider uppercase transition-all duration-300 hover:-translate-y-0.5 flex items-center justify-center gap-2.5 backdrop-blur-sm active:translate-y-0 cursor-pointer"
+              className="h-[52px] sm:h-[54px] min-w-[180px] sm:min-w-[195px] lg:min-w-[220px] px-5 sm:px-6 rounded-xl glass-btn-secondary font-display text-xs sm:text-sm font-semibold tracking-wider uppercase flex items-center justify-center gap-2.5 cursor-pointer"
               aria-label="Download resume PDF"
             >
               <svg width="13" height="13" viewBox="0 0 14 14" fill="none" className="flex-shrink-0">
@@ -396,11 +397,11 @@ export function HeroContent({ visible }: HeroContentProps) {
           />
         </motion.div>
 
-        {/* 7 & 8. Matched CTA Buttons */}
+        {/* 7 & 8. Matched CTA Buttons (Phase 9 Glass Buttons) */}
         <motion.div variants={ctaVariants} className="flex flex-col sm:flex-row items-center gap-2.5 w-full max-w-xs pt-1">
           <button
             onClick={handleExplore}
-            className="w-full h-[50px] px-5 rounded-sm bg-[#00D9FF] hover:bg-[#38E8FF] text-[#050608] font-display text-xs font-bold tracking-wider uppercase transition-all duration-300 flex items-center justify-center gap-2 shadow-[0_4px_18px_rgba(0,217,255,0.24)] cursor-pointer"
+            className="w-full h-[50px] px-5 rounded-xl glass-btn-primary font-display text-xs font-bold tracking-wider uppercase flex items-center justify-center gap-2 cursor-pointer"
             aria-label="Explore engineering work"
           >
             <span>Explore My Work</span>
@@ -411,7 +412,7 @@ export function HeroContent({ visible }: HeroContentProps) {
 
           <button
             onClick={handleResume}
-            className="w-full h-[50px] px-5 rounded-sm border border-[rgba(140,190,210,0.16)] hover:border-[rgba(0,217,255,0.45)] bg-[#0D131A]/80 text-[#F4F7FA] hover:text-[#00D9FF] font-display text-xs font-semibold tracking-wider uppercase transition-all duration-300 flex items-center justify-center gap-2 backdrop-blur-sm cursor-pointer"
+            className="w-full h-[50px] px-5 rounded-xl glass-btn-secondary font-display text-xs font-semibold tracking-wider uppercase flex items-center justify-center gap-2 cursor-pointer"
             aria-label="Download resume PDF"
           >
             <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
