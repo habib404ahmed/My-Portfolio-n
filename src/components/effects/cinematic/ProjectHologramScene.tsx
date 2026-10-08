@@ -7,19 +7,31 @@ interface ProjectHologramSceneProps {
   activeSection: SectionId
 }
 
+const _projScaleVec = new THREE.Vector3()
+
 export function ProjectHologramScene({ activeSection }: ProjectHologramSceneProps) {
   const groupRef = useRef<THREE.Group>(null)
   const radarRef = useRef<THREE.Mesh>(null)
   const agentRingRef = useRef<THREE.Mesh>(null)
   const beaconRef = useRef<THREE.Mesh>(null)
+  const currentScale = useRef(0.001)
 
   const isActive = activeSection === 'projects'
 
   useFrame((_, delta) => {
     if (!groupRef.current) return
 
+    // Off-screen dormant culling
+    if (!isActive && currentScale.current < 0.005) {
+      if (groupRef.current.visible) groupRef.current.visible = false
+      return
+    }
+    groupRef.current.visible = true
+
     const targetScale = isActive ? 1.0 : 0.001
-    groupRef.current.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), delta * 2.8)
+    currentScale.current += (targetScale - currentScale.current) * Math.min(delta * 2.8, 0.2)
+    _projScaleVec.setScalar(currentScale.current)
+    groupRef.current.scale.copy(_projScaleVec)
 
     if (radarRef.current) {
       radarRef.current.rotation.y += delta * 0.2
@@ -35,8 +47,6 @@ export function ProjectHologramScene({ activeSection }: ProjectHologramSceneProp
       beaconRef.current.scale.setScalar(pulse)
     }
   })
-
-  if (!isActive && groupRef.current?.scale.x === 0.001) return null
 
   return (
     <group ref={groupRef} position={[0.85, 0.0, -0.6]}>

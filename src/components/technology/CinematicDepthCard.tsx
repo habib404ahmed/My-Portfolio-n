@@ -110,8 +110,8 @@ export function CinematicDepthCard({
           background: isHovered
             ? 'linear-gradient(145deg, rgba(255, 255, 255, 0.075) 0%, rgba(10, 16, 26, 0.88) 100%)'
             : 'linear-gradient(145deg, rgba(255, 255, 255, 0.045) 0%, rgba(8, 12, 20, 0.82) 100%)',
-          backdropFilter: 'blur(24px) saturate(145%)',
-          WebkitBackdropFilter: 'blur(24px) saturate(145%)',
+          backdropFilter: 'blur(12px) saturate(135%)',
+          WebkitBackdropFilter: 'blur(12px) saturate(135%)',
           border: isHovered
             ? `1px solid ${domain.color}80`
             : '1px solid rgba(150, 210, 255, 0.18)',

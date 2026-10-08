@@ -7,17 +7,29 @@ interface ResumeTerminalSceneProps {
   activeSection: SectionId
 }
 
+const _resScaleVec = new THREE.Vector3()
+
 export function ResumeTerminalScene({ activeSection }: ResumeTerminalSceneProps) {
   const groupRef = useRef<THREE.Group>(null)
   const laserRef = useRef<THREE.Mesh>(null)
+  const currentScale = useRef(0.001)
 
   const isActive = activeSection === 'resume'
 
   useFrame((_, delta) => {
     if (!groupRef.current) return
 
+    // Off-screen dormant culling
+    if (!isActive && currentScale.current < 0.005) {
+      if (groupRef.current.visible) groupRef.current.visible = false
+      return
+    }
+    groupRef.current.visible = true
+
     const targetScale = isActive ? 1.0 : 0.001
-    groupRef.current.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), delta * 2.8)
+    currentScale.current += (targetScale - currentScale.current) * Math.min(delta * 2.8, 0.2)
+    _resScaleVec.setScalar(currentScale.current)
+    groupRef.current.scale.copy(_resScaleVec)
 
     // Sweeping laser scan line
     if (laserRef.current) {
@@ -25,8 +37,6 @@ export function ResumeTerminalScene({ activeSection }: ResumeTerminalSceneProps)
       laserRef.current.position.y = Math.sin(time * 1.5) * 1.4
     }
   })
-
-  if (!isActive && groupRef.current?.scale.x === 0.001) return null
 
   return (
     <group ref={groupRef} position={[0, 0, -1.0]}>

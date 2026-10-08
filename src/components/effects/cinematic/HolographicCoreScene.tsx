@@ -7,20 +7,32 @@ interface HolographicCoreSceneProps {
   activeSection: SectionId
 }
 
+const _holoScaleVec = new THREE.Vector3()
+
 export function HolographicCoreScene({ activeSection }: HolographicCoreSceneProps) {
   const groupRef = useRef<THREE.Group>(null)
   const sphereRef = useRef<THREE.Mesh>(null)
   const innerRef = useRef<THREE.Mesh>(null)
   const orbit1Ref = useRef<THREE.Mesh>(null)
   const orbit2Ref = useRef<THREE.Mesh>(null)
+  const currentScale = useRef(0.001)
 
   const isActive = activeSection === 'about'
 
   useFrame((_, delta) => {
     if (!groupRef.current) return
 
+    // Off-screen dormant culling
+    if (!isActive && currentScale.current < 0.005) {
+      if (groupRef.current.visible) groupRef.current.visible = false
+      return
+    }
+    groupRef.current.visible = true
+
     const targetScale = isActive ? 1.0 : 0.001
-    groupRef.current.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), delta * 2.8)
+    currentScale.current += (targetScale - currentScale.current) * Math.min(delta * 2.8, 0.2)
+    _holoScaleVec.setScalar(currentScale.current)
+    groupRef.current.scale.copy(_holoScaleVec)
 
     if (sphereRef.current) {
       sphereRef.current.rotation.y += delta * 0.12
@@ -39,8 +51,6 @@ export function HolographicCoreScene({ activeSection }: HolographicCoreSceneProp
       orbit2Ref.current.rotation.x += delta * 0.16
     }
   })
-
-  if (!isActive && groupRef.current?.scale.x === 0.001) return null
 
   return (
     <group ref={groupRef} position={[0.95, 0.1, -0.6]}>

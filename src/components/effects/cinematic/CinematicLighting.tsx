@@ -5,7 +5,7 @@ import type { SectionId } from '@/hooks/useCinematicScroll'
 
 interface CinematicLightingProps {
   activeSection: SectionId
-  sectionProgress: number
+  sectionProgress?: number
 }
 
 interface LightingMood {
@@ -180,6 +180,37 @@ const LIGHTING_MOODS: Record<SectionId, LightingMood> = {
   },
 }
 
+// Pre-parsed mood color and vector objects (Zero allocations during useFrame)
+const PARSED_MOODS: Record<
+  SectionId,
+  {
+    ambientColor: THREE.Color
+    ambientIntensity: number
+    keyColor: THREE.Color
+    keyIntensity: number
+    keyPos: THREE.Vector3
+    fillColor: THREE.Color
+    fillIntensity: number
+    fillPos: THREE.Vector3
+    fogNear: number
+    fogFar: number
+  }
+> = Object.entries(LIGHTING_MOODS).reduce((acc, [sec, m]) => {
+  acc[sec as SectionId] = {
+    ambientColor: new THREE.Color(m.ambientColor),
+    ambientIntensity: m.ambientIntensity,
+    keyColor: new THREE.Color(m.keyColor),
+    keyIntensity: m.keyIntensity,
+    keyPos: new THREE.Vector3(...m.keyPos),
+    fillColor: new THREE.Color(m.fillColor),
+    fillIntensity: m.fillIntensity,
+    fillPos: new THREE.Vector3(...m.fillPos),
+    fogNear: m.fogNear,
+    fogFar: m.fogFar,
+  }
+  return acc
+}, {} as any)
+
 export function CinematicLighting({ activeSection }: CinematicLightingProps) {
   const ambientRef = useRef<THREE.AmbientLight>(null)
   const keyRef = useRef<THREE.PointLight>(null)
@@ -190,13 +221,13 @@ export function CinematicLighting({ activeSection }: CinematicLightingProps) {
   const curFillColor = useRef(new THREE.Color('#6575FF'))
 
   useFrame((state, delta) => {
-    const mood = LIGHTING_MOODS[activeSection] || LIGHTING_MOODS.hero
+    const mood = PARSED_MOODS[activeSection] || PARSED_MOODS.hero
     const lerpSpeed = Math.min(delta * 2.8, 0.12)
 
-    // Smooth lighting color transitions
-    curAmbientColor.current.lerp(new THREE.Color(mood.ambientColor), lerpSpeed)
-    curKeyColor.current.lerp(new THREE.Color(mood.keyColor), lerpSpeed)
-    curFillColor.current.lerp(new THREE.Color(mood.fillColor), lerpSpeed)
+    // Smooth lighting color transitions without per-frame allocations
+    curAmbientColor.current.lerp(mood.ambientColor, lerpSpeed)
+    curKeyColor.current.lerp(mood.keyColor, lerpSpeed)
+    curFillColor.current.lerp(mood.fillColor, lerpSpeed)
 
     if (ambientRef.current) {
       ambientRef.current.color.copy(curAmbientColor.current)
@@ -206,13 +237,13 @@ export function CinematicLighting({ activeSection }: CinematicLightingProps) {
     if (keyRef.current) {
       keyRef.current.color.copy(curKeyColor.current)
       keyRef.current.intensity += (mood.keyIntensity - keyRef.current.intensity) * lerpSpeed
-      keyRef.current.position.lerp(new THREE.Vector3(...mood.keyPos), lerpSpeed)
+      keyRef.current.position.lerp(mood.keyPos, lerpSpeed)
     }
 
     if (fillRef.current) {
       fillRef.current.color.copy(curFillColor.current)
       fillRef.current.intensity += (mood.fillIntensity - fillRef.current.intensity) * lerpSpeed
-      fillRef.current.position.lerp(new THREE.Vector3(...mood.fillPos), lerpSpeed)
+      fillRef.current.position.lerp(mood.fillPos, lerpSpeed)
     }
 
     // Dynamic Fog modulation

@@ -7,18 +7,30 @@ interface CertificatesHoloSceneProps {
   activeSection: SectionId
 }
 
+const _certScaleVec = new THREE.Vector3()
+
 export function CertificatesHoloScene({ activeSection }: CertificatesHoloSceneProps) {
   const groupRef = useRef<THREE.Group>(null)
   const plaque1Ref = useRef<THREE.Mesh>(null)
   const plaque2Ref = useRef<THREE.Mesh>(null)
+  const currentScale = useRef(0.001)
 
   const isActive = activeSection === 'certifications'
 
   useFrame((_, delta) => {
     if (!groupRef.current) return
 
+    // Off-screen dormant culling
+    if (!isActive && currentScale.current < 0.005) {
+      if (groupRef.current.visible) groupRef.current.visible = false
+      return
+    }
+    groupRef.current.visible = true
+
     const targetScale = isActive ? 1.0 : 0.001
-    groupRef.current.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), delta * 2.8)
+    currentScale.current += (targetScale - currentScale.current) * Math.min(delta * 2.8, 0.2)
+    _certScaleVec.setScalar(currentScale.current)
+    groupRef.current.scale.copy(_certScaleVec)
 
     if (plaque1Ref.current) {
       plaque1Ref.current.rotation.y = Math.sin(performance.now() * 0.001) * 0.15 + 0.2
@@ -27,8 +39,6 @@ export function CertificatesHoloScene({ activeSection }: CertificatesHoloScenePr
       plaque2Ref.current.rotation.y = Math.cos(performance.now() * 0.001) * 0.15 - 0.2
     }
   })
-
-  if (!isActive && groupRef.current?.scale.x === 0.001) return null
 
   return (
     <group ref={groupRef} position={[0.8, -0.1, -0.7]}>

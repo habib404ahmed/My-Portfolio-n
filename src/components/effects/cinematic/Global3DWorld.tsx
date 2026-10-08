@@ -1,8 +1,9 @@
-import { Suspense } from 'react'
+import { Suspense, useState, useEffect } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { PerspectiveCamera, AdaptiveDpr } from '@react-three/drei'
 import { useCinematicScroll } from '@/hooks/useCinematicScroll'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
+import { qualityManager } from '@/stores/qualityManager'
 import type { DeviceClass } from '@/hooks/useDeviceCapability'
 
 // 3D Cinematic Atmosphere & Camera
@@ -30,8 +31,20 @@ interface Global3DWorldProps {
 }
 
 export function Global3DWorld({ deviceClass }: Global3DWorldProps) {
-  const { activeSection, sectionProgress, scrollProgress, scrollVelocity, mouse } = useCinematicScroll()
+  const { activeSection } = useCinematicScroll()
   const prefersReduced = useReducedMotion()
+  const [isTabVisible, setIsTabVisible] = useState(true)
+
+  // Pause WebGL rendering when tab is hidden or minimized (Section 3 of Phase 10.3)
+  useEffect(() => {
+    const handleVisibility = () => {
+      setIsTabVisible(document.visibilityState === 'visible')
+    }
+    document.addEventListener('visibilitychange', handleVisibility)
+    return () => document.removeEventListener('visibilitychange', handleVisibility)
+  }, [])
+
+  const cappedDpr = qualityManager.getCappedDpr()
 
   return (
     <div
@@ -40,6 +53,7 @@ export function Global3DWorld({ deviceClass }: Global3DWorldProps) {
     >
       <Canvas
         style={{ background: 'transparent' }}
+        frameloop={isTabVisible ? 'always' : 'never'}
         gl={{
           antialias: deviceClass !== 'low',
           alpha: true,
@@ -47,53 +61,42 @@ export function Global3DWorld({ deviceClass }: Global3DWorldProps) {
           stencil: false,
           depth: true,
         }}
-        dpr={deviceClass === 'low' ? [1, 1] : [1, 1.5]}
+        dpr={cappedDpr}
       >
         <AdaptiveDpr pixelated />
         <PerspectiveCamera makeDefault position={[0, 0, 6.2]} fov={50} />
 
-        {/* Cinematic Camera Orchestrator */}
+        {/* Cinematic Camera Orchestrator (Reads high-frequency values from cinematicScrollStore) */}
         <CinematicCamera
           activeSection={activeSection}
-          sectionProgress={sectionProgress}
-          scrollProgress={scrollProgress}
-          scrollVelocity={scrollVelocity}
-          mouseX={mouse.x}
-          mouseY={mouse.y}
           prefersReducedMotion={prefersReduced}
         />
 
         {/* Dynamic Scene-Specific Cinematic Lighting & Fog Moods */}
-        <CinematicLighting
-          activeSection={activeSection}
-          sectionProgress={sectionProgress}
-        />
+        <CinematicLighting activeSection={activeSection} />
 
         <Suspense fallback={null}>
           {/* Persistent Atmospheric Digital Dust & Infinite Floor Grid */}
           <AmbientParticles deviceClass={deviceClass} />
           <GridPlane opacity={0.035} />
 
-          {/* Section 3D States */}
+          {/* Section 3D States (Self-cull when dormant offscreen) */}
           <HeroAICoreScene
             activeSection={activeSection}
-            sectionProgress={sectionProgress}
-            scrollVelocity={scrollVelocity}
+            sectionProgress={0}
+            scrollVelocity={0}
             deviceClass={deviceClass}
-            mouseX={mouse.x}
-            mouseY={mouse.y}
+            mouseX={0}
+            mouseY={0}
           />
 
-          <SystemGatewayScene
-            activeSection={activeSection}
-            sectionProgress={sectionProgress}
-          />
+          <SystemGatewayScene activeSection={activeSection} />
 
           <HolographicCoreScene activeSection={activeSection} />
 
           <EngineeringPipelineScene
             activeSection={activeSection}
-            sectionProgress={sectionProgress}
+            sectionProgress={0}
           />
 
           <TechnologyConstellationScene activeSection={activeSection} />

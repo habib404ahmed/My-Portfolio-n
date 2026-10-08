@@ -79,8 +79,8 @@ export function PipelineDetailModal({
           className="relative w-full max-w-[740px] my-auto rounded-[24px] overflow-hidden text-left pointer-events-auto"
           style={{
             background: 'rgba(10, 16, 23, 0.78)',
-            backdropFilter: 'blur(28px) saturate(150%)',
-            WebkitBackdropFilter: 'blur(28px) saturate(150%)',
+            backdropFilter: 'blur(14px) saturate(135%)',
+            WebkitBackdropFilter: 'blur(14px) saturate(135%)',
             border: '1px solid rgba(255, 255, 255, 0.16)',
             boxShadow: `0 30px 100px rgba(0, 0, 0, 0.65), inset 0 1px 1px rgba(255, 255, 255, 0.22), 0 0 35px ${pipeline.color}25`,
             maxHeight: '85vh',
@@ -188,8 +188,8 @@ export function PipelineDetailModal({
                         border: isExpanded
                           ? `1px solid ${node.color}`
                           : '1px solid rgba(255, 255, 255, 0.12)',
-                        backdropFilter: 'blur(20px)',
-                        WebkitBackdropFilter: 'blur(20px)',
+                        backdropFilter: 'blur(10px)',
+                        WebkitBackdropFilter: 'blur(10px)',
                         boxShadow: isExpanded
                           ? `0 10px 30px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 0 20px ${node.color}30`
                           : '0 4px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.08)',

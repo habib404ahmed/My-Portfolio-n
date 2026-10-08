@@ -5,8 +5,10 @@ import type { SectionId } from '@/hooks/useCinematicScroll'
 
 interface SystemGatewaySceneProps {
   activeSection: SectionId
-  sectionProgress: number
+  sectionProgress?: number
 }
+
+const _gateScaleVec = new THREE.Vector3()
 
 export function SystemGatewayScene({ activeSection }: SystemGatewaySceneProps) {
   const groupRef = useRef<THREE.Group>(null)
@@ -14,6 +16,7 @@ export function SystemGatewayScene({ activeSection }: SystemGatewaySceneProps) {
   const ring2Ref = useRef<THREE.Mesh>(null)
   const ring3Ref = useRef<THREE.Mesh>(null)
   const nodesRef = useRef<THREE.Points>(null)
+  const currentScale = useRef(0.001)
 
   const isActive = activeSection === 'enter-system' || activeSection === 'hero'
 
@@ -42,11 +45,20 @@ export function SystemGatewayScene({ activeSection }: SystemGatewaySceneProps) {
   useFrame((_, delta) => {
     if (!groupRef.current) return
 
+    // Off-screen dormant culling
+    if (!isActive && currentScale.current < 0.005) {
+      if (groupRef.current.visible) groupRef.current.visible = false
+      return
+    }
+    groupRef.current.visible = true
+
     const targetScale = activeSection === 'enter-system' ? 1.0 : activeSection === 'hero' ? 0.35 : 0.001
     const targetZ = activeSection === 'enter-system' ? -1.0 : -4.0
 
-    groupRef.current.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), delta * 3.0)
-    groupRef.current.position.z += (targetZ - groupRef.current.position.z) * delta * 2.5
+    currentScale.current += (targetScale - currentScale.current) * Math.min(delta * 3.0, 0.2)
+    _gateScaleVec.setScalar(currentScale.current)
+    groupRef.current.scale.copy(_gateScaleVec)
+    groupRef.current.position.z += (targetZ - groupRef.current.position.z) * Math.min(delta * 2.5, 0.2)
 
     // Counter-rotating engineering gateway data rings
     if (ring1Ref.current) ring1Ref.current.rotation.z += delta * 0.25
@@ -55,8 +67,6 @@ export function SystemGatewayScene({ activeSection }: SystemGatewaySceneProps) {
 
     if (nodesRef.current) nodesRef.current.rotation.z += delta * 0.08
   })
-
-  if (!isActive && groupRef.current?.scale.x === 0.001) return null
 
   return (
     <group ref={groupRef} position={[0, -0.2, -1.0]}>

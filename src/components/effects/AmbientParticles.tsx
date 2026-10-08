@@ -38,24 +38,12 @@ export function AmbientParticles({ deviceClass, intensity = 1 }: AmbientParticle
     return { positions, velocities }
   }, [particleCount])
 
-  useFrame(() => {
+  useFrame((state, delta) => {
     if (!meshRef.current) return
-    const pos = meshRef.current.geometry.attributes.position.array as Float32Array
-
-    for (let i = 0; i < particleCount; i++) {
-      const i3 = i * 3
-      pos[i3] += velocities[i3]
-      pos[i3 + 1] += velocities[i3 + 1]
-      pos[i3 + 2] += velocities[i3 + 2]
-
-      if (Math.abs(pos[i3]) > 16) velocities[i3] *= -1
-      if (Math.abs(pos[i3 + 1]) > 11) velocities[i3 + 1] *= -1
-      if (pos[i3 + 2] > 6) velocities[i3 + 2] *= -1
-      if (pos[i3 + 2] < -20) velocities[i3 + 2] *= -1
-    }
-
-    meshRef.current.geometry.attributes.position.needsUpdate = true
-    meshRef.current.rotation.y += 0.00005
+    const time = state.clock.getElapsedTime()
+    meshRef.current.rotation.y += delta * 0.006
+    meshRef.current.rotation.x += delta * 0.003
+    meshRef.current.position.y = Math.sin(time * 0.2) * 0.15
   })
 
   return (

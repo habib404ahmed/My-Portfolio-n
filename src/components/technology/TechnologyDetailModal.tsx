@@ -161,8 +161,8 @@ export function TechnologyDetailModal({
           className="relative w-full max-w-[740px] my-auto rounded-[24px] overflow-hidden text-left pointer-events-auto"
           style={{
             background: 'rgba(8, 14, 22, 0.72)',
-            backdropFilter: 'blur(24px) saturate(140%)',
-            WebkitBackdropFilter: 'blur(24px) saturate(140%)',
+            backdropFilter: 'blur(14px) saturate(135%)',
+            WebkitBackdropFilter: 'blur(14px) saturate(135%)',
             border: '1px solid rgba(255, 255, 255, 0.14)',
             boxShadow: `0 30px 100px rgba(0, 0, 0, 0.65), inset 0 1px 1px rgba(255, 255, 255, 0.20), 0 0 40px ${domain.glowColor}`,
             maxHeight: '85vh',
@@ -276,8 +276,8 @@ export function TechnologyDetailModal({
                       style={{
                         background: 'rgba(255, 255, 255, 0.04)',
                         border: '1px solid rgba(255, 255, 255, 0.10)',
-                        backdropFilter: 'blur(16px)',
-                        WebkitBackdropFilter: 'blur(16px)',
+                        backdropFilter: 'blur(10px)',
+                        WebkitBackdropFilter: 'blur(10px)',
                         boxShadow: '0 4px 16px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.08)',
                       }}
                       onMouseEnter={(e) => {

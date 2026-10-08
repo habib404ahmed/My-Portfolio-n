@@ -14,19 +14,31 @@ const BEACONS = [
   { name: 'YOUTUBE', color: '#f43f5e', pos: [1.4, -0.4, 0] as [number, number, number] },
 ]
 
+const _commScaleVec = new THREE.Vector3()
+
 export function CommunicationPortalScene({ activeSection }: CommunicationPortalSceneProps) {
   const groupRef = useRef<THREE.Group>(null)
   const coreRef = useRef<THREE.Mesh>(null)
   const wave1Ref = useRef<THREE.Mesh>(null)
   const wave2Ref = useRef<THREE.Mesh>(null)
+  const currentScale = useRef(0.001)
 
   const isActive = activeSection === 'contact'
 
   useFrame((_, delta) => {
     if (!groupRef.current) return
 
+    // Off-screen dormant culling
+    if (!isActive && currentScale.current < 0.005) {
+      if (groupRef.current.visible) groupRef.current.visible = false
+      return
+    }
+    groupRef.current.visible = true
+
     const targetScale = isActive ? 1.0 : 0.001
-    groupRef.current.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), delta * 2.8)
+    currentScale.current += (targetScale - currentScale.current) * Math.min(delta * 2.8, 0.2)
+    _commScaleVec.setScalar(currentScale.current)
+    groupRef.current.scale.copy(_commScaleVec)
 
     if (coreRef.current) {
       coreRef.current.rotation.y += delta * 0.25
@@ -48,8 +60,6 @@ export function CommunicationPortalScene({ activeSection }: CommunicationPortalS
       mat.opacity = Math.max(1.0 - (scale - 0.6) / 1.6, 0) * 0.35
     }
   })
-
-  if (!isActive && groupRef.current?.scale.x === 0.001) return null
 
   return (
     <group ref={groupRef} position={[0, -0.1, -0.7]}>
