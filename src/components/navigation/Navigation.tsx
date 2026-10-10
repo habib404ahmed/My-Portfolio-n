@@ -83,22 +83,22 @@ export function Navigation({ visible }: NavigationProps) {
 
               {/* Text: Name & Role */}
               <div className="flex flex-col justify-center leading-none text-left">
-                <span className="font-display text-sm font-bold tracking-wider text-white uppercase leading-tight group-hover:text-cyan-200 transition-colors">
+                <span className="font-display text-[15px] sm:text-base font-bold tracking-wider text-white uppercase leading-tight group-hover:text-cyan-200 transition-colors">
                   HABIB AHMED
                 </span>
-                <span className="font-mono text-[0.625rem] text-slate-400 tracking-widest uppercase mt-0.5">
+                <span className="font-mono text-[12px] text-slate-400 tracking-widest uppercase mt-0.5">
                   SOFTWARE ENGINEER
                 </span>
               </div>
             </a>
 
-            {/* Desktop Navigation Links + Primary CTA */}
+            {/* Desktop Navigation Links + Primary CTA (Phase 10.4: 14-15px) */}
             <nav className="hidden md:flex items-center gap-6 lg:gap-8" aria-label="Desktop Navigation">
               {DESKTOP_NAV_LINKS.map((link) => (
                 <button
                   key={link.id}
                   onClick={() => handleNavClick(link.href)}
-                  className="font-display text-xs font-medium tracking-[0.14em] uppercase text-slate-300 hover:text-cyan-300 transition-colors relative py-1 group focus:outline-none cursor-pointer"
+                  className="font-display text-[14px] lg:text-[15px] font-semibold tracking-[0.12em] uppercase text-slate-300 hover:text-cyan-300 transition-colors relative py-1 group focus:outline-none cursor-pointer"
                 >
                   <span>{link.label}</span>
                   <span className="absolute bottom-0 left-0 right-0 h-[1px] bg-cyan-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
@@ -108,7 +108,7 @@ export function Navigation({ visible }: NavigationProps) {
               {/* Primary Emphasized Resume CTA Button */}
               <button
                 onClick={() => handleNavClick('#resume')}
-                className="ml-4 lg:ml-6 h-8 px-4 rounded-full font-display text-xs font-semibold tracking-wider uppercase glass-btn-primary hover:text-white transition-all duration-200 focus:outline-none focus:ring-1 focus:ring-cyan-400 cursor-pointer shrink-0"
+                className="ml-4 lg:ml-6 h-9 px-4 lg:px-5 rounded-full font-display text-[14px] font-semibold tracking-wider uppercase glass-btn-primary hover:text-white transition-all duration-200 focus:outline-none focus:ring-1 focus:ring-cyan-400 cursor-pointer shrink-0"
               >
                 RESUME
               </button>
@@ -118,7 +118,7 @@ export function Navigation({ visible }: NavigationProps) {
             <div className="flex md:hidden items-center">
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
-                className="h-8 px-3 rounded-full border border-white/15 bg-white/5 font-mono text-xs text-slate-200 tracking-wider hover:text-white hover:border-cyan-400/50 transition-colors flex items-center gap-1.5 focus:outline-none cursor-pointer"
+                className="h-9 px-3.5 rounded-full border border-white/20 bg-white/5 font-mono text-[13px] text-slate-200 tracking-wider hover:text-white hover:border-cyan-400/50 transition-colors flex items-center gap-2 focus:outline-none cursor-pointer"
                 aria-label={menuOpen ? 'Close navigation overlay' : 'Open navigation overlay'}
                 aria-expanded={menuOpen}
               >
@@ -142,13 +142,13 @@ export function Navigation({ visible }: NavigationProps) {
                 <div className="flex items-center justify-between border-b border-white/10 pb-6">
                   <div className="flex items-center gap-2">
                     <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
-                    <span className="font-mono text-xs font-bold text-white tracking-widest uppercase">
+                    <span className="font-mono text-[13px] font-bold text-white tracking-widest uppercase">
                       HABIB AHMED // NAVIGATION
                     </span>
                   </div>
                   <button
                     onClick={() => setMenuOpen(false)}
-                    className="p-2 text-slate-400 hover:text-white font-mono text-xs font-bold flex items-center gap-1"
+                    className="p-2 text-slate-300 hover:text-white font-mono text-[13px] font-bold flex items-center gap-1.5 cursor-pointer"
                     aria-label="Close menu"
                   >
                     <span>✕</span>
@@ -165,10 +165,10 @@ export function Navigation({ visible }: NavigationProps) {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: index * 0.08, duration: 0.4 }}
                       onClick={() => handleNavClick(item.href)}
-                      className="text-left font-display text-2xl font-bold uppercase tracking-tight text-slate-200 hover:text-cyan-400 transition-colors flex items-baseline justify-between border-b border-white/5 pb-3"
+                      className="text-left font-display text-2xl sm:text-3xl font-bold uppercase tracking-tight text-slate-200 hover:text-cyan-400 transition-colors flex items-baseline justify-between border-b border-white/5 pb-3 cursor-pointer"
                     >
                       <span>{item.label}</span>
-                      <span className="font-mono text-xs text-slate-500 tracking-widest">
+                      <span className="font-mono text-sm text-slate-400 tracking-widest">
                         0{index + 1}
                       </span>
                     </motion.button>
@@ -179,7 +179,7 @@ export function Navigation({ visible }: NavigationProps) {
                     <a
                       href="/assets/Md-Habib-Munsar-Ahmed-Resume.pdf"
                       download="Md-Habib-Munsar-Ahmed-Resume.pdf"
-                      className="mt-2 w-full py-3 rounded-lg border border-cyan-500/40 bg-cyan-950/30 text-cyan-300 font-display text-center text-sm font-bold uppercase tracking-wider block"
+                      className="mt-3 w-full h-[50px] rounded-xl border border-cyan-500/40 bg-cyan-950/40 text-cyan-300 font-display flex items-center justify-center text-[15px] font-bold uppercase tracking-wider"
                     >
                       DOWNLOAD RESUME (PDF)
                     </a>
@@ -188,12 +188,12 @@ export function Navigation({ visible }: NavigationProps) {
 
                 {/* Overlay Bottom Contacts */}
                 <div className="border-t border-white/10 pt-6">
-                  <p className="font-mono text-[0.625rem] uppercase tracking-widest text-slate-500 mb-2 font-semibold">
+                  <p className="font-mono text-[12px] uppercase tracking-widest text-slate-400 mb-2 font-semibold">
                     DIRECT CONTACT
                   </p>
                   <a
                     href={`mailto:${profile.contact.email}`}
-                    className="font-mono text-xs text-cyan-300 block truncate"
+                    className="font-mono text-[14px] text-cyan-300 block truncate"
                   >
                     {profile.contact.email}
                   </a>

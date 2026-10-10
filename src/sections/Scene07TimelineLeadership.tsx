@@ -81,23 +81,23 @@ export function Scene07TimelineLeadership() {
         />
 
         {/* Scene Header */}
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 font-mono text-[0.6875rem] uppercase tracking-[0.25em] text-cyan-400 mb-3 px-3 py-1 rounded-full border border-cyan-500/20 bg-cyan-950/20">
+        <div className="text-center max-w-3xl mx-auto mb-12">
+          <div className="inline-flex items-center gap-2 font-mono text-[13px] uppercase tracking-[0.12em] text-cyan-400 mb-3 px-3.5 py-1.5 rounded-full border border-cyan-500/20 bg-cyan-950/20 font-semibold">
             <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-ping" />
             <span>SCENE 07 &bull; CINEMATIC TRAJECTORY</span>
           </div>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold text-white tracking-tight uppercase mb-3">
+          <h2 className="text-[clamp(32px,4vw,56px)] font-display font-extrabold text-[#F5F8FA] tracking-tight uppercase leading-[1.1] mb-3">
             THE JOURNEY
           </h2>
 
-          <p className="font-mono text-xs sm:text-sm text-slate-400">
+          <p className="font-body text-[clamp(16px,1.2vw,18px)] text-[#A8B4C2] leading-[1.65] max-w-[65ch] mx-auto">
             Academic grounding, self-directed systems &amp; security exploration, production engineering, and leadership.
           </p>
         </div>
 
         {/* ─── MILESTONE STEPPING TIMELINE — Glass Capsules (Phase 9 Section 20 & 24) ─── */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-9 gap-2 mb-10">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-9 gap-2.5 mb-10">
           {timelineEvents.map((evt, idx) => {
             const isActive = idx === activeIndex
             const isPast = idx < activeIndex
@@ -105,7 +105,7 @@ export function Scene07TimelineLeadership() {
               <button
                 key={evt.id}
                 onClick={() => setActiveIndex(idx)}
-                className={`p-2.5 sm:p-3 rounded-2xl text-left transition-all duration-300 relative group focus:outline-none focus:ring-1 focus:ring-cyan-400 cursor-pointer ${
+                className={`p-3 rounded-2xl text-left transition-all duration-300 relative group focus:outline-none focus:ring-1 focus:ring-cyan-400 cursor-pointer ${
                   isActive
                     ? 'glass-focus liquid-edge border-white/50 shadow-xl scale-102 opacity-100 ring-1 ring-cyan-400/50'
                     : isPast
@@ -117,9 +117,9 @@ export function Scene07TimelineLeadership() {
                 }}
                 aria-pressed={isActive}
               >
-                <div className="flex items-center justify-between mb-1">
+                <div className="flex items-center justify-between mb-1.5">
                   <span
-                    className="font-mono text-xs font-bold"
+                    className="font-mono text-[13px] sm:text-[14px] font-bold"
                     style={{ color: evt.color }}
                   >
                     {evt.year}
@@ -131,7 +131,7 @@ export function Scene07TimelineLeadership() {
                     }}
                   />
                 </div>
-                <div className="font-display text-[0.625rem] sm:text-[0.6875rem] font-bold tracking-wider text-slate-200 uppercase truncate">
+                <div className="font-display text-[12px] sm:text-[13px] font-bold tracking-wide text-slate-200 uppercase truncate">
                   {evt.label}
                 </div>
               </button>
@@ -158,41 +158,41 @@ export function Scene07TimelineLeadership() {
                     className="w-2 h-2 rounded-full"
                     style={{ background: activeEvent.color }}
                   />
-                  <span className="font-mono text-[0.625rem] tracking-widest uppercase text-slate-400 font-semibold">
+                  <span className="font-mono text-[12px] sm:text-[13px] tracking-widest uppercase text-slate-300 font-semibold">
                     DISCIPLINE &bull; {currentEnv.gridType}
                   </span>
                 </div>
 
                 <div className="flex items-baseline gap-3 mb-2">
                   <span
-                    className="font-mono text-xl sm:text-2xl font-bold"
+                    className="font-mono text-[18px] sm:text-[22px] font-bold"
                     style={{ color: activeEvent.color }}
                   >
                     {activeEvent.period}
                   </span>
-                  <h3 className="font-display text-2xl sm:text-3xl font-extrabold text-white tracking-tight uppercase">
+                  <h3 className="font-display text-[clamp(22px,2.2vw,28px)] font-extrabold text-[#F5F8FA] tracking-tight uppercase leading-tight">
                     {activeEvent.label}
                   </h3>
                 </div>
 
-                <div className="font-mono text-xs sm:text-sm text-cyan-400 mb-4 font-medium">
+                <div className="font-mono text-[14px] sm:text-[15px] text-cyan-400 mb-4 font-semibold">
                   {activeEvent.subtitle}
                 </div>
 
-                <p className="font-body text-sm sm:text-base text-slate-300 leading-relaxed mb-6 font-light">
+                <p className="font-body text-[16px] sm:text-[17px] text-[#A8B4C2] leading-[1.65] mb-6 font-normal">
                   {activeEvent.description}
                 </p>
 
                 {/* Connected Architecture Tags */}
                 {activeEvent.connectedProjects && (
-                  <div className="flex flex-wrap items-center gap-2 pt-4 border-t border-white/5">
-                    <span className="font-mono text-[0.625rem] text-slate-500 uppercase tracking-wider">
+                  <div className="flex flex-wrap items-center gap-2 pt-4 border-t border-white/10">
+                    <span className="font-mono text-[12px] sm:text-[13px] text-slate-400 uppercase tracking-wider font-semibold">
                       PROJECTS:
                     </span>
                     {activeEvent.connectedProjects.map((p) => (
                       <span
                         key={p}
-                        className="px-2.5 py-1 rounded bg-white/5 border border-white/10 font-mono text-xs text-slate-300"
+                        className="px-3 py-1 rounded bg-white/5 border border-white/10 font-mono text-[13px] sm:text-[14px] text-slate-200 font-medium"
                       >
                         {p}
                       </span>
@@ -201,9 +201,9 @@ export function Scene07TimelineLeadership() {
                 )}
 
                 {/* Subtitle environment cue */}
-                <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-[0.6875rem] font-mono text-slate-500">
+                <div className="mt-4 pt-3.5 border-t border-white/10 flex items-center justify-between text-[13px] font-mono text-slate-400">
                   <span>{currentEnv.visualElements}</span>
-                  <span className="text-slate-600">
+                  <span className="text-slate-500 font-semibold">
                     STEP {activeIndex + 1} OF {timelineEvents.length}
                   </span>
                 </div>
@@ -225,29 +225,29 @@ export function Scene07TimelineLeadership() {
                   className="w-full max-w-sm p-6 rounded-2xl glass-card liquid-edge shadow-[0_15px_40px_rgba(244,63,94,0.15)] group"
                 >
                   <div className="flex items-center justify-between pb-3 mb-4 border-b border-rose-500/20">
-                    <span className="font-mono text-[0.625rem] font-bold text-rose-400 uppercase tracking-widest">
+                    <span className="font-mono text-[12px] sm:text-[13px] font-bold text-rose-400 uppercase tracking-widest">
                       EDUCATIONAL OUTREACH
                     </span>
                     <span className="w-2 h-2 rounded-full bg-rose-400 animate-pulse" />
                   </div>
 
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="w-10 h-10 rounded-xl bg-rose-500/20 border border-rose-500/40 flex items-center justify-center text-rose-400">
-                      <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22">
+                  <div className="flex items-center gap-3.5 mb-3.5">
+                    <div className="w-11 h-11 rounded-xl bg-rose-500/20 border border-rose-500/40 flex items-center justify-center text-rose-400 flex-shrink-0">
+                      <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
                         <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
                       </svg>
                     </div>
                     <div>
-                      <div className="font-display text-lg font-bold text-white group-hover:text-rose-300 transition-colors">
+                      <div className="font-display text-[18px] sm:text-[20px] font-bold text-[#F5F8FA] group-hover:text-rose-300 transition-colors">
                         King of Kali Linux
                       </div>
-                      <div className="font-mono text-xs text-rose-300/80">
+                      <div className="font-mono text-[13px] sm:text-[14px] text-rose-300 font-medium">
                         @king_of_kali_linux_404
                       </div>
                     </div>
                   </div>
 
-                  <p className="font-body text-xs text-slate-300 leading-relaxed mb-5">
+                  <p className="font-body text-[14px] sm:text-[15px] text-[#A8B4C2] leading-[1.6] mb-5">
                     Producing practical technical guides demystifying ethical hacking, Kali Linux workflows, and defensive security architectures.
                   </p>
 
@@ -255,7 +255,7 @@ export function Scene07TimelineLeadership() {
                     href="https://youtube.com/@king_of_kali_linux_404"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-3 rounded-lg border border-rose-500/30 bg-rose-500/10 hover:bg-rose-500/20 text-xs font-mono text-rose-300 flex items-center justify-between transition-all"
+                    className="p-3.5 rounded-xl border border-rose-500/30 bg-rose-500/10 hover:bg-rose-500/20 text-[14px] font-mono text-rose-300 font-semibold flex items-center justify-between transition-all"
                   >
                     <span>VISIT YOUTUBE CHANNEL</span>
                     <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
@@ -270,7 +270,7 @@ export function Scene07TimelineLeadership() {
                   exit={{ opacity: 0, scale: 0.94, y: -15 }}
                   transition={{ duration: 0.5 }}
                   onClick={() => setViewerCertId(activeEvent.certificateRef || null)}
-                  className="w-full max-w-sm p-6 rounded-2xl glass-card liquid-edge glass-reflection-sweep cursor-pointer border border-cyan-500/30 hover:border-cyan-400/60 shadow-[0_15px_40px_rgba(6,182,212,0.18)] transition-all group"
+                  className="w-full max-w-sm p-6 sm:p-7 rounded-2xl glass-card liquid-edge glass-reflection-sweep cursor-pointer border border-cyan-500/30 hover:border-cyan-400/60 shadow-[0_15px_40px_rgba(6,182,212,0.18)] transition-all group"
                   role="button"
                   tabIndex={0}
                   onKeyDown={(e) =>
@@ -279,23 +279,23 @@ export function Scene07TimelineLeadership() {
                   aria-label={`View verified certificate for ${activeEvent.label}`}
                 >
                   <div className="flex items-center justify-between pb-3 mb-4 border-b border-cyan-500/20">
-                    <span className="font-mono text-[0.625rem] font-bold text-cyan-400 uppercase tracking-widest">
+                    <span className="font-mono text-[12px] sm:text-[13px] font-bold text-cyan-400 uppercase tracking-widest">
                       DOCUMENT EVIDENCE &bull; VERIFIED
                     </span>
                     <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
                   </div>
 
-                  <div className="font-display text-lg font-bold text-white mb-1 group-hover:text-cyan-300 transition-colors">
+                  <div className="font-display text-[18px] sm:text-[20px] font-bold text-[#F5F8FA] mb-1 group-hover:text-cyan-300 transition-colors">
                     {activeEvent.subtitle}
                   </div>
-                  <div className="font-mono text-xs text-cyan-300/80 mb-3">
+                  <div className="font-mono text-[13px] sm:text-[14px] text-cyan-300 font-medium mb-3">
                     {activeEvent.period}
                   </div>
-                  <p className="font-body text-xs text-slate-300 leading-relaxed mb-4">
+                  <p className="font-body text-[14px] sm:text-[15px] text-[#A8B4C2] leading-[1.6] mb-4">
                     {activeEvent.description}
                   </p>
 
-                  <div className="p-3 rounded-lg border border-cyan-500/20 bg-black/40 flex items-center justify-between text-xs font-mono text-cyan-300">
+                  <div className="p-3.5 rounded-xl border border-cyan-500/20 bg-black/40 flex items-center justify-between text-[13px] sm:text-[14px] font-mono text-cyan-300 font-semibold">
                     <span>INSPECT VERIFIED DOCUMENT</span>
                     <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
                   </div>
@@ -308,7 +308,7 @@ export function Scene07TimelineLeadership() {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.96 }}
                   transition={{ duration: 0.4 }}
-                  className="w-full max-w-sm p-6 rounded-2xl glass-card liquid-edge text-center"
+                  className="w-full max-w-sm p-6 sm:p-7 rounded-2xl glass-card liquid-edge text-center"
                 >
                   <div
                     className="w-16 h-16 rounded-full mx-auto mb-4 border flex items-center justify-center"
@@ -319,19 +319,19 @@ export function Scene07TimelineLeadership() {
                     }}
                   >
                     <span
-                      className="font-mono text-sm font-bold"
+                      className="font-mono text-[16px] font-bold"
                       style={{ color: activeEvent.color }}
                     >
                       {activeEvent.year}
                     </span>
                   </div>
-                  <div className="font-display text-sm font-bold text-white uppercase tracking-wider mb-1">
+                  <div className="font-display text-[15px] sm:text-[16px] font-bold text-[#F5F8FA] uppercase tracking-wider mb-1.5">
                     {activeEvent.label}
                   </div>
-                  <div className="font-mono text-xs text-slate-400 mb-4">
+                  <div className="font-mono text-[13px] text-slate-400 mb-4 font-medium">
                     {currentEnv.gridType}
                   </div>
-                  <p className="font-body text-xs text-slate-400 leading-relaxed">
+                  <p className="font-body text-[14px] text-[#A8B4C2] leading-[1.6] m-0">
                     {currentEnv.visualElements}
                   </p>
                 </motion.div>

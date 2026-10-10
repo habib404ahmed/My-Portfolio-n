@@ -28,7 +28,7 @@ export function ResumeCTA() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-3.5 py-1 mb-6 rounded-full border border-cyan-500/20 bg-cyan-950/30 text-cyan-300 font-mono text-xs tracking-widest uppercase"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 mb-6 rounded-full border border-cyan-500/20 bg-cyan-950/30 text-cyan-300 font-mono text-[13px] tracking-[0.12em] uppercase font-semibold"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
             INITIATE COLLABORATION
@@ -39,7 +39,7 @@ export function ResumeCTA() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="text-3xl sm:text-5xl lg:text-6xl font-display font-extrabold text-white tracking-tight leading-tight mb-4"
+            className="text-[clamp(32px,5vw,60px)] font-display font-extrabold text-[#F5F8FA] tracking-tight leading-[1.1] mb-4 uppercase"
           >
             READY TO BUILD <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-300 to-indigo-400">
@@ -52,7 +52,7 @@ export function ResumeCTA() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-slate-300 font-body text-base sm:text-lg leading-relaxed max-w-xl mb-10"
+            className="text-[#A8B4C2] font-body text-[17px] sm:text-[18px] leading-[1.65] max-w-[65ch] mb-10"
           >
             Looking to collaborate on challenging software engineering projects, AI systems, or full-stack applications.
           </motion.p>
@@ -107,10 +107,10 @@ export function ResumeCTA() {
 
           {/* Phase 6 Transition Bridge */}
           <div className="pt-8 border-t border-white/10 w-full max-w-md text-center">
-            <div className="font-mono text-xs text-slate-500 uppercase tracking-widest mb-2">
+            <div className="font-mono text-[13px] text-slate-400 uppercase tracking-widest mb-2 font-semibold">
               TRANSITION // PHASE 06
             </div>
-            <div className="text-sm font-display font-medium text-slate-300 tracking-wide">
+            <div className="text-[15px] sm:text-[16px] font-display font-semibold text-[#F5F8FA] tracking-wide">
               LET&rsquo;S BUILD THE NEXT THING.
             </div>
           </div>

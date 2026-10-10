@@ -15,10 +15,10 @@ export function ProjectConstellationNav({
   return (
     <div className="w-full max-w-4xl mx-auto mb-10">
       <div className="flex items-center justify-between mb-4">
-        <span className="font-mono text-xs text-cyan-400 uppercase tracking-widest">
+        <span className="font-mono text-[13px] text-cyan-400 uppercase tracking-[0.12em] font-semibold">
           PROJECT CONSTELLATION MAP
         </span>
-        <span className="font-mono text-xs text-slate-400">
+        <span className="font-mono text-[13px] text-slate-400 font-medium">
           SELECT WORLD TO ENTER
         </span>
       </div>
@@ -30,7 +30,7 @@ export function ProjectConstellationNav({
             <button
               key={proj.id}
               onClick={() => onSelectProject(proj.id)}
-              className={`p-3 rounded-xl border text-left transition-all duration-300 relative group overflow-hidden ${
+              className={`p-3.5 rounded-xl border text-left transition-all duration-300 relative group overflow-hidden cursor-pointer ${
                 isActive
                   ? 'border-white/40 bg-slate-900/90 shadow-xl scale-102'
                   : 'border-white/10 bg-slate-950/60 hover:border-white/20 hover:bg-white/[0.02]'
@@ -44,7 +44,7 @@ export function ProjectConstellationNav({
               {/* Subtle top indicator */}
               <div className="flex items-center justify-between mb-2">
                 <span
-                  className="font-mono text-[0.625rem] font-bold"
+                  className="font-mono text-[11px] sm:text-[12px] font-bold"
                   style={{ color: proj.accentColor }}
                 >
                   {proj.number} // {proj.category.toUpperCase()}
@@ -59,7 +59,7 @@ export function ProjectConstellationNav({
               </div>
 
               <div
-                className={`font-display text-xs font-bold tracking-wide truncate ${
+                className={`font-display text-[13px] sm:text-[14px] font-bold tracking-wide truncate ${
                   isActive ? 'text-white' : 'text-slate-300 group-hover:text-white'
                 }`}
               >

@@ -86,7 +86,7 @@ export function ProjectDetailModal({ project, onClose }: ProjectDetailModalProps
               {/* Top Meta Header */}
               <div className="flex flex-wrap items-center gap-3 mb-3">
                 <span
-                  className="font-mono text-xs font-bold px-2.5 py-0.5 rounded"
+                  className="font-mono text-[13px] font-bold px-2.5 py-0.5 rounded"
                   style={{
                     color: project.accentColor,
                     background: `${project.accentColor}18`,
@@ -97,31 +97,31 @@ export function ProjectDetailModal({ project, onClose }: ProjectDetailModalProps
               </div>
 
               {/* Title & Tagline */}
-              <h3 className="text-2xl sm:text-4xl font-display font-extrabold text-white mb-2">
+              <h3 className="text-[clamp(26px,3vw,36px)] font-display font-extrabold text-[#F5F8FA] mb-2 leading-tight">
                 {project.title}
               </h3>
-              <p className="text-base text-cyan-300/90 font-medium font-body mb-6">
+              <p className="text-[16px] sm:text-[17px] text-cyan-300 font-semibold font-body mb-4">
                 {project.tagline}
               </p>
 
               {/* Long Description */}
-              <p className="text-sm text-slate-300 font-body leading-relaxed mb-6">
+              <p className="text-[16px] sm:text-[17px] text-[#A8B4C2] font-body leading-[1.65] mb-6">
                 {project.longDescription}
               </p>
 
               {/* Architectural Pipeline Steps */}
               <div className="mb-6 p-4 rounded-xl border border-white/10 bg-black/40">
-                <div className="font-mono text-[0.625rem] text-slate-400 uppercase tracking-widest mb-3">
+                <div className="font-mono text-[12px] sm:text-[13px] text-slate-400 uppercase tracking-[0.12em] mb-3 font-semibold">
                   SYSTEM EXECUTION PIPELINE
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-5 gap-2">
+                <div className="grid grid-cols-1 sm:grid-cols-5 gap-2.5">
                   {project.pipeline.map((p, idx) => (
                     <div
                       key={idx}
-                      className="p-2.5 rounded border border-white/5 bg-white/[0.02] flex flex-col justify-between"
+                      className="p-3 rounded-lg border border-white/10 bg-white/[0.03] flex flex-col justify-between"
                     >
-                      <span className="font-mono text-[0.5625rem] text-slate-500 mb-1">{p.step}</span>
-                      <span className="font-mono text-xs font-semibold text-slate-200">{p.label}</span>
+                      <span className="font-mono text-[11px] sm:text-[12px] text-slate-400 mb-1">{p.step}</span>
+                      <span className="font-mono text-[13px] sm:text-[14px] font-semibold text-[#F5F8FA]">{p.label}</span>
                     </div>
                   ))}
                 </div>
@@ -129,14 +129,14 @@ export function ProjectDetailModal({ project, onClose }: ProjectDetailModalProps
 
               {/* Technologies */}
               <div className="mb-6">
-                <div className="font-mono text-[0.625rem] text-slate-400 uppercase tracking-widest mb-2.5">
+                <div className="font-mono text-[12px] sm:text-[13px] text-slate-400 uppercase tracking-[0.12em] mb-2.5 font-semibold">
                   VERIFIED STACK
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {project.technologies.map((t) => (
                     <span
                       key={t}
-                      className="px-3 py-1 rounded-md border border-white/10 bg-slate-900 font-mono text-xs text-slate-200"
+                      className="px-3 py-1.5 rounded-lg border border-white/10 bg-slate-900/90 font-mono text-[13px] sm:text-[14px] text-[#F5F8FA] font-medium"
                     >
                       {t}
                     </span>
@@ -146,13 +146,13 @@ export function ProjectDetailModal({ project, onClose }: ProjectDetailModalProps
 
               {/* Key Features */}
               <div className="mb-6">
-                <div className="font-mono text-[0.625rem] text-slate-400 uppercase tracking-widest mb-2.5">
+                <div className="font-mono text-[12px] sm:text-[13px] text-slate-400 uppercase tracking-[0.12em] mb-2.5 font-semibold">
                   CORE CAPABILITIES & IMPLEMENTATION
                 </div>
-                <ul className="space-y-2 text-xs sm:text-sm text-slate-300 font-body">
+                <ul className="space-y-2.5 text-[14px] sm:text-[15px] text-[#A8B4C2] font-body leading-relaxed">
                   {project.features.map((f, i) => (
-                    <li key={i} className="flex items-start gap-2">
-                      <span className="text-cyan-400 mt-0.5 font-mono">&bull;</span>
+                    <li key={i} className="flex items-start gap-2.5">
+                      <span className="text-cyan-400 mt-1 font-mono text-base">&bull;</span>
                       <span>{f}</span>
                     </li>
                   ))}
@@ -160,11 +160,11 @@ export function ProjectDetailModal({ project, onClose }: ProjectDetailModalProps
               </div>
 
               {/* My Contribution */}
-              <div className="mb-8 p-4 rounded-xl border border-cyan-500/20 bg-cyan-950/20">
-                <div className="font-mono text-[0.625rem] text-cyan-300 uppercase tracking-widest mb-1.5 font-bold">
+              <div className="mb-8 p-4.5 rounded-xl border border-cyan-500/20 bg-cyan-950/20">
+                <div className="font-mono text-[12px] sm:text-[13px] text-cyan-300 uppercase tracking-[0.12em] mb-2 font-bold">
                   MY ROLE & CONTRIBUTION
                 </div>
-                <p className="text-xs sm:text-sm text-slate-200 font-body leading-relaxed">
+                <p className="text-[14px] sm:text-[15px] text-[#F5F8FA] font-body leading-[1.65] m-0">
                   {project.contribution}
                 </p>
               </div>
@@ -197,7 +197,7 @@ export function ProjectDetailModal({ project, onClose }: ProjectDetailModalProps
 
                 <button
                   onClick={onClose}
-                  className="font-mono text-xs text-slate-400 hover:text-white transition-colors"
+                  className="font-mono text-[13px] sm:text-[14px] text-slate-400 hover:text-white transition-colors cursor-pointer"
                 >
                   &larr; BACK TO PROJECT UNIVERSE
                 </button>

@@ -100,19 +100,19 @@ export function PipelineDetailModal({
           {/* Modal Header */}
           <div className="relative p-5 sm:p-7 border-b border-white/10 flex items-start justify-between gap-4">
             <div className="min-w-0 pr-10">
-              <div className="flex items-center gap-2.5 mb-2">
+              <div className="flex items-center gap-2.5 mb-2.5">
                 <span
                   className="w-2.5 h-2.5 rounded-full flex-shrink-0 animate-pulse shadow-[0_0_10px_currentColor]"
                   style={{ backgroundColor: pipeline.color, color: pipeline.color }}
                 />
                 <span
                   id="pipeline-modal-title"
-                  className="font-mono text-[14px] sm:text-[16px] font-extrabold tracking-[0.08em] uppercase text-[#F4F7FA]"
+                  className="font-mono text-[17px] sm:text-[20px] font-extrabold tracking-[0.06em] uppercase text-[#F5F8FA]"
                 >
                   {pipeline.title}
                 </span>
                 <span
-                  className="font-mono text-[11px] px-2 py-0.5 rounded-full border border-white/15 bg-white/5 font-semibold text-slate-300"
+                  className="font-mono text-[12px] px-2.5 py-0.5 rounded-full border border-white/15 bg-white/5 font-semibold text-slate-300"
                   style={{ borderColor: `${pipeline.color}40`, color: pipeline.color }}
                 >
                   {pipeline.code}
@@ -121,7 +121,7 @@ export function PipelineDetailModal({
 
               <p
                 id="pipeline-modal-desc"
-                className="text-[13px] sm:text-[14px] text-slate-300 font-body leading-relaxed m-0 max-w-xl"
+                className="text-[15px] sm:text-[16px] text-[#A8B4C2] font-body leading-[1.6] m-0 max-w-xl"
               >
                 {pipeline.description}
               </p>
@@ -152,7 +152,7 @@ export function PipelineDetailModal({
               }}
               aria-label="Close pipeline module"
             >
-              <span className="font-mono text-lg text-slate-300 group-hover:text-cyan-300 transition-colors leading-none select-none">
+              <span className="font-mono text-xl text-slate-300 group-hover:text-cyan-300 transition-colors leading-none select-none">
                 &times;
               </span>
             </button>
@@ -160,7 +160,7 @@ export function PipelineDetailModal({
 
           {/* Modal Body: Connected Glass Pipeline Stages */}
           <div className="p-5 sm:p-7 overflow-y-auto max-h-[calc(85vh-160px)] custom-scrollbar">
-            <div className="text-[11px] font-mono text-slate-400 mb-4 uppercase tracking-wider">
+            <div className="text-[13px] font-mono text-slate-400 mb-4 uppercase tracking-[0.1em] font-semibold">
               PIPELINE EXECUTION NODES // CLICK ANY STAGE FOR DETAILED TELEMETRY
             </div>
 
@@ -212,7 +212,7 @@ export function PipelineDetailModal({
                       <div className="flex items-start justify-between gap-3">
                         <div className="flex items-center gap-3">
                           <span
-                            className="font-mono text-[11px] font-bold px-2 py-0.5 rounded border uppercase"
+                            className="font-mono text-[12px] sm:text-[13px] font-bold px-2.5 py-0.5 rounded border uppercase"
                             style={{
                               borderColor: `${node.color}50`,
                               backgroundColor: `${node.color}15`,
@@ -221,23 +221,23 @@ export function PipelineDetailModal({
                           >
                             {node.stage}
                           </span>
-                          <span className="font-mono text-[15px] sm:text-[17px] font-bold text-white group-hover:text-cyan-300 transition-colors">
+                          <span className="font-mono text-[16px] sm:text-[18px] font-bold text-white group-hover:text-cyan-300 transition-colors">
                             {node.name}
                           </span>
                         </div>
 
-                        <span className="font-mono text-[12px] text-slate-400 group-hover:text-cyan-300 transition-colors">
+                        <span className="font-mono text-[12px] sm:text-[13px] text-slate-400 group-hover:text-cyan-300 transition-colors font-semibold">
                           {isExpanded ? 'LESS [-]' : 'EXPAND [+]'}
                         </span>
                       </div>
 
                       {/* Role */}
-                      <div className="font-mono text-[12px] sm:text-[13px] text-cyan-300 mt-2 font-medium">
+                      <div className="font-mono text-[13px] sm:text-[14px] text-cyan-300 mt-2 font-medium">
                         {node.role}
                       </div>
 
                       {/* Description */}
-                      <p className="font-body text-[13px] text-slate-300 mt-2 leading-relaxed m-0">
+                      <p className="font-body text-[14px] sm:text-[15px] text-[#A8B4C2] mt-2 leading-[1.6] m-0">
                         {node.description}
                       </p>
                     </motion.button>
@@ -246,13 +246,13 @@ export function PipelineDetailModal({
                     {!isLast && (
                       <div className="flex flex-col items-center justify-center my-1.5" aria-hidden="true">
                         <div
-                          className="w-[2px] h-3"
+                          className="w-[2px] h-3.5"
                           style={{
                             background: `linear-gradient(to bottom, ${node.color}60, ${pipeline.nodes[index + 1].color}60)`,
                           }}
                         />
                         <span
-                          className="font-mono text-[11px] leading-none select-none"
+                          className="font-mono text-[12px] leading-none select-none"
                           style={{ color: pipeline.nodes[index + 1].color }}
                         >
                           &darr;
@@ -266,9 +266,9 @@ export function PipelineDetailModal({
           </div>
 
           {/* Footer */}
-          <div className="p-4 sm:p-5 border-t border-white/10 bg-black/25 flex items-center justify-between font-mono text-[11px] text-slate-400">
+          <div className="p-4 sm:p-5 border-t border-white/10 bg-black/25 flex items-center justify-between font-mono text-[13px] text-slate-300">
             <span>4 CONNECTED GLASS STAGES</span>
-            <span className="text-cyan-400 font-semibold">VERIFIED ARCHITECTURE</span>
+            <span className="text-cyan-400 font-semibold tracking-wide">VERIFIED ARCHITECTURE</span>
           </div>
         </motion.div>
       </div>

@@ -45,16 +45,27 @@
   /* Emerald (Security indicator) */
   --color-emerald: #10b981;
 
-  /* Typography Colors */
+  /* Typography Colors (Phase 10.4 High Contrast) */
   --color-text-primary: #F5F8FA;
   --color-text-secondary: #A8B4C2;
-  --color-text-muted: #687687;
+  --color-text-muted: #7F8B99;
   --color-text-accent: #00D9FF;
 
   /* Typography */
   --font-display: 'Space Grotesk', 'Inter', sans-serif;
   --font-body: 'Inter', sans-serif;
   --font-mono: 'Space Mono', monospace;
+
+  /* Phase 10.4 Typography Scale Tokens */
+  --font-size-display: clamp(3rem, 7vw, 6rem); /* 48-96px */
+  --font-size-hero-title: clamp(1.5rem, 2.5vw, 2rem); /* 24-32px */
+  --font-size-section: clamp(2rem, 4vw, 3.5rem); /* 32-56px */
+  --font-size-subsection: clamp(1.375rem, 2vw, 1.75rem); /* 22-28px */
+  --font-size-card-title: clamp(1.125rem, 1.5vw, 1.375rem); /* 18-22px */
+  --font-size-body: clamp(1rem, 1.1vw, 1.125rem); /* 16-18px */
+  --font-size-small: 0.875rem; /* 14px */
+  --font-size-eyebrow: 0.8125rem; /* 13px */
+  --font-size-micro: 0.6875rem; /* 11px */
 
   /* Cinematic Animation Timing & Curves (Phase 8) */
   --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
@@ -253,7 +264,7 @@ section[id] {
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65), inset 0 -1px 0 rgba(0, 217, 255, 0.14);
 }
 
-/* Glass Buttons (Phase 9 Section 39) */
+/* Glass Buttons (Phase 9 & 10.4 Typography Overhaul) */
 .glass-btn-primary {
   position: relative;
   background: linear-gradient(135deg, rgba(0, 217, 255, 0.16) 0%, rgba(6, 10, 16, 0.88) 100%);
@@ -261,6 +272,9 @@ section[id] {
   -webkit-backdrop-filter: blur(20px) saturate(150%);
   border: 1px solid rgba(0, 217, 255, 0.45);
   color: var(--color-cyan-bright);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 0 16px rgba(0, 217, 255, 0.15);
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
               border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
@@ -288,6 +302,9 @@ section[id] {
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.12);
   color: var(--color-text-primary);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.10);
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
               border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
@@ -356,9 +373,15 @@ body {
   font-family: var(--font-body);
   background-color: var(--color-void);
   color: var(--color-text-primary);
-  line-height: 1.6;
+  font-size: 16px;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+p {
+  line-height: 1.65;
+  max-width: 65ch;
 }
 
 :focus-visible {
@@ -429,10 +452,42 @@ body {
 
 .text-label {
   font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.2em;
+  font-size: 0.8125rem; /* 13px */
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--color-text-secondary);
+}
+
+/* Phase 10.4 Authoritative Section Typography Classes */
+.scene-heading {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4vw, 56px);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: #F5F8FA;
+}
+
+.scene-subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(16px, 1.2vw, 18px);
+  line-height: 1.65;
+  color: #A8B4C2;
+  max-width: 65ch;
+}
+
+.scene-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
 }
 
 /* ============================================================
@@ -556,13 +611,13 @@ body {
   z-index: 1;
 }
 
-/* Glass Technology Chips (Section 18) */
+/* Glass Technology Chips (Phase 10.4: Min 13px, Rec 14px, Padding 8px 12px) */
 .glass-chip {
   display: inline-flex;
   align-items: center;
-  padding: 0.25rem 0.65rem;
+  padding: 8px 12px;
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.875rem; /* 14px */
   color: var(--color-text-secondary);
   background: rgba(255, 255, 255, 0.035);
   backdrop-filter: blur(12px);
@@ -620,23 +675,24 @@ body {
 }
 
 /* ============================================================
-   BUTTONS
+   BUTTONS (Phase 10.4 Typography & Readability Overhaul)
    ============================================================ */
 .btn-primary {
   position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.875rem 2rem;
+  gap: 0.625rem;
+  min-height: 48px;
+  padding: 0.75rem 1.5rem;
   font-family: var(--font-display);
-  font-size: 0.8125rem;
+  font-size: 0.9375rem; /* 15px */
   font-weight: 600;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--color-void);
   background: var(--color-cyan);
   border: none;
-  border-radius: 2px;
+  border-radius: 4px;
   cursor: pointer;
   overflow: hidden;
   transition: all 0.3s var(--ease-cinematic);
@@ -664,17 +720,18 @@ body {
 .btn-secondary {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.875rem 2rem;
+  gap: 0.625rem;
+  min-height: 48px;
+  padding: 0.75rem 1.5rem;
   font-family: var(--font-display);
-  font-size: 0.8125rem;
+  font-size: 0.9375rem; /* 15px */
   font-weight: 600;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--color-text-primary);
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 4px;
   cursor: pointer;
   transition: all 0.3s var(--ease-cinematic);
   text-decoration: none;

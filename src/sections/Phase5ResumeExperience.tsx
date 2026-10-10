@@ -14,7 +14,7 @@ export function Phase5ResumeExperience() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="inline-flex items-center gap-2 px-3.5 py-1 mb-4 rounded-full border border-[rgba(0,217,255,0.25)] bg-[#00D9FF]/[0.05] text-[#00D9FF] font-mono text-[0.6875rem] tracking-widest uppercase"
+          className="inline-flex items-center gap-2 px-3.5 py-1.5 mb-4 rounded-full border border-[rgba(0,217,255,0.25)] bg-[#00D9FF]/[0.05] text-[#00D9FF] font-mono text-[13px] tracking-[0.12em] uppercase font-semibold"
         >
           <span className="w-1.5 h-1.5 rounded-full bg-[#00D9FF] animate-pulse" />
           PHASE 05 // THE RESUME EXPERIENCE
@@ -25,7 +25,7 @@ export function Phase5ResumeExperience() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.1 }}
-          className="text-3xl sm:text-5xl lg:text-6xl font-display font-extrabold text-[#F4F7FA] tracking-tight leading-tight mb-3"
+          className="text-[clamp(32px,5vw,56px)] font-display font-extrabold text-[#F5F8FA] tracking-tight leading-[1.1] mb-3 uppercase"
         >
           ENGINEERING <br className="hidden sm:inline" />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00D9FF] via-[#38E8FF] to-[#F4F7FA]">
@@ -33,11 +33,11 @@ export function Phase5ResumeExperience() {
           </span>
         </motion.h2>
 
-        <p className="text-sm sm:text-base text-[#A8B4C2] font-body max-w-xl mx-auto px-6 mb-2">
+        <p className="text-[clamp(16px,1.2vw,18px)] text-[#A8B4C2] font-body max-w-[65ch] mx-auto px-6 mb-3 leading-[1.65]">
           &ldquo;Building intelligent, scalable and secure software systems.&rdquo;
         </p>
 
-        <p className="font-mono text-xs text-[#687687] tracking-wider">
+        <p className="font-mono text-[13px] sm:text-[14px] text-slate-400 tracking-wider font-medium">
           PROFESSIONAL &bull; RECRUITER-FRIENDLY &bull; ATS COMPLIANT
         </p>
       </div>

@@ -108,7 +108,7 @@ export function Scene02AboutIdentity() {
               className="mt-3.5 h-[38px] min-w-[190px] px-5 rounded-full glass-level-2 border border-[rgba(0,217,255,0.35)] flex items-center justify-center gap-2.5 shadow-[0_4px_16px_rgba(0,0,0,0.5),0_0_12px_rgba(0,217,255,0.12)] whitespace-nowrap select-none"
             >
               <span className="w-2 h-2 rounded-full bg-[#00D9FF] shadow-[0_0_8px_rgba(0,217,255,0.8)] animate-pulse flex-shrink-0" />
-              <span className="font-mono text-xs text-[#F4F7FA] tracking-[0.08em] uppercase font-bold">
+              <span className="font-mono text-[13px] sm:text-[14px] text-[#F4F7FA] tracking-[0.1em] uppercase font-bold">
                 SOFTWARE ENGINEER
               </span>
             </motion.div>
@@ -123,11 +123,11 @@ export function Scene02AboutIdentity() {
             >
               <div className="flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#00D9FF] flex-shrink-0" />
-                <span className="font-display text-xs font-semibold text-[#F4F7FA] truncate">
+                <span className="font-display text-[14px] font-semibold text-[#F4F7FA] truncate">
                   Md Habib Munsar Ahmed
                 </span>
               </div>
-              <span className="font-mono text-[0.6875rem] text-[#687687] tracking-wide flex-shrink-0 ml-2">
+              <span className="font-mono text-[13px] text-[#A8B4C2] tracking-wide flex-shrink-0 ml-2">
                 {profile.location.split(',')[0]}
               </span>
             </motion.div>
@@ -138,29 +138,29 @@ export function Scene02AboutIdentity() {
             className="profile-content w-full flex flex-col box-border"
             style={{ maxWidth: 'min(100%, 880px)' }}
           >
-            {/* 1. Core Statement Box — Focus Glass (Phase 9 Section 15) */}
+            {/* 1. Core Statement Box — Focus Glass (Phase 10.4: 20-28px Statement) */}
             <div className="core-statement w-full p-5 sm:p-6 rounded-2xl glass-focus liquid-edge glass-reflection-sweep box-border shadow-[0_16px_40px_rgba(0,0,0,0.45)]">
-              <div className="font-mono text-[11px] sm:text-xs font-bold text-[#00D9FF] mb-2 uppercase tracking-[0.12em] flex items-center gap-2">
+              <div className="font-mono text-[13px] font-bold text-[#00D9FF] mb-2 uppercase tracking-[0.12em] flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#00D9FF] animate-pulse flex-shrink-0" />
                 <span>CORE STATEMENT</span>
               </div>
-              <p className="text-[19px] sm:text-[21px] lg:text-[24px] font-display font-semibold text-[#F4F7FA] leading-[1.35] max-w-[760px] m-0">
+              <p className="text-[clamp(20px,2vw,28px)] font-display font-semibold text-[#F4F7FA] leading-[1.38] max-w-[760px] m-0">
                 &ldquo;Software Engineer building intelligent, secure and scalable digital systems across AI, full-stack development and cybersecurity.&rdquo;
               </p>
             </div>
 
-            {/* 2. Editorial Description Block */}
-            <div className="profile-description w-full max-w-[850px] mt-[14px]">
-              <p className="text-[15px] sm:text-[16px] text-[#A8B4C2] font-body leading-[1.55] max-w-[850px] m-0">
+            {/* 2. Editorial Description Block (Phase 10.4: 16-17px, line-height 1.65) */}
+            <div className="profile-description w-full max-w-[850px] mt-[16px]">
+              <p className="text-[16px] sm:text-[17px] text-[#A8B4C2] font-body leading-[1.65] max-w-[850px] m-0">
                 My engineering foundation was built by working across software, systems and security. Alongside application development, I have explored Linux, networking, ethical hacking, hardware troubleshooting and AI/ML—giving me a broader understanding of how modern systems are built, deployed and secured.
               </p>
               {/* Secondary Description */}
-              <p className="mt-[6px] text-[14px] sm:text-[15px] text-[#687687] font-body leading-[1.5] max-w-[850px] m-0">
+              <p className="mt-[8px] text-[15.5px] sm:text-[16.5px] text-[#A8B4C2]/90 font-body leading-[1.6] max-w-[850px] m-0">
                 From operating system configuration and network traffic analysis to autonomous multi-agent workflows and responsive full-stack architectures, I build with an end-to-end mindset where intelligence and resilience meet.
               </p>
             </div>
 
-            {/* 3. Three Capability Cards — Floating Glass Modules (Phase 9 Section 15 & 19) */}
+            {/* 3. Three Capability Cards — Floating Glass Modules (Phase 10.4: Titles 17px, Descs 15px) */}
             <div className="capability-grid mt-[18px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full items-stretch">
               {FOCUS_PILLARS.map((pillar) => (
                 <div
@@ -168,41 +168,41 @@ export function Scene02AboutIdentity() {
                   className="glass-card liquid-edge p-[16px_18px] rounded-xl flex flex-col items-start justify-start min-h-0 h-auto transition-all duration-300 hover:-translate-y-1 shadow-[0_8px_24px_rgba(0,0,0,0.35)]"
                 >
                   <div
-                    className="font-display font-semibold text-[15px] leading-[1.3]"
+                    className="font-display font-semibold text-[17px] leading-[1.3]"
                     style={{ color: pillar.accent }}
                   >
                     {pillar.title}
                   </div>
-                  <p className="text-[14px] leading-[1.5] text-[#A8B4C2] font-body mt-2 m-0">
+                  <p className="text-[15px] leading-[1.55] text-[#A8B4C2] font-body mt-2 m-0">
                     {pillar.desc}
                   </p>
                 </div>
               ))}
             </div>
 
-            {/* 4. Metadata Cards Row — Glass Level 1 */}
-            <div className="metadata-grid mt-[14px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
-              <div className="h-[58px] px-[14px] py-[9px] rounded-xl glass-level-1 liquid-edge border border-white/10 box-border flex flex-col justify-center shadow-sm">
-                <span className="text-[#687687] block font-mono text-[10px] sm:text-[11px] uppercase tracking-wider mb-0.5 font-semibold">
+            {/* 4. Metadata Cards Row — Glass Level 1 (Phase 10.4: Value 14-15px, Label 12-13px) */}
+            <div className="metadata-grid mt-[16px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
+              <div className="h-[62px] px-[16px] py-[10px] rounded-xl glass-level-1 liquid-edge border border-white/10 box-border flex flex-col justify-center shadow-sm">
+                <span className="text-[#A8B4C2] block font-mono text-[12px] uppercase tracking-wider mb-0.5 font-semibold">
                   AFFILIATION
                 </span>
-                <span className="text-[#F4F7FA] font-sans text-[13px] sm:text-[14px] font-medium leading-tight truncate">
+                <span className="text-[#F4F7FA] font-sans text-[14px] sm:text-[15px] font-medium leading-tight truncate">
                   Assam Down Town University
                 </span>
               </div>
-              <div className="h-[58px] px-[14px] py-[9px] rounded-xl glass-level-1 liquid-edge border border-white/10 box-border flex flex-col justify-center shadow-sm">
-                <span className="text-[#687687] block font-mono text-[10px] sm:text-[11px] uppercase tracking-wider mb-0.5 font-semibold">
+              <div className="h-[62px] px-[16px] py-[10px] rounded-xl glass-level-1 liquid-edge border border-white/10 box-border flex flex-col justify-center shadow-sm">
+                <span className="text-[#A8B4C2] block font-mono text-[12px] uppercase tracking-wider mb-0.5 font-semibold">
                   ACADEMIC PERIOD
                 </span>
-                <span className="text-[#F4F7FA] font-mono text-[13px] sm:text-[14px] font-medium leading-tight truncate">
+                <span className="text-[#F4F7FA] font-mono text-[14px] sm:text-[15px] font-medium leading-tight truncate">
                   2025 &mdash; 2028 (BCA)
                 </span>
               </div>
-              <div className="h-[58px] px-[14px] py-[9px] rounded-xl glass-level-1 liquid-edge border border-white/10 box-border flex flex-col justify-center shadow-sm">
-                <span className="text-[#687687] block font-mono text-[10px] sm:text-[11px] uppercase tracking-wider mb-0.5 font-semibold">
+              <div className="h-[62px] px-[16px] py-[10px] rounded-xl glass-level-1 liquid-edge border border-white/10 box-border flex flex-col justify-center shadow-sm">
+                <span className="text-[#A8B4C2] block font-mono text-[12px] uppercase tracking-wider mb-0.5 font-semibold">
                   LOCATION
                 </span>
-                <span className="text-[#F4F7FA] font-sans text-[13px] sm:text-[14px] font-medium leading-tight truncate">
+                <span className="text-[#F4F7FA] font-sans text-[14px] sm:text-[15px] font-medium leading-tight truncate">
                   {profile.location}
                 </span>
               </div>

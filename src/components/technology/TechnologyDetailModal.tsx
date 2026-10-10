@@ -190,22 +190,22 @@ export function TechnologyDetailModal({
                 />
                 <span
                   id="tech-modal-title"
-                  className="font-mono text-[14px] sm:text-[16px] font-extrabold tracking-[0.08em] uppercase text-[#F4F7FA]"
+                  className="font-mono text-[18px] sm:text-[20px] font-extrabold tracking-[0.06em] uppercase text-[#F4F7FA]"
                 >
                   {domain.label}
                 </span>
                 <span
-                  className="font-mono text-[11px] px-2 py-0.5 rounded-full border border-white/15 bg-white/5 font-semibold text-slate-300"
+                  className="font-mono text-[12px] sm:text-[13px] px-2.5 py-0.5 rounded-full border border-white/15 bg-white/5 font-semibold text-slate-300"
                   style={{ borderColor: `${domain.color}40`, color: domain.color }}
                 >
                   {domain.shortLabel}
                 </span>
               </div>
 
-              {/* Category Description */}
+              {/* Category Description (Phase 10.4: 15-17px) */}
               <p
                 id="tech-modal-desc"
-                className="text-[13px] sm:text-[14px] text-slate-300 font-body leading-relaxed m-0 max-w-xl"
+                className="text-[15px] sm:text-[16px] text-[#A8B4C2] font-body leading-relaxed m-0 max-w-2xl"
               >
                 {domain.description}
               </p>
@@ -255,7 +255,7 @@ export function TechnologyDetailModal({
                   transition={{ duration: 0.25 }}
                   className="space-y-2.5"
                 >
-                  <div className="flex items-center justify-between text-[11px] font-mono text-slate-400 mb-2 uppercase tracking-wider px-1">
+                  <div className="flex items-center justify-between text-[13px] font-mono text-slate-300 mb-2.5 uppercase tracking-wider px-1 font-semibold">
                     <span>TECHNOLOGIES IN MODULE</span>
                     <span>CLICK ITEM FOR VERIFIED DETAILS</span>
                   </div>
@@ -303,7 +303,7 @@ export function TechnologyDetailModal({
                         {/* Spatial Optical Node Dot & Conduit Line */}
                         <div className="flex items-center gap-1.5 flex-shrink-0" aria-hidden="true">
                           <span
-                            className="w-2 h-2 rounded-full transition-transform group-hover:scale-125"
+                            className="w-2.5 h-2.5 rounded-full transition-transform group-hover:scale-125"
                             style={{
                               backgroundColor: domain.color,
                               boxShadow: `0 0 8px ${domain.color}`,
@@ -314,23 +314,24 @@ export function TechnologyDetailModal({
 
                         <div className="min-w-0">
                           <div className="flex items-center gap-2">
-                            <span className="font-mono text-[14px] sm:text-[15px] font-bold text-white group-hover:text-cyan-300 transition-colors">
+                            {/* Technology name inside opened category: 16-18px */}
+                            <span className="font-mono text-[16px] sm:text-[17px] font-bold text-white group-hover:text-cyan-300 transition-colors">
                               {item.name}
                             </span>
                             {item.projects && item.projects.length > 0 && (
-                              <span className="font-mono text-[10px] px-1.5 py-0.5 rounded border border-cyan-500/30 bg-cyan-500/10 text-cyan-300 font-medium">
+                              <span className="font-mono text-[12px] px-2 py-0.5 rounded border border-cyan-500/30 bg-cyan-500/10 text-cyan-300 font-medium">
                                 {item.projects.length} {item.projects.length === 1 ? 'PROJECT' : 'PROJECTS'}
                               </span>
                             )}
                           </div>
-                          <p className="font-body text-[12px] sm:text-[13px] text-slate-400 group-hover:text-slate-300 transition-colors mt-0.5 m-0 line-clamp-1">
+                          <p className="font-body text-[14px] sm:text-[15px] text-[#A8B4C2] group-hover:text-slate-200 transition-colors mt-0.5 m-0 line-clamp-1">
                             {item.description}
                           </p>
                         </div>
                       </div>
 
-                      <div className="flex items-center gap-1.5 font-mono text-[13px] text-slate-400 group-hover:text-cyan-300 group-hover:translate-x-1 transition-all flex-shrink-0">
-                        <span className="hidden sm:inline text-[11px] uppercase tracking-wider">DETAILS</span>
+                      <div className="flex items-center gap-1.5 font-mono text-[14px] text-slate-400 group-hover:text-cyan-300 group-hover:translate-x-1 transition-all flex-shrink-0">
+                        <span className="hidden sm:inline text-[12px] uppercase tracking-wider font-semibold">DETAILS</span>
                         <span className="text-base">&rarr;</span>
                       </div>
                     </motion.button>
@@ -351,12 +352,12 @@ export function TechnologyDetailModal({
                     <button
                       type="button"
                       onClick={() => setSelectedTech(null)}
-                      className="inline-flex items-center gap-2 font-mono text-[12px] font-bold text-cyan-400 hover:text-cyan-200 transition-colors cursor-pointer group py-1 px-2 -ml-2 rounded-lg hover:bg-white/5"
+                      className="inline-flex items-center gap-2 font-mono text-[14px] font-bold text-cyan-400 hover:text-cyan-200 transition-colors cursor-pointer group py-1.5 px-2.5 -ml-2 rounded-lg hover:bg-white/5"
                     >
                       <span className="transition-transform group-hover:-translate-x-1">&larr;</span>
                       <span>BACK TO {domain.label}</span>
                     </button>
-                    <span className="font-mono text-[11px] text-slate-400">
+                    <span className="font-mono text-[12px] text-slate-400">
                       ESC TO RETURN
                     </span>
                   </div>
@@ -364,11 +365,11 @@ export function TechnologyDetailModal({
                   {/* Technology Title & Role */}
                   <div className="rounded-xl p-4 sm:p-5 bg-white/[0.03] border border-white/10">
                     <div className="flex items-baseline justify-between flex-wrap gap-2">
-                      <h4 className="font-mono text-xl sm:text-2xl font-black text-white tracking-wide m-0">
+                      <h4 className="font-mono text-2xl sm:text-3xl font-black text-white tracking-wide m-0">
                         {selectedTech.name}
                       </h4>
                       <span
-                        className="font-mono text-[11px] uppercase tracking-widest px-2.5 py-1 rounded-full border"
+                        className="font-mono text-[12px] sm:text-[13px] uppercase tracking-widest px-3 py-1 rounded-full border font-semibold"
                         style={{
                           borderColor: `${domain.color}50`,
                           backgroundColor: `${domain.color}15`,
@@ -378,7 +379,8 @@ export function TechnologyDetailModal({
                         {selectedTech.role || `${domain.label} COMPONENT`}
                       </span>
                     </div>
-                    <p className="font-body text-[13px] sm:text-[14px] text-slate-300 mt-2 m-0 leading-relaxed">
+                    {/* Technology Detail Description: 15-17px */}
+                    <p className="font-body text-[15px] sm:text-[16px] text-[#A8B4C2] mt-2 m-0 leading-relaxed">
                       {selectedTech.description}
                     </p>
                   </div>
@@ -386,15 +388,15 @@ export function TechnologyDetailModal({
                   {/* "Used for:" Bullet Points (Faithful to verified tech stack) */}
                   {selectedTech.usedFor && selectedTech.usedFor.length > 0 && (
                     <div className="space-y-2">
-                      <h5 className="font-mono text-[12px] tracking-[0.1em] text-cyan-400 uppercase font-semibold m-0 flex items-center gap-2">
+                      <h5 className="font-mono text-[13px] tracking-[0.1em] text-cyan-400 uppercase font-semibold m-0 flex items-center gap-2">
                         <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
                         USED FOR IN ENGINEERING:
                       </h5>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
                         {selectedTech.usedFor.map((point, idx) => (
                           <div
                             key={idx}
-                            className="p-3 rounded-lg bg-white/[0.025] border border-white/10 flex items-start gap-2.5 text-[12px] sm:text-[13px] text-slate-200 leading-snug"
+                            className="p-3.5 rounded-lg bg-white/[0.025] border border-white/10 flex items-start gap-2.5 text-[14px] sm:text-[15px] text-slate-200 leading-snug"
                           >
                             <span className="text-cyan-400 font-mono select-none mt-0.5">&bull;</span>
                             <span>{point}</span>
@@ -407,11 +409,11 @@ export function TechnologyDetailModal({
                   {/* PROJECT CONNECTIONS VISUALIZATION (Prompt Requirement 15) */}
                   <div className="space-y-3 pt-1">
                     <div className="flex items-center justify-between">
-                      <h5 className="font-mono text-[12px] tracking-[0.1em] text-slate-300 uppercase font-semibold m-0 flex items-center gap-2">
+                      <h5 className="font-mono text-[13px] tracking-[0.1em] text-slate-300 uppercase font-semibold m-0 flex items-center gap-2">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                         PROJECT CONNECTIONS
                       </h5>
-                      <span className="font-mono text-[10px] text-slate-400">
+                      <span className="font-mono text-[12px] text-slate-400">
                         {selectedTech.projects && selectedTech.projects.length > 0
                           ? 'VERIFIED CODEBASE IMPLEMENTATION'
                           : 'FOUNDATIONAL ENGINEERING KNOWLEDGE'}
@@ -421,7 +423,6 @@ export function TechnologyDetailModal({
                     {selectedTech.projects && selectedTech.projects.length > 0 ? (
                       <div className="relative pl-4 sm:pl-6 border-l-2 border-cyan-500/30 space-y-3.5 my-3">
                         {selectedTech.projects.map((proj, pIdx) => {
-                          const isLast = pIdx === (selectedTech.projects?.length ?? 1) - 1
                           return (
                             <div key={proj.projectId} className="relative group">
                               {/* Branch Connector Line (│ ├── / └──) */}
@@ -440,15 +441,15 @@ export function TechnologyDetailModal({
                               >
                                 <div className="flex items-center justify-between flex-wrap gap-2">
                                   <div className="flex items-center gap-2">
-                                    <span className="font-mono text-[13px] sm:text-[14px] font-bold text-white group-hover:text-cyan-300 transition-colors">
+                                    <span className="font-mono text-[15px] sm:text-[16px] font-bold text-white group-hover:text-cyan-300 transition-colors">
                                       {proj.projectName}
                                     </span>
                                   </div>
-                                  <span className="font-mono text-[10px] px-2 py-0.5 rounded border border-cyan-500/30 bg-cyan-500/10 text-cyan-300 font-semibold">
+                                  <span className="font-mono text-[12px] px-2 py-0.5 rounded border border-cyan-500/30 bg-cyan-500/10 text-cyan-300 font-semibold">
                                     {proj.tag}
                                   </span>
                                 </div>
-                                <p className="font-body text-[12px] sm:text-[13px] text-slate-300 mt-1.5 m-0 leading-relaxed">
+                                <p className="font-body text-[14px] sm:text-[15px] text-[#A8B4C2] mt-1.5 m-0 leading-relaxed">
                                   {proj.roleDescription}
                                 </p>
                               </div>
@@ -457,7 +458,7 @@ export function TechnologyDetailModal({
                         })}
                       </div>
                     ) : (
-                      <div className="p-4 rounded-xl bg-white/[0.02] border border-white/10 text-slate-400 text-[12px] sm:text-[13px] font-body leading-relaxed">
+                      <div className="p-4 rounded-xl bg-white/[0.02] border border-white/10 text-[#A8B4C2] text-[14px] sm:text-[15px] font-body leading-relaxed">
                         Implemented through foundational computer science coursework, object-oriented system design labs, and software engineering exercises.
                       </div>
                     )}
@@ -468,7 +469,7 @@ export function TechnologyDetailModal({
           </div>
 
           {/* Modal Footer */}
-          <div className="p-4 sm:p-5 border-t border-white/10 bg-black/25 flex items-center justify-between font-mono text-[11px] text-slate-400">
+          <div className="p-4 sm:p-5 border-t border-white/10 bg-black/25 flex items-center justify-between font-mono text-[13px] text-slate-300">
             <div className="flex items-center gap-2">
               <span
                 className="w-1.5 h-1.5 rounded-full"

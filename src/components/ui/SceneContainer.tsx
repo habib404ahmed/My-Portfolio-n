@@ -52,7 +52,7 @@ export function SceneContainer({
           className={`mb-12 md:mb-16 ${
             align === 'center' ? 'text-center mx-auto' : ''
           }`}
-          style={{ maxWidth: 800 }}
+          style={{ maxWidth: 860 }}
         >
           {badge && (
             <motion.div
@@ -60,7 +60,7 @@ export function SceneContainer({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="inline-flex items-center gap-2 px-3 py-1 mb-3.5 rounded-full border border-cyan-500/20 bg-cyan-500/5 text-cyan-400 font-mono text-[0.6875rem] tracking-widest uppercase font-semibold"
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 mb-4 rounded-full border border-cyan-500/25 bg-cyan-500/10 text-cyan-300 font-mono text-[13px] tracking-[0.12em] uppercase font-semibold"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
               {badge}
@@ -73,7 +73,7 @@ export function SceneContainer({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.6, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-extrabold text-white tracking-tight leading-tight uppercase"
+              className="text-[clamp(30px,4vw,56px)] font-display font-extrabold text-[#F5F8FA] tracking-tight leading-[1.1] uppercase"
             >
               {title}{' '}
               {titleHighlight && (
@@ -90,7 +90,7 @@ export function SceneContainer({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="mt-3 text-sm sm:text-base text-slate-400 font-body leading-relaxed max-w-2xl"
+              className="mt-4 text-[clamp(16px,1.2vw,18px)] text-[#A8B4C2] font-body leading-[1.65] max-w-[65ch]"
             >
               {subtitle}
             </motion.p>

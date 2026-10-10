@@ -170,7 +170,7 @@ export function Scene03EngineeringMindset() {
                 <button
                   key={stage.id}
                   onClick={() => setActiveStageId(stage.id)}
-                  className={`flex-shrink-0 min-w-[120px] md:min-w-0 snap-start flex flex-col items-center p-3 rounded-xl border text-center transition-all duration-300 cursor-pointer ${
+                  className={`flex-shrink-0 min-w-[130px] md:min-w-0 snap-start flex flex-col items-center p-3 sm:p-3.5 rounded-xl border text-center transition-all duration-300 cursor-pointer ${
                     isActive
                       ? 'glass-focus liquid-edge border-[#00D9FF] shadow-[0_0_22px_rgba(0,217,255,0.35)] scale-102'
                       : 'glass-card hover:border-[rgba(0,217,255,0.3)]'
@@ -178,13 +178,13 @@ export function Scene03EngineeringMindset() {
                   aria-pressed={isActive}
                 >
                   <span
-                    className="font-mono text-[0.6875rem] font-bold mb-1"
-                    style={{ color: isActive ? stage.color : '#687687' }}
+                    className="font-mono text-[13px] sm:text-[14px] font-bold mb-1"
+                    style={{ color: isActive ? stage.color : '#7F8B99' }}
                   >
                     {stage.number}
                   </span>
                   <span
-                    className={`font-display text-xs font-bold tracking-wider ${
+                    className={`font-display text-[13px] sm:text-[14px] font-bold tracking-wider ${
                       isActive ? 'text-[#F4F7FA]' : 'text-[#A8B4C2]'
                     }`}
                   >
@@ -214,11 +214,11 @@ export function Scene03EngineeringMindset() {
                   className="w-2.5 h-2.5 rounded-full"
                   style={{ background: currentStage.color }}
                 />
-                <span className="font-mono text-xs font-bold tracking-wider text-[#F4F7FA] uppercase">
+                <span className="font-mono text-[13px] sm:text-[14px] font-bold tracking-wider text-[#F4F7FA] uppercase">
                   PHASE {currentStage.number} &bull; {currentStage.title}
                 </span>
               </div>
-              <span className="font-mono text-[0.6875rem] text-[#687687] uppercase tracking-widest">
+              <span className="font-mono text-[12px] sm:text-[13px] text-[#A8B4C2] uppercase tracking-widest font-semibold">
                 METHODOLOGY
               </span>
             </div>
@@ -245,10 +245,10 @@ export function Scene03EngineeringMindset() {
                       {currentStage.number}
                     </span>
                   </div>
-                  <div className="font-display text-sm font-semibold text-slate-200 uppercase tracking-wider mb-1">
+                  <div className="font-display text-[15px] sm:text-[16px] font-semibold text-slate-200 uppercase tracking-wider mb-1">
                     {currentStage.visualState}
                   </div>
-                  <p className="text-xs sm:text-sm text-slate-400 font-body max-w-sm">
+                  <p className="text-[14px] sm:text-[15px] text-[#A8B4C2] font-body max-w-sm">
                     {currentStage.tagline}
                   </p>
                 </motion.div>
@@ -259,8 +259,8 @@ export function Scene03EngineeringMindset() {
             <div className="grid grid-cols-3 gap-3 pt-4 border-t border-[rgba(140,190,210,0.16)]">
               {currentStage.metrics.map((m, i) => (
                 <div key={i} className="p-3 rounded-lg bg-[#090D12]/80 border border-[rgba(140,190,210,0.16)]">
-                  <div className="font-mono text-[0.625rem] text-[#687687] uppercase tracking-wider">{m.label}</div>
-                  <div className="font-mono text-xs text-[#F4F7FA] font-bold mt-0.5">{m.value}</div>
+                  <div className="font-mono text-[12px] text-[#A8B4C2] uppercase tracking-wider">{m.label}</div>
+                  <div className="font-mono text-[13px] sm:text-[14px] text-[#F4F7FA] font-bold mt-0.5">{m.value}</div>
                 </div>
               ))}
             </div>
@@ -269,23 +269,23 @@ export function Scene03EngineeringMindset() {
           {/* Right Column: Architectural Approach (Focus Glass) */}
           <div className="lg:col-span-5 rounded-2xl glass-focus liquid-edge glass-reflection-sweep p-6 sm:p-8 flex flex-col justify-between">
             <div>
-              <div className="font-mono text-xs font-bold text-[#00D9FF] uppercase tracking-wider mb-2">
+              <div className="font-mono text-[13px] font-bold text-[#00D9FF] uppercase tracking-wider mb-2">
                 ARCHITECTURAL APPROACH
               </div>
-              <h3 className="text-2xl font-display font-bold text-[#F4F7FA] mb-3">
+              <h3 className="text-2xl sm:text-3xl font-display font-bold text-[#F4F7FA] mb-3">
                 {currentStage.title}
               </h3>
-              <p className="text-[#A8B4C2] font-body text-sm leading-relaxed mb-6">
+              <p className="text-[#A8B4C2] font-body text-[16px] sm:text-[17px] leading-[1.65] mb-6">
                 {currentStage.description}
               </p>
             </div>
 
             {/* Objective Callout */}
             <div className="p-4 rounded-xl border border-white/10 bg-black/40">
-              <span className="font-mono text-[0.625rem] text-[#687687] uppercase tracking-wider block mb-1 font-semibold">
+              <span className="font-mono text-[12px] text-[#A8B4C2] uppercase tracking-wider block mb-1 font-semibold">
                 CORE OBJECTIVE
               </span>
-              <p className="font-body text-xs text-[#F4F7FA] leading-normal">
+              <p className="font-body text-[15px] sm:text-[16px] text-[#F4F7FA] leading-normal">
                 {currentStage.tagline}
               </p>
             </div>
@@ -301,14 +301,14 @@ export function Scene03EngineeringMindset() {
           className="p-5 rounded-xl glass-level-1 liquid-edge flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-left"
         >
           <div>
-            <span className="font-mono text-[0.6875rem] text-[#00D9FF] uppercase tracking-wider font-bold block mb-1">
+            <span className="font-mono text-[13px] text-[#00D9FF] uppercase tracking-wider font-bold block mb-1">
               GUIDING PRINCIPLE // STAGE {currentStage.number}
             </span>
-            <p className="font-body text-xs sm:text-sm text-[#F4F7FA] italic">
+            <p className="font-body text-[15px] sm:text-[16px] text-[#F4F7FA] italic leading-relaxed">
               {currentStage.heuristic}
             </p>
           </div>
-          <span className="font-mono text-[0.6875rem] text-[#687687] self-start sm:self-center uppercase flex-shrink-0">
+          <span className="font-mono text-[12px] sm:text-[13px] text-[#A8B4C2] self-start sm:self-center uppercase flex-shrink-0 font-semibold">
             ENGINEERING DISCIPLINE
           </span>
         </motion.div>

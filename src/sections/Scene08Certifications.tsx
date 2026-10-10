@@ -51,20 +51,20 @@ export function Scene08Certifications() {
         />
 
         {/* ─── CONTROLLED HIERARCHY & VERIFIED COUNTER ─── */}
-        <div className="text-center max-w-2xl mx-auto mb-12">
+        <div className="text-center max-w-3xl mx-auto mb-12">
           {/* Small Scene Label */}
-          <div className="inline-flex items-center gap-2 font-mono text-[0.6875rem] uppercase tracking-[0.25em] text-[#00D9FF] mb-3 px-3 py-1 rounded-full border border-[rgba(0,217,255,0.25)] bg-[#00D9FF]/[0.05]">
+          <div className="inline-flex items-center gap-2 font-mono text-[13px] uppercase tracking-[0.12em] text-[#00D9FF] mb-3 px-3.5 py-1.5 rounded-full border border-[rgba(0,217,255,0.25)] bg-[#00D9FF]/[0.05] font-semibold">
             <span className="w-1.5 h-1.5 rounded-full bg-[#00D9FF] animate-pulse" />
             <span>SCENE 10 // CREDENTIAL CONSTELLATION</span>
           </div>
 
           {/* Controlled heading */}
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold text-[#F4F7FA] tracking-tight uppercase mb-3">
+          <h2 className="text-[clamp(32px,4vw,56px)] font-display font-extrabold text-[#F5F8FA] tracking-tight uppercase leading-[1.1] mb-3">
             CERTIFICATIONS
           </h2>
 
           {/* Small supporting text */}
-          <p className="font-mono text-xs sm:text-sm text-[#A8B4C2] tracking-wide">
+          <p className="font-body text-[clamp(16px,1.2vw,18px)] text-[#A8B4C2] leading-[1.65] max-w-[65ch] mx-auto">
             Technical learning that shaped my engineering journey.
           </p>
         </div>
@@ -111,11 +111,11 @@ export function Scene08Certifications() {
                         className="w-2 h-2 rounded-full"
                         style={{ background: theme.color }}
                       />
-                      <span className="font-mono text-[0.625rem] text-slate-400 tracking-widest uppercase font-semibold">
+                      <span className="font-mono text-[12px] sm:text-[13px] text-slate-300 tracking-widest uppercase font-semibold">
                         {cert.number} &bull; {theme.nodeType}
                       </span>
                     </div>
-                    <span className="font-mono text-xs text-slate-400 font-bold">
+                    <span className="font-mono text-[13px] sm:text-[14px] text-slate-300 font-bold">
                       {cert.date.toUpperCase()}
                     </span>
                   </div>
@@ -135,24 +135,24 @@ export function Scene08Certifications() {
                   </div>
 
                   {/* Title & Issuer */}
-                  <div className="font-mono text-[0.6875rem] text-cyan-300 font-semibold tracking-wider uppercase mb-1">
+                  <div className="font-mono text-[12px] sm:text-[13px] text-cyan-300 font-semibold tracking-wider uppercase mb-1.5">
                     {cert.categoryLabel}
                   </div>
-                  <h3 className="font-display text-lg sm:text-xl font-bold text-white mb-1.5 group-hover:text-cyan-300 transition-colors">
+                  <h3 className="font-display text-[18px] sm:text-[21px] font-bold text-[#F5F8FA] mb-2 leading-snug group-hover:text-cyan-300 transition-colors">
                     {cert.title}
                   </h3>
-                  <div className="font-mono text-xs text-slate-300 mb-4 font-medium">
+                  <div className="font-body text-[15px] sm:text-[16px] text-slate-300 mb-4 font-medium">
                     {cert.issuer}
                   </div>
                 </div>
 
                 {/* Inspect Action Footer */}
                 <div className="pt-4 border-t border-white/5 flex items-center justify-between">
-                  <span className="font-mono text-xs text-slate-300 group-hover:text-white transition-colors font-medium">
+                  <span className="font-mono text-[13px] sm:text-[14px] text-slate-300 group-hover:text-white transition-colors font-semibold">
                     VIEW CERTIFICATE
                   </span>
                   <span
-                    className="font-mono text-sm transition-transform duration-300 group-hover:translate-x-1"
+                    className="font-mono text-base transition-transform duration-300 group-hover:translate-x-1"
                     style={{ color: theme.color }}
                   >
                     &rarr;

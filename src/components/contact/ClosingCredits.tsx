@@ -39,16 +39,16 @@ export function ClosingCredits({ onRestart }: ClosingCreditsProps) {
         transition={{ duration: 0.8 }}
         className="mb-14 pt-10 border-t border-white/10"
       >
-        <span className="font-mono text-[0.625rem] tracking-[0.3em] uppercase text-cyan-400 block mb-3">
+        <span className="font-mono text-[13px] tracking-[0.14em] uppercase text-cyan-400 font-semibold block mb-3">
           SYSTEM SIGNATURE
         </span>
-        <h3 className="font-display text-2xl sm:text-3xl font-bold tracking-tight text-white mb-2">
+        <h3 className="font-display text-[26px] sm:text-[32px] font-extrabold tracking-tight text-[#F5F8FA] mb-2 uppercase">
           MD HABIB MUNSAR AHMED
         </h3>
-        <p className="font-mono text-xs sm:text-sm text-slate-300 font-semibold tracking-wider uppercase mb-1">
+        <p className="font-mono text-[15px] sm:text-[16px] text-slate-200 font-semibold tracking-wider uppercase mb-1.5">
           Software Engineer
         </p>
-        <p className="font-mono text-[0.6875rem] text-slate-400 tracking-widest uppercase">
+        <p className="font-mono text-[13px] sm:text-[14px] text-slate-400 tracking-wider uppercase">
           AI/ML &bull; Full-Stack &bull; Cybersecurity
         </p>
       </motion.div>
@@ -61,13 +61,13 @@ export function ClosingCredits({ onRestart }: ClosingCreditsProps) {
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true, margin: '-50px' }}
         transition={{ duration: 1, delay: 0.2 }}
-        className="my-16 max-w-2xl mx-auto p-8 rounded-3xl border border-cyan-500/20 bg-gradient-to-b from-slate-900/60 to-slate-950/80 backdrop-blur-md relative overflow-hidden shadow-[0_0_50px_rgba(6,182,212,0.12)]"
+        className="my-16 max-w-2xl mx-auto p-8 sm:p-10 rounded-3xl border border-cyan-500/20 bg-gradient-to-b from-slate-900/60 to-slate-950/80 backdrop-blur-md relative overflow-hidden shadow-[0_0_50px_rgba(6,182,212,0.12)]"
       >
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-48 h-[1px] bg-gradient-to-r from-transparent via-cyan-400/80 to-transparent" />
-        <div className="font-mono text-[0.625rem] tracking-[0.25em] uppercase text-slate-400 mb-4">
+        <div className="font-mono text-[13px] tracking-[0.14em] uppercase text-slate-400 font-semibold mb-4">
           FINAL TRANSMISSION
         </div>
-        <blockquote className="font-display text-lg sm:text-2xl font-medium text-slate-100 leading-relaxed tracking-wide space-y-2">
+        <blockquote className="font-display text-[20px] sm:text-[24px] font-medium text-slate-100 leading-relaxed tracking-wide space-y-2">
           <p className="text-cyan-300/90">&ldquo;Build with curiosity.</p>
           <p className="text-white">Engineer with purpose.</p>
           <p className="text-emerald-400/90">Secure what matters.&rdquo;</p>
@@ -104,10 +104,10 @@ export function ClosingCredits({ onRestart }: ClosingCreditsProps) {
           <div className="absolute -inset-4 bg-cyan-500/10 rounded-full blur-xl -z-10 group-hover:bg-cyan-500/25 transition-colors" />
         </div>
 
-        <div className="font-mono text-[0.625rem] text-cyan-400 tracking-[0.25em] uppercase mb-1">
+        <div className="font-mono text-[12px] sm:text-[13px] text-cyan-400 tracking-[0.14em] uppercase mb-1.5 font-semibold">
           THE END CONNECTS TO THE BEGINNING
         </div>
-        <p className="font-body text-xs text-slate-400 max-w-sm mb-6">
+        <p className="font-body text-[14px] sm:text-[15px] text-[#A8B4C2] max-w-sm mb-6 leading-relaxed">
           The cycle of continuous learning, architecture, and exploration restarts.
         </p>
 

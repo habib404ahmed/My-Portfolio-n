@@ -49,13 +49,13 @@ export function Scene09RecruiterSnapshot() {
               transition={{ duration: 0.5, delay: idx * 0.08 }}
               className="p-5 rounded-xl border border-white/10 bg-slate-950/70 backdrop-blur-md"
             >
-              <div className="font-mono text-[0.6875rem] text-slate-500 uppercase tracking-wider mb-1">
+              <div className="font-mono text-[12px] sm:text-[13px] text-slate-400 uppercase tracking-wider mb-1 font-semibold">
                 {stat.label}
               </div>
-              <div className="text-xl md:text-2xl font-display font-bold text-white mb-1">
+              <div className="text-[20px] md:text-[24px] font-display font-extrabold text-[#F5F8FA] mb-1">
                 {stat.value}
               </div>
-              <div className="font-mono text-xs text-cyan-400">
+              <div className="font-mono text-[13px] text-cyan-400 font-medium">
                 {stat.detail}
               </div>
             </motion.div>
@@ -71,22 +71,22 @@ export function Scene09RecruiterSnapshot() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 + idx * 0.1 }}
-              className="p-6 rounded-xl border border-white/10 bg-black/40 backdrop-blur-sm flex flex-col justify-between"
+              className="p-6 rounded-2xl border border-white/10 bg-black/40 backdrop-blur-sm flex flex-col justify-between"
             >
               <div>
-                <span className="font-mono text-[0.625rem] font-bold text-cyan-400 uppercase tracking-widest block mb-2">
+                <span className="font-mono text-[13px] font-bold text-cyan-400 uppercase tracking-widest block mb-2">
                   {item.category}
                 </span>
-                <h4 className="text-lg font-display font-semibold text-white mb-2">
+                <h4 className="text-[18px] sm:text-[20px] font-display font-bold text-white mb-2 leading-snug">
                   {item.title}
                 </h4>
-                <p className="text-xs text-slate-400 font-body leading-relaxed">
+                <p className="text-[15px] sm:text-[16px] text-[#A8B4C2] font-body leading-[1.65]">
                   {item.description}
                 </p>
               </div>
 
-              <div className="mt-6 pt-4 border-t border-white/5 flex items-center gap-1.5 font-mono text-[0.6875rem] text-emerald-400">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+              <div className="mt-6 pt-4 border-t border-white/5 flex items-center gap-1.5 font-mono text-[13px] text-emerald-400 font-semibold">
+                <span className="w-2 h-2 rounded-full bg-emerald-400" />
                 PRODUCTION READY
               </div>
             </motion.div>
@@ -94,12 +94,12 @@ export function Scene09RecruiterSnapshot() {
         </div>
 
         {/* Direct Action Hub for Recruiters */}
-        <div className="p-6 md:p-8 rounded-xl border border-cyan-500/20 bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 flex flex-col sm:flex-row items-center justify-between gap-6">
+        <div className="p-6 md:p-8 rounded-2xl border border-cyan-500/20 bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 flex flex-col sm:flex-row items-center justify-between gap-6">
           <div>
-            <h4 className="text-xl font-display font-bold text-white mb-1">
+            <h4 className="text-[20px] sm:text-[22px] font-display font-bold text-white mb-1.5 leading-snug">
               Interested in collaborating or discussing opportunities?
             </h4>
-            <p className="font-mono text-xs text-slate-400">
+            <p className="font-mono text-[14px] text-slate-300 m-0">
               {profile.contact.email} &bull; {profile.location}
             </p>
           </div>

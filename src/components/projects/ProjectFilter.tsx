@@ -19,7 +19,7 @@ export function ProjectFilter({ currentCategory, onCategoryChange }: ProjectFilt
           <button
             key={c.id}
             onClick={() => onCategoryChange(c.id)}
-            className={`px-3 py-1 rounded-full font-mono text-[0.6875rem] font-bold tracking-wider uppercase transition-all duration-300 ${
+            className={`px-3.5 py-1.5 rounded-full font-mono text-[13px] font-bold tracking-wider uppercase transition-all duration-300 cursor-pointer ${
               isActive
                 ? 'border border-cyan-400 bg-cyan-950/60 text-cyan-300 shadow-[0_0_12px_rgba(6,182,212,0.3)]'
                 : 'border border-white/10 bg-black/40 text-slate-400 hover:text-white hover:border-white/25'

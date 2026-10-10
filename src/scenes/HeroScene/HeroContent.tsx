@@ -200,45 +200,45 @@ export function HeroContent({ visible }: HeroContentProps) {
           initial="hidden"
           animate={visible ? 'visible' : 'hidden'}
           variants={heroSceneContainer}
-          className="hero-copy col-span-12 md:col-span-7 lg:col-span-7 flex flex-col items-start text-left w-full max-w-[620px] p-6 sm:p-8 md:p-9 rounded-[28px] glass-level-1 liquid-edge glass-reflection-sweep shadow-[0_24px_80px_rgba(0,0,0,0.45)]"
+          className="hero-copy col-span-12 md:col-span-7 lg:col-span-7 flex flex-col items-start text-left w-full max-w-[680px] p-6 sm:p-8 md:p-9 rounded-[28px] glass-level-1 liquid-edge glass-reflection-sweep shadow-[0_24px_80px_rgba(0,0,0,0.45)]"
         >
-          {/* 1. Location / Role Line */}
+          {/* 1. Location / Role Line (Phase 10.4: 13px font-mono) */}
           <motion.div
             variants={metaVariants}
-            className="w-full flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-xs text-[#A8B4C2] tracking-[0.2em] uppercase mb-5"
+            className="w-full flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-[13px] text-[#A8B4C2] tracking-[0.14em] uppercase mb-4"
           >
             <span className="w-1.5 h-1.5 rotate-45 bg-[#00D9FF] inline-block flex-shrink-0" />
             <span className="whitespace-nowrap">SOFTWARE ENGINEER</span>
-            <span className="text-[#687687]">&bull;</span>
+            <span className="text-[#7F8B99]">&bull;</span>
             <span className="whitespace-nowrap">BONGAIGAON, ASSAM, INDIA</span>
           </motion.div>
 
-          {/* 2. Canonical Name (Movie Title Sequence Tracking Reveal) */}
+          {/* 2. Canonical Name (Phase 10.4: clamp(48px, 6vw, 88px)) */}
           <motion.h1
             variants={nameVariants}
             aria-label={profile.name.full}
-            className="w-full tracking-tight select-none mb-4"
+            className="w-full tracking-tight select-none mb-3"
           >
-            <span className="block font-display text-[clamp(2.25rem,3.8vw,3.6rem)] font-black text-[#F4F7FA] uppercase leading-[0.95] tracking-cinematic">
+            <span className="block font-display text-[clamp(48px,6vw,88px)] font-black text-[#F4F7FA] uppercase leading-[0.95] tracking-cinematic">
               {profile.name.display[0]}
             </span>
-            <span className="block font-display text-[clamp(2.25rem,3.8vw,3.6rem)] font-black text-transparent bg-clip-text bg-gradient-to-r from-[#00D9FF] via-[#38E8FF] to-[#F4F7FA] uppercase leading-[0.95] drop-shadow-[0_0_24px_rgba(0,217,255,0.22)]">
+            <span className="block font-display text-[clamp(48px,6vw,88px)] font-black text-transparent bg-clip-text bg-gradient-to-r from-[#00D9FF] via-[#38E8FF] to-[#F4F7FA] uppercase leading-[0.95] drop-shadow-[0_0_24px_rgba(0,217,255,0.22)]">
               {profile.name.display[1]}
             </span>
           </motion.h1>
 
-          {/* 3. Primary Professional Title (Sharp Vertical Reveal) */}
+          {/* 3. Primary Professional Title (Phase 10.4: clamp(22px, 2.2vw, 30px)) */}
           <motion.div
             variants={titleVariants}
-            className="w-full font-mono text-sm sm:text-base font-bold text-[#F4F7FA] tracking-[0.25em] uppercase mb-2.5"
+            className="w-full font-mono text-[clamp(22px,2.2vw,30px)] font-bold text-[#F4F7FA] tracking-[0.18em] uppercase mb-3"
           >
             {profile.title.toUpperCase()}
           </motion.div>
 
-          {/* 4. Specialization Line (Staggered Subtle Scale Reveal) */}
+          {/* 4. Specialization Line (Phase 10.4: 14-15px font-mono) */}
           <motion.div
             variants={specializationVariants}
-            className="w-full flex flex-wrap items-center gap-x-2.5 gap-y-1 font-mono text-xs sm:text-sm tracking-wider uppercase text-[#38E8FF]/95 mb-5"
+            className="w-full flex flex-wrap items-center gap-x-2.5 gap-y-1 font-mono text-[14px] sm:text-[15px] tracking-wider uppercase text-[#38E8FF]/95 mb-5"
           >
             <span className="w-6 h-[1.5px] bg-gradient-to-r from-[#00D9FF] to-transparent flex-shrink-0" />
             <span>AI/ML ENGINEERING</span>
@@ -248,33 +248,33 @@ export function HeroContent({ visible }: HeroContentProps) {
             <span>CYBERSECURITY &amp; ETHICAL HACKING</span>
           </motion.div>
 
-          {/* 5. Editorial Positioning Statement (Delayed Soft Reveal) */}
+          {/* 5. Editorial Positioning Statement (Phase 10.4: clamp(17px, 1.2vw, 19px), line-height 1.65) */}
           <motion.p
             variants={descriptionVariants}
-            className="w-full max-w-[540px] font-body text-[0.9375rem] sm:text-base text-[#A8B4C2] leading-[1.6] mb-7"
+            className="w-full max-w-[65ch] font-body text-[clamp(17px,1.2vw,19px)] text-[#A8B4C2] leading-[1.65] mb-7"
           >
             {profile.tagline}
           </motion.p>
 
-          {/* 6. CTA Container (Glass Buttons - Phase 9 Section 39) */}
+          {/* 6. CTA Container (Phase 10.4: 15-16px Buttons, 52px height) */}
           <motion.div variants={ctaVariants} className="hero-actions w-full flex flex-wrap items-center gap-3.5 mb-5">
             <button
               onClick={handleExplore}
-              className="h-[52px] sm:h-[54px] min-w-[180px] sm:min-w-[195px] lg:min-w-[220px] px-5 sm:px-6 rounded-xl glass-btn-primary font-display text-xs sm:text-sm font-bold tracking-wider uppercase flex items-center justify-center gap-2.5 cursor-pointer"
+              className="h-[52px] min-w-[195px] px-6 rounded-xl glass-btn-primary font-display text-[15px] sm:text-[16px] font-bold tracking-wider uppercase flex items-center justify-center gap-2.5 cursor-pointer"
               aria-label="Explore engineering work"
             >
               <span>Explore My Work</span>
-              <svg width="13" height="13" viewBox="0 0 14 14" fill="none" className="flex-shrink-0">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="flex-shrink-0">
                 <path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </button>
 
             <button
               onClick={handleResume}
-              className="h-[52px] sm:h-[54px] min-w-[180px] sm:min-w-[195px] lg:min-w-[220px] px-5 sm:px-6 rounded-xl glass-btn-secondary font-display text-xs sm:text-sm font-semibold tracking-wider uppercase flex items-center justify-center gap-2.5 cursor-pointer"
+              className="h-[52px] min-w-[195px] px-6 rounded-xl glass-btn-secondary font-display text-[15px] sm:text-[16px] font-semibold tracking-wider uppercase flex items-center justify-center gap-2.5 cursor-pointer"
               aria-label="Download resume PDF"
             >
-              <svg width="13" height="13" viewBox="0 0 14 14" fill="none" className="flex-shrink-0">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="flex-shrink-0">
                 <path d="M7 1v9M3 7l4 4 4-4M1 12h12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
               <span>Download Resume</span>
@@ -335,43 +335,43 @@ export function HeroContent({ visible }: HeroContentProps) {
         variants={heroSceneContainer}
         className="flex md:hidden flex-col items-center text-center pt-4 pb-12 space-y-3 w-full"
       >
-        {/* 1. Location Line */}
+        {/* 1. Location Line (Phase 10.4: 13px font-mono) */}
         <motion.div
           variants={metaVariants}
-          className="w-full flex items-center justify-center gap-1.5 font-mono text-[0.625rem] text-[#A8B4C2] tracking-[0.14em] uppercase whitespace-nowrap"
+          className="w-full flex items-center justify-center gap-1.5 font-mono text-[13px] text-[#A8B4C2] tracking-[0.12em] uppercase whitespace-nowrap"
         >
           <span className="w-1.5 h-1.5 rotate-45 bg-[#00D9FF] inline-block flex-shrink-0" />
           <span>SOFTWARE ENGINEER</span>
-          <span className="text-[#687687]">&bull;</span>
+          <span className="text-[#7F8B99]">&bull;</span>
           <span>BONGAIGAON, ASSAM, INDIA</span>
         </motion.div>
 
-        {/* 2. Name */}
+        {/* 2. Name (Phase 10.4: 40-52px) */}
         <motion.h1
           variants={nameVariants}
           aria-label={profile.name.full}
           className="w-full tracking-tight select-none"
         >
-          <span className="block font-display text-3xl sm:text-4xl font-black text-[#F4F7FA] uppercase leading-[0.95]">
+          <span className="block font-display text-[clamp(40px,9vw,52px)] font-black text-[#F4F7FA] uppercase leading-[0.95]">
             {profile.name.display[0]}
           </span>
-          <span className="block font-display text-3xl sm:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#00D9FF] via-[#38E8FF] to-[#F4F7FA] uppercase leading-[0.95] drop-shadow-[0_0_20px_rgba(0,217,255,0.22)]">
+          <span className="block font-display text-[clamp(40px,9vw,52px)] font-black text-transparent bg-clip-text bg-gradient-to-r from-[#00D9FF] via-[#38E8FF] to-[#F4F7FA] uppercase leading-[0.95] drop-shadow-[0_0_20px_rgba(0,217,255,0.22)]">
             {profile.name.display[1]}
           </span>
         </motion.h1>
 
-        {/* 3. Title */}
+        {/* 3. Title (Phase 10.4: 20-22px) */}
         <motion.div
           variants={titleVariants}
-          className="w-full font-mono text-xs font-bold text-[#F4F7FA] tracking-[0.22em] uppercase"
+          className="w-full font-mono text-[20px] sm:text-[22px] font-bold text-[#F4F7FA] tracking-[0.16em] uppercase"
         >
           {profile.title.toUpperCase()}
         </motion.div>
 
-        {/* 4. Specialization Line */}
+        {/* 4. Specialization Line (Phase 10.4: 13-14px) */}
         <motion.div
           variants={specializationVariants}
-          className="w-full font-mono text-[0.6875rem] tracking-wider uppercase text-[#38E8FF]/90 flex flex-wrap items-center justify-center gap-1.5 max-w-xs"
+          className="w-full font-mono text-[13px] sm:text-[14px] tracking-wider uppercase text-[#38E8FF]/90 flex flex-wrap items-center justify-center gap-2 max-w-sm"
         >
           <span>AI/ML</span>
           <span className="text-[#007C99]">&bull;</span>
@@ -380,16 +380,16 @@ export function HeroContent({ visible }: HeroContentProps) {
           <span>CYBERSECURITY</span>
         </motion.div>
 
-        {/* 5. Description */}
+        {/* 5. Description (Phase 10.4: 16-17px, line-height 1.65) */}
         <motion.p
           variants={descriptionVariants}
-          className="w-full font-body text-xs sm:text-sm text-[#A8B4C2] leading-relaxed max-w-sm px-2"
+          className="w-full font-body text-[16px] sm:text-[17px] text-[#A8B4C2] leading-[1.65] max-w-md px-3"
         >
           {profile.tagline}
         </motion.p>
 
         {/* 6. Portrait */}
-        <motion.div variants={portraitVariants} className="w-full flex justify-center py-2 max-w-[270px]">
+        <motion.div variants={portraitVariants} className="w-full flex justify-center py-2 max-w-[280px]">
           <ProfilePhoto
             visible={visible}
             size="standard"
@@ -397,25 +397,25 @@ export function HeroContent({ visible }: HeroContentProps) {
           />
         </motion.div>
 
-        {/* 7 & 8. Matched CTA Buttons (Phase 9 Glass Buttons) */}
-        <motion.div variants={ctaVariants} className="flex flex-col sm:flex-row items-center gap-2.5 w-full max-w-xs pt-1">
+        {/* 7 & 8. Matched CTA Buttons (Phase 10.4: 15px font, 50px height) */}
+        <motion.div variants={ctaVariants} className="flex flex-col sm:flex-row items-center gap-3 w-full max-w-sm pt-1 px-3">
           <button
             onClick={handleExplore}
-            className="w-full h-[50px] px-5 rounded-xl glass-btn-primary font-display text-xs font-bold tracking-wider uppercase flex items-center justify-center gap-2 cursor-pointer"
+            className="w-full h-[50px] px-6 rounded-xl glass-btn-primary font-display text-[15px] font-bold tracking-wider uppercase flex items-center justify-center gap-2.5 cursor-pointer"
             aria-label="Explore engineering work"
           >
             <span>Explore My Work</span>
-            <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
               <path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </button>
 
           <button
             onClick={handleResume}
-            className="w-full h-[50px] px-5 rounded-xl glass-btn-secondary font-display text-xs font-semibold tracking-wider uppercase flex items-center justify-center gap-2 cursor-pointer"
+            className="w-full h-[50px] px-6 rounded-xl glass-btn-secondary font-display text-[15px] font-semibold tracking-wider uppercase flex items-center justify-center gap-2.5 cursor-pointer"
             aria-label="Download resume PDF"
           >
-            <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
               <path d="M7 1v9M3 7l4 4 4-4M1 12h12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
             <span>Download Resume</span>
@@ -423,7 +423,7 @@ export function HeroContent({ visible }: HeroContentProps) {
         </motion.div>
 
         {/* 9. Social Links + Email */}
-        <motion.div variants={socialVariants} className="flex flex-col items-center gap-2 pt-1.5">
+        <motion.div variants={socialVariants} className="flex flex-col items-center gap-2 pt-2">
           <div className="flex items-center gap-3">
             {socialLinks.map(({ label, href, icon }) => (
               <a
@@ -432,7 +432,7 @@ export function HeroContent({ visible }: HeroContentProps) {
                 target={href.startsWith('http') ? '_blank' : undefined}
                 rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
                 aria-label={label}
-                className="w-8 h-8 rounded flex items-center justify-center text-[#A8B4C2] hover:text-[#00D9FF] hover:bg-white/5 transition-colors"
+                className="w-9 h-9 rounded-lg flex items-center justify-center text-[#A8B4C2] hover:text-[#00D9FF] hover:bg-white/5 transition-colors"
               >
                 {icon}
               </a>
@@ -440,7 +440,7 @@ export function HeroContent({ visible }: HeroContentProps) {
           </div>
           <a
             href={`mailto:${profile.contact.email}`}
-            className="font-mono text-[0.6875rem] text-[#A8B4C2] hover:text-[#00D9FF] transition-colors tracking-wide"
+            className="font-mono text-[14px] text-[#A8B4C2] hover:text-[#00D9FF] transition-colors tracking-wide"
           >
             {profile.contact.email}
           </a>

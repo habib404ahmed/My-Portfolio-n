@@ -35,10 +35,10 @@ export function WebResumeViewer() {
         <div className="flex items-center gap-3">
           <div className="w-3 h-3 rounded-full bg-cyan-400 animate-pulse" />
           <div>
-            <div className="font-mono text-xs font-bold text-white uppercase tracking-wider">
+            <div className="font-mono text-[13px] sm:text-[14px] font-bold text-white uppercase tracking-wider">
               OFFICIAL CURRICULUM VITAE
             </div>
-            <div className="font-mono text-[0.625rem] text-slate-400">
+            <div className="font-mono text-[12px] text-slate-400">
               ATS-FRIENDLY &bull; ONE-PAGE OPTIMIZED &bull; VERIFIED DATA
             </div>
           </div>
@@ -48,7 +48,7 @@ export function WebResumeViewer() {
           {/* Download PDF Button - Primary CTA */}
           <CinematicButton
             variant="primary"
-            size="sm"
+            size="md"
             href={profile.resume.path}
             download="Md-Habib-Munsar-Ahmed-Resume.pdf"
             ariaLabel="Download ATS-Friendly PDF Resume"
@@ -59,7 +59,7 @@ export function WebResumeViewer() {
           {/* View Fullscreen Modal - Secondary CTA */}
           <button
             onClick={() => setModalOpen(true)}
-            className="px-3.5 py-2 rounded-xl glass-btn-secondary font-mono text-xs text-cyan-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer"
+            className="px-4 py-2.5 rounded-xl glass-btn-secondary font-mono text-[13px] text-cyan-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer"
             aria-label="View Resume in Full-Screen Modal"
           >
             <svg className="w-4 h-4 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -76,7 +76,7 @@ export function WebResumeViewer() {
           {/* Print Resume Button */}
           <button
             onClick={() => window.print()}
-            className="px-3.5 py-2 rounded-xl glass-btn-secondary font-mono text-xs text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer"
+            className="px-4 py-2.5 rounded-xl glass-btn-secondary font-mono text-[13px] text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer"
             aria-label="Print Resume Document"
           >
             <svg className="w-4 h-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -110,15 +110,15 @@ export function WebResumeViewer() {
                   }}
                 />
               </div>
-              <div className="mt-2.5 font-display text-xs font-bold text-white tracking-wide">
+              <div className="mt-2.5 font-display text-[14px] font-bold text-white tracking-wide">
                 {resumeData.name}
               </div>
-              <div className="font-mono text-[0.625rem] text-cyan-400 uppercase tracking-wider font-semibold">
+              <div className="font-mono text-[12px] text-cyan-400 uppercase tracking-wider font-semibold">
                 {resumeData.title}
               </div>
             </div>
 
-            <div className="font-mono text-[0.625rem] text-slate-400 uppercase tracking-widest mb-3">
+            <div className="font-mono text-[12px] text-slate-400 uppercase tracking-widest mb-3 font-semibold">
               RESUME SECTIONS
             </div>
             <nav className="space-y-1">
@@ -126,7 +126,7 @@ export function WebResumeViewer() {
                 <button
                   key={sec.id}
                   onClick={() => scrollToSection(sec.id)}
-                  className={`w-full text-left px-3 py-2 rounded-lg font-mono text-xs transition-all cursor-pointer ${
+                  className={`w-full text-left px-3 py-2 rounded-lg font-mono text-[13px] transition-all cursor-pointer ${
                     activeNav === sec.id
                       ? 'text-cyan-300 bg-cyan-950/40 border border-cyan-500/30 font-semibold'
                       : 'text-slate-400 hover:text-slate-200 hover:bg-white/[0.02]'
@@ -141,7 +141,7 @@ export function WebResumeViewer() {
               <a
                 href={profile.resume.path}
                 download="Md-Habib-Munsar-Ahmed-Resume.pdf"
-                className="w-full py-2 px-3 rounded-lg border border-cyan-500/20 bg-cyan-950/30 text-cyan-300 font-mono text-xs text-center block hover:bg-cyan-500/20 transition-all"
+                className="w-full py-2.5 px-3 rounded-lg border border-cyan-500/20 bg-cyan-950/30 text-cyan-300 font-mono text-[13px] text-center block hover:bg-cyan-500/20 transition-all font-medium"
               >
                 Md-Habib-Munsar-Ahmed-Resume.pdf
               </a>
@@ -161,30 +161,30 @@ export function WebResumeViewer() {
             {/* 1. Header & Contact */}
             <div className="border-b border-white/15 pb-6 mb-8">
               <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 mb-2">
-                <h1 className="text-3xl sm:text-4xl font-display font-extrabold text-white tracking-tight">
+                <h1 className="text-[clamp(28px,3vw,38px)] font-display font-extrabold text-white tracking-tight">
                   {resumeData.name}
                 </h1>
-                <span className="font-mono text-xs text-cyan-400 font-bold uppercase tracking-wider">
+                <span className="font-mono text-[14px] text-cyan-400 font-bold uppercase tracking-wider">
                   {resumeData.title}
                 </span>
               </div>
 
-              <div className="font-mono text-xs text-slate-300 mb-4">
+              <div className="font-mono text-[14px] text-slate-300 mb-4 font-medium">
                 {resumeData.positioning}
               </div>
 
               {/* Clickable Contact Strip */}
-              <div className="flex flex-wrap items-center gap-y-2 gap-x-4 font-mono text-xs text-slate-400">
+              <div className="flex flex-wrap items-center gap-y-2 gap-x-4 font-mono text-[13px] sm:text-[14px] text-slate-300">
                 <span>{resumeData.contact.location}</span>
-                <span>&bull;</span>
+                <span className="text-slate-500">&bull;</span>
                 <a href={`tel:${resumeData.contact.phone}`} className="hover:text-cyan-300 transition-colors">
                   {resumeData.contact.phone}
                 </a>
-                <span>&bull;</span>
+                <span className="text-slate-500">&bull;</span>
                 <a href={`mailto:${resumeData.contact.email}`} className="hover:text-cyan-300 transition-colors">
                   {resumeData.contact.email}
                 </a>
-                <span>&bull;</span>
+                <span className="text-slate-500">&bull;</span>
                 <a
                   href={resumeData.contact.github}
                   target="_blank"
@@ -193,7 +193,7 @@ export function WebResumeViewer() {
                 >
                   GitHub
                 </a>
-                <span>&bull;</span>
+                <span className="text-slate-500">&bull;</span>
                 <a
                   href={resumeData.contact.linkedin}
                   target="_blank"
@@ -202,7 +202,7 @@ export function WebResumeViewer() {
                 >
                   LinkedIn
                 </a>
-                <span>&bull;</span>
+                <span className="text-slate-500">&bull;</span>
                 <a
                   href={resumeData.contact.portfolio}
                   target="_blank"
@@ -216,22 +216,22 @@ export function WebResumeViewer() {
 
             {/* 01. Summary */}
             <section id="res-summary" className="mb-8 scroll-mt-24">
-              <h2 className="font-mono text-xs text-cyan-400 font-bold uppercase tracking-widest mb-3 border-b border-white/10 pb-1.5">
+              <h2 className="font-mono text-[13px] sm:text-[14px] text-cyan-400 font-bold uppercase tracking-wider mb-3 border-b border-white/10 pb-1.5">
                 01 // Professional Summary
               </h2>
-              <p className="text-sm text-slate-300 font-body leading-relaxed">
+              <p className="text-[16px] sm:text-[17px] text-[#A8B4C2] font-body leading-[1.65]">
                 {resumeData.summary}
               </p>
             </section>
 
             {/* 02. Technical Skills */}
             <section id="res-skills" className="mb-8 scroll-mt-24">
-              <h2 className="font-mono text-xs text-cyan-400 font-bold uppercase tracking-widest mb-3 border-b border-white/10 pb-1.5">
+              <h2 className="font-mono text-[13px] sm:text-[14px] text-cyan-400 font-bold uppercase tracking-wider mb-3 border-b border-white/10 pb-1.5">
                 02 // Technical Skills
               </h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 font-mono text-xs">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 font-mono text-[13px] sm:text-[14px]">
                 {resumeData.technicalSkills.map((s) => (
-                  <div key={s.category} className="p-3 rounded-lg border border-white/5 bg-black/40">
+                  <div key={s.category} className="p-3.5 rounded-xl border border-white/10 bg-black/40">
                     <span className="text-cyan-400 font-bold mr-2 uppercase">{s.category}:</span>
                     <span className="text-slate-200">{s.skills.join(', ')}</span>
                   </div>
@@ -241,35 +241,35 @@ export function WebResumeViewer() {
 
             {/* 03. Projects */}
             <section id="res-projects" className="mb-8 scroll-mt-24">
-              <h2 className="font-mono text-xs text-cyan-400 font-bold uppercase tracking-widest mb-4 border-b border-white/10 pb-1.5">
+              <h2 className="font-mono text-[13px] sm:text-[14px] text-cyan-400 font-bold uppercase tracking-wider mb-4 border-b border-white/10 pb-1.5">
                 03 // Software Engineering Projects
               </h2>
               <div className="space-y-6">
                 {resumeData.projects.map((proj) => (
-                  <div key={proj.title} className="p-4 rounded-xl border border-white/5 bg-white/[0.01]">
-                    <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 mb-1">
-                      <h3 className="text-base font-display font-bold text-white">
+                  <div key={proj.title} className="p-4.5 rounded-xl border border-white/10 bg-white/[0.02]">
+                    <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 mb-1.5">
+                      <h3 className="text-[17px] sm:text-[18px] font-display font-bold text-white">
                         {proj.title}
                       </h3>
                       <a
                         href={proj.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="font-mono text-xs text-cyan-400 hover:text-cyan-300 transition-colors shrink-0"
+                        className="font-mono text-[13px] text-cyan-400 hover:text-cyan-300 transition-colors shrink-0 font-semibold"
                       >
                         GitHub &rarr;
                       </a>
                     </div>
-                    <div className="font-mono text-xs text-slate-400 mb-1">
+                    <div className="font-mono text-[14px] text-slate-300 mb-1.5 font-medium">
                       {proj.subtitle}
                     </div>
-                    <div className="font-mono text-[0.6875rem] text-slate-500 mb-3">
+                    <div className="font-mono text-[13px] text-slate-400 mb-3.5">
                       STACK: {proj.technologies}
                     </div>
-                    <ul className="space-y-1.5 text-xs text-slate-300 font-body">
+                    <ul className="space-y-2 text-[14px] sm:text-[15px] text-[#A8B4C2] font-body leading-relaxed">
                       {proj.points.map((pt, i) => (
-                        <li key={i} className="flex items-start gap-2">
-                          <span className="text-cyan-400 font-mono mt-0.5">&bull;</span>
+                        <li key={i} className="flex items-start gap-2.5">
+                          <span className="text-cyan-400 font-mono mt-0.5 text-base">&bull;</span>
                           <span>{pt}</span>
                         </li>
                       ))}
@@ -281,35 +281,35 @@ export function WebResumeViewer() {
 
             {/* 04. Education & Coursework */}
             <section id="res-education" className="mb-8 scroll-mt-24">
-              <h2 className="font-mono text-xs text-cyan-400 font-bold uppercase tracking-widest mb-3 border-b border-white/10 pb-1.5">
+              <h2 className="font-mono text-[13px] sm:text-[14px] text-cyan-400 font-bold uppercase tracking-wider mb-3 border-b border-white/10 pb-1.5">
                 04 // Education & Relevant Coursework
               </h2>
               <div className="space-y-4">
                 {resumeData.education.map((edu, idx) => (
-                  <div key={idx} className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+                  <div key={idx} className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1.5 p-3.5 rounded-xl border border-white/10 bg-black/40">
                     <div>
-                      <h3 className="text-sm font-display font-bold text-white">
+                      <h3 className="text-[16px] font-display font-bold text-white">
                         {edu.degree}
                       </h3>
-                      <div className="text-xs text-slate-300 font-body">{edu.institution}</div>
-                      <div className="font-mono text-xs text-slate-400 mt-1">
+                      <div className="text-[14px] sm:text-[15px] text-slate-300 font-body">{edu.institution}</div>
+                      <div className="font-mono text-[13px] text-slate-400 mt-1">
                         {edu.details.join(' | ')}
                       </div>
                     </div>
-                    <span className="font-mono text-xs text-slate-500 shrink-0">{edu.period}</span>
+                    <span className="font-mono text-[13px] text-slate-400 shrink-0 font-medium">{edu.period}</span>
                   </div>
                 ))}
 
                 {/* Coursework pill cloud */}
                 <div className="pt-3 border-t border-white/5">
-                  <div className="font-mono text-xs text-slate-400 mb-2 font-semibold">
+                  <div className="font-mono text-[13px] text-slate-300 mb-2.5 font-semibold">
                     RELEVANT ACADEMIC COURSEWORK:
                   </div>
-                  <div className="flex flex-wrap gap-1.5">
+                  <div className="flex flex-wrap gap-2">
                     {resumeData.relevantCoursework.map((course) => (
                       <span
                         key={course}
-                        className="px-2.5 py-1 rounded bg-slate-900 border border-white/10 text-slate-300 font-mono text-[0.6875rem]"
+                        className="px-3 py-1 rounded-lg bg-slate-900 border border-white/10 text-slate-300 font-mono text-[13px]"
                       >
                         {course}
                       </span>
@@ -321,66 +321,66 @@ export function WebResumeViewer() {
 
             {/* 05. Technical Activities & Experience */}
             <section id="res-activities" className="mb-8 scroll-mt-24">
-              <h2 className="font-mono text-xs text-cyan-400 font-bold uppercase tracking-widest mb-3 border-b border-white/10 pb-1.5">
+              <h2 className="font-mono text-[13px] sm:text-[14px] text-cyan-400 font-bold uppercase tracking-wider mb-3 border-b border-white/10 pb-1.5">
                 05 // Technical Activities & Experience
               </h2>
               {resumeData.technicalActivities.map((act) => (
-                <div key={act.role} className="p-3.5 rounded-lg border border-white/5 bg-black/30">
-                  <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 mb-1">
-                    <span className="font-display font-bold text-white text-sm">
+                <div key={act.role} className="p-4 rounded-xl border border-white/10 bg-black/40">
+                  <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 mb-1.5">
+                    <span className="font-display font-bold text-white text-[15px] sm:text-[16px]">
                       {act.role} — {act.platform}
                     </span>
                     <a
                       href={act.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="font-mono text-xs text-cyan-400 hover:text-cyan-300 transition-colors"
+                      className="font-mono text-[13px] text-cyan-400 hover:text-cyan-300 transition-colors font-semibold"
                     >
                       YouTube &rarr;
                     </a>
                   </div>
-                  <p className="text-slate-300 font-body text-xs leading-relaxed">{act.description}</p>
+                  <p className="text-[#A8B4C2] font-body text-[14px] sm:text-[15px] leading-relaxed m-0">{act.description}</p>
                 </div>
               ))}
             </section>
 
             {/* 06. Leadership & Activities */}
             <section id="res-leadership" className="mb-8 scroll-mt-24">
-              <h2 className="font-mono text-xs text-cyan-400 font-bold uppercase tracking-widest mb-3 border-b border-white/10 pb-1.5">
+              <h2 className="font-mono text-[13px] sm:text-[14px] text-cyan-400 font-bold uppercase tracking-wider mb-3 border-b border-white/10 pb-1.5">
                 06 // Leadership & Activities
               </h2>
               {resumeData.leadership.map((l) => (
-                <div key={l.role} className="text-xs">
+                <div key={l.role} className="p-4 rounded-xl border border-white/10 bg-black/40 mb-3 text-[14px]">
                   <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 mb-1">
-                    <span className="font-display font-bold text-white text-sm">
+                    <span className="font-display font-bold text-white text-[15px] sm:text-[16px]">
                       {l.role} — {l.program}
                     </span>
-                    <span className="font-mono text-slate-500">{l.date}</span>
+                    <span className="font-mono text-slate-400 text-[13px]">{l.date}</span>
                   </div>
-                  <div className="font-mono text-cyan-400 mb-1">
+                  <div className="font-mono text-cyan-400 mb-1.5 text-[13px] font-medium">
                     {l.organization} {l.recognition && `• ${l.recognition}`}
                   </div>
-                  <p className="text-slate-300 font-body leading-relaxed">{l.description}</p>
+                  <p className="text-[#A8B4C2] font-body leading-relaxed m-0 text-[14px] sm:text-[15px]">{l.description}</p>
                 </div>
               ))}
             </section>
 
             {/* 07. Certifications */}
             <section id="res-certifications" className="mb-8 scroll-mt-24">
-              <h2 className="font-mono text-xs text-cyan-400 font-bold uppercase tracking-widest mb-3 border-b border-white/10 pb-1.5">
+              <h2 className="font-mono text-[13px] sm:text-[14px] text-cyan-400 font-bold uppercase tracking-wider mb-3 border-b border-white/10 pb-1.5">
                 07 // Certifications
               </h2>
-              <div className="space-y-3 font-mono text-xs">
+              <div className="space-y-3 font-mono text-[13px] sm:text-[14px]">
                 {resumeData.certifications.map((c) => (
-                  <div key={c.title} className="p-3 rounded-lg border border-white/5 bg-black/30">
+                  <div key={c.title} className="p-3.5 rounded-xl border border-white/10 bg-black/40">
                     <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 mb-1">
                       <span className="font-bold text-white">{c.title}</span>
-                      <span className="text-slate-500">{c.date}</span>
+                      <span className="text-slate-400">{c.date}</span>
                     </div>
-                    <div className="text-cyan-400 mb-1">
+                    <div className="text-cyan-400 mb-1 font-medium">
                       {c.issuer} {c.credentialId && `| ID: ${c.credentialId}`}
                     </div>
-                    <div className="text-slate-400 font-body text-xs">{c.details}</div>
+                    <div className="text-slate-300 font-body text-[14px]">{c.details}</div>
                   </div>
                 ))}
               </div>
@@ -388,12 +388,12 @@ export function WebResumeViewer() {
 
             {/* 08. Languages */}
             <section id="res-languages" className="mb-8 scroll-mt-24">
-              <h2 className="font-mono text-xs text-cyan-400 font-bold uppercase tracking-widest mb-3 border-b border-white/10 pb-1.5">
+              <h2 className="font-mono text-[13px] sm:text-[14px] text-cyan-400 font-bold uppercase tracking-wider mb-3 border-b border-white/10 pb-1.5">
                 08 // Languages
               </h2>
-              <div className="flex flex-wrap gap-4 font-mono text-xs text-slate-300">
+              <div className="flex flex-wrap gap-3 font-mono text-[13px] sm:text-[14px] text-slate-300">
                 {resumeData.languages.map((lang) => (
-                  <span key={lang.name} className="px-3 py-1.5 rounded-lg border border-white/10 bg-black/40">
+                  <span key={lang.name} className="px-3.5 py-2 rounded-xl border border-white/10 bg-black/40">
                     <strong className="text-white">{lang.name}:</strong> {lang.level}
                   </span>
                 ))}
@@ -402,23 +402,23 @@ export function WebResumeViewer() {
 
             {/* 09. Contact & Verification */}
             <section id="res-contact" className="pt-6 border-t border-white/15 scroll-mt-24">
-              <h2 className="font-mono text-xs text-cyan-400 font-bold uppercase tracking-widest mb-3">
+              <h2 className="font-mono text-[13px] sm:text-[14px] text-cyan-400 font-bold uppercase tracking-wider mb-3">
                 09 // Direct Contact & Verification
               </h2>
-              <p className="text-xs text-slate-400 font-body mb-4">
+              <p className="text-[14px] sm:text-[15px] text-[#A8B4C2] font-body mb-4 leading-relaxed">
                 This document represents verified academic milestones, independent software repositories, and industry credentials. References, transcripts, and repository access are available upon request.
               </p>
               <div className="flex flex-wrap items-center gap-3">
                 <a
                   href={`mailto:${resumeData.contact.email}`}
-                  className="font-mono text-xs text-cyan-300 hover:underline"
+                  className="font-mono text-[14px] text-cyan-300 hover:underline font-semibold"
                 >
                   {resumeData.contact.email}
                 </a>
-                <span className="text-slate-600">&bull;</span>
-                <span className="font-mono text-xs text-slate-400">{resumeData.contact.phone}</span>
-                <span className="text-slate-600">&bull;</span>
-                <span className="font-mono text-xs text-slate-400">{resumeData.contact.location}</span>
+                <span className="text-slate-500">&bull;</span>
+                <span className="font-mono text-[14px] text-slate-300">{resumeData.contact.phone}</span>
+                <span className="text-slate-500">&bull;</span>
+                <span className="font-mono text-[14px] text-slate-300">{resumeData.contact.location}</span>
               </div>
             </section>
           </div>

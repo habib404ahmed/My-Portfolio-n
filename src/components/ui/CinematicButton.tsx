@@ -30,9 +30,9 @@ export function CinematicButton({
   target,
 }: CinematicButtonProps) {
   const sizeStyles: Record<string, React.CSSProperties> = {
-    sm: { padding: '0.5rem 1.25rem', fontSize: '0.6875rem' },
-    md: { padding: '0.875rem 2rem', fontSize: '0.8125rem' },
-    lg: { padding: '1rem 2.5rem', fontSize: '0.875rem' },
+    sm: { padding: '0.625rem 1.25rem', fontSize: '0.875rem', minHeight: '42px' }, // 14px
+    md: { padding: '0.75rem 1.75rem', fontSize: '0.9375rem', minHeight: '48px' }, // 15px
+    lg: { padding: '0.875rem 2.25rem', fontSize: '1rem', minHeight: '52px' }, // 16px
   }
 
   const variantClass: Record<string, string> = {

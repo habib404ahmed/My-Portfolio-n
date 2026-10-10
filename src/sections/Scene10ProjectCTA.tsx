@@ -46,7 +46,7 @@ export function Scene10ProjectCTA() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-3.5 py-1 mb-8 rounded-full border border-cyan-500/20 bg-cyan-950/30 text-cyan-300 font-mono text-xs tracking-widest uppercase"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 mb-8 rounded-full border border-cyan-500/20 bg-cyan-950/30 text-cyan-300 font-mono text-[13px] tracking-[0.12em] uppercase font-semibold"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
             TRANSITION // PHASE 03
@@ -57,7 +57,7 @@ export function Scene10ProjectCTA() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="text-3xl sm:text-5xl lg:text-6xl font-display font-extrabold text-white tracking-tight leading-tight mb-6"
+            className="text-[clamp(32px,5vw,60px)] font-display font-extrabold text-[#F5F8FA] tracking-tight leading-[1.1] mb-6 uppercase"
           >
             READY TO EXPLORE <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-300 to-indigo-400">
@@ -70,7 +70,7 @@ export function Scene10ProjectCTA() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-slate-300 font-body text-base sm:text-lg leading-relaxed max-w-xl mb-10"
+            className="text-[#A8B4C2] font-body text-[clamp(16px,1.2vw,18px)] leading-[1.65] max-w-[65ch] mb-10"
           >
             Witness the full-scale systems in action: SENTRA AI, Box Cricket, Campus Care,
             5minhelp, and autonomous multi-agent software.
@@ -105,7 +105,7 @@ export function Scene10ProjectCTA() {
           </motion.div>
 
           {/* Micro status telemetry */}
-          <div className="mt-14 font-mono text-[0.625rem] text-slate-500 uppercase tracking-widest flex items-center gap-3">
+          <div className="mt-14 font-mono text-[12px] sm:text-[13px] text-slate-400 uppercase tracking-widest flex items-center gap-3 font-semibold">
             <span>SYS_STATUS: OPTIMAL</span>
             <span>&bull;</span>
             <span>5 PRODUCTION PROJECTS LOADED</span>

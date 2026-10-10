@@ -158,14 +158,14 @@ export function CinematicDepthCard({
                 boxShadow: `0 0 10px ${domain.color}`,
               }}
             />
-            <h3 className="font-mono text-[14px] sm:text-[15px] font-extrabold tracking-[0.06em] text-[#F4F7FA] group-hover:text-cyan-300 transition-colors m-0 truncate">
+            <h3 className="font-mono text-[18px] sm:text-[20px] lg:text-[22px] font-extrabold tracking-[0.04em] text-[#F4F7FA] group-hover:text-cyan-300 transition-colors m-0 truncate">
               {domain.label}
             </h3>
           </div>
 
-          {/* Category Code Badge */}
+          {/* Category Code Badge (Phase 10.4: 12-13px) */}
           <span
-            className="font-mono text-[10px] px-2.5 py-0.5 rounded-full border border-white/15 uppercase font-semibold flex-shrink-0 ml-2 transition-all duration-300"
+            className="font-mono text-[12px] sm:text-[13px] px-2.5 py-0.5 rounded-full border border-white/15 uppercase font-semibold flex-shrink-0 ml-2 transition-all duration-300"
             style={{
               color: domain.color,
               backgroundColor: isHovered ? `${domain.color}20` : 'rgba(255, 255, 255, 0.04)',
@@ -176,8 +176,8 @@ export function CinematicDepthCard({
           </span>
         </div>
 
-        {/* Short Category Description */}
-        <p className="font-body text-[12px] sm:text-[13px] text-[#A8B4C2] leading-[1.45] mt-1 mb-2 m-0 line-clamp-2">
+        {/* Short Category Description (Phase 10.4: 15-16px, line-height 1.55) */}
+        <p className="font-body text-[15px] sm:text-[16px] text-[#A8B4C2] leading-[1.55] mt-1 mb-2 m-0 line-clamp-2">
           {domain.description}
         </p>
       </div>
@@ -280,20 +280,20 @@ export function CinematicDepthCard({
         />
       </div>
 
-      {/* ─── Section 8: Card Footer with Technology Count & Premium Glass EXPLORE Button ─── */}
-      <div className="relative z-10 mt-auto pt-3 border-t border-[rgba(140,190,210,0.12)] flex items-center justify-between font-mono text-[11px] text-[#687687] w-full">
-        {/* Count & Verified Status */}
+      {/* ─── Section 8: Card Footer with Technology Count & Premium Glass EXPLORE Button (Phase 10.4) ─── */}
+      <div className="relative z-10 mt-auto pt-3 border-t border-[rgba(140,190,210,0.12)] flex items-center justify-between font-mono text-[13px] text-[#A8B4C2] w-full">
+        {/* Count & Verified Status (Phase 10.4: 13-14px) */}
         <span className="flex items-center gap-1.5">
-          <span className="text-[#A8B4C2] font-medium">{domain.tech.length} Technologies</span>
-          <span className="text-slate-600">&bull;</span>
-          <span className="font-semibold tracking-wider" style={{ color: domain.color }}>
+          <span className="text-[#A8B4C2] font-medium text-[13px] sm:text-[14px]">{domain.tech.length} Technologies</span>
+          <span className="text-slate-500">&bull;</span>
+          <span className="font-semibold tracking-wider text-[12px] sm:text-[13px]" style={{ color: domain.color }}>
             VERIFIED
           </span>
         </span>
 
-        {/* Premium Glass Action Button: EXPLORE → (Section 8 Specification) */}
+        {/* Premium Glass Action Button: EXPLORE → (Phase 10.4: 14-16px) */}
         <div
-          className="px-2.5 py-1 rounded-full flex items-center gap-1.5 transition-all duration-300 border relative overflow-hidden"
+          className="px-3 py-1.5 rounded-full flex items-center gap-1.5 transition-all duration-300 border relative overflow-hidden"
           style={{
             background: isHovered ? 'rgba(0, 217, 255, 0.16)' : 'rgba(255, 255, 255, 0.05)',
             borderColor: isHovered ? 'rgba(0, 217, 255, 0.6)' : 'rgba(255, 255, 255, 0.14)',
@@ -309,11 +309,11 @@ export function CinematicDepthCard({
             }`}
           />
 
-          <span className="font-mono text-[11px] font-bold text-white tracking-wider uppercase">
+          <span className="font-mono text-[14px] font-bold text-white tracking-wider uppercase">
             EXPLORE
           </span>
           <span
-            className="font-mono text-cyan-400 font-bold text-xs transition-transform duration-300"
+            className="font-mono text-cyan-400 font-bold text-[15px] transition-transform duration-300"
             style={{
               transform: isHovered ? 'translateX(5px)' : 'translateX(0px)',
             }}

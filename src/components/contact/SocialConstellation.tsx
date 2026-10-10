@@ -42,10 +42,10 @@ export function SocialConstellation() {
 
   return (
     <div className="w-full max-w-4xl mx-auto my-16 text-center">
-      <div className="font-mono text-xs uppercase tracking-widest text-slate-500 mb-2">
+      <div className="font-mono text-[13px] uppercase tracking-[0.12em] text-slate-400 mb-2 font-semibold">
         COMMUNICATION TOPOLOGY
       </div>
-      <h3 className="text-xl sm:text-2xl font-display font-bold text-white mb-8">
+      <h3 className="text-[22px] sm:text-[26px] font-display font-extrabold text-[#F5F8FA] mb-8">
         Social & Network Nodes
       </h3>
 
@@ -58,11 +58,11 @@ export function SocialConstellation() {
         >
           <div className="flex items-center gap-2 justify-center">
             <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
-            <span className="font-display font-bold text-sm text-white tracking-wider uppercase">
+            <span className="font-display font-bold text-[15px] sm:text-[16px] text-white tracking-wider uppercase">
               COMMUNICATION CORE
             </span>
           </div>
-          <div className="font-mono text-[0.625rem] text-slate-400 mt-0.5">
+          <div className="font-mono text-[12px] text-slate-400 mt-1 font-semibold">
             4 DIRECT ACCESS DESTINATIONS
           </div>
         </motion.div>
@@ -98,22 +98,22 @@ export function SocialConstellation() {
                       style={{ background: conn.color }}
                     />
                     <span
-                      className="font-mono text-xs font-bold tracking-wider"
+                      className="font-mono text-[13px] font-bold tracking-wider"
                       style={{ color: conn.color }}
                     >
                       {conn.label}
                     </span>
                   </div>
-                  <span className="font-mono text-xs text-slate-500 group-hover:text-white transition-colors">
+                  <span className="font-mono text-sm text-slate-400 group-hover:text-white transition-colors">
                     &rarr;
                   </span>
                 </div>
 
-                <div className="font-mono text-xs text-white font-medium mb-1 truncate">
+                <div className="font-mono text-[13px] sm:text-[14px] text-white font-medium mb-1.5 truncate">
                   {conn.handle}
                 </div>
 
-                <p className="font-body text-[0.6875rem] text-slate-400 leading-snug">
+                <p className="font-body text-[13px] sm:text-[14px] text-[#A8B4C2] leading-normal m-0">
                   {conn.desc}
                 </p>
               </a>

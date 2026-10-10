@@ -37,13 +37,13 @@ export function Scene04TechnologyUniverse() {
         {/* ─── Section Header ─── */}
         <header className="scene-header">
           {/* Scene Label */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 mb-[14px] rounded-full border border-cyan-500/20 bg-cyan-500/5 text-cyan-400 font-mono text-[11px] sm:text-xs tracking-[0.12em] uppercase font-semibold">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 mb-4 rounded-full border border-cyan-500/20 bg-cyan-500/5 text-cyan-400 font-mono text-[13px] tracking-[0.12em] uppercase font-semibold">
             <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
             <span>SCENE 04 // CONNECTED STACK</span>
           </div>
 
           {/* Heading: ENGINEERED ECOSYSTEM */}
-          <h2 className="m-0 text-[clamp(42px,5vw,58px)] font-display font-extrabold text-white tracking-tight leading-none uppercase mt-3">
+          <h2 className="m-0 text-[clamp(32px,4vw,56px)] font-display font-extrabold text-[#F5F8FA] tracking-tight leading-[1.1] uppercase mt-2">
             ENGINEERED{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-300 to-indigo-400">
               ECOSYSTEM
@@ -51,7 +51,7 @@ export function Scene04TechnologyUniverse() {
           </h2>
 
           {/* Description */}
-          <p className="mt-4 max-w-[820px] text-[17px] text-slate-300 font-body leading-[1.6]">
+          <p className="mt-4 max-w-[65ch] text-[clamp(16px,1.2vw,18px)] text-[#A8B4C2] font-body leading-[1.65]">
             Organized into cohesive architectural layers. Every language, runtime, database, and protocol is chosen for reliability, high throughput, and strict security.
           </p>
         </header>
@@ -62,21 +62,21 @@ export function Scene04TechnologyUniverse() {
           <button
             type="button"
             onClick={() => handleOpenPipeline('intelligent')}
-            className="p-[16px_18px] rounded-[16px] glass-level-1 liquid-edge min-h-[72px] h-auto flex flex-col justify-center shadow-sm w-full box-border min-w-0 text-left transition-all duration-300 hover:border-[#8B7CFF]/50 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(139,124,255,0.18)] cursor-pointer group active:scale-[0.98]"
+            className="p-[16px_20px] rounded-[16px] glass-level-1 liquid-edge min-h-[76px] h-auto flex flex-col justify-center shadow-sm w-full box-border min-w-0 text-left transition-all duration-300 hover:border-[#8B7CFF]/50 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(139,124,255,0.18)] cursor-pointer group active:scale-[0.98]"
             aria-label="Open Intelligent Systems Pipeline details"
             aria-haspopup="dialog"
           >
-            <div className="flex items-center justify-between mb-2">
-              <span className="font-mono text-[10px] sm:text-[11px] text-[#8B7CFF] font-semibold tracking-[0.08em] uppercase flex items-center gap-2">
+            <div className="flex items-center justify-between mb-2.5">
+              <span className="font-mono text-[12px] sm:text-[13px] text-[#8B7CFF] font-semibold tracking-[0.08em] uppercase flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#8B7CFF] animate-pulse" />
                 INTELLIGENT SYSTEMS PIPELINE
               </span>
-              <span className="font-mono text-[10px] text-slate-400 group-hover:text-[#8B7CFF] transition-colors flex items-center gap-1">
+              <span className="font-mono text-[12px] sm:text-[13px] text-slate-400 group-hover:text-[#8B7CFF] transition-colors flex items-center gap-1.5">
                 <span>INSPECT FLOW</span>
                 <span className="group-hover:translate-x-0.5 transition-transform">&rarr;</span>
               </span>
             </div>
-            <div className="flex items-center flex-wrap gap-1.5 font-mono text-[13px] text-[#F4F7FA] leading-[1.3]">
+            <div className="flex items-center flex-wrap gap-2 font-mono text-[13px] sm:text-[14px] text-[#F5F8FA] leading-[1.3]">
               <span className="glass-chip text-[#8B7CFF] font-medium group-hover:border-[#8B7CFF]/40 transition-colors">
                 AI / ML
               </span>
@@ -99,21 +99,21 @@ export function Scene04TechnologyUniverse() {
           <button
             type="button"
             onClick={() => handleOpenPipeline('zero-trust')}
-            className="p-[16px_18px] rounded-[16px] glass-level-1 liquid-edge min-h-[72px] h-auto flex flex-col justify-center shadow-sm w-full box-border min-w-0 text-left transition-all duration-300 hover:border-[#00D9FF]/50 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(0,217,255,0.18)] cursor-pointer group active:scale-[0.98]"
+            className="p-[16px_20px] rounded-[16px] glass-level-1 liquid-edge min-h-[76px] h-auto flex flex-col justify-center shadow-sm w-full box-border min-w-0 text-left transition-all duration-300 hover:border-[#00D9FF]/50 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(0,217,255,0.18)] cursor-pointer group active:scale-[0.98]"
             aria-label="Open Zero-Trust Defense Pipeline details"
             aria-haspopup="dialog"
           >
-            <div className="flex items-center justify-between mb-2">
-              <span className="font-mono text-[10px] sm:text-[11px] text-[#00D9FF] font-semibold tracking-[0.08em] uppercase flex items-center gap-2">
+            <div className="flex items-center justify-between mb-2.5">
+              <span className="font-mono text-[12px] sm:text-[13px] text-[#00D9FF] font-semibold tracking-[0.08em] uppercase flex items-center gap-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#00D9FF] animate-pulse" />
                 ZERO-TRUST DEFENSE PIPELINE
               </span>
-              <span className="font-mono text-[10px] text-slate-400 group-hover:text-[#00D9FF] transition-colors flex items-center gap-1">
+              <span className="font-mono text-[12px] sm:text-[13px] text-slate-400 group-hover:text-[#00D9FF] transition-colors flex items-center gap-1.5">
                 <span>INSPECT FLOW</span>
                 <span className="group-hover:translate-x-0.5 transition-transform">&rarr;</span>
               </span>
             </div>
-            <div className="flex items-center flex-wrap gap-1.5 font-mono text-[13px] text-[#F4F7FA] leading-[1.3]">
+            <div className="flex items-center flex-wrap gap-2 font-mono text-[13px] sm:text-[14px] text-[#F5F8FA] leading-[1.3]">
               <span className="glass-chip text-[#00D9FF] font-medium group-hover:border-[#00D9FF]/40 transition-colors">
                 Cybersecurity
               </span>

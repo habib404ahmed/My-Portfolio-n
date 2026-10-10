@@ -202,21 +202,21 @@ export function CertificateViewer({
           </motion.div>
 
           {/* ─── 5. Certificate Metadata & Action Bar — Glass Level 1 ─── */}
-          <div className="mt-4 sm:mt-5 w-full glass-level-1 liquid-edge p-3.5 sm:p-4 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-3 font-mono text-xs text-slate-300">
+          <div className="mt-4 sm:mt-5 w-full glass-level-1 liquid-edge p-3.5 sm:p-4 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-3 font-mono text-[13px] sm:text-[14px] text-slate-200">
             {/* Metadata Left */}
             <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 sm:gap-4 text-center sm:text-left">
-              <span className="text-white font-semibold flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full" style={{ background: accentColor }} />
+              <span className="text-white font-bold flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full" style={{ background: accentColor }} />
                 {cert.title}
               </span>
-              <span className="text-slate-600 hidden sm:inline">&bull;</span>
-              <span className="text-slate-400">
-                ISSUED: <strong className="text-slate-200">{cert.date}</strong>
+              <span className="text-slate-500 hidden sm:inline">&bull;</span>
+              <span className="text-slate-300">
+                ISSUED: <strong className="text-white font-semibold">{cert.date}</strong>
               </span>
               {cert.certificateId && (
                 <>
-                  <span className="text-slate-600 hidden sm:inline">&bull;</span>
-                  <span className="text-cyan-400">ID: {cert.certificateId}</span>
+                  <span className="text-slate-500 hidden sm:inline">&bull;</span>
+                  <span className="text-cyan-400 font-semibold">ID: {cert.certificateId}</span>
                 </>
               )}
             </div>
@@ -227,14 +227,14 @@ export function CertificateViewer({
               <div className="flex items-center gap-2 md:hidden">
                 <button
                   onClick={handlePrev}
-                  className="px-3.5 py-1.5 rounded-lg border border-white/15 bg-slate-900/90 text-slate-200 hover:text-white hover:border-cyan-400 transition-colors flex items-center gap-1 cursor-pointer"
+                  className="px-3.5 py-1.5 rounded-lg border border-white/15 bg-slate-900/90 text-slate-200 hover:text-white hover:border-cyan-400 transition-colors flex items-center gap-1 cursor-pointer font-mono text-[13px]"
                   aria-label="Previous certificate"
                 >
                   &larr; PREV
                 </button>
                 <button
                   onClick={handleNext}
-                  className="px-3.5 py-1.5 rounded-lg border border-white/15 bg-slate-900/90 text-slate-200 hover:text-white hover:border-cyan-400 transition-colors flex items-center gap-1 cursor-pointer"
+                  className="px-3.5 py-1.5 rounded-lg border border-white/15 bg-slate-900/90 text-slate-200 hover:text-white hover:border-cyan-400 transition-colors flex items-center gap-1 cursor-pointer font-mono text-[13px]"
                   aria-label="Next certificate"
                 >
                   NEXT &rarr;
@@ -242,7 +242,7 @@ export function CertificateViewer({
               </div>
 
               {/* Stepper Indicator */}
-              <div className="px-3 py-1 rounded-full border border-white/10 bg-slate-950/80 text-slate-400 font-bold tracking-wider">
+              <div className="px-3 py-1 rounded-full border border-white/10 bg-slate-950/80 text-slate-300 font-bold tracking-wider text-[13px]">
                 0{currentIndex + 1} / 0{certifications.length}
               </div>
 
@@ -250,10 +250,10 @@ export function CertificateViewer({
               <a
                 href={cert.downloadUrl || cert.image}
                 download={`${cert.id}.jpg`}
-                className="px-3 py-1 rounded-lg border border-white/15 bg-white/5 text-slate-300 hover:text-white hover:border-cyan-400/50 hover:bg-cyan-950/30 transition-all hidden sm:flex items-center gap-1.5"
+                className="px-3.5 py-1.5 rounded-lg border border-white/15 bg-white/5 text-slate-200 hover:text-white hover:border-cyan-400/50 hover:bg-cyan-950/30 transition-all hidden sm:flex items-center gap-1.5 font-mono text-[13px] font-semibold"
                 aria-label={`Download certificate image for ${cert.title}`}
               >
-                <svg className="w-3.5 h-3.5 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-4 h-4 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                 </svg>
                 <span>DOWNLOAD</span>

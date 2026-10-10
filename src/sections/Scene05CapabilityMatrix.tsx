@@ -24,10 +24,10 @@ export function Scene05CapabilityMatrix() {
               <button
                 key={cap.id}
                 onClick={() => setSelectedCapId(cap.id)}
-                className={`p-3.5 rounded-lg border text-left transition-all duration-300 flex flex-col justify-between min-h-[96px] ${
+                className={`p-3.5 rounded-xl border text-left transition-all duration-300 flex flex-col justify-between min-h-[104px] cursor-pointer ${
                   isSelected
-                    ? 'border-white/30 bg-slate-900/90 shadow-lg scale-102'
-                    : 'border-white/5 bg-slate-950/40 hover:border-white/20 hover:bg-white/[0.02]'
+                    ? 'border-white/35 bg-slate-900/90 shadow-lg scale-102'
+                    : 'border-white/10 bg-slate-950/50 hover:border-white/25 hover:bg-white/[0.04]'
                 }`}
                 style={{
                   boxShadow: isSelected ? `0 0 20px ${cap.color}25` : 'none',
@@ -36,7 +36,7 @@ export function Scene05CapabilityMatrix() {
               >
                 <div className="flex items-center justify-between w-full">
                   <span
-                    className="font-mono text-[0.625rem] font-bold px-1.5 py-0.5 rounded"
+                    className="font-mono text-[11px] sm:text-[12px] font-bold px-2 py-0.5 rounded tracking-wide"
                     style={{
                       color: cap.color,
                       background: `${cap.color}15`,
@@ -47,11 +47,11 @@ export function Scene05CapabilityMatrix() {
                   <span
                     className="w-1.5 h-1.5 rounded-full"
                     style={{
-                      background: isSelected ? cap.color : 'rgba(255,255,255,0.1)',
+                      background: isSelected ? cap.color : 'rgba(255,255,255,0.2)',
                     }}
                   />
                 </div>
-                <div className="font-display font-semibold text-xs text-slate-200 mt-2 leading-tight">
+                <div className="font-display font-semibold text-[13px] sm:text-[14px] text-slate-200 mt-2 leading-snug">
                   {cap.title}
                 </div>
               </button>
@@ -67,7 +67,7 @@ export function Scene05CapabilityMatrix() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -15 }}
             transition={{ duration: 0.4 }}
-            className="rounded-xl border border-white/10 bg-slate-950/80 p-6 md:p-10 relative overflow-hidden backdrop-blur-md"
+            className="rounded-2xl border border-white/12 bg-slate-950/85 p-6 md:p-10 relative overflow-hidden backdrop-blur-md"
           >
             {/* Ambient Background Aura */}
             <div
@@ -84,16 +84,16 @@ export function Scene05CapabilityMatrix() {
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 mb-8 border-b border-white/10">
               <div>
                 <span
-                  className="font-mono text-xs uppercase tracking-wider block mb-1"
+                  className="font-mono text-[13px] uppercase tracking-[0.12em] block mb-1.5 font-semibold"
                   style={{ color: currentCapability.color }}
                 >
                   SYSTEM PIPELINE // {currentCapability.domain}
                 </span>
-                <h3 className="text-2xl sm:text-3xl font-display font-bold text-white">
+                <h3 className="text-[clamp(22px,2.2vw,30px)] font-display font-extrabold text-[#F5F8FA] leading-tight">
                   {currentCapability.title}
                 </h3>
               </div>
-              <p className="text-sm text-slate-400 font-body max-w-md">
+              <p className="text-[15px] sm:text-[16px] text-[#A8B4C2] font-body max-w-lg leading-[1.65] m-0">
                 {currentCapability.description}
               </p>
             </div>
@@ -104,13 +104,13 @@ export function Scene05CapabilityMatrix() {
                 {currentCapability.flow.map((step, idx) => (
                   <div key={idx} className="relative flex flex-col">
                     <div
-                      className="card-3d-tilt p-4 rounded-lg border border-white/10 bg-black/50 backdrop-blur-sm flex flex-col justify-between min-h-[110px] hover:border-white/30 transition-all group"
+                      className="card-3d-tilt p-4.5 rounded-xl border border-white/10 bg-black/50 backdrop-blur-sm flex flex-col justify-between min-h-[116px] hover:border-white/30 transition-all group"
                       style={{
                         boxShadow: `0 4px 20px rgba(0,0,0,0.5)`,
                       }}
                     >
                       <div className="flex items-center justify-between">
-                        <span className="font-mono text-xs text-slate-500 group-hover:text-slate-300">
+                        <span className="font-mono text-[12px] sm:text-[13px] text-slate-400 font-medium group-hover:text-slate-200">
                           {step.step}
                         </span>
                         <span
@@ -118,7 +118,7 @@ export function Scene05CapabilityMatrix() {
                           style={{ background: currentCapability.color }}
                         />
                       </div>
-                      <div className="font-mono text-xs font-semibold text-slate-200 mt-3 group-hover:text-white transition-colors">
+                      <div className="font-mono text-[13px] sm:text-[14px] font-semibold text-[#F5F8FA] mt-3 group-hover:text-cyan-300 transition-colors leading-snug">
                         {step.label}
                       </div>
                     </div>
@@ -126,7 +126,7 @@ export function Scene05CapabilityMatrix() {
                     {/* Arrow between steps (desktop) */}
                     {idx < currentCapability.flow.length - 1 && (
                       <div
-                        className="hidden sm:block absolute -right-3 top-1/2 -translate-y-1/2 z-20 text-slate-600 font-mono text-xs pointer-events-none"
+                        className="hidden sm:block absolute -right-3 top-1/2 -translate-y-1/2 z-20 text-slate-500 font-mono text-sm pointer-events-none"
                         aria-hidden="true"
                       >
                         &rarr;
