@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "node scripts/generate_resume_pdf.js && tsc -b && vite build && node scripts/build_api.js",
+    "build": "node scripts/generate_resume_pdf.js && tsc -b && vite build",
+    "build:api": "node scripts/build_api.js",
     "generate:resume": "node scripts/generate_resume_pdf.js",
     "lint": "oxlint",
     "preview": "vite preview",
@@ -45,6 +46,7 @@
     "@types/react-dom": "^19.2.7",
     "@vercel/node": "^23.0.1",
     "@vitejs/plugin-react": "^6.1.1",
+    "esbuild": "^0.25.0",
     "oxlint": "^1.81.0",
     "sharp": "^0.35.5",
     "typescript": "~6.0.2",

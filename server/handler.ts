@@ -1,8 +1,8 @@
 import express, { type Request, type Response } from 'express'
 import cookieParser from 'cookie-parser'
-import { apiRouter } from '../server/api.ts'
-import { ensureAdminInitialized } from '../server/auth.ts'
-import { UPLOADS_DIR } from '../server/storage.ts'
+import { apiRouter } from './api.ts'
+import { ensureAdminInitialized } from './auth.ts'
+import { UPLOADS_DIR } from './storage.ts'
 
 const app = express()
 

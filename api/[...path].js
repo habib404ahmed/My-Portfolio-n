@@ -1,4 +1,4 @@
-// api/handler.ts
+// server/handler.ts
 import express2 from "express";
 import cookieParser from "cookie-parser";
 
@@ -2419,7 +2419,7 @@ apiRouter.post("/resume/generate", requireAuth, (_req, res) => {
   });
 });
 
-// api/handler.ts
+// server/handler.ts
 var app = express2();
 app.use(cookieParser());
 app.get("/api/health", (_req, res) => {

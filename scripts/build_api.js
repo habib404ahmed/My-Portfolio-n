@@ -1,11 +1,10 @@
 import { build } from 'esbuild';
 import fs from 'fs';
-import path from 'path';
 
 async function run() {
   console.log('[Build API] Bundling serverless API functions for Vercel...');
   await build({
-    entryPoints: ['api/handler.ts'],
+    entryPoints: ['server/handler.ts'],
     bundle: true,
     platform: 'node',
     format: 'esm',
