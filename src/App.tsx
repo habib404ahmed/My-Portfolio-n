@@ -5,7 +5,7 @@ import { AdminStudio } from '@/admin/AdminStudio.tsx'
 
 import { InitSequence } from '@/scenes/IntroScene/InitSequence'
 import { Global3DWorld } from '@/components/effects/cinematic/Global3DWorld'
-import { HeroCinematicBackground } from '@/components/effects/cinematic/HeroCinematicBackground'
+import { GlobalCinematicBackground } from '@/components/effects/cinematic/HeroCinematicBackground'
 import { HeroContent } from '@/scenes/HeroScene/HeroContent'
 import { WebGLFallback } from '@/scenes/HeroScene/WebGLFallback'
 import { Navigation } from '@/components/navigation/Navigation'
@@ -192,12 +192,13 @@ function PortfolioWebsite() {
     .sort((a, b) => a.order - b.order)
 
   return (
-    <div className="relative min-h-screen bg-transparent text-slate-100 overflow-x-hidden selection:bg-cyan-500/20 selection:text-cyan-200">
-      {/* Persistent Global Cinematic Background Layer (Phase 13.4) */}
-      <HeroCinematicBackground visible={true} />
+    <>
+      {/* ─── Persistent Stationary Global Cinematic Background (Phase 13.5) ─── */}
+      <GlobalCinematicBackground />
 
-      {/* Subtle film grain noise */}
-      <div className="noise-overlay" aria-hidden="true" />
+      <div className="app-content relative min-h-screen bg-transparent text-slate-100 overflow-x-hidden selection:bg-cyan-500/20 selection:text-cyan-200">
+        {/* Subtle film grain noise */}
+        <div className="noise-overlay" aria-hidden="true" />
 
       {/* Cinematic Vignette & Global Color Grade */}
       <div className="cinematic-vignette" aria-hidden="true" />
@@ -360,7 +361,8 @@ function PortfolioWebsite() {
         })}
       </main>
     </div>
-  )
+  </>
+)
 }
 
 export default function App() {

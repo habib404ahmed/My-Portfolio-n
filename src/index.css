@@ -167,7 +167,8 @@ section[id]:not(#hero):not(#web-resume-document section) {
 }
 
 /* ============================================================
-   GLOBAL CINEMATIC ENVIRONMENT BACKGROUND (Phase 13.4)
+   GLOBAL CINEMATIC ENVIRONMENT BACKGROUND (Phase 13.5)
+   Completely stationary wallpaper across entire portfolio
    ============================================================ */
 html,
 body,
@@ -184,10 +185,12 @@ body,
   height: 100vh;
   overflow: hidden;
   pointer-events: none;
-  z-index: 1; /* Layer 1: Behind 3D World (z-2) and Content (z-10) */
+  z-index: 0; /* Layer 0: Lowest visual layer, stationary wallpaper */
   background-color: var(--color-void, #030507);
+  transform: none !important;
 }
 
+.global-bg-fallback,
 .hero-env-fallback {
   position: absolute;
   inset: 0;
@@ -196,43 +199,45 @@ body,
   background-color: var(--color-void, #030507);
 }
 
+.global-bg-image,
 .hero-env-image {
   position: absolute;
-  inset: -12px;
-  width: calc(100% + 24px);
-  height: calc(100% + 24px);
+  inset: 0;
+  width: 100%;
+  height: 100%;
   background-image:
     linear-gradient(180deg, rgba(3, 7, 12, 0.24) 0%, rgba(3, 7, 12, 0.48) 100%),
     url('/images/portfolio-cinematic-bg.webp'),
     url('/images/portfolio-cinematic-bg.png');
   background-size: cover;
-  background-repeat: no-repeat;
   background-position: center center;
-  will-change: transform;
+  background-repeat: no-repeat;
+  transform: none !important;
+  transition: none !important;
+  will-change: auto !important;
 }
 
-@media (max-width: 768px) {
-  .hero-env-image {
-    background-position: 50% 20%;
-  }
-}
-
+.global-bg-overlay-desktop,
 .hero-env-overlay-desktop {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   background: linear-gradient(90deg, rgba(3, 7, 12, 0.82) 0%, rgba(3, 8, 14, 0.52) 48%, rgba(3, 7, 12, 0.42) 100%);
+  pointer-events: none;
 }
 
+.global-bg-overlay-mobile,
 .hero-env-overlay-mobile {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   background: linear-gradient(180deg, rgba(3, 7, 12, 0.82) 0%, rgba(3, 8, 14, 0.55) 45%, rgba(3, 7, 12, 0.82) 100%);
+  pointer-events: none;
 }
 
+.global-bg-horizon-glow,
 .hero-env-horizon-glow {
   position: absolute;
   inset: 0;
@@ -240,8 +245,10 @@ body,
   height: 100%;
   background: radial-gradient(ellipse 75% 28% at 50% 64%, rgba(0, 217, 255, 0.12) 0%, transparent 70%);
   mix-blend-mode: screen;
+  pointer-events: none;
 }
 
+.global-bg-top-blend,
 .hero-env-top-blend {
   position: absolute;
   top: 0;
@@ -249,10 +256,17 @@ body,
   width: 100%;
   height: 140px;
   background: linear-gradient(to bottom, rgba(3, 5, 7, 0.75) 0%, rgba(3, 5, 7, 0.30) 60%, transparent 100%);
+  pointer-events: none;
 }
 
 .hero-env-bottom-blend {
   display: none !important;
+}
+
+.app-content {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
 }
 
 #hero {
