@@ -8,6 +8,14 @@ const app = express()
 
 app.use(cookieParser())
 
+// Health check endpoint
+app.get('/api/health', (_req: Request, res: Response) => {
+  res.json({ status: 'ok', timestamp: new Date().toISOString() })
+})
+app.get('/health', (_req: Request, res: Response) => {
+  res.json({ status: 'ok', timestamp: new Date().toISOString() })
+})
+
 // Serve uploads if requested via API
 app.use('/uploads', express.static(UPLOADS_DIR))
 app.use('/api/uploads', express.static(UPLOADS_DIR))
@@ -20,6 +28,13 @@ let isInitialized = false
 let initPromise: Promise<any> | null = null
 
 export async function handleRequest(req: Request, res: Response) {
+  // Normalize req.url if Vercel set x-matched-path or query route
+  const matchedPath =
+    (req.headers['x-matched-path'] as string) || (req.headers['x-now-route-matches'] as string)
+  if (matchedPath && matchedPath.startsWith('/api') && req.url !== matchedPath) {
+    req.url = matchedPath
+  }
+
   if (!isInitialized) {
     if (!initPromise) {
       initPromise = ensureAdminInitialized()
