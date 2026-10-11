@@ -8,6 +8,7 @@ interface CertificateViewerProps {
   cert: Certification | null
   onClose: () => void
   onSelectCert?: (cert: Certification) => void
+  certificates?: Certification[]
 }
 
 const CATEGORY_COLORS: Record<string, string> = {
@@ -20,26 +21,28 @@ export function CertificateViewer({
   cert,
   onClose,
   onSelectCert,
+  certificates: passedCertificates,
 }: CertificateViewerProps) {
+  const certList = passedCertificates || certifications
   const closeButtonRef = useRef<HTMLButtonElement>(null)
   const prefersReduced = useReducedMotion()
 
   // Find index in certifications array for Next/Previous navigation
   const currentIndex = cert
-    ? certifications.findIndex((c) => c.id === cert.id)
+    ? certList.findIndex((c) => c.id === cert.id)
     : -1
 
   const handleNext = () => {
-    if (currentIndex === -1) return
-    const nextIdx = (currentIndex + 1) % certifications.length
-    const nextCert = certifications[nextIdx]
+    if (currentIndex === -1 || certList.length === 0) return
+    const nextIdx = (currentIndex + 1) % certList.length
+    const nextCert = certList[nextIdx]
     if (onSelectCert) onSelectCert(nextCert)
   }
 
   const handlePrev = () => {
-    if (currentIndex === -1) return
-    const prevIdx = (currentIndex - 1 + certifications.length) % certifications.length
-    const prevCert = certifications[prevIdx]
+    if (currentIndex === -1 || certList.length === 0) return
+    const prevIdx = (currentIndex - 1 + certList.length) % certList.length
+    const prevCert = certList[prevIdx]
     if (onSelectCert) onSelectCert(prevCert)
   }
 
@@ -253,7 +256,7 @@ export function CertificateViewer({
 
               {/* Stepper Indicator */}
               <div className="px-3 py-1 rounded-full border border-white/10 bg-slate-950/80 text-slate-300 font-bold tracking-wider text-[13px]">
-                0{currentIndex + 1} / 0{certifications.length}
+                0{currentIndex + 1} / 0{certList.length}
               </div>
 
               {/* External Verification Option */}

@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { timelineEvents, type TimelineEvent } from '@/data/timeline'
-import { certifications } from '@/data/certifications'
+import { certifications, type Certification } from '@/data/certifications'
 import { CertificateViewer } from '@/components/ui/cert/CertificateViewer'
 import { SectionTransition } from '@/components/ui/SectionTransition'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
+import { usePortfolioContent } from '@/context/ContentContext'
 
 interface EnvironmentStyle {
   ambientBg: string
@@ -61,6 +62,12 @@ const ENVIRONMENTS: Record<string, EnvironmentStyle> = {
 }
 
 export function Scene07TimelineLeadership() {
+  const { content } = usePortfolioContent()
+  const certList = (Array.isArray(content?.certifications)
+    ? (content.certifications as unknown as Certification[])
+    : certifications
+  ).filter((c) => c.visible !== false)
+
   const [activeIndex, setActiveIndex] = useState<number>(0)
   const [viewerCertId, setViewerCertId] = useState<string | null>(null)
   const prefersReduced = useReducedMotion()
@@ -68,7 +75,7 @@ export function Scene07TimelineLeadership() {
   const activeEvent = timelineEvents[activeIndex] || timelineEvents[0]
   const currentEnv = ENVIRONMENTS[activeEvent.id] || ENVIRONMENTS['bca-foundation']
 
-  const activeCertForViewer = certifications.find((c) => c.id === viewerCertId) || null
+  const activeCertForViewer = certList.find((c) => c.id === viewerCertId) || null
 
   return (
     <SectionTransition id="achievements" ariaLabel="Cinematic Journey Timeline" className="border-b border-white/5">
@@ -344,6 +351,7 @@ export function Scene07TimelineLeadership() {
         <CertificateViewer
           cert={activeCertForViewer}
           onClose={() => setViewerCertId(null)}
+          certificates={certList}
         />
       </div>
     </SectionTransition>

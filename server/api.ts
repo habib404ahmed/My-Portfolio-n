@@ -5,6 +5,7 @@ import fs from 'fs'
 import { exec } from 'child_process'
 import {
   getPublishedContent,
+  savePublishedContent,
   getDraftContent,
   saveDraftContent,
   publishDraft,
@@ -360,6 +361,137 @@ apiRouter.post('/content/rollback', requireAuth, (req: AuthenticatedRequest, res
     res.status(500).json({ error: 'Failed to rollback version', details: err.message })
   }
 })
+
+// ==========================================
+// CERTIFICATE MANAGEMENT ENDPOINTS
+// ==========================================
+
+// Protected: DELETE certificate by ID
+const handleDeleteCertificate = (req: AuthenticatedRequest, res: Response) => {
+  try {
+    const certId = req.params.id
+    if (!certId || typeof certId !== 'string') {
+      res.status(400).json({ error: 'Certificate ID is required' })
+      return
+    }
+
+    const draft = getDraftContent()
+    const published = getPublishedContent()
+
+    // Find certificate in draft or published
+    const certInDraft = (draft.certifications || []).find((c) => c.id === certId)
+    const certInPublished = (published.certifications || []).find((c) => c.id === certId)
+    const targetCert = certInDraft || certInPublished
+
+    if (!targetCert) {
+      res.status(404).json({ error: `Certificate with ID "${certId}" was not found.` })
+      return
+    }
+
+    const certTitle = targetCert.title || certId
+
+    // Identify file paths associated with this certificate
+    const associatedUrls: string[] = [
+      targetCert.downloadUrl,
+      targetCert.image,
+      targetCert.imageWebp,
+    ].filter(Boolean) as string[]
+
+    // Remove from draft certifications
+    draft.certifications = (draft.certifications || []).filter((c) => c.id !== certId)
+    // Clean up any timeline references in draft
+    if (Array.isArray(draft.timeline)) {
+      draft.timeline = draft.timeline.map((t) =>
+        t.certificateRef === certId ? { ...t, certificateRef: undefined } : t
+      )
+    }
+
+    // Remove from published certifications
+    published.certifications = (published.certifications || []).filter((c) => c.id !== certId)
+    // Clean up any timeline references in published
+    if (Array.isArray(published.timeline)) {
+      published.timeline = published.timeline.map((t) =>
+        t.certificateRef === certId ? { ...t, certificateRef: undefined } : t
+      )
+    }
+
+    // Persist content updates to disk immediately
+    saveDraftContent(draft)
+    savePublishedContent(published)
+
+    // Safely cleanup associated uploaded files
+    const deletedFiles: string[] = []
+    const failedFiles: string[] = []
+    const preservedFiles: string[] = []
+
+    // String representation of remaining content to check for shared files
+    const remainingContentStr = JSON.stringify(draft) + JSON.stringify(published)
+
+    for (const url of associatedUrls) {
+      // Only files in /uploads/ or /api/uploads/ should ever be deleted from disk
+      const isUpload =
+        url.startsWith('/uploads/') ||
+        url.startsWith('/api/uploads/') ||
+        url.startsWith('uploads/')
+
+      if (!isUpload) {
+        // Shared repository assets (e.g. /assets/certificates/...) must never be unlinked
+        continue
+      }
+
+      // Extract filename cleanly
+      const cleanPath = url.split('?')[0].split('#')[0]
+      const filename = path.basename(cleanPath)
+
+      if (!filename || filename === '.' || filename === '..' || filename === '.gitkeep') {
+        continue
+      }
+
+      // Check if another certificate or other portfolio section still references this file
+      if (remainingContentStr.includes(filename)) {
+        preservedFiles.push(filename)
+        continue
+      }
+
+      const filePath = path.resolve(UPLOADS_DIR, filename)
+
+      // Ensure path is strictly within UPLOADS_DIR (prevent directory traversal)
+      if (!filePath.startsWith(path.resolve(UPLOADS_DIR))) {
+        continue
+      }
+
+      if (fs.existsSync(filePath)) {
+        try {
+          fs.unlinkSync(filePath)
+          deletedFiles.push(filename)
+        } catch (fileErr: any) {
+          console.error(`[Delete Certificate] Failed to delete file ${filePath}:`, fileErr)
+          failedFiles.push(filename)
+        }
+      }
+    }
+
+    res.json({
+      success: true,
+      message: `Certificate "${certTitle}" was permanently deleted.`,
+      deletedId: certId,
+      deletedFiles,
+      failedFiles: failedFiles.length > 0 ? failedFiles : undefined,
+      preservedFiles: preservedFiles.length > 0 ? preservedFiles : undefined,
+      warning:
+        failedFiles.length > 0
+          ? `Certificate record was deleted, but file(s) [${failedFiles.join(', ')}] could not be deleted from storage.`
+          : undefined,
+      remainingCount: draft.certifications.length,
+    })
+  } catch (err: any) {
+    console.error('[Delete Certificate Error]:', err)
+    res.status(500).json({ error: 'Failed to delete certificate', details: err.message })
+  }
+}
+
+apiRouter.delete('/certificates/:id', requireAuth, handleDeleteCertificate)
+apiRouter.delete('/content/certificates/:id', requireAuth, handleDeleteCertificate)
 
 // ==========================================
 // MEDIA UPLOAD & LIBRARY ENDPOINTS

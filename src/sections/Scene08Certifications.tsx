@@ -36,14 +36,14 @@ const THEMES: Record<string, NodeTheme> = {
 
 export function Scene08Certifications() {
   const { content } = usePortfolioContent()
-  const certList = (content?.certifications && content.certifications.length > 0
+  const certList = (Array.isArray(content?.certifications)
     ? (content.certifications as unknown as Certification[])
     : staticCertifications
   ).filter((c) => c.visible !== false)
 
   const [activeCert, setActiveCert] = useState<Certification | null>(null)
   const [focusedId, setFocusedId] = useState<string>(
-    certList[0]?.id || 'cisco-modern-ai'
+    certList[0]?.id || ''
   )
 
   const currentTheme = THEMES[
@@ -81,7 +81,14 @@ export function Scene08Certifications() {
 
         {/* ─── CREDENTIAL CONSTELLATION NODES ─── */}
         <div className="relative grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch">
-          {certList.map((cert, index) => {
+          {certList.length === 0 ? (
+            <div className="col-span-full py-16 text-center rounded-2xl border border-white/5 bg-slate-950/40 p-8">
+              <p className="font-mono text-sm text-slate-400">
+                No certificates currently listed in this category.
+              </p>
+            </div>
+          ) : (
+            certList.map((cert, index) => {
             const theme = THEMES[cert.category] || THEMES.ai
             const isFocused = focusedId === cert.id
             const docPath = cert.downloadUrl || cert.image || ''
@@ -186,7 +193,8 @@ export function Scene08Certifications() {
                 </div>
               </motion.div>
             )
-          })}
+            })
+          )}
         </div>
 
         {/* Cinematic Full-Screen Modal Viewer */}
@@ -194,6 +202,7 @@ export function Scene08Certifications() {
           cert={activeCert}
           onClose={() => setActiveCert(null)}
           onSelectCert={(next) => setActiveCert(next)}
+          certificates={certList}
         />
       </div>
     </SectionTransition>

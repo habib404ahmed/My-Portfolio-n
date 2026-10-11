@@ -154,7 +154,9 @@ export function CertificateEditModal({
     xhr.open('POST', '/api/upload', true)
     xhr.withCredentials = true
 
-    const token = localStorage.getItem('admin_token')
+    const token =
+      (typeof window !== 'undefined' && sessionStorage.getItem('admin_token')) ||
+      (typeof window !== 'undefined' && localStorage.getItem('admin_token'))
     if (token) {
       xhr.setRequestHeader('Authorization', `Bearer ${token}`)
     }

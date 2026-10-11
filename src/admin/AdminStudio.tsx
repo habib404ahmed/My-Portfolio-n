@@ -383,6 +383,19 @@ export function AdminStudio() {
                   onUpdateCertifications={(certs) =>
                     updateContent({ ...content, certifications: certs })
                   }
+                  onCertDeleted={(deletedId) => {
+                    const nextCerts = content.certifications.filter((c) => c.id !== deletedId)
+                    const nextTimeline = content.timeline.map((t) =>
+                      t.certificateRef === deletedId ? { ...t, certificateRef: undefined } : t
+                    )
+                    const updated = {
+                      ...content,
+                      certifications: nextCerts,
+                      timeline: nextTimeline,
+                    }
+                    updateContent(updated)
+                    setSaveStatus({ status: 'saved', lastSaved: new Date().toISOString() })
+                  }}
                 />
               )}
               {currentTab === 'resume' && (

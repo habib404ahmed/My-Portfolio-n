@@ -21,8 +21,12 @@ import {
   Edit2,
   FileText,
   Download,
+  AlertTriangle,
+  Loader2,
+  CheckCircle,
 } from 'lucide-react'
 import { CertificateEditModal } from '../components/CertificateEditModal.tsx'
+import { apiFetch } from '../utils/api.ts'
 
 interface EducationJourneyCertsViewProps {
   content: PortfolioContent
@@ -30,6 +34,7 @@ interface EducationJourneyCertsViewProps {
   onUpdateEducation: (edu: EducationData[]) => void
   onUpdateTimeline: (time: TimelineItemData[]) => void
   onUpdateCertifications: (certs: CertificationData[]) => void
+  onCertDeleted?: (id: string) => void
 }
 
 export function EducationJourneyCertsView({
@@ -38,11 +43,18 @@ export function EducationJourneyCertsView({
   onUpdateEducation,
   onUpdateTimeline,
   onUpdateCertifications,
+  onCertDeleted,
 }: EducationJourneyCertsViewProps) {
   const [certSearch, setCertSearch] = useState('')
   const [previewCert, setPreviewCert] = useState<CertificationData | null>(null)
   const [editingCert, setEditingCert] = useState<CertificationData | null>(null)
   const [isCertModalOpen, setIsCertModalOpen] = useState(false)
+
+  // Real Deletion State
+  const [confirmDeleteCert, setConfirmDeleteCert] = useState<CertificationData | null>(null)
+  const [deletingCertId, setDeletingCertId] = useState<string | null>(null)
+  const [deleteError, setDeleteError] = useState<string | null>(null)
+  const [deleteSuccessMsg, setDeleteSuccessMsg] = useState<string | null>(null)
 
   // Education Handlers
   const handleAddEducation = () => {
@@ -114,9 +126,66 @@ export function EducationJourneyCertsView({
     }
   }
 
-  const handleRemoveCert = (id: string) => {
-    if (confirm('Delete this certificate record from your portfolio?')) {
-      onUpdateCertifications(content.certifications.filter((c) => c.id !== id))
+  const handlePromptDelete = (cert: CertificationData) => {
+    setDeleteError(null)
+    setConfirmDeleteCert(cert)
+  }
+
+  const handleDeleteCertConfirmed = async (certToDelete: CertificationData) => {
+    if (deletingCertId) return // Prevent concurrent duplicate requests
+    setDeletingCertId(certToDelete.id)
+    setDeleteError(null)
+
+    try {
+      const res = await apiFetch(`/api/certificates/${encodeURIComponent(certToDelete.id)}`, {
+        method: 'DELETE',
+      })
+
+      if (!res.ok) {
+        let errMessage = `Delete failed with status ${res.status}`
+        try {
+          const errData = await res.json()
+          if (errData?.error) errMessage = errData.error
+        } catch {}
+
+        if (res.status === 401 || res.status === 403) {
+          errMessage = 'Session unauthorized. Please check your admin credentials and re-authenticate.'
+        } else if (res.status === 404) {
+          errMessage = `Certificate with ID "${certToDelete.id}" was not found on the server.`
+        }
+        throw new Error(errMessage)
+      }
+
+      const data = await res.json()
+
+      // Reset modal and selection states
+      if (previewCert?.id === certToDelete.id) {
+        setPreviewCert(null)
+      }
+      if (editingCert?.id === certToDelete.id) {
+        setEditingCert(null)
+        setIsCertModalOpen(false)
+      }
+      setConfirmDeleteCert(null)
+      setDeletingCertId(null)
+
+      // Notify parent to update persistent state
+      if (onCertDeleted) {
+        onCertDeleted(certToDelete.id)
+      } else {
+        const next = content.certifications.filter((c) => c.id !== certToDelete.id)
+        onUpdateCertifications(next)
+      }
+
+      // Display real confirmation
+      setDeleteSuccessMsg(
+        data.message || `Certificate "${certToDelete.title}" permanently deleted.`
+      )
+      setTimeout(() => setDeleteSuccessMsg(null), 5000)
+    } catch (err: any) {
+      console.error('[Certificate Deletion Error]:', err)
+      setDeleteError(err.message || 'An error occurred while deleting the certificate.')
+      setDeletingCertId(null)
     }
   }
 
@@ -331,6 +400,24 @@ export function EducationJourneyCertsView({
             </div>
           </div>
 
+          {/* Success Notification Banner */}
+          {deleteSuccessMsg && (
+            <div className="p-3 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs flex items-center justify-between gap-3 animate-fade-in">
+              <div className="flex items-center gap-2">
+                <CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                <span className="font-mono">{deleteSuccessMsg}</span>
+              </div>
+              <button
+                type="button"
+                onClick={() => setDeleteSuccessMsg(null)}
+                className="text-emerald-400 hover:text-emerald-200 transition-colors cursor-pointer"
+                aria-label="Dismiss alert"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            </div>
+          )}
+
           {/* Certificate Compact Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
             {filteredCerts.map((c, idx) => {
@@ -458,11 +545,17 @@ export function EducationJourneyCertsView({
 
                       <button
                         type="button"
-                        onClick={() => handleRemoveCert(c.id)}
-                        className="p-1 rounded text-[#8491A2] hover:text-red-400 transition-colors cursor-pointer"
+                        disabled={deletingCertId === c.id}
+                        onClick={() => handlePromptDelete(c)}
+                        className="p-1 rounded text-[#8491A2] hover:text-red-400 transition-colors cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
                         title="Delete Certificate"
+                        aria-label={`Delete ${c.title}`}
                       >
-                        <Trash2 className="w-3.5 h-3.5" />
+                        {deletingCertId === c.id ? (
+                          <Loader2 className="w-3.5 h-3.5 animate-spin text-red-400" />
+                        ) : (
+                          <Trash2 className="w-3.5 h-3.5" />
+                        )}
                       </button>
                     </div>
                   </div>
@@ -551,6 +644,108 @@ export function EducationJourneyCertsView({
                   className="max-h-[65vh] max-w-full object-contain rounded"
                 />
               )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ─── Confirmation Modal for Certificate Deletion ─── */}
+      {confirmDeleteCert && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="confirm-delete-title"
+          onClick={() => {
+            if (!deletingCertId) {
+              setConfirmDeleteCert(null)
+              setDeleteError(null)
+            }
+          }}
+        >
+          <div
+            className="relative max-w-md w-full bg-[#10151D] border border-red-500/30 rounded-2xl p-6 shadow-2xl space-y-4"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-start gap-3">
+              <div className="p-2.5 rounded-xl bg-red-500/10 border border-red-500/25 text-red-400 flex-shrink-0">
+                <AlertTriangle className="w-5 h-5" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <h4
+                  id="confirm-delete-title"
+                  className="text-sm font-bold text-[#F5F8FA] font-mono"
+                >
+                  Confirm Certificate Deletion
+                </h4>
+                <p className="text-xs text-[#8491A2] mt-1 leading-relaxed">
+                  This will permanently delete this credential from persistent storage and clean up its uploaded document.
+                </p>
+              </div>
+            </div>
+
+            {/* Certificate Details Preview */}
+            <div className="p-3.5 rounded-xl bg-[#080B0F] border border-white/5 space-y-2 font-mono">
+              <div className="flex items-center justify-between text-[11px]">
+                <span className="text-cyan-400 font-semibold">
+                  {confirmDeleteCert.number} • {confirmDeleteCert.categoryLabel}
+                </span>
+                <span className="text-slate-400">{confirmDeleteCert.date}</span>
+              </div>
+              <p className="text-xs font-bold text-white line-clamp-2">
+                {confirmDeleteCert.title}
+              </p>
+              <p className="text-[11px] text-slate-400">
+                Issuer: <span className="text-slate-200">{confirmDeleteCert.issuer}</span>
+              </p>
+              {confirmDeleteCert.fileName && (
+                <p className="text-[10px] text-slate-400 truncate">
+                  Uploaded File:{' '}
+                  <span className="text-cyan-300">{confirmDeleteCert.fileName}</span>
+                </p>
+              )}
+            </div>
+
+            {/* Error Message if Deletion Failed */}
+            {deleteError && (
+              <div className="p-3 rounded-lg bg-red-500/15 border border-red-500/40 text-red-300 text-xs flex items-start gap-2">
+                <AlertTriangle className="w-4 h-4 text-red-400 flex-shrink-0 mt-0.5" />
+                <span className="flex-1 font-mono leading-relaxed">{deleteError}</span>
+              </div>
+            )}
+
+            {/* Modal Actions */}
+            <div className="flex items-center justify-end gap-2.5 pt-2 border-t border-white/5">
+              <button
+                type="button"
+                disabled={Boolean(deletingCertId)}
+                onClick={() => {
+                  setConfirmDeleteCert(null)
+                  setDeleteError(null)
+                }}
+                className="px-3.5 py-1.5 rounded-lg border border-white/10 hover:bg-white/5 text-slate-300 font-mono text-xs transition-colors cursor-pointer disabled:opacity-50"
+              >
+                Cancel
+              </button>
+
+              <button
+                type="button"
+                disabled={Boolean(deletingCertId)}
+                onClick={() => handleDeleteCertConfirmed(confirmDeleteCert)}
+                className="px-4 py-1.5 rounded-lg bg-red-500/20 border border-red-500/40 text-red-300 hover:bg-red-500/30 font-mono text-xs font-semibold flex items-center gap-2 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_15px_rgba(239,68,68,0.2)]"
+              >
+                {deletingCertId ? (
+                  <>
+                    <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                    <span>Deleting from Server...</span>
+                  </>
+                ) : (
+                  <>
+                    <Trash2 className="w-3.5 h-3.5" />
+                    <span>Delete Permanently</span>
+                  </>
+                )}
+              </button>
             </div>
           </div>
         </div>

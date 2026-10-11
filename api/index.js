@@ -1709,7 +1709,7 @@ function getDefaultContent() {
       profileImage: profile.photo.path,
       profileCrop: {
         x: 50,
-        y: 40,
+        y: 20,
         scale: 1,
         rotate: 0,
         flipH: false,
@@ -2297,6 +2297,91 @@ apiRouter.post("/content/rollback", requireAuth, (req, res) => {
     res.status(500).json({ error: "Failed to rollback version", details: err.message });
   }
 });
+var handleDeleteCertificate = (req, res) => {
+  try {
+    const certId = req.params.id;
+    if (!certId || typeof certId !== "string") {
+      res.status(400).json({ error: "Certificate ID is required" });
+      return;
+    }
+    const draft = getDraftContent();
+    const published = getPublishedContent();
+    const certInDraft = (draft.certifications || []).find((c) => c.id === certId);
+    const certInPublished = (published.certifications || []).find((c) => c.id === certId);
+    const targetCert = certInDraft || certInPublished;
+    if (!targetCert) {
+      res.status(404).json({ error: `Certificate with ID "${certId}" was not found.` });
+      return;
+    }
+    const certTitle = targetCert.title || certId;
+    const associatedUrls = [
+      targetCert.downloadUrl,
+      targetCert.image,
+      targetCert.imageWebp
+    ].filter(Boolean);
+    draft.certifications = (draft.certifications || []).filter((c) => c.id !== certId);
+    if (Array.isArray(draft.timeline)) {
+      draft.timeline = draft.timeline.map(
+        (t) => t.certificateRef === certId ? { ...t, certificateRef: void 0 } : t
+      );
+    }
+    published.certifications = (published.certifications || []).filter((c) => c.id !== certId);
+    if (Array.isArray(published.timeline)) {
+      published.timeline = published.timeline.map(
+        (t) => t.certificateRef === certId ? { ...t, certificateRef: void 0 } : t
+      );
+    }
+    saveDraftContent(draft);
+    savePublishedContent(published);
+    const deletedFiles = [];
+    const failedFiles = [];
+    const preservedFiles = [];
+    const remainingContentStr = JSON.stringify(draft) + JSON.stringify(published);
+    for (const url of associatedUrls) {
+      const isUpload = url.startsWith("/uploads/") || url.startsWith("/api/uploads/") || url.startsWith("uploads/");
+      if (!isUpload) {
+        continue;
+      }
+      const cleanPath = url.split("?")[0].split("#")[0];
+      const filename = path2.basename(cleanPath);
+      if (!filename || filename === "." || filename === ".." || filename === ".gitkeep") {
+        continue;
+      }
+      if (remainingContentStr.includes(filename)) {
+        preservedFiles.push(filename);
+        continue;
+      }
+      const filePath = path2.resolve(UPLOADS_DIR, filename);
+      if (!filePath.startsWith(path2.resolve(UPLOADS_DIR))) {
+        continue;
+      }
+      if (fs2.existsSync(filePath)) {
+        try {
+          fs2.unlinkSync(filePath);
+          deletedFiles.push(filename);
+        } catch (fileErr) {
+          console.error(`[Delete Certificate] Failed to delete file ${filePath}:`, fileErr);
+          failedFiles.push(filename);
+        }
+      }
+    }
+    res.json({
+      success: true,
+      message: `Certificate "${certTitle}" was permanently deleted.`,
+      deletedId: certId,
+      deletedFiles,
+      failedFiles: failedFiles.length > 0 ? failedFiles : void 0,
+      preservedFiles: preservedFiles.length > 0 ? preservedFiles : void 0,
+      warning: failedFiles.length > 0 ? `Certificate record was deleted, but file(s) [${failedFiles.join(", ")}] could not be deleted from storage.` : void 0,
+      remainingCount: draft.certifications.length
+    });
+  } catch (err) {
+    console.error("[Delete Certificate Error]:", err);
+    res.status(500).json({ error: "Failed to delete certificate", details: err.message });
+  }
+};
+apiRouter.delete("/certificates/:id", requireAuth, handleDeleteCertificate);
+apiRouter.delete("/content/certificates/:id", requireAuth, handleDeleteCertificate);
 apiRouter.post(
   "/upload",
   requireAuth,

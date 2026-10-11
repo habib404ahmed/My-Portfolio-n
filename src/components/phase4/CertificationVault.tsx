@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { certifications, type Certification } from '@/data/certifications'
 import { CertificateViewer } from '@/components/ui/cert/CertificateViewer'
+import { usePortfolioContent } from '@/context/ContentContext'
 
 interface CertificationVaultProps {
   externalSelectedId?: string | null
@@ -9,11 +10,17 @@ interface CertificationVaultProps {
 }
 
 export function CertificationVault({ externalSelectedId, onClearExternal }: CertificationVaultProps) {
+  const { content } = usePortfolioContent()
+  const certList = (Array.isArray(content?.certifications)
+    ? (content.certifications as unknown as Certification[])
+    : certifications
+  ).filter((c) => c.visible !== false)
+
   const [activeCert, setActiveCert] = useState<Certification | null>(null)
 
   // Handle external selection from timeline
   const selectedCert = externalSelectedId
-    ? certifications.find((c) => c.id === externalSelectedId) || activeCert
+    ? certList.find((c) => c.id === externalSelectedId) || activeCert
     : activeCert
 
   const handleClose = () => {
@@ -38,7 +45,7 @@ export function CertificationVault({ externalSelectedId, onClearExternal }: Cert
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {certifications.map((cert, idx) => (
+        {certList.map((cert, idx) => (
           <motion.div
             key={cert.id}
             initial={{ opacity: 0, y: 20 }}
@@ -138,6 +145,7 @@ export function CertificationVault({ externalSelectedId, onClearExternal }: Cert
         cert={selectedCert}
         onClose={handleClose}
         onSelectCert={(next) => setActiveCert(next)}
+        certificates={certList}
       />
     </div>
   )
