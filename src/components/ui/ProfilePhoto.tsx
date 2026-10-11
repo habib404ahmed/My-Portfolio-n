@@ -37,15 +37,15 @@ export function ProfilePhoto({
   // Dimensions based on size preset (deliberate 2:3 portrait proportions)
   const framePresets = {
     hero: {
-      frame: 'w-[clamp(280px,21vw,310px)] max-h-[min(465px,54vh)]',
+      frame: 'w-[clamp(330px,25vw,410px)] max-h-[min(590px,65vh)]',
       aspectRatio: '2 / 3',
     },
     standard: {
-      frame: 'w-[clamp(250px,26vw,285px)] max-h-[min(420px,48vh)]',
+      frame: 'w-[clamp(280px,26vw,330px)] max-h-[min(480px,54vh)]',
       aspectRatio: '2 / 3',
     },
     compact: {
-      frame: 'w-[clamp(195px,52vw,240px)] max-h-[min(350px,42vh)]',
+      frame: 'w-[clamp(220px,62vw,290px)] max-h-[min(420px,48vh)]',
       aspectRatio: '2 / 3',
     },
   }[size]
@@ -102,33 +102,33 @@ export function ProfilePhoto({
       <div className="relative flex flex-col items-center">
         {/* Holographic Framing Accents around Photo Container */}
         <div className="relative group">
-          {/* Subtle Refined Corner Brackets (Stay inside boundary to prevent top clipping) */}
+          {/* Prominent High-Tech Cyan HUD Corner Brackets matching reference image */}
           <div
-            className="absolute -top-1.5 -left-1.5 w-4 h-4 border-t border-l border-cyan-400/30 pointer-events-none transition-colors duration-500 group-hover:border-cyan-400/60"
+            className="absolute -top-3.5 -left-3.5 w-7 h-7 border-t-2 border-l-2 border-cyan-400 pointer-events-none drop-shadow-[0_0_10px_rgba(0,217,255,0.7)] transition-transform duration-300 group-hover:scale-105"
             aria-hidden="true"
           />
           <div
-            className="absolute -top-1.5 -right-1.5 w-4 h-4 border-t border-r border-cyan-400/30 pointer-events-none transition-colors duration-500 group-hover:border-cyan-400/60"
+            className="absolute -top-3.5 -right-3.5 w-7 h-7 border-t-2 border-r-2 border-cyan-400 pointer-events-none drop-shadow-[0_0_10px_rgba(0,217,255,0.7)] transition-transform duration-300 group-hover:scale-105"
             aria-hidden="true"
           />
           <div
-            className="absolute -bottom-1.5 -left-1.5 w-4 h-4 border-b border-l border-cyan-400/30 pointer-events-none transition-colors duration-500 group-hover:border-cyan-400/60"
+            className="absolute -bottom-3.5 -left-3.5 w-7 h-7 border-b-2 border-l-2 border-cyan-400 pointer-events-none drop-shadow-[0_0_10px_rgba(0,217,255,0.7)] transition-transform duration-300 group-hover:scale-105"
             aria-hidden="true"
           />
           <div
-            className="absolute -bottom-1.5 -right-1.5 w-4 h-4 border-b border-r border-cyan-400/30 pointer-events-none transition-colors duration-500 group-hover:border-cyan-400/60"
+            className="absolute -bottom-3.5 -right-3.5 w-7 h-7 border-b-2 border-r-2 border-cyan-400 pointer-events-none drop-shadow-[0_0_10px_rgba(0,217,255,0.7)] transition-transform duration-300 group-hover:scale-105"
             aria-hidden="true"
           />
 
-          {/* ─── Portrait Photo Container (Phase 9 Glass Frame — 2:3 Aspect Ratio) ─── */}
+          {/* ─── Portrait Photo Container (2:3 Aspect Ratio) ─── */}
           <div
-            className={`relative rounded-2xl overflow-hidden glass-frame liquid-edge p-1 shadow-[0_24px_70px_rgba(0,0,0,0.85)] transition-all duration-500 group-hover:shadow-[0_28px_80px_rgba(0,217,255,0.18)] ${framePresets.frame}`}
+            className={`relative rounded-2xl overflow-hidden border border-cyan-400/40 p-1 shadow-[0_24px_70px_rgba(0,0,0,0.85),0_0_30px_rgba(0,217,255,0.16)] transition-all duration-500 group-hover:shadow-[0_28px_80px_rgba(0,217,255,0.3)] ${framePresets.frame}`}
             style={{
               aspectRatio:
                 crop?.aspectRatio && crop.aspectRatio !== '1:1' && crop.aspectRatio !== '576 / 1024'
                   ? crop.aspectRatio
                   : framePresets.aspectRatio,
-              borderRadius: `${crop?.borderRadius ?? 24}px`,
+              borderRadius: `${crop?.borderRadius ?? 20}px`,
             }}
           >
             <img
@@ -181,11 +181,11 @@ export function ProfilePhoto({
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8, duration: 0.6 }}
-          className="mt-4 sm:mt-5 h-[36px] sm:h-[38px] min-w-[175px] sm:min-w-[195px] px-4 sm:px-5 rounded-full border border-cyan-500/30 bg-slate-950/85 hover:border-cyan-400/50 backdrop-blur-md flex items-center justify-center gap-2.5 shadow-[0_4px_16px_rgba(0,0,0,0.6),0_0_12px_rgba(6,182,212,0.12)] whitespace-nowrap select-none"
+          className="mt-5 h-[38px] px-6 rounded-full border border-cyan-400/50 bg-[#030507]/90 hover:border-cyan-400/80 backdrop-blur-md flex items-center justify-center gap-2.5 shadow-[0_0_16px_rgba(0,217,255,0.25),0_8px_24px_rgba(0,0,0,0.6)] whitespace-nowrap select-none transition-colors"
         >
-          {/* Status Dot: 7-9px, emerald glowing pulse */}
-          <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)] animate-pulse flex-shrink-0" />
-          <span className="font-mono text-xs sm:text-[0.8125rem] text-slate-100 tracking-[0.08em] uppercase font-bold">
+          {/* Status Dot: 8px emerald glowing pulse */}
+          <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.9)] animate-pulse flex-shrink-0" />
+          <span className="font-mono text-xs sm:text-[13px] text-white tracking-[0.14em] uppercase font-bold">
             SOFTWARE ENGINEER
           </span>
         </motion.div>

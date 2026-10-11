@@ -211,11 +211,11 @@ export function HeroContent({ visible }: HeroContentProps) {
         data-editable-id="hero-heading"
         data-editable-name="Name Heading"
       >
-        <span className="block font-display font-extrabold text-[#F4F7FA] uppercase leading-[1.05]">
+        <span className="block font-display font-extrabold text-[#FFFFFF] uppercase leading-[1.05]">
           {nameLine1}
         </span>
         {nameLine2 && (
-          <span className="block font-display font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#00D9FF] via-[#38E8FF] to-[#F4F7FA] uppercase leading-[1.05] drop-shadow-[0_0_24px_rgba(0,217,255,0.22)]">
+          <span className="block font-display font-extrabold text-[#00D9FF] uppercase leading-[1.05] drop-shadow-[0_0_24px_rgba(0,217,255,0.45)]">
             {nameLine2}
           </span>
         )}
@@ -228,11 +228,11 @@ export function HeroContent({ visible }: HeroContentProps) {
 
       {/* 4. Specialties */}
       <motion.div variants={specializationVariants} className="hero-specialties" data-editable-id="hero-specialties" data-editable-name="Specialties">
-        <span className="w-5 h-[1.5px] bg-gradient-to-r from-[#00D9FF] to-transparent flex-shrink-0" />
+        <span className="text-[#00D9FF] font-semibold">&mdash;</span>
         <span>AI/ML ENGINEERING</span>
-        <span className="text-[#007C99] font-bold">&bull;</span>
+        <span className="text-[#00D9FF] font-bold">&bull;</span>
         <span>FULL-STACK DEVELOPMENT</span>
-        <span className="text-[#007C99] font-bold">&bull;</span>
+        <span className="text-[#00D9FF] font-bold">&bull;</span>
         <span>CYBERSECURITY</span>
       </motion.div>
 

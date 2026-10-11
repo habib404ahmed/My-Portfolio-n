@@ -97,51 +97,64 @@ export function AICoreMesh({
 
   return (
     <group ref={groupRef}>
-      {/* Inner energy core */}
+      {/* 1. Inner energy core */}
       <mesh ref={innerRef}>
         <icosahedronGeometry args={[0.55, 1]} />
         <meshStandardMaterial
-          color="#06b6d4"
-          emissive="#06b6d4"
-          emissiveIntensity={isForming ? 0.15 : 0.35}
+          color="#00D9FF"
+          emissive="#00D9FF"
+          emissiveIntensity={isForming ? 0.3 : 0.85}
           transparent
-          opacity={isForming ? 0.2 : 0.45}
-          roughness={0.25}
-          metalness={0.75}
+          opacity={isForming ? 0.3 : 0.7}
+          roughness={0.15}
+          metalness={0.8}
         />
       </mesh>
 
-      {/* Wireframe overlay */}
+      {/* 2. Geodesic wireframe overlay with cyan nodes */}
       <mesh>
         <icosahedronGeometry args={[0.57, 1]} />
-        <meshBasicMaterial color="#06b6d4" wireframe transparent opacity={0.06} />
+        <meshBasicMaterial color="#00D9FF" wireframe transparent opacity={0.45} />
       </mesh>
 
-      {/* Outer shell */}
+      {/* 3. Secondary subtle inner lattice */}
+      <mesh>
+        <icosahedronGeometry args={[0.59, 1]} />
+        <meshBasicMaterial color="#E0F7FA" wireframe transparent opacity={0.25} />
+      </mesh>
+
+      {/* 4. Outer octagonal lattice shell */}
       <mesh ref={outerRef}>
-        <octahedronGeometry args={[0.82, 2]} />
-        <meshStandardMaterial color="#3b82f6" emissive="#3b82f6" emissiveIntensity={0.12} wireframe transparent opacity={0.035} />
+        <octahedronGeometry args={[0.78, 2]} />
+        <meshStandardMaterial
+          color="#38E8FF"
+          emissive="#00D9FF"
+          emissiveIntensity={0.25}
+          wireframe
+          transparent
+          opacity={0.15}
+        />
       </mesh>
 
-      {/* Ring 1 */}
+      {/* 5. Orbiting Ring 1 (Primary tilted ring) */}
       <mesh ref={ringRef}>
-        <torusGeometry args={[0.95, 0.003, 6, 128]} />
-        <meshBasicMaterial color="#06b6d4" transparent opacity={0.25} />
+        <torusGeometry args={[0.96, 0.005, 8, 128]} />
+        <meshBasicMaterial color="#00D9FF" transparent opacity={0.65} />
       </mesh>
 
-      {/* Ring 2 */}
+      {/* 6. Orbiting Ring 2 (Cross tilted orbit) */}
       <mesh ref={ring2Ref}>
-        <torusGeometry args={[0.82, 0.002, 6, 96]} />
-        <meshBasicMaterial color="#7c3aed" transparent opacity={0.16} />
+        <torusGeometry args={[1.15, 0.004, 8, 128]} />
+        <meshBasicMaterial color="#38E8FF" transparent opacity={0.5} />
       </mesh>
 
-      {/* Ring 3 */}
-      <mesh rotation={[Math.PI / 3, 0, 0]}>
-        <torusGeometry args={[1.15, 0.002, 6, 128]} />
-        <meshBasicMaterial color="#3b82f6" transparent opacity={0.12} />
+      {/* 7. Orbiting Ring 3 (Outer ambient boundary) */}
+      <mesh rotation={[Math.PI / 3, 0, Math.PI / 6]}>
+        <torusGeometry args={[1.35, 0.003, 8, 128]} />
+        <meshBasicMaterial color="#0284c7" transparent opacity={0.35} />
       </mesh>
 
-      {/* Orbital particles — subtle digital dust */}
+      {/* 8. Orbital particles — energetic floating digital dust */}
       <points ref={orbitalRef}>
         <bufferGeometry>
           <bufferAttribute
@@ -154,18 +167,19 @@ export function AICoreMesh({
           />
         </bufferGeometry>
         <pointsMaterial
-          size={0.03}
+          size={0.035}
           vertexColors
           transparent
-          opacity={0.24}
+          opacity={0.5}
           sizeAttenuation
           blending={THREE.AdditiveBlending}
           depthWrite={false}
         />
       </points>
 
-      <pointLight color="#06b6d4" intensity={isForming ? 0.2 : 0.45} distance={5} decay={2} />
-      <pointLight color="#3b82f6" intensity={0.2} distance={3} decay={2} position={[0, 1, 0]} />
+      {/* Core illumination lights */}
+      <pointLight color="#00D9FF" intensity={isForming ? 0.4 : 1.2} distance={6} decay={2} />
+      <pointLight color="#38E8FF" intensity={0.5} distance={4} decay={2} position={[0, 1, 0]} />
     </group>
   )
 }

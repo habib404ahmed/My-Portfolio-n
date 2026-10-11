@@ -197,97 +197,98 @@ export function Navigation({ visible }: NavigationProps) {
           data-editable-name="Navbar"
           className={`site-header ${scrolled ? 'scrolled' : ''} ${isHidden ? 'is-hidden' : ''}`}
         >
-          <div className="site-header-inner h-full flex items-center justify-between max-w-[1360px] mx-auto px-6 sm:px-8 w-full">
-            {/* Brand block: Profile thumbnail + Name & Role */}
-            <a
-              href="#hero"
-              data-editable-id="navbar-logo"
-              data-editable-name="Navbar Logo"
-              onClick={(e) => {
-                e.preventDefault()
-                if (isHiddenRef.current) {
-                  isHiddenRef.current = false
-                  setIsHidden(false)
-                }
-                window.scrollTo({ top: 0, behavior: 'smooth' })
-              }}
-              className="flex items-center gap-3.5 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 rounded-lg cursor-pointer select-none py-1"
-              aria-label="Habib Ahmed — Return to top"
-            >
-              {/* Profile Photo Thumbnail Brand Mark */}
-              <div className="w-[38px] h-[38px] sm:w-[40px] sm:h-[40px] rounded-full overflow-hidden shrink-0 border border-cyan-400/60 bg-slate-900 shadow-[0_0_12px_rgba(0,217,255,0.25)] transition-all duration-200 ease-out group-hover:scale-105 group-hover:border-cyan-300 group-hover:shadow-[0_0_16px_rgba(0,217,255,0.45)]">
-                <img
-                  src={profilePhoto}
-                  alt={nav.logoText || 'Profile avatar'}
-                  width={40}
-                  height={40}
-                  className="w-full h-full object-cover select-none pointer-events-none"
-                  loading="eager"
-                  onError={(e) => {
-                    const target = e.currentTarget
-                    if (target.src.endsWith('.webp')) {
-                      target.src = '/assets/images/profile.jpg'
-                    }
-                  }}
-                />
+          <div className="site-header-inner">
+            {/* 1. Left: Brand block (Profile thumbnail + Name & Role) */}
+            <div className="header-brand-area">
+              <a
+                href="#hero"
+                data-editable-id="navbar-logo"
+                data-editable-name="Navbar Logo"
+                onClick={(e) => {
+                  e.preventDefault()
+                  if (isHiddenRef.current) {
+                    isHiddenRef.current = false
+                    setIsHidden(false)
+                  }
+                  window.scrollTo({ top: 0, behavior: 'smooth' })
+                }}
+                className="header-brand-link focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+                aria-label="Habib Ahmed — Return to top"
+              >
+                {/* Profile Photo Thumbnail Brand Mark */}
+                <div className="header-brand-avatar">
+                  <img
+                    src={profilePhoto}
+                    alt={nav.logoText || 'Profile avatar'}
+                    width={40}
+                    height={40}
+                    className="w-full h-full object-cover select-none pointer-events-none"
+                    loading="eager"
+                    onError={(e) => {
+                      const target = e.currentTarget
+                      if (target.src.endsWith('.webp')) {
+                        target.src = '/assets/images/profile.jpg'
+                      }
+                    }}
+                  />
+                </div>
+
+                {/* Text: Name & Role */}
+                <div className="header-brand-text" data-editable-id="navbar-brand-text" data-editable-name="Brand Text">
+                  <span className="header-brand-name">
+                    {nav.logoText || 'HABIB AHMED'}
+                  </span>
+                  <span className="header-brand-title">
+                    {content.hero.title || 'SOFTWARE ENGINEER'}
+                  </span>
+                </div>
+              </a>
+            </div>
+
+            {/* 2. Center: Desktop Navigation Links (Evenly spaced, clean line) */}
+            <nav className="header-nav-area hidden lg:flex" aria-label="Desktop Navigation" data-editable-id="navbar-nav" data-editable-name="Navigation Links">
+              <div className="header-nav-list">
+                {nav.links.filter((l) => l.enabled && l.id !== 'resume' && l.href !== '#resume').map((link) => {
+                  const active = isLinkActive(link.href)
+                  return (
+                    <button
+                      key={link.id}
+                      onClick={() => handleNavClick(link.href)}
+                      className={`header-nav-link ${active ? 'active' : ''} focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-cyan-400`}
+                      aria-current={active ? 'page' : undefined}
+                    >
+                      <span>{link.label}</span>
+                      <span className="header-nav-indicator" />
+                    </button>
+                  )
+                })}
               </div>
+            </nav>
 
-              {/* Text: Name & Role */}
-              <div className="flex flex-col justify-center leading-none text-left" data-editable-id="navbar-brand-text" data-editable-name="Brand Text">
-                <span className="font-display text-[15px] sm:text-[16px] font-bold tracking-wider text-white uppercase leading-tight group-hover:text-cyan-200 transition-colors whitespace-nowrap">
-                  {nav.logoText || 'HABIB AHMED'}
-                </span>
-                <span className="font-mono text-[11px] sm:text-[12px] text-slate-400 tracking-widest uppercase mt-0.5 whitespace-nowrap">
-                  {content.hero.title || 'SOFTWARE ENGINEER'}
-                </span>
-              </div>
-            </a>
-
-            {/* Desktop Navigation Links + Primary CTA (Hidden on screens < 1120px to prevent cramped rows) */}
-            <nav className="hidden xl:flex items-center gap-5 xl:gap-7" aria-label="Desktop Navigation" data-editable-id="navbar-nav" data-editable-name="Navigation Links">
-              {nav.links.filter((l) => l.enabled).map((link) => {
-                const active = isLinkActive(link.href)
-                return (
-                  <button
-                    key={link.id}
-                    onClick={() => handleNavClick(link.href)}
-                    className={`font-display text-[13.5px] xl:text-[14px] font-semibold tracking-[0.12em] uppercase transition-colors relative py-1.5 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-cyan-400 rounded-sm cursor-pointer whitespace-nowrap select-none group ${
-                      active ? 'text-cyan-300 font-bold' : 'text-slate-300 hover:text-white'
-                    }`}
-                    aria-current={active ? 'page' : undefined}
-                  >
-                    <span>{link.label}</span>
-                    <span
-                      className={`absolute bottom-0 left-0 right-0 h-[1.5px] bg-cyan-400 transition-transform duration-300 origin-left ${
-                        active ? 'scale-x-100 shadow-[0_0_8px_rgba(0,217,255,0.6)]' : 'scale-x-0 group-hover:scale-x-100'
-                      }`}
-                    />
-                  </button>
-                )
-              })}
-
+            {/* 3. Right: Resume CTA Button & Mobile Trigger */}
+            <div className="header-actions-area">
               {/* Primary Emphasized Resume CTA Button */}
               <button
                 onClick={() => handleNavClick('#resume')}
                 data-editable-id="navbar-resume-btn"
                 data-editable-name="Resume Button"
-                className="ml-2 h-10 px-5 rounded-full font-display text-[13.5px] font-bold tracking-wider uppercase glass-btn-primary hover:text-white transition-all duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-cyan-400 cursor-pointer shrink-0 whitespace-nowrap shadow-[0_4px_16px_rgba(0,217,255,0.2)]"
+                className="header-resume-btn hidden sm:inline-flex items-center justify-center focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-cyan-400"
               >
                 {nav.resumeButtonText || 'RESUME'}
               </button>
-            </nav>
 
-            {/* Mobile / Tablet Compact Hamburger Trigger */}
-            <div className="flex xl:hidden items-center">
-              <button
-                onClick={() => setMenuOpen(!menuOpen)}
-                className="h-10 px-4 rounded-full border border-white/15 bg-white/5 font-mono text-[13px] text-slate-200 tracking-wider hover:text-white hover:border-cyan-400/50 transition-colors flex items-center gap-2 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-cyan-400 cursor-pointer select-none"
-                aria-label={menuOpen ? 'Close navigation drawer' : 'Open navigation menu'}
-                aria-expanded={menuOpen}
-              >
-                <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-                <span>{menuOpen ? '✕ CLOSE' : '☰ MENU'}</span>
-              </button>
+              {/* Mobile / Tablet Compact Hamburger Trigger */}
+              <div className="flex lg:hidden items-center">
+                <button
+                  onClick={() => setMenuOpen(!menuOpen)}
+                  className="h-10 px-4 rounded-full border border-white/15 bg-white/5 font-mono text-[13px] text-slate-200 tracking-wider hover:text-white hover:border-cyan-400/50 transition-colors flex items-center gap-2 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-cyan-400 cursor-pointer select-none"
+                  aria-label={menuOpen ? 'Close navigation drawer' : 'Open navigation menu'}
+                  aria-expanded={menuOpen}
+                >
+                  <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+                  <span>{menuOpen ? '✕ CLOSE' : '☰ MENU'}</span>
+                </button>
+              </div>
             </div>
           </div>
 
