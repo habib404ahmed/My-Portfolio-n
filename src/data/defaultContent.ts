@@ -319,7 +319,7 @@ export function getDefaultContent(): PortfolioContent {
       profileImage: profile.photo.path,
       profileCrop: {
         x: 50,
-        y: 40,
+        y: 20,
         scale: 1,
         rotate: 0,
         flipH: false,

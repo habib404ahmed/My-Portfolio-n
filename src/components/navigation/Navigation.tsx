@@ -263,9 +263,9 @@ export function Navigation({ visible }: NavigationProps) {
                   <img
                     src={profilePhoto}
                     alt={nav.logoText || 'Profile avatar'}
-                    width={42}
-                    height={42}
-                    className="w-full h-full object-cover select-none pointer-events-none"
+                    width={50}
+                    height={50}
+                    className="header-avatar-img select-none pointer-events-none"
                     loading="eager"
                     onError={(e) => {
                       const target = e.currentTarget
