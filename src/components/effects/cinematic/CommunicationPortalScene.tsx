@@ -50,41 +50,43 @@ export function CommunicationPortalScene({ activeSection }: CommunicationPortalS
       const scale = ((performance.now() * 0.0008) % 1.0) * 1.6 + 0.6
       wave1Ref.current.scale.set(scale, scale, 1)
       const mat = wave1Ref.current.material as THREE.MeshBasicMaterial
-      mat.opacity = Math.max(1.0 - (scale - 0.6) / 1.6, 0) * 0.35
+      mat.opacity = Math.max(1.0 - (scale - 0.6) / 1.6, 0) * 0.15
     }
 
     if (wave2Ref.current) {
       const scale = (((performance.now() * 0.0008) + 0.5) % 1.0) * 1.6 + 0.6
       wave2Ref.current.scale.set(scale, scale, 1)
       const mat = wave2Ref.current.material as THREE.MeshBasicMaterial
-      mat.opacity = Math.max(1.0 - (scale - 0.6) / 1.6, 0) * 0.35
+      mat.opacity = Math.max(1.0 - (scale - 0.6) / 1.6, 0) * 0.15
     }
   })
 
   return (
-    <group ref={groupRef} position={[0, -0.1, -0.7]}>
-      {/* Central Communication Core */}
+    <group ref={groupRef} position={[0, 0.45, -2.8]}>
+      {/* Central Communication Core (Subtle Deep-Background Accent) */}
       <mesh ref={coreRef}>
-        <dodecahedronGeometry args={[0.3, 0]} />
+        <dodecahedronGeometry args={[0.22, 0]} />
         <meshStandardMaterial
           color="#06b6d4"
           emissive="#06b6d4"
-          emissiveIntensity={0.6}
-          roughness={0.2}
-          metalness={0.8}
+          emissiveIntensity={0.2}
+          roughness={0.4}
+          metalness={0.6}
+          transparent
+          opacity={0.65}
         />
       </mesh>
 
       {/* Radiating Signal Wave 1 */}
       <mesh ref={wave1Ref}>
         <ringGeometry args={[0.5, 0.52, 32]} />
-        <meshBasicMaterial color="#38bdf8" transparent opacity={0.3} side={THREE.DoubleSide} />
+        <meshBasicMaterial color="#38bdf8" transparent opacity={0.15} side={THREE.DoubleSide} />
       </mesh>
 
       {/* Radiating Signal Wave 2 */}
       <mesh ref={wave2Ref}>
         <ringGeometry args={[0.5, 0.52, 32]} />
-        <meshBasicMaterial color="#06b6d4" transparent opacity={0.3} side={THREE.DoubleSide} />
+        <meshBasicMaterial color="#06b6d4" transparent opacity={0.15} side={THREE.DoubleSide} />
       </mesh>
 
       {/* Orbital Communication Satellite Beacons & Beam Rays */}
@@ -96,16 +98,18 @@ export function CommunicationPortalScene({ activeSection }: CommunicationPortalS
               new THREE.Vector3(0, 0, 0),
               new THREE.Vector3(...beacon.pos),
             ]),
-            new THREE.LineBasicMaterial({ color: beacon.color, transparent: true, opacity: 0.3 })
+            new THREE.LineBasicMaterial({ color: beacon.color, transparent: true, opacity: 0.12 })
           )} />
 
           {/* Satellite Beacon */}
           <mesh position={beacon.pos}>
-            <sphereGeometry args={[0.07, 16, 16]} />
+            <sphereGeometry args={[0.06, 16, 16]} />
             <meshStandardMaterial
               color={beacon.color}
               emissive={beacon.color}
-              emissiveIntensity={0.5}
+              emissiveIntensity={0.25}
+              transparent
+              opacity={0.6}
             />
           </mesh>
         </group>

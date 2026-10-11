@@ -38,7 +38,7 @@ export function CinematicButton({
   const variantClass: Record<string, string> = {
     primary: 'btn-primary',
     secondary: 'btn-secondary',
-    ghost: 'btn-secondary',
+    ghost: 'btn-ghost',
   }
 
   const sharedStyle: React.CSSProperties = {

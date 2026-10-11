@@ -48,6 +48,11 @@ export function CinematicDepthCard({
   // Specular Reflection Spotlight tracking cursor
   const reflectionX = useTransform(springX, [-0.5, 0.5], ['15%', '85%'])
   const reflectionY = useTransform(springY, [-0.5, 0.5], ['15%', '85%'])
+  const specularBackground = useTransform(
+    [reflectionX, reflectionY],
+    ([rx, ry]) =>
+      `radial-gradient(circle 180px at ${rx} ${ry}, rgba(255, 255, 255, 0.14) 0%, transparent 70%)`
+  )
 
   const handleMouseMove = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -126,11 +131,7 @@ export function CinematicDepthCard({
         <motion.div
           className="absolute inset-0 rounded-2xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-300"
           style={{
-            background: useTransform(
-              [reflectionX, reflectionY],
-              ([rx, ry]) =>
-                `radial-gradient(circle 180px at ${rx} ${ry}, rgba(255, 255, 255, 0.14) 0%, transparent 70%)`
-            ),
+            background: specularBackground,
           }}
           aria-hidden="true"
         />

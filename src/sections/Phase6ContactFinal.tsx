@@ -37,7 +37,7 @@ export function Phase6ContactFinal({ onRestart }: Phase6ContactFinalProps) {
         aria-hidden="true"
       />
 
-      <div className="page-container relative">
+      <div className="page-container relative z-10">
         {/* ──────────────────────────────────────────
             TRANSITION FROM RESUME: CONVERGENCE & REVELATION
             ────────────────────────────────────────── */}
@@ -193,31 +193,41 @@ export function Phase6ContactFinal({ onRestart }: Phase6ContactFinalProps) {
             SCENES 05, 06, 07: DIGITAL SIGNATURE, FINAL CREED & RESTART
             ────────────────────────────────────────── */}
         <ClosingCredits onRestart={onRestart} />
+      </div>
 
-        {/* ──────────────────────────────────────────
-            SCENE 08: MINIMAL FOOTER
-            ────────────────────────────────────────── */}
-        <footer
-          className="pt-12 pb-6 border-t border-white/10 text-center sm:text-left"
-          aria-label="Portfolio Footer"
-        >
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
+      {/* ──────────────────────────────────────────
+          SCENE 08: SUBTLE TRANSLUCENT LIQUID GLASS FOOTER
+          ────────────────────────────────────────── */}
+      <footer
+        className="w-full relative z-20 border-t border-[rgba(120,190,220,0.20)]"
+        style={{
+          background: 'rgba(3, 9, 17, 0.68)',
+          backdropFilter: 'blur(12px) saturate(120%)',
+          WebkitBackdropFilter: 'blur(12px) saturate(120%)',
+          boxShadow: '0 -10px 40px rgba(0, 0, 0, 0.45)',
+        }}
+        aria-label="Portfolio Footer"
+      >
+        <div className="page-container py-8 sm:py-10">
+          {/* Upper Footer Row */}
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
             <div>
-              <p className="font-display font-bold text-[16px] text-[#F5F8FA] tracking-wide m-0">
+              <p className="font-display font-bold text-[17px] sm:text-[18px] text-[#F5F8FC] tracking-wide m-0">
                 {profile.name.full}
               </p>
-              <p className="font-mono text-[13px] sm:text-[14px] text-slate-400 mt-1 mb-0">
-                {profile.title} &bull; {profile.location}
+              <p className="font-mono text-[13px] sm:text-[14px] text-[#C2CDD9] mt-1.5 mb-0">
+                Software Engineer &bull; Bongaigaon, Assam, India
               </p>
             </div>
 
             {/* Social Direct Links */}
-            <div className="flex flex-wrap items-center gap-6 font-mono text-[14px] text-slate-300">
+            <div className="flex flex-wrap items-center justify-center sm:justify-end gap-6 sm:gap-7 font-mono text-[14px]">
               <a
                 href={profile.social.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-cyan-400 transition-colors"
+                className="text-[#C2CDD9] hover:text-[#27DDF5] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#27DDF5] rounded px-1"
+                aria-label="GitHub Profile"
               >
                 GitHub
               </a>
@@ -225,7 +235,8 @@ export function Phase6ContactFinal({ onRestart }: Phase6ContactFinalProps) {
                 href={profile.social.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-cyan-400 transition-colors"
+                className="text-[#C2CDD9] hover:text-[#27DDF5] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#27DDF5] rounded px-1"
+                aria-label="LinkedIn Profile"
               >
                 LinkedIn
               </a>
@@ -233,27 +244,35 @@ export function Phase6ContactFinal({ onRestart }: Phase6ContactFinalProps) {
                 href={profile.social.youtube}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-cyan-400 transition-colors"
+                className="text-[#C2CDD9] hover:text-[#27DDF5] transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#27DDF5] rounded px-1"
+                aria-label="YouTube Channel"
               >
                 YouTube
               </a>
               <a
                 href={`mailto:${profile.contact.email}`}
-                className="hover:text-cyan-400 transition-colors text-cyan-300 font-semibold"
+                className="text-[#27DDF5] hover:text-[#F5F8FC] font-semibold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#27DDF5] rounded px-1"
+                aria-label={`Send Email to ${profile.contact.email}`}
               >
                 Email
               </a>
             </div>
           </div>
 
-          <div className="mt-8 pt-4 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between text-[12px] font-mono text-slate-400 gap-2">
-            <p className="m-0">&copy; 2026 {profile.name.full}. All rights reserved.</p>
-            <p className="text-slate-600">
+          {/* Divider Line */}
+          <div className="w-full h-[1px] my-6 sm:my-7 bg-[rgba(190,220,245,0.20)]" />
+
+          {/* Lower Footer Row */}
+          <div className="flex flex-col sm:flex-row items-center justify-between text-[12px] sm:text-[13px] font-mono gap-3 text-center sm:text-left">
+            <p className="text-[#C2CDD9] m-0">
+              &copy; 2026 {profile.name.full}. All rights reserved.
+            </p>
+            <p className="text-[#A7B6C7] m-0">
               Curated for Excellence &bull; AI/ML &bull; Full-Stack &bull; Cybersecurity
             </p>
           </div>
-        </footer>
-      </div>
+        </div>
+      </footer>
     </section>
   )
 }
