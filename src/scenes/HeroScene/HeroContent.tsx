@@ -153,7 +153,7 @@ export function HeroContent({ visible }: HeroContentProps) {
       label: 'GitHub',
       href: content.contact.social.github,
       icon: (
-        <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="21" height="21" aria-hidden="true">
           <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12" />
         </svg>
       ),
@@ -162,7 +162,7 @@ export function HeroContent({ visible }: HeroContentProps) {
       label: 'LinkedIn',
       href: content.contact.social.linkedin,
       icon: (
-        <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="21" height="21" aria-hidden="true">
           <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
         </svg>
       ),
@@ -171,7 +171,7 @@ export function HeroContent({ visible }: HeroContentProps) {
       label: 'YouTube',
       href: content.contact.social.youtube,
       icon: (
-        <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="21" height="21" aria-hidden="true">
           <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
         </svg>
       ),
@@ -180,7 +180,7 @@ export function HeroContent({ visible }: HeroContentProps) {
       label: 'Email',
       href: `mailto:${content.contact.email}`,
       icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" width="18" height="18" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" width="21" height="21" aria-hidden="true">
           <path d="M3 8l7.89 5.26a2 2 0 0 0 2.22 0L21 8M5 19h14a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2z" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       ),
@@ -247,19 +247,19 @@ export function HeroContent({ visible }: HeroContentProps) {
         {hero.ctaPrimary.visible && (
           <button
             onClick={handleExplore}
-            className="h-[48px] sm:h-[52px] min-w-[175px] sm:min-w-[185px] px-5 sm:px-6 rounded-xl glass-btn-primary font-display text-[14px] sm:text-[15px] font-bold tracking-wider uppercase flex items-center justify-center gap-2.5 group cursor-pointer shadow-[0_4px_20px_rgba(0,217,255,0.22)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+            className="hero-btn hero-btn-primary h-[50px] sm:h-[56px] lg:h-[60px] min-w-[180px] sm:min-w-[200px] lg:min-w-[216px] px-5 sm:px-6 rounded-xl glass-btn-primary font-display text-[14px] sm:text-[15px] font-bold tracking-wider uppercase flex items-center justify-center gap-2.5 group cursor-pointer shadow-[0_4px_20px_rgba(0,217,255,0.22)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
             aria-label={primaryCtaLabel}
           >
             <span>{primaryCtaLabel}</span>
             <svg
-              width="14"
-              height="14"
+              width="15"
+              height="15"
               viewBox="0 0 14 14"
               fill="none"
               className="flex-shrink-0 group-hover:translate-x-1 transition-transform duration-200"
               aria-hidden="true"
             >
-              <path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </button>
         )}
@@ -267,11 +267,11 @@ export function HeroContent({ visible }: HeroContentProps) {
         {hero.ctaSecondary.visible && (
           <button
             onClick={handleResume}
-            className="h-[48px] sm:h-[52px] min-w-[165px] sm:min-w-[175px] px-5 sm:px-6 rounded-xl glass-btn-secondary font-display text-[14px] sm:text-[15px] font-semibold tracking-wider uppercase flex items-center justify-center gap-2.5 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+            className="hero-btn hero-btn-secondary h-[50px] sm:h-[56px] lg:h-[60px] min-w-[170px] sm:min-w-[185px] lg:min-w-[202px] px-5 sm:px-6 rounded-xl glass-btn-secondary font-display text-[14px] sm:text-[15px] font-semibold tracking-wider uppercase flex items-center justify-center gap-2.5 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
             aria-label={secondaryCtaLabel}
           >
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="flex-shrink-0" aria-hidden="true">
-              <path d="M7 1v9M3 7l4 4 4-4M1 12h12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            <svg width="15" height="15" viewBox="0 0 14 14" fill="none" className="flex-shrink-0" aria-hidden="true">
+              <path d="M7 1v9M3 7l4 4 4-4M1 12h12" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
             <span>{secondaryCtaLabel}</span>
           </button>
@@ -280,7 +280,7 @@ export function HeroContent({ visible }: HeroContentProps) {
 
       {/* 7. Social Links */}
       <motion.div variants={socialVariants} className="hero-socials" data-editable-id="hero-social-links" data-editable-name="Social Links">
-        <div className="flex items-center gap-2.5">
+        <div className="flex items-center gap-2.5 sm:gap-3">
           {socialLinks.map(({ label, href, icon }) => (
             <a
               key={label}
@@ -288,7 +288,7 @@ export function HeroContent({ visible }: HeroContentProps) {
               target={href.startsWith('http') ? '_blank' : undefined}
               rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
               aria-label={label}
-              className="w-9 h-9 rounded-lg flex items-center justify-center text-[#A8B4C2] hover:text-[#00D9FF] hover:bg-white/5 transition-all duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-cyan-400"
+              className="w-9 h-9 sm:w-10 sm:h-10 lg:w-[42px] lg:h-[42px] rounded-xl flex items-center justify-center text-[#A8B4C2] hover:text-[#00D9FF] hover:bg-white/5 transition-all duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-cyan-400"
             >
               {icon}
             </a>
@@ -297,7 +297,7 @@ export function HeroContent({ visible }: HeroContentProps) {
         <div className="w-[1px] h-4 bg-white/15 hidden lg:block" />
         <a
           href={`mailto:${content.contact.email}`}
-          className="font-mono text-[13px] text-[#A8B4C2] hover:text-[#00D9FF] transition-colors tracking-wide truncate max-w-[280px]"
+          className="font-mono text-[13px] sm:text-[13.5px] lg:text-[14.5px] text-[#A8B4C2] hover:text-[#00D9FF] transition-colors tracking-wide truncate max-w-[280px]"
         >
           {content.contact.email}
         </a>

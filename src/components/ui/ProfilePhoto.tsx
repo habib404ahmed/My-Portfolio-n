@@ -37,7 +37,7 @@ export function ProfilePhoto({
   // Dimensions based on size preset (deliberate 2:3 portrait proportions)
   const framePresets = {
     hero: {
-      frame: 'w-[clamp(250px,21vw,340px)] max-h-[min(430px,48vh)]',
+      frame: 'w-[clamp(280px,23.5vw,400px)] max-h-[min(515px,54vh)]',
       aspectRatio: '2 / 3',
     },
     standard: {
@@ -181,11 +181,11 @@ export function ProfilePhoto({
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8, duration: 0.6 }}
-          className="mt-3.5 h-[34px] px-5 rounded-full border border-cyan-400/50 bg-[#030507]/90 hover:border-cyan-400/80 backdrop-blur-md flex items-center justify-center gap-2 shadow-[0_0_16px_rgba(0,217,255,0.25),0_8px_24px_rgba(0,0,0,0.6)] whitespace-nowrap select-none transition-colors"
+          className="mt-3.5 h-[36px] sm:h-[38px] px-5 sm:px-6 rounded-full border border-cyan-400/50 bg-[#030507]/90 hover:border-cyan-400/80 backdrop-blur-md flex items-center justify-center gap-2.5 shadow-[0_0_18px_rgba(0,217,255,0.25),0_8px_24px_rgba(0,0,0,0.6)] whitespace-nowrap select-none transition-colors"
         >
           {/* Status Dot: 8px emerald glowing pulse */}
           <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.9)] animate-pulse flex-shrink-0" />
-          <span className="font-mono text-xs sm:text-[12.5px] text-white tracking-[0.14em] uppercase font-bold">
+          <span className="font-mono text-[12px] sm:text-[13px] text-white tracking-[0.14em] uppercase font-bold">
             SOFTWARE ENGINEER
           </span>
         </motion.div>
