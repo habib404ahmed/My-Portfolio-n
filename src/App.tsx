@@ -229,7 +229,7 @@ function PortfolioWebsite() {
       <section
         id="hero"
         data-editable-id="hero-section"
-        className="relative min-h-[100dvh] w-full overflow-visible flex flex-col items-center justify-start"
+        className="relative w-full overflow-visible flex flex-col items-center justify-center"
         aria-label="Hero — Introduction"
       >
         {/* Cinematic Cyberpunk Environment Layer (Phase 12.4) - z-[1] */}
@@ -247,7 +247,7 @@ function PortfolioWebsite() {
         />
 
         {/* Hero content overlay - z-[10] */}
-        <div className="relative z-10 layer-content w-full flex flex-col items-center justify-start flex-1 pt-0 pb-12 sm:pb-16">
+        <div className="relative z-10 layer-content w-full flex flex-col items-center justify-center flex-1 py-0">
           <HeroContent visible={heroContentVisible} />
         </div>
 
@@ -264,14 +264,14 @@ function PortfolioWebsite() {
                 const target = document.querySelector('#about') || document.querySelector('#main-content')
                 if (target) target.scrollIntoView({ behavior: 'smooth' })
               }}
-              className="hidden lg:flex absolute bottom-5 left-1/2 -translate-x-1/2 flex-col items-center gap-1.5 text-slate-400 hover:text-cyan-300 transition-colors z-20 cursor-pointer group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-cyan-400 rounded-sm py-1 px-3 select-none"
+              className="hidden lg:flex absolute bottom-2.5 left-1/2 -translate-x-1/2 flex-col items-center gap-1 text-slate-400 hover:text-cyan-300 transition-colors z-20 cursor-pointer group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-cyan-400 rounded-sm py-1 px-3 select-none"
               aria-label="Scroll to explore next section"
             >
               <span className="font-mono text-[9px] text-slate-400 group-hover:text-cyan-300 tracking-[0.25em] uppercase transition-colors">
                 SCROLL TO EXPLORE
               </span>
               <div
-                className="w-[1px] h-5 bg-gradient-to-b from-cyan-400/60 to-transparent group-hover:h-6 group-hover:from-cyan-300 transition-all duration-300"
+                className="w-[1px] h-4 bg-gradient-to-b from-cyan-400/60 to-transparent group-hover:h-5 group-hover:from-cyan-300 transition-all duration-300"
               />
             </motion.button>
           )}

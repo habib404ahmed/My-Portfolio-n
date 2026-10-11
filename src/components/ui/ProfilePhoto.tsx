@@ -37,15 +37,15 @@ export function ProfilePhoto({
   // Dimensions based on size preset (deliberate 2:3 portrait proportions)
   const framePresets = {
     hero: {
-      frame: 'w-[clamp(330px,25vw,410px)] max-h-[min(590px,65vh)]',
+      frame: 'w-[clamp(260px,22vw,360px)] max-h-[min(480px,52vh)]',
       aspectRatio: '2 / 3',
     },
     standard: {
-      frame: 'w-[clamp(280px,26vw,330px)] max-h-[min(480px,54vh)]',
+      frame: 'w-[clamp(240px,24vw,320px)] max-h-[min(440px,48vh)]',
       aspectRatio: '2 / 3',
     },
     compact: {
-      frame: 'w-[clamp(220px,62vw,290px)] max-h-[min(420px,48vh)]',
+      frame: 'w-[clamp(220px,62vw,280px)] max-h-[min(400px,46vh)]',
       aspectRatio: '2 / 3',
     },
   }[size]
@@ -181,11 +181,11 @@ export function ProfilePhoto({
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8, duration: 0.6 }}
-          className="mt-5 h-[38px] px-6 rounded-full border border-cyan-400/50 bg-[#030507]/90 hover:border-cyan-400/80 backdrop-blur-md flex items-center justify-center gap-2.5 shadow-[0_0_16px_rgba(0,217,255,0.25),0_8px_24px_rgba(0,0,0,0.6)] whitespace-nowrap select-none transition-colors"
+          className="mt-3.5 h-[34px] px-5 rounded-full border border-cyan-400/50 bg-[#030507]/90 hover:border-cyan-400/80 backdrop-blur-md flex items-center justify-center gap-2 shadow-[0_0_16px_rgba(0,217,255,0.25),0_8px_24px_rgba(0,0,0,0.6)] whitespace-nowrap select-none transition-colors"
         >
           {/* Status Dot: 8px emerald glowing pulse */}
           <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.9)] animate-pulse flex-shrink-0" />
-          <span className="font-mono text-xs sm:text-[13px] text-white tracking-[0.14em] uppercase font-bold">
+          <span className="font-mono text-xs sm:text-[12.5px] text-white tracking-[0.14em] uppercase font-bold">
             SOFTWARE ENGINEER
           </span>
         </motion.div>
