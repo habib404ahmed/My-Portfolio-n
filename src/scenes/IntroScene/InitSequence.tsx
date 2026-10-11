@@ -46,14 +46,24 @@ export function InitSequence({ onComplete }: InitSequenceProps) {
 
     timerRef.current.push(tDone)
 
+    // Skip on any key press
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' || e.key === ' ' || e.key === 'Enter') {
+        onComplete()
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown)
+
     return () => {
       timerRef.current.forEach(clearTimeout)
+      window.removeEventListener('keydown', handleKeyDown)
     }
   }, [onComplete, prefersReduced])
 
   return (
     <div
-      className="fixed inset-0 z-40 flex flex-col items-center justify-center"
+      onClick={onComplete}
+      className="fixed inset-0 z-40 flex flex-col items-center justify-center cursor-pointer select-none"
       style={{ background: 'var(--color-void)' }}
       role="status"
       aria-live="polite"
@@ -186,6 +196,18 @@ export function InitSequence({ onComplete }: InitSequenceProps) {
         >
           {Math.round(progressWidth)}% COMPLETE
         </div>
+
+        {/* Skip button prompt */}
+        <button
+          onClick={(e) => {
+            e.stopPropagation()
+            onComplete()
+          }}
+          className="mt-4 px-3 py-1 rounded border border-white/10 bg-white/5 font-mono text-[11px] text-slate-400 hover:text-cyan-300 hover:border-cyan-400/40 transition-colors cursor-pointer"
+          aria-label="Skip initialization intro"
+        >
+          CLICK TO SKIP [ESC]
+        </button>
       </div>
     </div>
   )

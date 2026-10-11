@@ -56,9 +56,14 @@ function PortfolioWebsite() {
   const phase1Timer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const phase2Timer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
-  // Fast skip if reduced motion or in draft preview frame
+  // Fast skip if reduced motion, already seen in this session, or in draft preview frame
   useEffect(() => {
-    if (prefersReduced || isDraftPreview) {
+    let hasSeenIntro = false
+    try {
+      hasSeenIntro = sessionStorage.getItem('portfolio_intro_seen') === 'true'
+    } catch (e) {}
+
+    if (prefersReduced || isDraftPreview || hasSeenIntro) {
       setPhase('ready')
       setHeroContentVisible(true)
       setNavVisible(true)
@@ -67,7 +72,7 @@ function PortfolioWebsite() {
       // Start with brief darkness
       phase1Timer.current = setTimeout(() => {
         setPhase('init')
-      }, 400)
+      }, 250)
     }
 
     return () => {
@@ -146,25 +151,25 @@ function PortfolioWebsite() {
   }, [isDraftPreview])
 
   const handleInitComplete = useCallback(() => {
+    try {
+      sessionStorage.setItem('portfolio_intro_seen', 'true')
+    } catch (e) {}
+
     setPhase('core')
     setCorePhase('forming')
 
-    // AI core forms
+    // AI core forms quickly & smoothly
     phase1Timer.current = setTimeout(() => {
       setCorePhase('active')
       setPhase('hero')
 
-      // Stagger hero content
+      // Reveal hero content and navigation in synchronized sequence
       phase2Timer.current = setTimeout(() => {
         setHeroContentVisible(true)
-
-        // Nav appears last
-        setTimeout(() => {
-          setNavVisible(true)
-          setPhase('ready')
-        }, 700)
-      }, 800)
-    }, 1800)
+        setNavVisible(true)
+        setPhase('ready')
+      }, 350)
+    }, 450)
   }, [])
 
   const handleRestartExperience = useCallback(() => {
@@ -228,7 +233,7 @@ function PortfolioWebsite() {
         aria-label="Hero — Introduction"
       >
         {/* Cinematic Cyberpunk Environment Layer (Phase 12.4) - z-[1] */}
-        <HeroCinematicBackground visible={heroContentVisible} />
+        <HeroCinematicBackground visible={true} />
 
         {/* Hero Ambient Horizon Glow - z-[3] */}
         <div

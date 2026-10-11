@@ -111,11 +111,13 @@ export function HeroAICoreScene({
     groupRef.current.rotation.y += delta * (baseRotSpeed + velocityEnergy * 0.6)
   })
 
+  const currentMouse = cinematicScrollStore.getState().mouse
+
   return (
     <group ref={groupRef} position={heroPosition} scale={baseScale}>
       <AICoreMesh
-        mouseX={0}
-        mouseY={0}
+        mouseX={currentMouse.x}
+        mouseY={currentMouse.y}
         deviceClass={deviceClass}
         phase="active"
       />

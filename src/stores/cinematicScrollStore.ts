@@ -57,7 +57,6 @@ class CinematicScrollStore {
     const onPointerMove = (e: MouseEvent) => {
       this.targetMouse.x = (e.clientX / window.innerWidth) * 2 - 1
       this.targetMouse.y = -(e.clientY / window.innerHeight) * 2 + 1
-      // Immediate rough tracking for fallback
       this.mouse.x = this.targetMouse.x
       this.mouse.y = this.targetMouse.y
     }
@@ -73,28 +72,54 @@ class CinematicScrollStore {
     }
     window.addEventListener('scroll', onScroll, { passive: true })
 
-    // 3. Cache offsets on resize / layout change
+    // 3. Cache offsets on resize, orientation change, and layout changes
     window.addEventListener('resize', () => this.cacheSectionOffsets(), { passive: true })
+    window.addEventListener('orientationchange', () => this.cacheSectionOffsets(), { passive: true })
+    window.addEventListener('load', () => this.cacheSectionOffsets(), { passive: true })
 
-    // Initial pass
+    // 4. ResizeObserver for dynamic content / font load shifts
+    if (typeof ResizeObserver !== 'undefined') {
+      try {
+        this.resizeObserver = new ResizeObserver(() => {
+          this.cacheSectionOffsets()
+        })
+        if (document.body) {
+          this.resizeObserver.observe(document.body)
+        }
+      } catch (e) {
+        // Fallback gracefully
+      }
+    }
+
+    // Initial pass (and retry after slight tick to allow React mounting)
     this.processScroll()
+    setTimeout(() => this.cacheSectionOffsets(), 150)
+    setTimeout(() => this.cacheSectionOffsets(), 600)
+    setTimeout(() => this.cacheSectionOffsets(), 1500)
   }
 
   public cacheSectionOffsets() {
     if (typeof document === 'undefined') return
+    const currentScrollY = window.scrollY || window.pageYOffset || 0
     this.sectionOffsets = SECTION_ORDER.map((id) => {
       const el = document.getElementById(id)
       if (!el) return { id, top: 0, height: 0 }
+      const rect = el.getBoundingClientRect()
       return {
         id,
-        top: el.offsetTop,
-        height: el.offsetHeight,
+        top: rect.top + currentScrollY,
+        height: rect.height || el.offsetHeight,
       }
     })
   }
 
+  public refresh() {
+    this.cacheSectionOffsets()
+    this.processScroll()
+  }
+
   private processScroll() {
-    const y = window.scrollY
+    const y = window.scrollY || window.pageYOffset || 0
     const now = performance.now()
     const dt = Math.max(now - this.lastTime, 8)
     const dy = Math.abs(y - this.lastScrollY)
@@ -111,7 +136,13 @@ class CinematicScrollStore {
     const docHeight = document.documentElement.scrollHeight - window.innerHeight
     this.scrollProgress = docHeight > 0 ? Math.min(Math.max(y / docHeight, 0), 1) : 0
 
-    // Determine current active section using cached offsets (NO getBoundingClientRect layout thrashing)
+    // Ensure valid section offsets if initialized before DOM was painted
+    const validOffsetsCount = this.sectionOffsets.filter((s) => s.height > 0).length
+    if (validOffsetsCount < 3) {
+      this.cacheSectionOffsets()
+    }
+
+    // Determine current active section using accurate document coordinates
     const middleY = y + window.innerHeight * 0.45
     let currentSec: SectionId = 'hero'
     let secProg = 0

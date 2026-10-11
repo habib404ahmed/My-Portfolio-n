@@ -57,7 +57,7 @@ export function AICoreMesh({
   }, [orbitCount])
 
   useFrame((_, delta) => {
-    if (!groupRef.current || !groupRef.current.parent?.visible) return
+    if (!groupRef.current) return
 
     const time = performance.now() * 0.001
     const targetRotY = mouseX * 0.3
