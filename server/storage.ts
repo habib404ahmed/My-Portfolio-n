@@ -3,18 +3,42 @@ import path from 'path'
 import { getDefaultContent } from '../src/data/defaultContent.ts'
 import type { PortfolioContent, ContentVersion } from '../src/types/content.ts'
 
-const DATA_DIR = path.resolve(process.cwd(), 'data')
-const VERSIONS_DIR = path.resolve(DATA_DIR, 'versions')
-const UPLOADS_DIR = path.resolve(process.cwd(), 'public', 'uploads')
+const isServerless = Boolean(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME)
+const BASE_DATA_DIR = path.resolve(process.cwd(), 'data')
+export const DATA_DIR = isServerless ? path.resolve('/tmp', 'portfolio_data') : BASE_DATA_DIR
+export const VERSIONS_DIR = path.resolve(DATA_DIR, 'versions')
+export const UPLOADS_DIR = isServerless
+  ? path.resolve('/tmp', 'portfolio_uploads')
+  : path.resolve(process.cwd(), 'public', 'uploads')
 const PUBLISHED_FILE = path.resolve(DATA_DIR, 'published-content.json')
 const DRAFT_FILE = path.resolve(DATA_DIR, 'draft-content.json')
 const CONFIG_FILE = path.resolve(DATA_DIR, 'admin-config.json')
 
 // Ensure directories exist
 function ensureDirs() {
-  if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true })
-  if (!fs.existsSync(VERSIONS_DIR)) fs.mkdirSync(VERSIONS_DIR, { recursive: true })
-  if (!fs.existsSync(UPLOADS_DIR)) fs.mkdirSync(UPLOADS_DIR, { recursive: true })
+  try {
+    if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true })
+    if (!fs.existsSync(VERSIONS_DIR)) fs.mkdirSync(VERSIONS_DIR, { recursive: true })
+    if (!fs.existsSync(UPLOADS_DIR)) fs.mkdirSync(UPLOADS_DIR, { recursive: true })
+
+    // If serverless, seed from repo data if available
+    if (isServerless && fs.existsSync(BASE_DATA_DIR)) {
+      const files = ['published-content.json', 'draft-content.json', 'admin-config.json']
+      for (const file of files) {
+        const src = path.resolve(BASE_DATA_DIR, file)
+        const dest = path.resolve(DATA_DIR, file)
+        if (fs.existsSync(src) && !fs.existsSync(dest)) {
+          try {
+            fs.copyFileSync(src, dest)
+          } catch {
+            // Ignore copy errors
+          }
+        }
+      }
+    }
+  } catch (err) {
+    console.warn('[Storage] Directory check warning:', err)
+  }
 }
 
 export function getPublishedContent(): PortfolioContent {

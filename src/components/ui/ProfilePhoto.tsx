@@ -34,17 +34,20 @@ export function ProfilePhoto({
   const translateX = prefersReduced || !interactiveParallax ? 0 : mouseX * 10
   const translateY = prefersReduced || !interactiveParallax ? 0 : mouseY * 8
 
-  // Dimensions based on size preset (controlled max height to prevent navbar crowding)
-  const sizeStyles = {
-    hero: 'max-h-[min(480px,52vh)] w-auto max-w-full',
-    standard: 'max-h-[min(320px,42vh)] w-auto max-w-full',
-    compact: 'max-h-[min(240px,35vh)] w-auto max-w-full',
-  }[size]
-
-  const containerMaxH = {
-    hero: 'max-h-[min(480px,52vh)]',
-    standard: 'max-h-[min(320px,42vh)]',
-    compact: 'max-h-[min(240px,35vh)]',
+  // Dimensions based on size preset (deliberate 2:3 portrait proportions)
+  const framePresets = {
+    hero: {
+      frame: 'w-[clamp(280px,21vw,310px)] max-h-[min(465px,54vh)]',
+      aspectRatio: '2 / 3',
+    },
+    standard: {
+      frame: 'w-[clamp(250px,26vw,285px)] max-h-[min(420px,48vh)]',
+      aspectRatio: '2 / 3',
+    },
+    compact: {
+      frame: 'w-[clamp(195px,52vw,240px)] max-h-[min(350px,42vh)]',
+      aspectRatio: '2 / 3',
+    },
   }[size]
 
   return (
@@ -117,11 +120,14 @@ export function ProfilePhoto({
             aria-hidden="true"
           />
 
-          {/* ─── Portrait Photo Container (Phase 9 Glass Frame) ─── */}
+          {/* ─── Portrait Photo Container (Phase 9 Glass Frame — 2:3 Aspect Ratio) ─── */}
           <div
-            className={`relative rounded-2xl overflow-hidden glass-frame liquid-edge p-1 shadow-[0_24px_70px_rgba(0,0,0,0.85)] transition-all duration-500 group-hover:shadow-[0_28px_80px_rgba(0,217,255,0.18)] ${containerMaxH} w-auto`}
+            className={`relative rounded-2xl overflow-hidden glass-frame liquid-edge p-1 shadow-[0_24px_70px_rgba(0,0,0,0.85)] transition-all duration-500 group-hover:shadow-[0_28px_80px_rgba(0,217,255,0.18)] ${framePresets.frame}`}
             style={{
-              aspectRatio: '576 / 1024',
+              aspectRatio:
+                crop?.aspectRatio && crop.aspectRatio !== '1:1' && crop.aspectRatio !== '576 / 1024'
+                  ? crop.aspectRatio
+                  : framePresets.aspectRatio,
               borderRadius: `${crop?.borderRadius ?? 24}px`,
             }}
           >
@@ -130,11 +136,9 @@ export function ProfilePhoto({
               alt={photoData.alt || 'Md Habib Munsar Ahmed — Software Engineer'}
               loading={priority ? 'eager' : 'lazy'}
               decoding="async"
-              className={`block w-full h-full filter contrast-[1.01] brightness-[1.01] transition-transform duration-700 ease-out group-hover:scale-[1.012] ${sizeStyles}`}
+              className="block w-full h-full object-cover filter contrast-[1.01] brightness-[1.01] transition-transform duration-700 ease-out group-hover:scale-[1.012]"
               style={{
-                aspectRatio: '576 / 1024',
-                objectFit: crop?.objectFit ?? 'cover',
-                objectPosition: `${crop?.x ?? 50}% ${crop?.y ?? 40}%`,
+                objectPosition: `${crop?.x ?? 50}% ${crop?.y ?? 38}%`,
                 transform: `scale(${crop?.scale ?? 1}) rotate(${crop?.rotate ?? 0}deg) scaleX(${
                   crop?.flipH ? -1 : 1
                 }) scaleY(${crop?.flipV ? -1 : 1})`,
@@ -172,12 +176,12 @@ export function ProfilePhoto({
           </div>
         </div>
 
-        {/* ─── Profile Caption Badge (Deliberate cinematic profile caption, 12-14px gap below photo) ─── */}
+        {/* ─── Profile Caption Badge (Deliberate cinematic profile caption, proportionate spacing) ─── */}
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8, duration: 0.6 }}
-          className="mt-3 sm:mt-3.5 h-[34px] sm:h-[36px] min-w-[165px] sm:min-w-[185px] px-4 sm:px-5 rounded-full border border-cyan-500/30 bg-slate-950/85 hover:border-cyan-400/50 backdrop-blur-md flex items-center justify-center gap-2.5 shadow-[0_4px_16px_rgba(0,0,0,0.6),0_0_12px_rgba(6,182,212,0.12)] whitespace-nowrap select-none"
+          className="mt-4 sm:mt-5 h-[36px] sm:h-[38px] min-w-[175px] sm:min-w-[195px] px-4 sm:px-5 rounded-full border border-cyan-500/30 bg-slate-950/85 hover:border-cyan-400/50 backdrop-blur-md flex items-center justify-center gap-2.5 shadow-[0_4px_16px_rgba(0,0,0,0.6),0_0_12px_rgba(6,182,212,0.12)] whitespace-nowrap select-none"
         >
           {/* Status Dot: 7-9px, emerald glowing pulse */}
           <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)] animate-pulse flex-shrink-0" />

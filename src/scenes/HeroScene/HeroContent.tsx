@@ -200,7 +200,7 @@ export function HeroContent({ visible }: HeroContentProps) {
       {/* 1. Availability Status Badge */}
       <motion.div variants={metaVariants} className="hero-availability" data-editable-id="hero-availability" data-editable-name="Availability Badge">
         <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)] animate-pulse flex-shrink-0" />
-        <span className="truncate">{hero.roleBadge || 'AVAILABLE FOR SOFTWARE ENGINEERING ROLES'}</span>
+        <span className="max-w-full">{hero.roleBadge || 'AVAILABLE FOR SOFTWARE ENGINEERING ROLES'}</span>
       </motion.div>
 
       {/* 2. Full Name Heading */}
@@ -294,7 +294,7 @@ export function HeroContent({ visible }: HeroContentProps) {
             </a>
           ))}
         </div>
-        <div className="w-[1px] h-4 bg-white/15 hidden sm:block" />
+        <div className="w-[1px] h-4 bg-white/15 hidden lg:block" />
         <a
           href={`mailto:${content.contact.email}`}
           className="font-mono text-[13px] text-[#A8B4C2] hover:text-[#00D9FF] transition-colors tracking-wide truncate max-w-[280px]"
@@ -353,7 +353,7 @@ export function HeroContent({ visible }: HeroContentProps) {
         >
           <ProfilePhoto
             visible={visible}
-            size="hero"
+            size="standard"
             mouseX={normalized.x}
             mouseY={normalized.y}
           />
@@ -383,7 +383,7 @@ export function HeroContent({ visible }: HeroContentProps) {
           {/* 1. Availability Status */}
           <motion.div variants={metaVariants} className="hero-availability justify-center mb-4">
             <span className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)] animate-pulse flex-shrink-0" />
-            <span className="truncate">{hero.roleBadge || 'AVAILABLE FOR SOFTWARE ENGINEERING ROLES'}</span>
+            <span className="max-w-full text-center">{hero.roleBadge || 'AVAILABLE FOR SOFTWARE ENGINEERING ROLES'}</span>
           </motion.div>
 
           {/* 2. Full Name */}
@@ -480,7 +480,7 @@ export function HeroContent({ visible }: HeroContentProps) {
         <motion.div variants={portraitVariants} className="hero-portrait-col w-full flex justify-center pt-2">
           <ProfilePhoto
             visible={visible}
-            size="standard"
+            size="compact"
             interactiveParallax={false}
           />
         </motion.div>

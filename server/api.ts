@@ -61,10 +61,15 @@ apiRouter.use((req: Request, res: Response, next) => {
 apiRouter.use(express.json({ limit: '10mb' }))
 apiRouter.use(express.urlencoded({ extended: true, limit: '10mb' }))
 
+import { UPLOADS_DIR } from './storage.ts'
+
 // Configure Multer for Uploads
-const UPLOADS_DIR = path.resolve(process.cwd(), 'public', 'uploads')
-if (!fs.existsSync(UPLOADS_DIR)) {
-  fs.mkdirSync(UPLOADS_DIR, { recursive: true })
+try {
+  if (!fs.existsSync(UPLOADS_DIR)) {
+    fs.mkdirSync(UPLOADS_DIR, { recursive: true })
+  }
+} catch {
+  // Ignore mkdir error if read-only
 }
 
 const storage = multer.diskStorage({
