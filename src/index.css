@@ -167,16 +167,24 @@ section[id]:not(#hero):not(#web-resume-document section) {
 }
 
 /* ============================================================
-   CINEMATIC ENVIRONMENT BACKGROUND (Phase 12.4)
+   GLOBAL CINEMATIC ENVIRONMENT BACKGROUND (Phase 13.4)
    ============================================================ */
+html,
+body,
+#root {
+  min-height: 100%;
+  background-color: var(--color-void, #030507);
+}
+
+.global-cinematic-background,
 .hero-cinematic-env {
-  position: absolute;
+  position: fixed;
   inset: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   overflow: hidden;
   pointer-events: none;
-  z-index: 1; /* Layer 2: Behind 3D World (z-2) and Content (z-10) */
+  z-index: 1; /* Layer 1: Behind 3D World (z-2) and Content (z-10) */
   background-color: var(--color-void, #030507);
 }
 
@@ -193,7 +201,10 @@ section[id]:not(#hero):not(#web-resume-document section) {
   inset: -12px;
   width: calc(100% + 24px);
   height: calc(100% + 24px);
-  background-image: url('/images/portfolio-cinematic-bg.webp'), url('/images/portfolio-cinematic-bg.png');
+  background-image:
+    linear-gradient(180deg, rgba(3, 7, 12, 0.24) 0%, rgba(3, 7, 12, 0.48) 100%),
+    url('/images/portfolio-cinematic-bg.webp'),
+    url('/images/portfolio-cinematic-bg.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
@@ -211,7 +222,7 @@ section[id]:not(#hero):not(#web-resume-document section) {
   inset: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, rgba(3, 7, 12, 0.88) 0%, rgba(3, 8, 14, 0.58) 48%, rgba(3, 7, 12, 0.40) 100%);
+  background: linear-gradient(90deg, rgba(3, 7, 12, 0.82) 0%, rgba(3, 8, 14, 0.52) 48%, rgba(3, 7, 12, 0.42) 100%);
 }
 
 .hero-env-overlay-mobile {
@@ -219,7 +230,7 @@ section[id]:not(#hero):not(#web-resume-document section) {
   inset: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(180deg, rgba(3, 7, 12, 0.88) 0%, rgba(3, 8, 14, 0.60) 45%, rgba(3, 7, 12, 0.88) 100%);
+  background: linear-gradient(180deg, rgba(3, 7, 12, 0.82) 0%, rgba(3, 8, 14, 0.55) 45%, rgba(3, 7, 12, 0.82) 100%);
 }
 
 .hero-env-horizon-glow {
@@ -227,7 +238,7 @@ section[id]:not(#hero):not(#web-resume-document section) {
   inset: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(ellipse 75% 28% at 50% 64%, rgba(0, 217, 255, 0.14) 0%, transparent 70%);
+  background: radial-gradient(ellipse 75% 28% at 50% 64%, rgba(0, 217, 255, 0.12) 0%, transparent 70%);
   mix-blend-mode: screen;
 }
 
@@ -236,17 +247,12 @@ section[id]:not(#hero):not(#web-resume-document section) {
   top: 0;
   left: 0;
   width: 100%;
-  height: 180px;
-  background: linear-gradient(to bottom, rgba(3, 5, 7, 0.90) 0%, rgba(3, 5, 7, 0.45) 55%, transparent 100%);
+  height: 140px;
+  background: linear-gradient(to bottom, rgba(3, 5, 7, 0.75) 0%, rgba(3, 5, 7, 0.30) 60%, transparent 100%);
 }
 
 .hero-env-bottom-blend {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 280px;
-  background: linear-gradient(to bottom, transparent 0%, rgba(3, 5, 7, 0.65) 60%, var(--color-void, #030507) 100%);
+  display: none !important;
 }
 
 #hero {
@@ -579,7 +585,7 @@ section[id]:not(#hero):not(#web-resume-document section) {
   padding-top: 64px;
   padding-bottom: 72px;
   scroll-margin-top: calc(var(--nav-height) + 24px);
-  background-color: var(--color-void);
+  background: transparent;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 

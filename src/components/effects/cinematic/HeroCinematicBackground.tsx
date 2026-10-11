@@ -35,7 +35,7 @@ export function HeroCinematicBackground({ visible = true }: HeroCinematicBackgro
 
   return (
     <div
-      className="hero-cinematic-env"
+      className="global-cinematic-background hero-cinematic-env"
       aria-hidden="true"
       style={{
         opacity: visible ? 1 : 0,
@@ -64,7 +64,7 @@ export function HeroCinematicBackground({ visible = true }: HeroCinematicBackgro
         }}
       />
 
-      {/* 3. Dark Cinematic Gradient Overlay (Preserving Left Text Panel Readability) */}
+      {/* 3. Dark Cinematic Gradient Overlay (Preserving Readability Across All Sections) */}
       <div className="hero-env-overlay-desktop hidden md:block" />
       <div className="hero-env-overlay-mobile block md:hidden" />
 
@@ -73,9 +73,6 @@ export function HeroCinematicBackground({ visible = true }: HeroCinematicBackgro
 
       {/* 5. Top Navbar Shadow Blending */}
       <div className="hero-env-top-blend" />
-
-      {/* 6. Bottom Reflective Ground Blending into Site Void */}
-      <div className="hero-env-bottom-blend" />
     </div>
   )
 }

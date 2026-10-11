@@ -19,7 +19,7 @@ export function Phase6ContactFinal({ onRestart }: Phase6ContactFinalProps) {
   return (
     <section
       id="contact"
-      className="relative bg-[#050608] text-[#F4F7FA] overflow-hidden"
+      className="relative bg-transparent text-[#F4F7FA] overflow-hidden"
       aria-label="Contact and Final Experience"
     >
       {/* ──────────────────────────────────────────

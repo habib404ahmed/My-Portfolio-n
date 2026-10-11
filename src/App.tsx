@@ -192,7 +192,10 @@ function PortfolioWebsite() {
     .sort((a, b) => a.order - b.order)
 
   return (
-    <div className="relative min-h-screen bg-[var(--color-void)] text-slate-100 overflow-x-hidden selection:bg-cyan-500/20 selection:text-cyan-200">
+    <div className="relative min-h-screen bg-transparent text-slate-100 overflow-x-hidden selection:bg-cyan-500/20 selection:text-cyan-200">
+      {/* Persistent Global Cinematic Background Layer (Phase 13.4) */}
+      <HeroCinematicBackground visible={true} />
+
       {/* Subtle film grain noise */}
       <div className="noise-overlay" aria-hidden="true" />
 
@@ -232,9 +235,6 @@ function PortfolioWebsite() {
         className="relative w-full overflow-visible flex flex-col items-center justify-center"
         aria-label="Hero — Introduction"
       >
-        {/* Cinematic Cyberpunk Environment Layer (Phase 12.4) - z-[1] */}
-        <HeroCinematicBackground visible={true} />
-
         {/* Hero Ambient Horizon Glow - z-[3] */}
         <div
           className="absolute inset-0 pointer-events-none z-[3]"
@@ -285,12 +285,6 @@ function PortfolioWebsite() {
             background:
               'radial-gradient(ellipse at center, transparent 45%, rgba(5,5,7,0.7) 100%)',
           }}
-        />
-
-        {/* Hero Bottom Exit */}
-        <div
-          className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[var(--color-void,#050507)] to-transparent pointer-events-none z-[4]"
-          aria-hidden="true"
         />
       </section>
 
