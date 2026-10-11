@@ -5,6 +5,7 @@ import { AdminStudio } from '@/admin/AdminStudio.tsx'
 
 import { InitSequence } from '@/scenes/IntroScene/InitSequence'
 import { Global3DWorld } from '@/components/effects/cinematic/Global3DWorld'
+import { HeroCinematicBackground } from '@/components/effects/cinematic/HeroCinematicBackground'
 import { HeroContent } from '@/scenes/HeroScene/HeroContent'
 import { WebGLFallback } from '@/scenes/HeroScene/WebGLFallback'
 import { Navigation } from '@/components/navigation/Navigation'
@@ -223,24 +224,25 @@ function PortfolioWebsite() {
       <section
         id="hero"
         data-editable-id="hero-section"
-        className="relative min-h-[100dvh] w-full overflow-visible flex flex-col items-center justify-start layer-content"
+        className="relative min-h-[100dvh] w-full overflow-visible flex flex-col items-center justify-start"
         aria-label="Hero — Introduction"
       >
-        {/* Hero Ambient Dual Lighting */}
+        {/* Cinematic Cyberpunk Environment Layer (Phase 12.4) - z-[1] */}
+        <HeroCinematicBackground visible={heroContentVisible} />
+
+        {/* Hero Ambient Horizon Glow - z-[3] */}
         <div
           className="absolute inset-0 pointer-events-none z-[3]"
           aria-hidden="true"
           style={{
-            background: `radial-gradient(circle at 22% 48%, rgba(6,182,212,${
+            background: `radial-gradient(circle at 50% 60%, rgba(0,217,255,${
               content.hero.bgAtmosphereIntensity * 0.08
-            }) 0%, transparent 55%), radial-gradient(circle at 78% 45%, rgba(245,158,11,${
-              content.hero.bgAtmosphereIntensity * 0.06
-            }) 0%, transparent 55%)`,
+            }) 0%, transparent 60%)`,
           }}
         />
 
-        {/* Hero content overlay */}
-        <div className="relative z-10 w-full flex flex-col items-center justify-start flex-1 pt-0 pb-12 sm:pb-16">
+        {/* Hero content overlay - z-[10] */}
+        <div className="relative z-10 layer-content w-full flex flex-col items-center justify-start flex-1 pt-0 pb-12 sm:pb-16">
           <HeroContent visible={heroContentVisible} />
         </div>
 

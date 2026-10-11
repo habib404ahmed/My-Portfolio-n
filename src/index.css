@@ -157,6 +157,89 @@ section[id] {
   }
 }
 
+/* ============================================================
+   CINEMATIC ENVIRONMENT BACKGROUND (Phase 12.4)
+   ============================================================ */
+.hero-cinematic-env {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1; /* Layer 2: Behind 3D World (z-2) and Content (z-10) */
+  background-color: var(--color-void, #030507);
+}
+
+.hero-env-fallback {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-void, #030507);
+}
+
+.hero-env-image {
+  position: absolute;
+  inset: -12px;
+  width: calc(100% + 24px);
+  height: calc(100% + 24px);
+  background-image: url('/images/portfolio-cinematic-bg.webp'), url('/images/portfolio-cinematic-bg.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  will-change: transform;
+}
+
+@media (max-width: 768px) {
+  .hero-env-image {
+    background-position: 50% 20%;
+  }
+}
+
+.hero-env-overlay-desktop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(3, 7, 12, 0.88) 0%, rgba(3, 8, 14, 0.58) 48%, rgba(3, 7, 12, 0.40) 100%);
+}
+
+.hero-env-overlay-mobile {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, rgba(3, 7, 12, 0.88) 0%, rgba(3, 8, 14, 0.60) 45%, rgba(3, 7, 12, 0.88) 100%);
+}
+
+.hero-env-horizon-glow {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse 75% 28% at 50% 64%, rgba(0, 217, 255, 0.14) 0%, transparent 70%);
+  mix-blend-mode: screen;
+}
+
+.hero-env-top-blend {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 180px;
+  background: linear-gradient(to bottom, rgba(3, 5, 7, 0.90) 0%, rgba(3, 5, 7, 0.45) 55%, transparent 100%);
+}
+
+.hero-env-bottom-blend {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 280px;
+  background: linear-gradient(to bottom, transparent 0%, rgba(3, 5, 7, 0.65) 60%, var(--color-void, #030507) 100%);
+}
+
 #hero {
   position: relative;
   width: 100%;
