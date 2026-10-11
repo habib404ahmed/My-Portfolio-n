@@ -122,7 +122,7 @@
 }
 
 /* Authoritative Global Section System (Phase 3 & 4) */
-section[id] {
+section[id]:not(#web-resume-document section) {
   position: relative;
   width: 100%;
   padding-block: var(--section-space-desktop);
@@ -132,15 +132,24 @@ section[id] {
 }
 
 @media (max-width: 1024px) {
-  section[id] {
+  section[id]:not(#web-resume-document section) {
     padding-block: var(--section-space-tablet);
   }
 }
 
 @media (max-width: 640px) {
-  section[id] {
+  section[id]:not(#web-resume-document section) {
     padding-block: var(--section-space-mobile);
   }
+}
+
+/* Inner Web Resume Document Section Reset */
+#web-resume-document section,
+#web-resume-document section[id] {
+  position: relative;
+  width: 100%;
+  padding-block: 0 !important;
+  margin-top: 0 !important;
 }
 
 @media (max-width: 1023px) {

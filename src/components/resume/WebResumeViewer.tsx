@@ -1,11 +1,11 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { resumeData } from '@/data/resume'
 import { profile } from '@/data/profile'
 import { CinematicButton } from '@/components/ui/CinematicButton'
 import { ResumeModalViewer } from './ResumeModalViewer'
 
 const RESUME_SECTIONS = [
-  { id: 'res-summary', label: '01. Summary' },
+  { id: 'res-summary', label: '01. Professional Summary' },
   { id: 'res-skills', label: '02. Technical Skills' },
   { id: 'res-projects', label: '03. Projects' },
   { id: 'res-education', label: '04. Education & Coursework' },
@@ -19,6 +19,25 @@ const RESUME_SECTIONS = [
 export function WebResumeViewer() {
   const [modalOpen, setModalOpen] = useState(false)
   const [activeNav, setActiveNav] = useState('res-summary')
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + 180
+      for (let i = RESUME_SECTIONS.length - 1; i >= 0; i--) {
+        const el = document.getElementById(RESUME_SECTIONS[i].id)
+        if (el) {
+          const top = el.getBoundingClientRect().top + window.scrollY
+          if (scrollPosition >= top) {
+            setActiveNav(RESUME_SECTIONS[i].id)
+            break
+          }
+        }
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   const scrollToSection = (id: string) => {
     setActiveNav(id)
@@ -96,10 +115,10 @@ export function WebResumeViewer() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* Left Sticky Index (Desktop Only) */}
         <aside className="lg:col-span-3 sticky top-24 hidden lg:block no-print">
-          <div className="p-5 rounded-2xl glass-card liquid-edge">
+          <div className="p-4 sm:p-5 rounded-2xl glass-card liquid-edge">
             {/* Candidate Canonical Portrait Card */}
-            <div className="mb-5 overflow-hidden rounded-xl glass-frame liquid-edge p-2 text-center">
-              <div className="relative aspect-[576/1024] max-h-[220px] mx-auto overflow-hidden rounded-lg bg-black/40">
+            <div className="mb-4 overflow-hidden rounded-xl glass-frame liquid-edge p-2 text-center">
+              <div className="relative aspect-[576/1024] max-h-[190px] mx-auto overflow-hidden rounded-lg bg-black/40">
                 <img
                   src="/assets/images/profile-400.webp"
                   alt="Md Habib Munsar Ahmed — Software Engineer"
@@ -110,15 +129,15 @@ export function WebResumeViewer() {
                   }}
                 />
               </div>
-              <div className="mt-2.5 font-display text-[14px] font-bold text-white tracking-wide">
+              <div className="mt-2 font-display text-[14px] font-bold text-white tracking-wide">
                 {resumeData.name}
               </div>
-              <div className="font-mono text-[12px] text-cyan-400 uppercase tracking-wider font-semibold">
+              <div className="font-mono text-[11.5px] text-cyan-400 uppercase tracking-wider font-semibold">
                 {resumeData.title}
               </div>
             </div>
 
-            <div className="font-mono text-[12px] text-slate-400 uppercase tracking-widest mb-3 font-semibold">
+            <div className="font-mono text-[11px] text-slate-400 uppercase tracking-widest mb-2.5 font-semibold px-1">
               RESUME SECTIONS
             </div>
             <nav className="space-y-1">
@@ -126,10 +145,10 @@ export function WebResumeViewer() {
                 <button
                   key={sec.id}
                   onClick={() => scrollToSection(sec.id)}
-                  className={`w-full text-left px-3 py-2 rounded-lg font-mono text-[13px] transition-all cursor-pointer ${
+                  className={`w-full text-left px-3 py-1.5 rounded-lg font-mono text-[12.5px] transition-all cursor-pointer ${
                     activeNav === sec.id
-                      ? 'text-cyan-300 bg-cyan-950/40 border border-cyan-500/30 font-semibold'
-                      : 'text-slate-400 hover:text-slate-200 hover:bg-white/[0.02]'
+                      ? 'text-cyan-300 bg-cyan-950/50 border border-cyan-500/40 font-semibold shadow-[0_0_12px_rgba(0,217,255,0.15)]'
+                      : 'text-slate-400 hover:text-slate-200 hover:bg-white/[0.03]'
                   }`}
                 >
                   {sec.label}
@@ -137,11 +156,12 @@ export function WebResumeViewer() {
               ))}
             </nav>
 
-            <div className="mt-6 pt-4 border-t border-white/10">
+            <div className="mt-5 pt-3.5 border-t border-white/10">
               <a
                 href={profile.resume.path}
                 download="Md-Habib-Munsar-Ahmed-Resume.pdf"
-                className="w-full py-2.5 px-3 rounded-lg border border-cyan-500/20 bg-cyan-950/30 text-cyan-300 font-mono text-[13px] text-center block hover:bg-cyan-500/20 transition-all font-medium"
+                className="w-full py-2 px-3 rounded-lg border border-cyan-500/25 bg-cyan-950/30 text-cyan-300 font-mono text-[12px] text-center block hover:bg-cyan-500/20 transition-all font-medium truncate"
+                title="Md-Habib-Munsar-Ahmed-Resume.pdf"
               >
                 Md-Habib-Munsar-Ahmed-Resume.pdf
               </a>
@@ -153,28 +173,28 @@ export function WebResumeViewer() {
         <div className="lg:col-span-9">
           <div
             id="web-resume-document"
-            className="w-full rounded-2xl border border-white/10 bg-slate-950 p-6 sm:p-12 md:p-14 shadow-2xl relative"
+            className="w-full rounded-2xl border border-white/10 bg-slate-950 p-6 sm:p-8 md:p-10 shadow-2xl relative"
             style={{
               boxShadow: '0 20px 60px rgba(0,0,0,0.8)',
             }}
           >
             {/* 1. Header & Contact */}
-            <div className="border-b border-white/15 pb-6 mb-8">
+            <div className="border-b border-white/15 pb-5 sm:pb-6 mb-7 sm:mb-8">
               <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 mb-2">
-                <h1 className="text-[clamp(28px,3vw,38px)] font-display font-extrabold text-white tracking-tight">
+                <h1 className="text-[clamp(26px,2.8vw,36px)] font-display font-extrabold text-white tracking-tight">
                   {resumeData.name}
                 </h1>
-                <span className="font-mono text-[14px] text-cyan-400 font-bold uppercase tracking-wider">
+                <span className="font-mono text-[13px] sm:text-[14px] text-cyan-400 font-bold uppercase tracking-wider">
                   {resumeData.title}
                 </span>
               </div>
 
-              <div className="font-mono text-[14px] text-slate-300 mb-4 font-medium">
+              <div className="font-mono text-[13.5px] sm:text-[14px] text-slate-300 mb-3 sm:mb-3.5 font-medium">
                 {resumeData.positioning}
               </div>
 
               {/* Clickable Contact Strip */}
-              <div className="flex flex-wrap items-center gap-y-2 gap-x-4 font-mono text-[13px] sm:text-[14px] text-slate-300">
+              <div className="flex flex-wrap items-center gap-y-2 gap-x-3.5 font-mono text-[12.5px] sm:text-[13.5px] text-slate-300">
                 <span>{resumeData.contact.location}</span>
                 <span className="text-slate-500">&bull;</span>
                 <a href={`tel:${resumeData.contact.phone}`} className="hover:text-cyan-300 transition-colors">
@@ -215,17 +235,17 @@ export function WebResumeViewer() {
             </div>
 
             {/* 01. Summary */}
-            <section id="res-summary" className="mb-8 scroll-mt-24">
+            <section id="res-summary" className="mb-7 sm:mb-8 scroll-mt-24">
               <h2 className="font-mono text-[13px] sm:text-[14px] text-cyan-400 font-bold uppercase tracking-wider mb-3 border-b border-white/10 pb-1.5">
                 01 // Professional Summary
               </h2>
-              <p className="text-[16px] sm:text-[17px] text-[#A8B4C2] font-body leading-[1.65]">
+              <p className="text-[15px] sm:text-[16px] text-[#A8B4C2] font-body leading-[1.55]">
                 {resumeData.summary}
               </p>
             </section>
 
             {/* 02. Technical Skills */}
-            <section id="res-skills" className="mb-8 scroll-mt-24">
+            <section id="res-skills" className="mb-6 sm:mb-8 scroll-mt-24">
               <h2 className="font-mono text-[13px] sm:text-[14px] text-cyan-400 font-bold uppercase tracking-wider mb-3 border-b border-white/10 pb-1.5">
                 02 // Technical Skills
               </h2>
@@ -240,7 +260,7 @@ export function WebResumeViewer() {
             </section>
 
             {/* 03. Projects */}
-            <section id="res-projects" className="mb-8 scroll-mt-24">
+            <section id="res-projects" className="mb-6 sm:mb-8 scroll-mt-24">
               <h2 className="font-mono text-[13px] sm:text-[14px] text-cyan-400 font-bold uppercase tracking-wider mb-4 border-b border-white/10 pb-1.5">
                 03 // Software Engineering Projects
               </h2>
@@ -280,7 +300,7 @@ export function WebResumeViewer() {
             </section>
 
             {/* 04. Education & Coursework */}
-            <section id="res-education" className="mb-8 scroll-mt-24">
+            <section id="res-education" className="mb-6 sm:mb-8 scroll-mt-24">
               <h2 className="font-mono text-[13px] sm:text-[14px] text-cyan-400 font-bold uppercase tracking-wider mb-3 border-b border-white/10 pb-1.5">
                 04 // Education & Relevant Coursework
               </h2>
@@ -320,7 +340,7 @@ export function WebResumeViewer() {
             </section>
 
             {/* 05. Technical Activities & Experience */}
-            <section id="res-activities" className="mb-8 scroll-mt-24">
+            <section id="res-activities" className="mb-6 sm:mb-8 scroll-mt-24">
               <h2 className="font-mono text-[13px] sm:text-[14px] text-cyan-400 font-bold uppercase tracking-wider mb-3 border-b border-white/10 pb-1.5">
                 05 // Technical Activities & Experience
               </h2>
@@ -345,7 +365,7 @@ export function WebResumeViewer() {
             </section>
 
             {/* 06. Leadership & Activities */}
-            <section id="res-leadership" className="mb-8 scroll-mt-24">
+            <section id="res-leadership" className="mb-6 sm:mb-8 scroll-mt-24">
               <h2 className="font-mono text-[13px] sm:text-[14px] text-cyan-400 font-bold uppercase tracking-wider mb-3 border-b border-white/10 pb-1.5">
                 06 // Leadership & Activities
               </h2>
@@ -366,7 +386,7 @@ export function WebResumeViewer() {
             </section>
 
             {/* 07. Certifications */}
-            <section id="res-certifications" className="mb-8 scroll-mt-24">
+            <section id="res-certifications" className="mb-6 sm:mb-8 scroll-mt-24">
               <h2 className="font-mono text-[13px] sm:text-[14px] text-cyan-400 font-bold uppercase tracking-wider mb-3 border-b border-white/10 pb-1.5">
                 07 // Certifications
               </h2>
@@ -387,7 +407,7 @@ export function WebResumeViewer() {
             </section>
 
             {/* 08. Languages */}
-            <section id="res-languages" className="mb-8 scroll-mt-24">
+            <section id="res-languages" className="mb-6 sm:mb-8 scroll-mt-24">
               <h2 className="font-mono text-[13px] sm:text-[14px] text-cyan-400 font-bold uppercase tracking-wider mb-3 border-b border-white/10 pb-1.5">
                 08 // Languages
               </h2>
