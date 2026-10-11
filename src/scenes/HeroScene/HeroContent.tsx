@@ -211,11 +211,11 @@ export function HeroContent({ visible }: HeroContentProps) {
         data-editable-id="hero-heading"
         data-editable-name="Name Heading"
       >
-        <span className="block font-display font-extrabold text-[#FFFFFF] uppercase leading-[1.05]">
+        <span className="block font-display font-extrabold text-[#FFFFFF] uppercase leading-[0.98]">
           {nameLine1}
         </span>
         {nameLine2 && (
-          <span className="block font-display font-extrabold text-[#00D9FF] uppercase leading-[1.05] drop-shadow-[0_0_24px_rgba(0,217,255,0.45)]">
+          <span className="block font-display font-extrabold text-[#00D9FF] uppercase leading-[0.98] drop-shadow-[0_0_24px_rgba(0,217,255,0.45)]">
             {nameLine2}
           </span>
         )}
@@ -247,7 +247,7 @@ export function HeroContent({ visible }: HeroContentProps) {
         {hero.ctaPrimary.visible && (
           <button
             onClick={handleExplore}
-            className="h-[50px] min-w-[190px] px-6 rounded-xl glass-btn-primary font-display text-[15px] sm:text-[16px] font-bold tracking-wider uppercase flex items-center justify-center gap-2.5 group cursor-pointer shadow-[0_4px_20px_rgba(0,217,255,0.22)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+            className="h-[48px] sm:h-[52px] min-w-[175px] sm:min-w-[185px] px-5 sm:px-6 rounded-xl glass-btn-primary font-display text-[14px] sm:text-[15px] font-bold tracking-wider uppercase flex items-center justify-center gap-2.5 group cursor-pointer shadow-[0_4px_20px_rgba(0,217,255,0.22)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
             aria-label={primaryCtaLabel}
           >
             <span>{primaryCtaLabel}</span>
@@ -267,7 +267,7 @@ export function HeroContent({ visible }: HeroContentProps) {
         {hero.ctaSecondary.visible && (
           <button
             onClick={handleResume}
-            className="h-[50px] min-w-[180px] px-6 rounded-xl glass-btn-secondary font-display text-[15px] sm:text-[16px] font-semibold tracking-wider uppercase flex items-center justify-center gap-2.5 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+            className="h-[48px] sm:h-[52px] min-w-[165px] sm:min-w-[175px] px-5 sm:px-6 rounded-xl glass-btn-secondary font-display text-[14px] sm:text-[15px] font-semibold tracking-wider uppercase flex items-center justify-center gap-2.5 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
             aria-label={secondaryCtaLabel}
           >
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="flex-shrink-0" aria-hidden="true">

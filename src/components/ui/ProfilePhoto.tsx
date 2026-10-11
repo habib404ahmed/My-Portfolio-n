@@ -37,7 +37,7 @@ export function ProfilePhoto({
   // Dimensions based on size preset (deliberate 2:3 portrait proportions)
   const framePresets = {
     hero: {
-      frame: 'w-[clamp(260px,22vw,360px)] max-h-[min(480px,52vh)]',
+      frame: 'w-[clamp(250px,21vw,340px)] max-h-[min(430px,48vh)]',
       aspectRatio: '2 / 3',
     },
     standard: {
