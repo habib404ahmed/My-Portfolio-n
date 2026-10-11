@@ -19,11 +19,16 @@ dist-ssr
 *.pem
 *.key
 *.cert
+data/admin-config.json
+data/versions/*
+!data/versions/.gitkeep
 
 # Temporary & Testing Artifacts
 scratch/
 .tempmediaStorage/
 screen*.png
+public/uploads/*
+!public/uploads/.gitkeep
 
 # Editor & OS files
 .vscode/*

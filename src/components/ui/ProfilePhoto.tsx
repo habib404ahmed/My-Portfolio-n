@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
-import { profile } from '@/data/profile'
 import { useReducedMotion } from '@/hooks/useReducedMotion'
+import { usePortfolioContent } from '@/context/ContentContext.tsx'
 
 interface ProfilePhotoProps {
   visible: boolean
@@ -24,6 +24,9 @@ export function ProfilePhoto({
   size = 'hero',
 }: ProfilePhotoProps) {
   const prefersReduced = useReducedMotion()
+  const { content } = usePortfolioContent()
+  const photoData = content.hero.profilePhoto
+  const crop = size === 'hero' ? photoData.desktopCrop : photoData.mobileCrop
 
   // Calculate subtle, non-distorting parallax angles
   const tiltX = prefersReduced || !interactiveParallax ? 0 : mouseY * -6
@@ -31,11 +34,17 @@ export function ProfilePhoto({
   const translateX = prefersReduced || !interactiveParallax ? 0 : mouseX * 10
   const translateY = prefersReduced || !interactiveParallax ? 0 : mouseY * 8
 
-  // Dimensions based on size preset (occupies 40-45% of visual area)
+  // Dimensions based on size preset (controlled max height to prevent navbar crowding)
   const sizeStyles = {
-    hero: 'max-h-[50vh] sm:max-h-[58vh] lg:max-h-[66vh] w-auto max-w-full',
-    standard: 'max-h-[310px] sm:max-h-[380px] w-auto max-w-[78vw]',
-    compact: 'max-h-[260px] w-auto max-w-full',
+    hero: 'max-h-[min(480px,52vh)] w-auto max-w-full',
+    standard: 'max-h-[min(320px,42vh)] w-auto max-w-full',
+    compact: 'max-h-[min(240px,35vh)] w-auto max-w-full',
+  }[size]
+
+  const containerMaxH = {
+    hero: 'max-h-[min(480px,52vh)]',
+    standard: 'max-h-[min(320px,42vh)]',
+    compact: 'max-h-[min(240px,35vh)]',
   }[size]
 
   return (
@@ -59,7 +68,7 @@ export function ProfilePhoto({
         transform: `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translate3d(${translateX}px, ${translateY}px, 0)`,
         transition: prefersReduced ? 'none' : 'transform 0.4s cubic-bezier(0.25, 1, 0.5, 1)',
       }}
-      className={`relative flex items-center justify-center select-none ${className}`}
+      className={`relative flex items-center justify-center select-none pt-2 ${className}`}
     >
       {/* ─── Ambient Atmospheric Aura & Lighting (Warm Person / Natural Lighting) ─── */}
       {showAura && (
@@ -90,56 +99,54 @@ export function ProfilePhoto({
       <div className="relative flex flex-col items-center">
         {/* Holographic Framing Accents around Photo Container */}
         <div className="relative group">
-          {/* Subtle Refined Corner Brackets (Thin lines, low opacity, framing photo) */}
+          {/* Subtle Refined Corner Brackets (Stay inside boundary to prevent top clipping) */}
           <div
-            className="absolute -top-2.5 -left-2.5 w-4 h-4 border-t border-l border-cyan-400/30 pointer-events-none transition-colors duration-500 group-hover:border-cyan-400/60"
+            className="absolute -top-1.5 -left-1.5 w-4 h-4 border-t border-l border-cyan-400/30 pointer-events-none transition-colors duration-500 group-hover:border-cyan-400/60"
             aria-hidden="true"
           />
           <div
-            className="absolute -top-2.5 -right-2.5 w-4 h-4 border-t border-r border-cyan-400/30 pointer-events-none transition-colors duration-500 group-hover:border-cyan-400/60"
+            className="absolute -top-1.5 -right-1.5 w-4 h-4 border-t border-r border-cyan-400/30 pointer-events-none transition-colors duration-500 group-hover:border-cyan-400/60"
             aria-hidden="true"
           />
           <div
-            className="absolute -bottom-2.5 -left-2.5 w-4 h-4 border-b border-l border-cyan-400/30 pointer-events-none transition-colors duration-500 group-hover:border-cyan-400/60"
+            className="absolute -bottom-1.5 -left-1.5 w-4 h-4 border-b border-l border-cyan-400/30 pointer-events-none transition-colors duration-500 group-hover:border-cyan-400/60"
             aria-hidden="true"
           />
           <div
-            className="absolute -bottom-2.5 -right-2.5 w-4 h-4 border-b border-r border-cyan-400/30 pointer-events-none transition-colors duration-500 group-hover:border-cyan-400/60"
+            className="absolute -bottom-1.5 -right-1.5 w-4 h-4 border-b border-r border-cyan-400/30 pointer-events-none transition-colors duration-500 group-hover:border-cyan-400/60"
             aria-hidden="true"
           />
 
           {/* ─── Portrait Photo Container (Phase 9 Glass Frame) ─── */}
           <div
-            className="relative rounded-2xl overflow-hidden glass-frame liquid-edge p-1 shadow-[0_24px_70px_rgba(0,0,0,0.85)] transition-all duration-500 group-hover:shadow-[0_28px_80px_rgba(0,217,255,0.18)]"
+            className={`relative rounded-2xl overflow-hidden glass-frame liquid-edge p-1 shadow-[0_24px_70px_rgba(0,0,0,0.85)] transition-all duration-500 group-hover:shadow-[0_28px_80px_rgba(0,217,255,0.18)] ${containerMaxH} w-auto`}
             style={{
               aspectRatio: '576 / 1024',
+              borderRadius: `${crop?.borderRadius ?? 24}px`,
             }}
           >
-            {/* Responsive High-Fidelity Picture */}
-            <picture className="block w-full h-full">
-              <source
-                type="image/webp"
-                srcSet="/assets/images/profile-400.webp 400w, /assets/images/profile-600.webp 600w, /assets/images/profile.webp 576w"
-                sizes="(max-width: 640px) 340px, (max-width: 1024px) 460px, 500px"
-              />
-              <img
-                src="/assets/images/profile.webp"
-                alt={profile.photo.alt || 'Md Habib Munsar Ahmed — Software Engineer'}
-                loading={priority ? 'eager' : 'lazy'}
-                decoding="async"
-                className={`block w-full h-full object-contain filter contrast-[1.01] brightness-[1.01] transition-transform duration-700 ease-out group-hover:scale-[1.012] ${sizeStyles}`}
-                style={{
-                  aspectRatio: '576 / 1024',
-                }}
-                onError={(e) => {
-                  // Fallback to jpg or png if webp fails
-                  const target = e.currentTarget
-                  if (target.src.endsWith('.webp')) {
-                    target.src = '/assets/images/profile.jpg'
-                  }
-                }}
-              />
-            </picture>
+            <img
+              src={photoData.path || '/assets/images/profile.png'}
+              alt={photoData.alt || 'Md Habib Munsar Ahmed — Software Engineer'}
+              loading={priority ? 'eager' : 'lazy'}
+              decoding="async"
+              className={`block w-full h-full filter contrast-[1.01] brightness-[1.01] transition-transform duration-700 ease-out group-hover:scale-[1.012] ${sizeStyles}`}
+              style={{
+                aspectRatio: '576 / 1024',
+                objectFit: crop?.objectFit ?? 'cover',
+                objectPosition: `${crop?.x ?? 50}% ${crop?.y ?? 40}%`,
+                transform: `scale(${crop?.scale ?? 1}) rotate(${crop?.rotate ?? 0}deg) scaleX(${
+                  crop?.flipH ? -1 : 1
+                }) scaleY(${crop?.flipV ? -1 : 1})`,
+                opacity: crop?.opacity ?? 1,
+              }}
+              onError={(e) => {
+                const target = e.currentTarget
+                if (target.src.endsWith('.webp')) {
+                  target.src = '/assets/images/profile.jpg'
+                }
+              }}
+            />
 
             {/* Environmental Floor Blend: Soft gradient at base to merge into UI darkness */}
             <div

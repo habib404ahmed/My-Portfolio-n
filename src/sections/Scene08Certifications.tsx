@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { certifications, type Certification } from '@/data/certifications'
+import { certifications as staticCertifications, type Certification } from '@/data/certifications'
 import { CertificateViewer } from '@/components/ui/cert/CertificateViewer'
 import { SectionTransition } from '@/components/ui/SectionTransition'
+import { usePortfolioContent } from '@/context/ContentContext'
+import { FileText } from 'lucide-react'
 
 interface NodeTheme {
   color: string
@@ -33,11 +35,19 @@ const THEMES: Record<string, NodeTheme> = {
 }
 
 export function Scene08Certifications() {
+  const { content } = usePortfolioContent()
+  const certList = (content?.certifications && content.certifications.length > 0
+    ? (content.certifications as unknown as Certification[])
+    : staticCertifications
+  ).filter((c) => c.visible !== false)
+
   const [activeCert, setActiveCert] = useState<Certification | null>(null)
-  const [focusedId, setFocusedId] = useState<string>('cisco-modern-ai')
+  const [focusedId, setFocusedId] = useState<string>(
+    certList[0]?.id || 'cisco-modern-ai'
+  )
 
   const currentTheme = THEMES[
-    certifications.find((c) => c.id === focusedId)?.category || 'ai'
+    certList.find((c) => c.id === focusedId)?.category || 'ai'
   ] || THEMES.ai
 
   return (
@@ -71,9 +81,11 @@ export function Scene08Certifications() {
 
         {/* ─── CREDENTIAL CONSTELLATION NODES ─── */}
         <div className="relative grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch">
-          {certifications.map((cert, index) => {
+          {certList.map((cert, index) => {
             const theme = THEMES[cert.category] || THEMES.ai
             const isFocused = focusedId === cert.id
+            const docPath = cert.downloadUrl || cert.image || ''
+            const isPdf = /\.pdf$/i.test(docPath)
 
             return (
               <motion.div
@@ -120,17 +132,31 @@ export function Scene08Certifications() {
                     </span>
                   </div>
 
-                  {/* Real Document Thumbnail Preview — Glass Frame (Phase 9 Section 25) */}
+                  {/* Real Document Thumbnail Preview — Glass Frame */}
                   <div className="relative aspect-[4/3] rounded-xl overflow-hidden glass-frame liquid-edge p-1 mb-5 transition-all">
-                    <picture className="block w-full h-full rounded-lg overflow-hidden">
-                      <source type="image/webp" srcSet={cert.imageWebp} />
-                      <img
-                        src={cert.image}
-                        alt={`${cert.title} thumbnail`}
-                        className="w-full h-full object-contain filter contrast-[1.01] transition-transform duration-500 group-hover:scale-[1.02]"
-                        loading="lazy"
-                      />
-                    </picture>
+                    {isPdf ? (
+                      <div className="w-full h-full rounded-lg bg-black/60 border border-red-500/20 flex flex-col items-center justify-center p-4 text-center group-hover:border-cyan-400/50 transition-colors">
+                        <div className="w-12 h-12 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center justify-center text-red-400 mb-2">
+                          <FileText className="w-6 h-6" />
+                        </div>
+                        <span className="font-mono text-[11px] font-bold text-red-300 uppercase tracking-wider">
+                          PDF Document
+                        </span>
+                        <span className="font-mono text-[10px] text-slate-400 mt-0.5 truncate max-w-[90%]">
+                          {cert.fileName || 'Verified Document'}
+                        </span>
+                      </div>
+                    ) : (
+                      <picture className="block w-full h-full rounded-lg overflow-hidden">
+                        <source type="image/webp" srcSet={cert.imageWebp || cert.image} />
+                        <img
+                          src={cert.image}
+                          alt={`${cert.title} thumbnail`}
+                          className="w-full h-full object-contain filter contrast-[1.01] transition-transform duration-500 group-hover:scale-[1.02]"
+                          loading="lazy"
+                        />
+                      </picture>
+                    )}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
                   </div>
 

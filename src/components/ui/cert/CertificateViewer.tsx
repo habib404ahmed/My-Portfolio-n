@@ -178,7 +178,7 @@ export function CertificateViewer({
           className="relative z-[1001] w-full max-w-[min(90vw,1000px)] flex flex-col items-center justify-center pointer-events-auto"
           onClick={(e) => e.stopPropagation()}
         >
-          {/* Certificate Image Frame — Liquid Glass Frame (Phase 9 Section 40) */}
+          {/* Certificate Image or PDF Frame — Liquid Glass Frame (Phase 9 Section 40) */}
           <motion.div
             key={cert.id}
             initial={prefersReduced ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.97 }}
@@ -190,15 +190,25 @@ export function CertificateViewer({
               boxShadow: `0 28px 70px rgba(0, 0, 0, 0.95), 0 0 45px ${accentColor}25`,
             }}
           >
-            <picture className="block max-h-[min(72vh,680px)] w-auto rounded-xl overflow-hidden">
-              <source type="image/webp" srcSet={cert.imageWebp} />
-              <img
-                src={cert.image}
-                alt={getAltText(cert)}
-                className="max-h-[min(72vh,680px)] max-w-[min(90vw,1000px)] w-auto h-auto object-contain filter contrast-[1.01]"
-                loading="eager"
-              />
-            </picture>
+            {/\.pdf$/i.test(cert.downloadUrl || cert.image || '') ? (
+              <div className="w-[min(90vw,900px)] h-[min(65vh,600px)] bg-black/80 rounded-xl overflow-hidden border border-white/10 flex flex-col items-center justify-center p-2">
+                <iframe
+                  src={`${cert.downloadUrl || cert.image}#toolbar=0`}
+                  title={`Official Credential: ${cert.title}`}
+                  className="w-full h-full rounded border-0"
+                />
+              </div>
+            ) : (
+              <picture className="block max-h-[min(72vh,680px)] w-auto rounded-xl overflow-hidden">
+                <source type="image/webp" srcSet={cert.imageWebp || cert.image} />
+                <img
+                  src={cert.image}
+                  alt={getAltText(cert)}
+                  className="max-h-[min(72vh,680px)] max-w-[min(90vw,1000px)] w-auto h-auto object-contain filter contrast-[1.01]"
+                  loading="eager"
+                />
+              </picture>
+            )}
           </motion.div>
 
           {/* ─── 5. Certificate Metadata & Action Bar — Glass Level 1 ─── */}
@@ -246,12 +256,28 @@ export function CertificateViewer({
                 0{currentIndex + 1} / 0{certifications.length}
               </div>
 
+              {/* External Verification Option */}
+              {cert.verificationUrl && (
+                <a
+                  href={cert.verificationUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-3.5 py-1.5 rounded-lg border border-cyan-400/30 bg-cyan-500/10 text-cyan-300 hover:text-white hover:border-cyan-400 hover:bg-cyan-500/20 transition-all hidden sm:flex items-center gap-1.5 font-mono text-[13px] font-semibold"
+                  aria-label={`Verify credential for ${cert.title}`}
+                >
+                  <svg className="w-3.5 h-3.5 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                  <span>VERIFY</span>
+                </a>
+              )}
+
               {/* Download Original Asset Option */}
               <a
                 href={cert.downloadUrl || cert.image}
-                download={`${cert.id}.jpg`}
+                download={`${cert.id || 'certificate'}`}
                 className="px-3.5 py-1.5 rounded-lg border border-white/15 bg-white/5 text-slate-200 hover:text-white hover:border-cyan-400/50 hover:bg-cyan-950/30 transition-all hidden sm:flex items-center gap-1.5 font-mono text-[13px] font-semibold"
-                aria-label={`Download certificate image for ${cert.title}`}
+                aria-label={`Download certificate document for ${cert.title}`}
               >
                 <svg className="w-4 h-4 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />

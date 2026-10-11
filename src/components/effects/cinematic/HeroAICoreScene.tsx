@@ -30,15 +30,14 @@ export function HeroAICoreScene({
 
   const pixelsPerUnit = size.height / viewport.height
 
-  // Responsive target core diameter in screen pixels (from Hero specs)
+  // Responsive target core diameter in screen pixels (Restrained for center column)
   const targetCorePixels = useMemo(() => {
     const w = size.width
-    if (w >= 1440) return 170
-    if (w >= 1280) return 150 + ((w - 1280) / (1440 - 1280)) * 20
-    if (w >= 1024) return 135 + ((w - 1024) / (1280 - 1024)) * 15
-    if (w >= 768) return 122 + ((w - 768) / (1024 - 768)) * 13
-    if (w >= 430) return 110 + ((w - 430) / (768 - 430)) * 12
-    return 105
+    if (w >= 1440) return 105
+    if (w >= 1280) return 95
+    if (w >= 1024) return 82
+    if (w >= 768) return 68
+    return 55
   }, [size.width])
 
   const baseCoreDiameter = 1.10
@@ -47,13 +46,14 @@ export function HeroAICoreScene({
   const heroPosition: [number, number, number] = useMemo(() => {
     const w = size.width
     if (w < 768) {
-      return [0, 0.15, 0]
+      // Mobile: deep in background negative space
+      return [0, -0.35, -2.5]
     }
     const offsetPx =
-      w >= 1440 ? 110 :
-      w >= 1280 ? 115 :
-      w >= 1024 ? 85 :
-      60
+      w >= 1440 ? 76 :
+      w >= 1280 ? 70 :
+      w >= 1024 ? 58 :
+      48
     const xUnits = offsetPx / pixelsPerUnit
     return [xUnits, 0.0, 0]
   }, [size.width, pixelsPerUnit])

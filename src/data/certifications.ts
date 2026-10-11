@@ -18,6 +18,12 @@ export interface Certification {
   verified: boolean
   description: string
   learningThemes?: string[]
+  credentialId?: string
+  verificationUrl?: string
+  fileName?: string
+  fileSize?: number
+  fileType?: 'image' | 'pdf'
+  visible?: boolean
 }
 
 export const certifications: Certification[] = [

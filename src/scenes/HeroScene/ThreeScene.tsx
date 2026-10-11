@@ -24,32 +24,32 @@ function ResponsiveAICore({
   // Calculate pixels per 3D world unit at focal plane (z = 0)
   const pixelsPerUnit = size.height / viewport.height
 
-  // Responsive target core diameter in screen pixels (Per Phase 6.9.3 specs):
-  // 1440px+: Core ≈ 170px (Orbit ≈ 350px)
-  // 1280px:  Core ≈ 150px (Orbit ≈ 310px)
-  // 1024px:  Core ≈ 135px (Orbit ≈ 280px)
-  // 768px:   Core ≈ 122px (Orbit ≈ 255px)
-  // 390px-430px: Core ≈ 105px (Orbit ≈ 215px)
+  // Responsive target core diameter in screen pixels (Restrained & refined for negative space):
+  // 1440px+: Core ≈ 140px (Orbit ≈ 280px)
+  // 1280px:  Core ≈ 125px (Orbit ≈ 250px)
+  // 1024px:  Core ≈ 110px (Orbit ≈ 220px)
+  // 768px:   Core ≈ 95px  (Orbit ≈ 190px)
+  // 390px-430px: Core ≈ 80px (Orbit ≈ 160px)
   const targetCorePixels = useMemo(() => {
     const w = size.width
-    if (w >= 1440) return 170
+    if (w >= 1440) return 140
     if (w >= 1280) {
       const t = (w - 1280) / (1440 - 1280)
-      return 150 + t * 20
+      return 125 + t * 15
     }
     if (w >= 1024) {
       const t = (w - 1024) / (1280 - 1024)
-      return 135 + t * 15
+      return 110 + t * 15
     }
     if (w >= 768) {
       const t = (w - 768) / (1024 - 768)
-      return 122 + t * 13
+      return 95 + t * 15
     }
     if (w >= 430) {
       const t = (w - 430) / (768 - 430)
-      return 110 + t * 12
+      return 85 + t * 10
     }
-    return 105
+    return 80
   }, [size.width])
 
   // Base inner icosahedron geometry diameter is 2 * 0.55 = 1.10 units
@@ -57,22 +57,20 @@ function ResponsiveAICore({
   const coreScale = targetCorePixels / (baseCoreDiameter * pixelsPerUnit)
 
   // Position:
-  // Desktop/Tablet: Centered inside negative space between left text and right portrait
-  // At 1440px: offset is +110px from center (+0.79 units)
-  // At 1280px: offset is +115px from center (+0.83 units)
-  // At 1024px: offset is +85px from center (+0.62 units)
-  // At 768px: offset is +60px from center (+0.45 units)
-  // Mobile (<768px): Centered horizontally (x = 0), slightly above center
+  // Desktop: Centered inside negative space between left text and right portrait
+  // At 1440px: offset is +85px from center (+0.61 units)
+  // At 1280px: offset is +80px from center (+0.58 units)
+  // At 1024px: offset is +65px from center (+0.47 units)
+  // Tablet (<1024px) / Mobile (<768px): Centered horizontally (x = 0), slightly above center
   const corePosition: [number, number, number] = useMemo(() => {
     const w = size.width
-    if (w < 768) {
+    if (w < 1024) {
       return [0, 0.15, 0]
     }
     const offsetPx =
-      w >= 1440 ? 110 :
-      w >= 1280 ? 115 :
-      w >= 1024 ? 85 :
-      60
+      w >= 1440 ? 85 :
+      w >= 1280 ? 80 :
+      65
     const xUnits = offsetPx / pixelsPerUnit
     return [xUnits, 0.0, 0]
   }, [size.width, pixelsPerUnit])
@@ -120,9 +118,9 @@ export function ThreeScene({
       <PerspectiveCamera makeDefault position={[0, 0, 6.2]} fov={50} />
 
       {/* Atmospheric Ambient Lighting (Restrained Cyan & Soft White) */}
-      <ambientLight intensity={0.06} color="#ffffff" />
-      <pointLight position={[10, 10, 10]} intensity={0.20} color="#38bdf8" />
-      <pointLight position={[-10, -5, -10]} intensity={0.12} color="#818cf8" />
+      <ambientLight intensity={0.05} color="#ffffff" />
+      <pointLight position={[10, 10, 10]} intensity={0.16} color="#38bdf8" />
+      <pointLight position={[-10, -5, -10]} intensity={0.10} color="#818cf8" />
 
       <Suspense fallback={null}>
         <AmbientParticles deviceClass={deviceClass} />

@@ -1,5 +1,8 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { ContentProvider, usePortfolioContent } from '@/context/ContentContext.tsx'
+import { AdminStudio } from '@/admin/AdminStudio.tsx'
+
 import { InitSequence } from '@/scenes/IntroScene/InitSequence'
 import { Global3DWorld } from '@/components/effects/cinematic/Global3DWorld'
 import { HeroContent } from '@/scenes/HeroScene/HeroContent'
@@ -37,7 +40,8 @@ type AppPhase =
   | 'hero'         // Full hero reveal
   | 'ready'        // Navigation visible, scroll enabled
 
-export default function App() {
+function PortfolioWebsite() {
+  const { content, isDraftPreview } = usePortfolioContent()
   const [phase, setPhase] = useState<AppPhase>('black')
   const [corePhase, setCorePhase] = useState<'forming' | 'active' | 'transitioning'>('forming')
   const [heroContentVisible, setHeroContentVisible] = useState(false)
@@ -51,9 +55,9 @@ export default function App() {
   const phase1Timer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const phase2Timer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
-  // If reduced motion, jump straight to hero
+  // Fast skip if reduced motion or in draft preview frame
   useEffect(() => {
-    if (prefersReduced) {
+    if (prefersReduced || isDraftPreview) {
       setPhase('ready')
       setHeroContentVisible(true)
       setNavVisible(true)
@@ -69,7 +73,76 @@ export default function App() {
       if (phase1Timer.current) clearTimeout(phase1Timer.current)
       if (phase2Timer.current) clearTimeout(phase2Timer.current)
     }
-  }, [prefersReduced])
+  }, [prefersReduced, isDraftPreview])
+
+  // Phase 12: Visual Editor Live Preview Integration (Selection Mode & Element Selection)
+  useEffect(() => {
+    if (!isDraftPreview) return
+
+    let selectionMode = true
+
+    const handleMessage = (e: MessageEvent) => {
+      if (e.data?.type === 'SET_SELECTION_MODE') {
+        selectionMode = Boolean(e.data.enabled)
+        if (selectionMode) {
+          document.body.classList.add('selection-mode-active')
+        } else {
+          document.body.classList.remove('selection-mode-active')
+          document.querySelectorAll('.is-editor-selected').forEach((el) => {
+            el.classList.remove('is-editor-selected')
+          })
+        }
+      } else if (e.data?.type === 'SELECT_ELEMENT_BY_ID') {
+        const id = e.data.elementId
+        document.querySelectorAll('.is-editor-selected').forEach((el) => {
+          el.classList.remove('is-editor-selected')
+        })
+        if (id) {
+          const target = document.querySelector(`[data-editable-id="${id}"]`)
+          if (target) {
+            target.classList.add('is-editor-selected')
+            target.scrollIntoView({ behavior: 'smooth', block: 'center' })
+          }
+        }
+      }
+    }
+
+    const handleClick = (e: MouseEvent) => {
+      if (!selectionMode) return
+      const target = (e.target as HTMLElement).closest('[data-editable-id]') as HTMLElement | null
+      if (target) {
+        e.preventDefault()
+        e.stopPropagation()
+        const id = target.getAttribute('data-editable-id')
+        if (id) {
+          document.querySelectorAll('.is-editor-selected').forEach((el) => {
+            el.classList.remove('is-editor-selected')
+          })
+          target.classList.add('is-editor-selected')
+
+          window.parent.postMessage(
+            {
+              type: 'ELEMENT_SELECTED',
+              elementId: id,
+              tagName: target.tagName,
+              textContent: target.innerText?.slice(0, 100),
+            },
+            '*'
+          )
+        }
+      }
+    }
+
+    document.body.classList.add('selection-mode-active')
+    window.addEventListener('message', handleMessage)
+    document.addEventListener('click', handleClick, true)
+
+    return () => {
+      document.body.classList.remove('selection-mode-active')
+      window.removeEventListener('message', handleMessage)
+      document.removeEventListener('click', handleClick, true)
+    }
+  }, [isDraftPreview])
 
   const handleInitComplete = useCallback(() => {
     setPhase('core')
@@ -107,12 +180,17 @@ export default function App() {
 
   const showScene = phase !== 'black' && phase !== 'init'
 
+  // Dynamic active sections
+  const enabledSections = [...content.sections]
+    .filter((s) => s.enabled)
+    .sort((a, b) => a.order - b.order)
+
   return (
     <div className="relative min-h-screen bg-[var(--color-void)] text-slate-100 overflow-x-hidden selection:bg-cyan-500/20 selection:text-cyan-200">
       {/* Subtle film grain noise */}
       <div className="noise-overlay" aria-hidden="true" />
 
-      {/* Phase 8 Cinematic Vignette & Global Color Grade */}
+      {/* Cinematic Vignette & Global Color Grade */}
       <div className="cinematic-vignette" aria-hidden="true" />
       <div className="cinematic-grade" aria-hidden="true" />
 
@@ -122,12 +200,9 @@ export default function App() {
       {/* Navigation */}
       <Navigation visible={navVisible} />
 
-      {/* ──────────────────────────────────────────
-          GLOBAL 3D WORLD — Unified Persistent WebGL Canvas (Layer 2)
-          Persistent cinematic 3D environment across all sections
-          ────────────────────────────────────────── */}
+      {/* Global 3D World Canvas */}
       <AnimatePresence>
-        {showScene && (
+        {showScene && content.animation.enableCinematic3D && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -144,56 +219,54 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      {/* ──────────────────────────────────────────
-          HERO SECTION — pinned full viewport
-          ────────────────────────────────────────── */}
+      {/* Hero Section */}
       <section
         id="hero"
-        className="relative min-h-[100dvh] w-full overflow-hidden flex flex-col items-center justify-start md:justify-center layer-content"
-        style={{ paddingTop: 'var(--nav-height, 72px)' }}
+        data-editable-id="hero-section"
+        className="relative min-h-[100dvh] w-full overflow-visible flex flex-col items-center justify-start layer-content"
         aria-label="Hero — Introduction"
       >
-
-        {/* Hero Ambient Dual Lighting: Cool Technology (Left) / Warm Person (Right) — Layer 3 */}
+        {/* Hero Ambient Dual Lighting */}
         <div
           className="absolute inset-0 pointer-events-none z-[3]"
           aria-hidden="true"
           style={{
-            background:
-              'radial-gradient(circle at 22% 48%, rgba(6,182,212,0.05) 0%, transparent 55%), radial-gradient(circle at 78% 45%, rgba(245,158,11,0.04) 0%, transparent 55%)',
+            background: `radial-gradient(circle at 22% 48%, rgba(6,182,212,${
+              content.hero.bgAtmosphereIntensity * 0.08
+            }) 0%, transparent 55%), radial-gradient(circle at 78% 45%, rgba(245,158,11,${
+              content.hero.bgAtmosphereIntensity * 0.06
+            }) 0%, transparent 55%)`,
           }}
         />
 
-        {/* Hero content overlay with balanced cinematic vertical center */}
-        {webGLSupported && (
-          <div className="relative z-10 w-full flex flex-col md:flex-row items-center justify-start md:justify-center flex-1 py-4">
-            <HeroContent visible={heroContentVisible} />
-          </div>
-        )}
+        {/* Hero content overlay */}
+        <div className="relative z-10 w-full flex flex-col items-center justify-start flex-1 pt-0 pb-12 sm:pb-16">
+          <HeroContent visible={heroContentVisible} />
+        </div>
 
-        {/* Scroll indicator (Subtle, desktop only to avoid mobile overlapping) */}
+        {/* Subtle, interactive scroll indicator */}
         <AnimatePresence>
           {phase === 'ready' && (
-            <motion.div
+            <motion.button
+              type="button"
               initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 0.7, y: 0 }}
+              animate={{ opacity: 0.75, y: 0 }}
               exit={{ opacity: 0 }}
               transition={{ delay: 1.5, duration: 0.8 }}
-              className="hidden md:flex absolute bottom-6 left-1/2 -translate-x-1/2 flex-col items-center gap-1.5 pointer-events-none z-10"
-              aria-hidden="true"
+              onClick={() => {
+                const target = document.querySelector('#about') || document.querySelector('#main-content')
+                if (target) target.scrollIntoView({ behavior: 'smooth' })
+              }}
+              className="hidden lg:flex absolute bottom-5 left-1/2 -translate-x-1/2 flex-col items-center gap-1.5 text-slate-400 hover:text-cyan-300 transition-colors z-20 cursor-pointer group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-cyan-400 rounded-sm py-1 px-3 select-none"
+              aria-label="Scroll to explore next section"
             >
-              <span className="font-mono text-[0.5625rem] text-slate-400 tracking-[0.25em] uppercase">
+              <span className="font-mono text-[9px] text-slate-400 group-hover:text-cyan-300 tracking-[0.25em] uppercase transition-colors">
                 SCROLL TO EXPLORE
               </span>
               <div
-                style={{
-                  width: 1,
-                  height: 24,
-                  background: 'linear-gradient(to bottom, rgba(6,182,212,0.5), transparent)',
-                  animation: 'pulse-glow 3s ease-in-out infinite',
-                }}
+                className="w-[1px] h-5 bg-gradient-to-b from-cyan-400/60 to-transparent group-hover:h-6 group-hover:from-cyan-300 transition-all duration-300"
               />
-            </motion.div>
+            </motion.button>
           )}
         </AnimatePresence>
 
@@ -207,18 +280,16 @@ export default function App() {
           }}
         />
 
-        {/* Hero Bottom Cinematic Exit: ensures zero collision with following section */}
+        {/* Hero Bottom Exit */}
         <div
           className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[var(--color-void,#050507)] to-transparent pointer-events-none z-[4]"
           aria-hidden="true"
         />
       </section>
 
-      {/* ──────────────────────────────────────────
-          INIT SEQUENCE OVERLAY
-          ────────────────────────────────────────── */}
+      {/* Init Sequence Overlay */}
       <AnimatePresence>
-        {(phase === 'black' || phase === 'init') && (
+        {!isDraftPreview && (phase === 'black' || phase === 'init') && (
           <motion.div
             exit={{ opacity: 0 }}
             transition={{ duration: 1.2, ease: 'easeInOut' }}
@@ -238,43 +309,70 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      {/* ──────────────────────────────────────────
-          MAIN CONTENT HIERARCHY (Section 30 Architecture)
-          ────────────────────────────────────────── */}
+      {/* Main Content Sections Hierarchy */}
       <main id="main-content" className="relative z-10 layer-content bg-transparent">
-        {/* Scene 01: Enter the Engineering System */}
-        <Scene01EnterSystem />
+        {enabledSections.map((sec) => {
+          let Component: React.ReactNode = null
+          switch (sec.id) {
+            case 'system':
+              Component = <Scene01EnterSystem />
+              break
+            case 'profile':
+              Component = <Scene02AboutIdentity />
+              break
+            case 'mindset':
+              Component = <Scene03EngineeringMindset />
+              break
+            case 'stack':
+              Component = <Scene04TechnologyUniverse />
+              break
+            case 'capabilities':
+              Component = <Scene05CapabilityMatrix />
+              break
+            case 'education':
+              Component = <Scene06EducationLanguages />
+              break
+            case 'projects':
+              Component = <ProjectUniverse />
+              break
+            case 'journey':
+              Component = <Scene07TimelineLeadership />
+              break
+            case 'certifications':
+              Component = <Scene08Certifications />
+              break
+            case 'resume':
+              Component = <Phase5ResumeExperience />
+              break
+            case 'contact':
+              Component = <Phase6ContactFinal onRestart={handleRestartExperience} />
+              break
+            default:
+              Component = null
+          }
 
-        {/* Scene 02: About / Engineer Profile */}
-        <Scene02AboutIdentity />
-
-        {/* Scene 03: How I Build (Engineering Mindset & Pipeline) */}
-        <Scene03EngineeringMindset />
-
-        {/* Scene 04: Connected Stack (Technology Universe) */}
-        <Scene04TechnologyUniverse />
-
-        {/* Scene 05: What I Can Build (System Capabilities) */}
-        <Scene05CapabilityMatrix />
-
-        {/* Scene 06: Academic Foundation (Education & Languages) */}
-        <Scene06EducationLanguages />
-
-        {/* Phase 3: Project Universe */}
-        <ProjectUniverse />
-
-        {/* Scene 07: The Journey (Timeline & Leadership) */}
-        <Scene07TimelineLeadership />
-
-        {/* Scene 08: Verified Certifications */}
-        <Scene08Certifications />
-
-        {/* Phase 5: The Resume Experience (ATS & Web) */}
-        <Phase5ResumeExperience />
-
-        {/* Phase 6: Contact & Final Connection */}
-        <Phase6ContactFinal onRestart={handleRestartExperience} />
+          return (
+            <div key={sec.id} data-editable-id={`section-${sec.id}`}>
+              {Component}
+            </div>
+          )
+        })}
       </main>
     </div>
+  )
+}
+
+export default function App() {
+  const isAdminRoute =
+    typeof window !== 'undefined' && window.location.pathname.startsWith('/admin')
+
+  if (isAdminRoute) {
+    return <AdminStudio />
+  }
+
+  return (
+    <ContentProvider>
+      <PortfolioWebsite />
+    </ContentProvider>
   )
 }
